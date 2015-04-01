@@ -1,0 +1,54 @@
+<link href="/static/css/custom/ucenter.css" rel="stylesheet" />
+<div class="pagetit">
+  <div class="navblock">
+    <ul class="titnav clr">
+      <li><a href="/admin" title="管理首页">管理首页</a></li>
+      <li class="pipe">&gt;</li>
+      <li>新闻邮件</li>
+    </ul>
+    <h2>新闻邮件</h2>
+  </div>
+</div>
+<div class="ucbg">
+	<div class="ucblock paddingt clr">
+		{include file="$root_path/apps/lists/leftlist_admin.html"}
+		<div class="rightdetail_admin">
+  	{if $paging !=""}
+       <div class="page-controls">
+        {$paging}
+       </div></div>
+	{/if}
+	
+	{if is_array($data)}
+<div class="general_table_border">
+	<table class="general_table" cellspacing="0" cellpadding="0" border="0">
+		<thead>
+			<tr>
+				<th>{$lang.name}</th>
+				<th>{$lang.readed}</th>
+				<th width="150"></th>
+			</tr>
+		</thead>
+
+		<tbody>
+		{foreach from=$data item=d}
+			<tr id="row{$d.id}" class="{cycle values="no,alt"}">
+				<td>{$d.name}</td>
+				<td>{$d.readed}</td>
+				<td>
+					<a href="?m={$smarty.get.m}&c=view&id={$d.id}&p={$smarty.get.p}" title="{$lang.view}"><img class="middle" src="{$data_server}admin/images/icons/16x16/view.png" /> {$lang.view}</a>
+				</td>					
+			</tr>
+			{/foreach}
+		</tbody>
+	</table> 	
+</div>
+	{else}
+		{$lang.no_records}
+	{/if}
+    <div class="form-submit">
+     <button onclick="window.location='?m={$smarty.get.m}&c=add';" type="button" class="btntheme2 btnsize">{$lang.add_new}</button>
+    </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+
+      <div id="tabsy">
+           <ul>
+            <li class="{if $smarty.get.controller != 'faq' && $smarty.get.controller != 'comments' && $smarty.get.controller != 'edit'} selected {/if} "><div></div><a href="/{$languageURL}items/{$item.id}">Item Details</a></li>
+			
+			
+			{if $faqs>0 || check_login_bool() && $item.user_id == $smarty.session.user.user_id}
+			<li class="{if $smarty.get.controller == 'faq'}selected{/if}" id="faq-tab"><div></div><a href="/{$languageURL}items/faq/{$item.id}">{$lang.faqs}</a></li>
+			{/if}
+			
+			{if check_login_bool() && $item.user_id == $smarty.session.user.user_id}
+			<li class="last{if $smarty.get.controller == 'edit'}selected{/if}" ><div></div><a href="/{$languageURL}items/edit/{$item.id}">{$lang.edit}</a></li>
+			{/if}
+            {if check_login_bool() && $item.user_id == $smarty.session.user.user_id}
+			<li class="last{if $smarty.get.controller == 'comments'}selected{/if} last"><div></div><a href="/{$languageURL}items/comments/{$item.id}">{$lang.comments1}</a><div class="last"></div></li>
+            {/if}
+          </ul>
+      </div>

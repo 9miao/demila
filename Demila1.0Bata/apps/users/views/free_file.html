@@ -1,0 +1,63 @@
+<link href="/static/css/custom/ucenter.css" rel="stylesheet" />
+<div class="pagetit">
+  <div class="navblock">
+    <ul class="titnav clr">
+      <li><a href="/" title="主页">主页</a></li>
+      <li class="pipe">&gt;</li>
+      <li><a href="/categories/all/" title="文件">文件</a></li>
+      <li class="pipe">&gt;</li>
+      <li>免费作品</li>
+    </ul>
+    <h2>免费作品</h2>
+  </div>
+</div>
+<div class="ucbg">
+  <div class="ucblock clr">
+    {if $paging}
+      <div class="pagecontrols clr"><div class="pagination">{$paging}</div></div>
+    {/if}
+
+    {if $freeItem}
+      <ul class="topauthorlist clr">
+      {foreach from=$freeItem item=fi}
+        <li class="authoritem">
+          <a class="avatar" href="/{$languageURL}items/{$fi.id}" onclick="">
+        <img alt="{$fi.name|escape}" border="0" class="landscape-image-magnifier preload no_preview" data-item-author="作者 {$users[$fi.user_id].nickname}" data-item-category="{foreach from=$i.categories item=e}{foreach from=$e item=c name=foo}{$categories[$c].name} {if !$smarty.foreach.foo.last} \ {/if}{/foreach}{/foreach}" data-item-cost="{$fi.price}" data-item-name="{$fi.name|escape}" data-preview-height="" data-preview-url="{$data_server}uploads/items/{$fi.id}/preview.jpg" data-preview-width="" src="{$data_server}uploads/items/{$fi.id}/{$fi.thumbnail}" title="{$fi.name|escape}" />
+        </a>
+          <div class="itemdetail">
+            <h3><a title="{$fi.name}" href="/{$languageURL}user/{$u.username}">{$fi.name}</a></h3>
+          </div>
+          <div class="sales">
+            <p class="nums"><span>{$fi.sales}</span>销量</p>
+          </div>
+          <div class="itemstars">
+            <div style="width:{$fi.rating*2}0%;" class="starnums"><span class="allstars"></span></div>
+            <div class="starsbg"></div>
+          </div>
+        </li>
+      {/foreach}
+      </ul>
+        <!--
+          <small class="meta">
+            <strong>{$u.items}</strong>作品<br>
+            <strong>{$u.followers}</strong>粉丝<br>
+            注册时间：{$u.register_datetime|date_format:"%Y-%m-%d"}<br>
+            {if $u.freelance == 'true'} 可承接威客工作<br>{/if}
+          </small>-->
+    {else}
+      <div class="content-box vertical-space">{$lang.no_users}</div>
+    {/if}
+    {if $paging}
+      <div class="pagecontrols clr"><div class="pagination">{$paging}</div></div>
+    {/if}
+  </div>
+  <script>
+  {literal}
+  seajs.use(["jq", "pageui"], function($, ui){
+    ui.navSearchHide();
+    ui.imgMagnifier("li.landscape-image-magnifier");
+  });
+  {/literal}
+  </script>
+  </div>
+</div>

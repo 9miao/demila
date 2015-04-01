@@ -1,0 +1,46 @@
+@charset "UTF-8";
+.magnifier{
+	width: 472px;
+}
+.magnifier .info{
+	overflow: auto;
+}
+.magnifier .price .symbol{
+	vertical-align: 40px;
+}
+.item-grid li{
+	text-align: left;
+}
+#recent-files .inner-border ul li{
+	text-align: left;
+}
+.idxlb{
+	text-align: left;
+}
+.idxlb .idxlbbg{
+	left: 0;
+}
+.idxlb .idxblock{
+}
+.itemlist .itemsort .sortbtns li.btns a{
+	float: left;
+}
+.resourcebg .leftdetail .detailimg .links .linkbtn{
+	padding: 0 20px;
+}
+.panel .choices .choicescen .cenobj{
+	padding: 0 25px;
+}
+.rightdetail .rightauthorlist .itemobj{
+	text-align: left;
+}
+.rightdetail .rightauthorlist .itemobj span, .rightdetail .rightauthorlist .itemobj a{
+	display: block;
+	text-align: center;
+}
+.item-grid .itemobj .itemstars, .featuredetail .itemstars{
+	text-align: left;
+}
+.item-grid .itemobj .sales .nums, .item-grid .itemobj .sales .price{
+	display: inline;
+}

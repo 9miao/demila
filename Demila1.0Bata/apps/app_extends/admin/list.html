@@ -1,0 +1,87 @@
+<link href="/static/css/custom/ucenter.css" rel="stylesheet" />
+<div class="pagetit">
+  <div class="navblock">
+    <ul class="titnav clr">
+      <li><a href="/admin" title="管理首页">管理首页</a></li>
+      {if isset($pdata)}
+      <li class="pipe">&gt;</li>
+      <li><a href="?m={$smarty.get.m}&c=list">页面</a></li>
+      <li class="pipe">&gt;</li>
+      <li><a href="?m={$smarty.get.m}&c=list&sub_of={$pdata.sub_of}">{$pdata.name}</a></li>
+      {else}
+      <li class="pipe">&gt;</li>
+      <li>扩展功能</li>
+      {/if}
+    </ul>
+    <h2>{if isset($pdata)}{$pdata.name}{else}扩展功能{/if}</h2>
+  </div>
+</div>
+
+<div class="ucbg">
+	<div class="ucblock paddingt clr">
+		{include file="$root_path/apps/lists/leftlist_admin.html"}
+		<div class="rightdetail_admin">
+  	{if $paging !=""}
+       <div class="page-controls">
+        {$paging}
+       </div>
+        </div>
+	{/if}
+
+	{if is_array($data)}
+   <div class="general_table_border">
+
+	<table id="attributelist" class="general_table" cellspacing="0" cellpadding="0" border="0">
+
+		<thead>
+			<tr>
+                <th>{$lang.order_by}</th>
+				<th>{$lang.name}</th>
+				<th>{$lang.is_start}</th>
+				<th width="150"></th>
+			</tr>
+
+		</thead>
+
+		<tbody>
+		{foreach from=$data item=d}
+			<tr id="row{$d.id}" class="{cycle values="no,alt"}">
+                <td>{$d.foreach.foreachname.iteration}</td>
+				<td>{$d.extend_name}</td>
+				<td>
+					{if $d.state ==0 }
+                        <img class="deletebtn" ajax-url="/apps/{$smarty.get.m}/ajax/edit.php" ajax-data="{literal}{'edit':true,'id':'{/literal}{$d.id}{literal}','state':'{/literal}{$d.state}{literal}'}{/literal}" item-id="{$d.id}"  src="{$data_server}admin/images/icons/24x24/accept.png" alt="" class="middle" />开启
+					{else}
+						<img class="deletebtn" ajax-url="/apps/{$smarty.get.m}/ajax/edit.php"
+                             ajax-data="{literal}{'edit':true,'id':'{/literal}{$d.id}{literal}','state':'{/literal}{$d.state}{literal}'}{/literal}"
+                             item-id="{$d.id}" src="{$data_server}admin/images/icons/24x24/delete.png" alt="" class="middle" />关闭
+					{/if}
+				</td>
+				<td>
+                    {if $d.m!='uploads_extends'}
+					<a href="?m={$d.m}&c={$d.c}" title="{$lang.edit}"><img class="middle" src="{$data_server}admin/images/icons/16x16/edit.png" /> {$lang.edit}</a>
+                    {/if}
+                    <a href="#" class="unloadbtn" ajax-url="/apps/{$smarty.get.m}/ajax/unload.php"
+                            ajax-data="{literal}{'unload':true,'extend_name':'{/literal}{$d.extend_name}{literal}','m':'{/literal}{$d.m}{literal}'}{/literal}"
+                            title="{$lang.unload}">
+                        <img class="middle" src="{$data_server}admin/images/icons/16x16/delete.png" /> {$lang.unload}</a>
+                </td>
+			</tr>
+			{/foreach}
+		</tbody>
+	</table>
+  </div>
+        {literal}
+        <script type="text/javascript">
+            seajs.use(["modules/ajax"], function(aj){
+                aj.ajaxbtninit("#attributelist .deletebtn", "ajax-url", "ajax-data", "editRow");
+                aj.ajaxbtninit("#attributelist .unloadbtn", "ajax-url", "ajax-data", "unloadRow", false, true);
+            });
+        </script>
+        {/literal}
+	{else}
+        您尚未安装任何扩展功能，请到<a href="http://www.4miao.com" target="_blank"> http://4miao.com </a>去挑选一个。
+	{/if}
+    </div>
+ </div>
+</div>

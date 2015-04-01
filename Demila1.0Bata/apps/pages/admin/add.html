@@ -1,0 +1,152 @@
+<link href="/static/css/custom/ucenter.css" rel="stylesheet"/>
+<div class="pagetit">
+    <div class="navblock">
+        <ul class="titnav clr">
+            <li><a href="/admin" title="管理首页">管理首页</a></li>
+            {if isset($pdata)}
+            <li class="pipe">&gt;</li>
+            <li><a href="?m={$smarty.get.m}&c=list">页面</a></li>
+            <li class="pipe">&gt;</li>
+            <li><a href="?m={$smarty.get.m}&c=list&sub_of={$smarty.get.sub_of}&p={$smarty.get.p}">{$pdata.name}</a></li>
+            <li class="pipe">&gt;</li>
+            <li><a href="#">{$smarty.post.name|escape}</a></li>
+            {else}
+            <li class="pipe">&gt;</li>
+            <li><a href="?m={$smarty.get.m}&c=list">页面</a></li>
+            {/if}
+        </ul>
+        <h2>{if isset($pdata)}{$pdata.name}{else}自定义页面列表{/if}</h2>
+    </div>
+</div>
+
+<!--<div class="page-info">
+    <div class="container">
+      <div id="breadcrumbs">
+        <a href="/admin" class="first">主页</a> \ {if isset($pdata)}<a href="?m={$smarty.get.m}&c=list">页面</a> \ <a href="?m={$smarty.get.m}&c=list&sub_of={$smarty.get.sub_of}&p={$smarty.get.p}">{$pdata.name}</a> \ <a href="#">{$smarty.post.name|escape}</a>{else}<a href="?m={$smarty.get.m}&c=list">页面</a> \ {/if} 
+      </div>
+      <h1 class="page-title">{$title} {if isset($pdata)}Subp{else}P{/if}age</h1>
+    </div>
+  </div>-->
+<div class="ucbg">
+    <div class="ucblock paddingt clr">
+        {include file="$root_path/apps/lists/leftlist_admin.html"}
+        <div class="rightdetail_admin">
+
+            <div class="content">
+                <!--<script type="text/javascript" src="{$data_server}nicEditors/nicEdit.js"></script>-->
+                <!--<script type="text/javascript">{literal}bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });{/literal}</script>-->
+                <div class="content-box">
+                    <form action="" class="horizontal-form item-form disable-on-submit" action="" method="post"
+                          enctype="multipart/form-data">
+                        {if $smarty.get.c == 'edit'}
+                        <div class="input-group">
+                            <label for="name">{$lang.subpage_of}</label>
+
+                            <div class="inputs">
+                                <select name="sub_of">
+                                    <option value="0">{$lang.none}</option>
+                                    {$select}
+                                </select>
+                                <input type="hidden" name="sub_of_old"
+                                       value="{if isset($smarty.post.sub_of_old)}{$smarty.post.sub_of_old}{else}{$smarty.post.sub_of}{/if}"/>
+                                {if isset($error.sub)}
+                                <small>{$error.sub}</small>
+                                {/if}
+                            </div>
+                        </div>
+                        {/if}
+                        <div class="input-group">
+                            <label for="Url">Url</label>
+
+                            <div class="inputs">
+                                <input id="Url" type="text" name="key" value="{$smarty.post.key|escape}"
+                                       required="true"/>
+                                {if isset($error.key)}
+                                <small>{$error.key}</small>
+                                {/if}
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="name">{$lang.name}</label>
+
+                            <div class="inputs">
+                                <input id="name" type="text" name="name" value="{$smarty.post.name|escape}"
+                                       required="true"/>
+                                {if isset($error.name)}
+                                <small>{$error.name}</small>
+                                {/if}
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="meta_title">{$lang.meta_title}</label>
+
+                            <div class="inputs">
+                                <input id="meta_title" type="text" name="meta_title"
+                                       value="{$smarty.post.meta_title|escape}"/>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="meta_keywords">{$lang.meta_keywords}</label>
+
+                            <div class="inputs">
+                                <input type="text" id="meta_keywords" name="meta_keywords"
+                                       value="{$smarty.post.meta_keywords|escape}"/>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="meta_description">{$lang.meta_description}</label>
+
+                            <div class="inputs">
+                                <input type="text" id="meta_description" name="meta_description"
+                                       value="{$smarty.post.meta_description|escape}"/>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="desc">{$lang.text}</label>
+
+                            <div class="inputs">
+                                <!--初始化编辑器-->
+                                <script id="desc" name="text" type="text/plain">{$smarty.post.text}</script>
+                                <!-- 配置文件 -->
+                                <script type="text/javascript" src="{$data_server}ueditor/ueditor.config.js"></script>
+                                <!-- 编辑器源码文件 -->
+                                <script type="text/javascript" src="{$data_server}ueditor/ueditor.all.js"></script>
+                                <!-- 实例化编辑器 -->
+                                <script type="text/javascript">
+                                    var ue = UE.getEditor('desc');
+                                </script>
+
+                                <!--<textarea name="text" id="desc">{$smarty.post.text}</textarea>-->
+
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="in_menu">{$lang.in_menu}</label>
+
+                            <div class="inputs">
+                                <input type="checkbox" name="menu" value="true" id="in_menu" class="checkbox" {if
+                                $smarty.post.menu == 'true'}checked="checked"{/if} /> {$lang.yes}
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="visible">{$lang.visible}</label>
+
+                            <div class="inputs">
+                                <input type="checkbox" name="visible" value="true" id="visible" class="checkbox" {if
+                                $smarty.post.visible == 'true'}checked="checked"{/if} /> {$lang.yes}
+                            </div>
+                        </div>
+                        <div class="form-submit">
+                            {if $smarty.get.c=='edit'}
+                            <button type="submit" name="edit" class="btntheme2 btnsize">{$lang.edit}</button>
+                            {else}
+                            <button type="submit" name="add" class="btntheme2 btnsize">{$lang.add}</button>
+                            {/if}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

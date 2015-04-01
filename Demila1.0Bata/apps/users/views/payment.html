@@ -1,0 +1,109 @@
+<link href="/static/css/custom/ucenter.css" rel="stylesheet" />
+{if $payments_data} 
+{if $smarty.session.user.power_elite_author  == 'true' || $smarty.session.user.elite_author  == 'true'}
+<div class="pagetit pagetabs{if $smarty.session.user.power_elite_author  == 'true'} power-elite-author{/if}{if $smarty.session.user.elite_author  == 'true'} elite-author{/if}">
+  <div class="navblock">
+    <ul class="titnav clr">
+      <li><a href="/" title="主页">主页</a></li>
+      <li class="pipe">&gt;</li>
+      <li><a href="/{$languageURL}users/{$smarty.session.user.username}/">我的账号</a></li>
+    </ul>
+    <h2>充值</h2>
+    {include file="$root_path/apps/users/views/tabsy.html"}
+  </div>
+</div>
+{else}
+<div class="pagetit pagetabs">
+  <div class="navblock">
+    <ul class="titnav clr">
+      <li><a href="/" title="主页">主页</a></li>
+      <li class="pipe">&gt;</li>
+      <li><a href="/{$languageURL}users/{$smarty.session.user.username}/">我的账号</a></li>
+    </ul>
+    <h2>充值</h2>
+    {include file="$root_path/apps/users/views/tabsy.html"}
+  </div>
+</div>
+{/if}
+
+
+<div class="ucbg">
+  <div class="ucblock paddingt clr">
+    {$errorMessage}
+    <div id="process">
+      <div class="inner-boundary">
+        <div class="inner-border">
+          <ul>
+            <li class="">填写充值金额<img src="/static/img/arrow.gif"></li> 
+            <li class="current">提交支付<img src="/static/img/arrow.gif"></li>
+            <li class=""><img src="/static/img/arrow.gif">返回网站</li>	
+          </ul>
+          <div class="single"> </div>
+          <img class="context" src="/static/img/cash.png" alt="Deposit" width="52" height="44">
+        </div>
+      </div>
+    </div>
+    <div class="leftdetail">
+
+      {foreach from=$payments_data item=pm}
+      <div class="sideblock">
+
+        <!--<div class="deposit-aside content-box callout">
+          <img alt="" src="/static/img/moneystack.png" width="130" height="95">
+        </div>-->
+
+        <p class="paymenttit">请选择一种支付方式然后点击确定</p>
+        <div class="radioimgs clr" id="radioimgs">
+          <div class="radioitem clr">
+            <input checked="checked" id="paymentway_1" name="paymentway" type="radio" value="0" />
+            <label for="paymentway_1"><img class="option" src="/static/img/alipay.jpg" width="435px" alt="使用支付宝支付"/></label>
+          </div>
+
+            <!--&lt;!&ndash;代理支付&ndash;&gt;-->
+            <!--<div class="radioitem clr">-->
+                <!--<input checked="checked" id="paymentway" name="paymentway" type="radio" value="1" />-->
+                <!--<label for="paymentway"><img class="option" src="/static/img/chinabank.jpg" width="435px" alt="使用DemilaPay支付"/></label>-->
+            <!--</div>-->
+
+
+
+            <!--网银在线-->
+          <!--<div class="radioitem clr">
+            <input id="paymentway_2" type="radio" name="paymentway" value="1" />
+            <label for="paymentway_2"><img class="option" src="/static/img/chinabank.jpg" alt=  "使用网银在线支付"/></label>
+          </div>-->
+
+        </div>
+        <div class="submitbtn clr" id="submitbtn">
+          <div style="">{$pm.form[0]}</div>
+          <!--<div style="display:none;">{$pm.form[1]}</div>-->
+        </div>
+      </div>
+      {/foreach}
+
+      {literal}
+      <script type="text/javascript">
+      seajs.use(["jq", "datavalid"], function($, dvo){
+        var btns = $("#submitbtn").find("div");
+        $("#radioimgs").find("input[type='radio']").each(function(e){
+          $(this).click(function(){
+            btns.eq(e).show().siblings("div").hide();
+          });
+        });
+      });
+      </script>
+      {/literal}
+    </div>
+    <div class="rightdetail">
+      <h3 class="bordertit">当前余额</h3>
+      <div class="borderbg">
+        <span class="current-balance">{$currency.symbol}{$smarty.session.user.total|string_format:"%.2f"}</span>
+        <p><a href="/{$languageURL}invoices/">查看账号历史</a></p>
+        <p>
+          <strong><strong>需要发票？</strong>请确保你已经在设置中填写了公司名称，现在去</strong><a href="/{$languageURL}statement/">设置</a>。
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{/if}

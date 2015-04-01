@@ -1,0 +1,199 @@
+<link href="/static/css/custom/ucenter.css" rel="stylesheet" />
+{if $smarty.session.user.power_elite_author  == 'true' || $smarty.session.user.elite_author  == 'true'}
+<div class="pagetit pagetabs{if $smarty.session.user.power_elite_author  == 'true'} power-elite-author{/if}{if $smarty.session.user.elite_author  == 'true'} elite-author{/if}">
+  <div class="navblock">
+    <ul class="titnav clr">
+      <li><a href="/" title="主页">主页</a></li>
+      <li class="pipe">&gt;</li>
+      <li><a href="/{$languageURL}users/{$smarty.session.user.username}/">我的账号</a></li>
+    </ul>
+    <h2>提现</h2>
+    {include file="$root_path/apps/users/views/tabsy.html"}
+  </div>
+</div>
+{else}
+<div class="pagetit pagetabs">
+  <div class="navblock">
+    <ul class="titnav clr">
+      <li><a href="/" title="主页">主页</a></li>
+      <li class="pipe">&gt;</li>
+      <li><a href="/{$languageURL}users/{$smarty.session.user.username}/">我的账号</a></li>
+    </ul>
+    <h2>提现</h2>
+    {include file="$root_path/apps/users/views/tabsy.html"}
+  </div>
+</div>
+{/if}
+
+<div class="ucbg">
+  <div class="ucblock paddingt clr">
+    {$errorMessage}
+    <div class="leftdetail">
+      <div class="sideblock">
+        <h3 class="underlined">你的余额</h3>
+        <p>你的账户余额: <strong>￥{$user.total|string_format:"%.2f"}</strong>（包括充值和收入，只能提取收入部分）。</p>
+        <div class="general_table_border">
+          <table class="general_table" cellspacing="0" cellpadding="0">
+            <thead>
+              <tr>
+                <th class="sprite_vert">你的余额明细（充值与收入）</th>
+                <th class="sprite_vert"></th>
+              </tr>
+            </thead>
+            <tr>
+              <td>充值余额（不能提现）</td>
+              <td>{$currency.symbol}{$user.deposit|string_format:"%.2f"}</td>
+            </tr>
+            <tfoot>
+              <tr style="background-color:#D2D1D0;">
+                <td>收入余额（可以提现）</td>
+                <td>{$currency.symbol}{$user.earning|string_format:"%.2f"}</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+
+        {if $checkWithdraw==0}
+        <div class="sideblock" id="prinotip" style="display:none;">
+            <span class="tiptxt">您的余额不足提现的最低额度（50元），可以继续上传作品，只要审核通过，就可以再次获得抽奖机会哦。</span>
+        </div>
+        <div class="sideblock">
+            <h3 class="underlined">发起提现请求</h3>
+            <p>最低提现数额不少于50元（系统默认），所有提款于下一个月的15日支付（如15日适逢周末或公众假期，顺延至下个工作日）。</p>
+            <form class="horizontal-form" action="" method="post">
+                <fieldset>
+                    <div class="input-group">
+                        <label for="amount">提现金额</label>
+                        <div class="inputs">
+                            <input checked="checked" id="maximum_at_period_end_false" name="maximum_at_period_end" value="false" type="radio">
+                            <input class="inline ipttheme" id="amount" name="amount" value="{$user.earning|string_format:"%.2f"}" type="text">
+                            <br>
+                            <label for="maximum_at_period_end_true">
+                                <input id="maximum_at_period_end_true" name="maximum_at_period_end" value="true" type="radio">
+                                <strong class="strong">全部收入</strong>
+                            </label>
+                            <br>
+                            <small>如果您选择了<strong>全部收入</strong>选项，申请提现数额仍然不能少于以下最低数额，如果少于最低数额，系统将不予处理。</small>
+                            <div class="notice hidden" id="all-earnings-notice">
+                                请注意<strong>全部收入</strong>的提现请求每月才能处理一次。也就是说，本月提交的提现请求，我们会在一个月之后处理。
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="service_paymethod">提现方式</label>
+                        <div class="inputs">
+                            <label for="service_alipay">
+                                <input id="service_alipay" name="service" value="alipay" type="radio">
+                                支付宝(适用于中国大陆作者)
+                                <small>最低￥50.00</small>
+                            </label>
+                            <br>
+                            <label for="service_paypal">
+                                <input id="service_paypal" name="service" value="paypal" type="radio">
+                                PayPal(适用于中国大陆以外作者)
+                                <small>最低$50.00</small>
+                            </label>
+                            <br>
+                            <label for="service_payoneer">
+                                <input id="service_payoneer" name="service" value="payoneer" type="radio">
+                                银行转账（暂未开通）
+                            </label>
+                            <br>
+                            <label for="service_swift">
+                                <input id="service_swift" name="service" value="swift" type="radio">
+                                国际转账（暂未开通）
+                                <small>需手续费￥200.00</small>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="input-group hidden dependent paypal-alipay">
+                        <label>地址或账号</label>
+                        <div id="payment_email_address_field" class="inputs">
+                            <input id="payment_email_address" class="ipttheme" name="payment_email_address" value="" type="text">
+                        </div>
+                    </div>
+                    <div class="input-group hidden dependent paypal-alipay">
+                        <label>确认地址或帐号</label>
+                        <div class="inputs">
+                            <input id="payment_email_address_confirmation" class="ipttheme" name="payment_email_address_confirmation" value="" type="text">
+                        </div>
+                    </div>
+                    <div id="payoneer-notice" class="payoneer input-group hidden dependent">
+                        <label>银行转账</label>
+                        <div class="inputs">
+                            <div class="notice">银行转账（暂未开通），欲知详情请<a href="/support/">联系我们</a>。</div>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="taxable_chinese_resident">中国大陆纳税者</label>
+                        <div class="inputs">
+                            <label for="taxable_chinese_resident">
+                                <input id="taxable_chinese_resident" name="taxable_chinese_resident" value="true" type="checkbox">
+                                <strong>我是中国大陆纳税主体</strong>
+                            </label>
+                            <div id="taxation-details" class="hidden dependent">
+                                <label for="hobbyist_true">
+                                    <input checked="checked" id="hobbyist_true" name="hobbyist" value="true" type="radio" />
+                                    设计开发是我的业余爱好
+                                </label>
+                                <label for="hobbyist_false">
+                                    <input id="hobbyist_false" name="hobbyist" value="false" type="radio">
+                                    设计开发是我(们)的业务
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tax-number input-group hidden dependent">
+                        <label for="cbn">组织机构代码</label>
+                        <div class="inputs">
+                            <input id="cbn" name="cbn" class="ipttheme" value="" type="text">
+                        </div>
+                    </div>
+                    <div class="tax-number input-group hidden dependent">
+                        <label for="ccn">营业执照号码</label>
+                        <div class="inputs">
+                            <input id="ccn" name="ccn" class="ipttheme" value="" type="text">
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="swift-notice notice hidden dependent">
+                    请注意国际转账由银行统一收取35美元手续费，折合人民币210元，<br><br>
+                    {$domain}不收取任何附加费用，因费用高昂，我们不建议您使用此种方式，除非您确实有极其迫切的需求。
+                    <br><br>
+                    <input id="swift-transaction-fee" value="35.00" type="hidden">
+                    <input id="max-withdrawal-amount-less-fee" value="-35.00" type="hidden">
+                    国际转账（暂未开通），欲知详情请<a href="/support/">联系我们</a>。
+                </div>
+                <div class="form-submit"><input type="hidden" name="submit" value="submit" />
+                    <button id="txbtn" type="submit" class="btntheme2 btnsize">提交提现请求</button>
+                </div>
+            </form>
+        </div>
+        {else}
+        <div class="sideblock">
+            <span class="tiptxt">你的上一次提现请求尚未处理完毕，暂时不能再次提现，{if $have_service==true}若有疑问请联系你的专属小编[{$service.user_name}]，{/if}感谢配合。</span>
+        </div>
+        {/if}
+
+    </div>
+    <div class="rightdetail">
+      <h3 class="bordertit">开始在网站上销售你的作品!</h3>
+      <div class="borderbg">
+        <p>如何开始销售?</p>
+        <p>在本站销售作品，将会获得高额的分成。查看<a href="/make_money/become_an_author">如何开始</a>！</p>
+      </div>
+    </div> 
+  </div>
+</div>
+<script>{literal}
+seajs.use(["jq", "modules/pay"], function($, pay){
+  var pri = "{/literal}{$user.earning|string_format:"%.2f"}{literal}";
+  pri = parseInt(pri);
+  if(pri < 50){
+    $("#txbtn").attr("disabled", "disabled");
+    $("#prinotip").show();
+  }
+  pay.init();
+}):
+{/literal}</script>
