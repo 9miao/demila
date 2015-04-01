@@ -1,0 +1,15 @@
+{if check_login_bool()}
+<ul class="pagetab clr">
+<li><a{if $smarty.get.controller == 'dashboard'} class="active"{/if} href="/{$languageURL}author_dashboard/">控制面板</a></li>
+<li><a{if $smarty.get.controller == 'profile'} class="active"{/if} href="/{$languageURL}user/{$smarty.session.user.username}/">个人资料</a></li>
+{if $smarty.session.user.items != '0'} 
+<li><a{if $smarty.get.controller == 'portfolio'} class="active"{/if} href="/{$languageURL}user/portfolio/{$smarty.session.user.username}/">作品集</a></li>
+{/if}
+<li><a{if $smarty.get.controller == 'edit'} class="active"{/if} href="/{$languageURL}edit/">我的设置</a></li>
+<li><a{if $smarty.get.controller == 'downloads'} class="active"{/if} href="/{$languageURL}download/">下载</a></li>
+<li><a{if $smarty.get.controller == 'bookmarks'} class="active"{/if} href="/{$languageURL}user/bookmarks/">书签集</a></li>
+<li><a{if $smarty.get.controller == 'deposit' || $smarty.get.controller == 'payment'} class="active"{/if} href="/{$languageURL}deposit/">充值</a></li>
+<li><a{if $smarty.get.controller == 'withdrawal'} class="active"{/if} href="/{$languageURL}withdrawal/">提现</a></li>
+<li><a{if $smarty.get.controller == 'statement'} class="active"{/if} href="/{$languageURL}statement/">统计</a></li>
+</ul>
+{/if}

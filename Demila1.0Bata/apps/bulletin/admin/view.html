@@ -1,0 +1,61 @@
+<link href="/static/css/custom/ucenter.css" rel="stylesheet" />
+<div class="pagetit">
+  <div class="navblock">
+    <ul class="titnav clr">
+      <li><a href="/admin" title="管理首页">管理首页</a></li>
+      <li class="pipe">&gt;</li>
+      <li><a href="?m={$smarty.get.m}&c=list&p={$smarty.get.p}">新闻邮件</a></li>
+      <li class="pipe">&gt;</li>
+      <li><a href="?m={$smarty.get.m}&c=list&p={$smarty.get.p}">{$title}</a></li>
+      <li class="pipe">&gt;</li>
+      <li>{$data.name}</li>
+    </ul>
+    <h2>{$data.name}</h2>
+  </div>
+</div>
+<!--<div class="page-info">
+    <div class="container">
+      <div id="breadcrumbs">
+        <a href="/admin" class="first">主页</a> \ <a href="?m={$smarty.get.m}&c=list&p={$smarty.get.p}">新闻邮件</a> \  <a href="?m={$smarty.get.m}&c=list&p={$smarty.get.p}">{$title}</a> \
+      </div>
+      <h1 class="page-title">{$data.name}</h1>
+    </div>
+  </div>-->
+<div class="ucbg">
+  <div class="ucblock paddingt clr">
+    {include file="$root_path/apps/lists/leftlist_admin.html"}
+    <div class="rightdetail_admin">
+
+    <div class="content">
+   <div class="content-box">
+	<form action="" class="horizontal-form item-form disable-on-submit" action="" method="post" enctype="multipart/form-data">
+	 <div class="input-group">
+        <label>标题</label>
+        <div class="right">
+         {$data.name}
+        </div>
+    </div>
+	 <div class="input-group">
+        <label>发表于</label>
+        <div class="right">
+         {$data.datetime|date_format:"%Y-%m-%d %H:%M"}
+        </div>
+    </div>
+	 <div class="input-group">
+        <label>{$lang.readed}</label>
+        <div class="right">
+         {$data.readed}
+        </div>
+    </div>	
+	 <div class="input-group">
+        <label>Description</label>
+        <div class="right">
+        {$data.text}
+        </div>
+    </div>	
+	</form>
+    </div>
+   </div>
+   </div>
+  </div>
+ </div>

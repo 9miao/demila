@@ -1,0 +1,85 @@
+<link href="/static/css/custom/ucenter.css" rel="stylesheet" />
+<div class="pagetit">
+  <div class="navblock">
+    <ul class="titnav clr">
+      <li><a href="/admin" title="管理首页">管理首页</a></li>
+      <li class="pipe">&gt;</li>
+      <li>管理员控制面板</li>
+    </ul>
+    <h2>管理员控制面板</h2>
+  </div>
+</div>
+<!--<div class="page-info">
+    <div class="container">
+      <div id="breadcrumbs">
+        <a href="/" class="first">主页</a> \ </div>
+       <h2 class="page-title">管理员控制面板 </h2>
+    </div>
+	{include file="$root_path/apps/admin/admin_tabsy.html"}
+</div>-->
+<div class="ucbg">
+	<div class="ucblock paddingt clr">
+		{include file="$root_path/apps/lists/leftlist_admin.html"}
+		<div class="rightdetail_admin">
+			<h2 class="box-heading sp">官方新闻</h2>
+			<ul class="newslist">
+				{foreach from=$news item=i}
+				<li class="clr">
+					<a href="{$i.url}" target="_blank" title="{$i.title}">{$i.title}</a>
+					<span>{$i.inputtime|date_format:'%Y-%m-%d'}</span>
+				</li>
+				{/foreach}
+				<li class="clr morelink"><a href="{$more}" target="_blank" title="更多新闻">更多新闻</a></li>
+			</ul>
+			<h2 class="box-heading">系统信息</h2>
+			<table class="msgtable" cellspacing="0" cellpadding="0" border="0">
+				<tr>
+					<td width="25%">操作系统：</td>
+					<td>{$sysinfo.os}</td>
+				</tr>
+				<tr>
+					<td>web 服务器软件：</td>
+					<td>{$sysinfo.web_server}</td>
+				</tr>
+				<tr>
+					<td>mysql版本：</td>
+					<td>{$sysinfo.mysqlv}</td>
+				</tr>
+				<tr>
+					<td>文件上传设置：</td>
+					<td>{$sysinfo.fileupload}</td>
+				</tr>
+				<tr>
+					<td>服务器IP：</td>
+					<td>{$sysinfo.ip}</td>
+				</tr>
+				<tr>
+					<td>物理路径：</td>
+					<td>{$sysinfo.root_path}</td>
+				</tr>
+				<tr>
+					<td>屏蔽函数：</td>
+					<td>{$sysinfo.unfun}</td>
+				</tr>
+				<tr>
+					<td>服务器时间：</td>
+					<td>{$sysinfo.server_time}</td>
+				</tr>
+				<tr>
+					<td>脚本超时：</td>
+					<td>{$sysinfo.outtime}秒</td>
+				</tr>
+				<tr>
+					<td>当前版本：</td>
+					<td>Demila{$smarty.const.VERSION}</td>
+				</tr>
+				<tr>
+					<td>最新版本：</td>
+					<td>Demila{$version.content}</td>
+				</tr>
+			</table>
+			<h2 class="box-heading">开发团队</h2>
+			{$team.content}
+		</div>
+	</div>
+</div>

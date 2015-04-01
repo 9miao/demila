@@ -1,0 +1,10 @@
+
+	{if $bulletins}
+		<ul>
+		{foreach from=$bulletins item=b}
+			<li><a href="/{$languageURL}bulletin/view/{$b.id}" title="" target="_blank">{$b.name}</a></li>
+		{/foreach}
+		</ul>
+	{else}
+		{$lang.no_bulletin}
+	{/if}

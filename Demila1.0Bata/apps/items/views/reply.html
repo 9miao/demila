@@ -1,0 +1,17 @@
+ {$errorMessage}  
+ {if check_login_bool()} {if $show_form}
+<div class="comment__reply">
+  <div class="comment__new-reply comment__new-reply--is-active">
+	  <form action="/{$languageURL}items/comments/{$comment.item_id}" method="post">
+	  	<input type="hidden" name="comment_id" value="{$comment.id}" />
+      <label class="visuallyhidden">写个回复</label>
+	 <textarea class="comment__new-reply-field" id="reply_text" name="comment"></textarea>
+	    <input type="hidden" name="add_reply" value="yes" />
+      <div class="form-submit">
+        <button type="submit" class="btntheme2 auto-width post-reply">回复</button>
+      </div>
+	  	    <input type="hidden" name="ret" value="">
+</form>  
+</div>
+</div> 
+{/if}{/if}

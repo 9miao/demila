@@ -1,0 +1,71 @@
+{if $user.power_elite_author  == 'true' || $user.elite_author  == 'true'}
+<div class="pagetit pagetabs{if $user.power_elite_author  == 'true'} power-elite-author{/if}{if $user.elite_author  == 'true'} elite-author{/if}">
+  <div class="navblock">
+    <ul class="titnav clr">
+      <li><a href="/" title="主页">主页</a></li>
+      <li class="pipe">&gt;</li>
+      <li><a href="/{$languageURL}user/{$user.username}/">个人资料</a></li>
+    </ul>
+    <h2>作品集<span class="sp">{if $user.power_elite_author  == 'true'}强力{/if}精英作者</span></h2>
+    {if check_login_bool() && $user.user_id == $smarty.session.user.user_id}
+    <ul class="pagetab clr">
+      <li><a href="/{$languageURL}author_dashboard/">控制面板</a></li>
+      <li><a href="/{$languageURL}user/{$smarty.session.user.username}/">个人资料</a></li>
+      {if $smarty.session.user.items != '0'} 
+      <li><a class="active" href="/{$languageURL}user/portfolio/{$smarty.session.user.username}/">作品集</a></li>
+      {/if}
+      <li><a href="/{$languageURL}edit/">我的设置</a></li>
+      <li><a href="/{$languageURL}download/">下载</a></li>
+      <li><a href="/{$languageURL}user/bookmarks/">书签集</a></li>
+      <li><a href="/{$languageURL}deposit/">充值</a></li>
+      <li><a href="/{$languageURL}withdrawal/">提现</a></li>
+      <li><a href="/{$languageURL}statement/">统计</a></li>
+    </ul>
+    {else}
+    <ul class="pagetab clr">
+      {if $user.items != '0'}
+      <li><a href="/{$languageURL}user/{$user.username}/">个人资料</a></li>
+      <li><a class="active" href="/{$languageURL}user/portfolio/{$user.username}/">作品集</a></li>
+      {else}
+      <li><a class="active" href="/{$languageURL}user/{$user.username}/">个人资料</a></li>
+      {/if}
+    </ul>
+    {/if}
+  </div>
+</div>
+{else}
+<div class="pagetit pagetabs">
+  <div class="navblock">
+    <ul class="titnav clr">
+      <li><a href="/" title="主页">主页</a></li>
+      <li class="pipe">&gt;</li>
+      <li><a href="/{$languageURL}user/{$user.username}/">个人资料</a></li>
+    </ul>
+    <h2>作品集</h2>
+    {if check_login_bool() && $user.user_id == $smarty.session.user.user_id}  
+    <ul class="pagetab clr">
+      <li><a href="/{$languageURL}author_dashboard/">控制面板</a></li>
+      <li><a href="/{$languageURL}user/{$smarty.session.user.username}/">个人资料</a></li>
+      {if $smarty.session.user.items != '0'} 
+      <li><a class="active" href="/{$languageURL}user/portfolio/{$smarty.session.user.username}/">作品集</a></li>
+      {/if}
+      <li><a href="/{$languageURL}edit/">我的设置</a></li>
+      <li><a href="/{$languageURL}download/">下载</a></li>
+      <li><a href="/{$languageURL}user/bookmarks/">书签集</a></li>
+      <li><a href="/{$languageURL}deposit/">充值</a></li>
+      <li><a href="/{$languageURL}withdrawal/">提现</a></li>
+      <li><a href="/{$languageURL}statement/">统计</a></li>
+    </ul>
+    {else}
+    <ul class="pagetab clr">
+      {if $user.items != '0'}
+      <li><a href="/{$languageURL}user/{$user.username}/">个人资料</a></li>
+      <li><a class="active" href="/{$languageURL}user/portfolio/{$user.username}/">作品集</a></li>
+      {else}
+      <li><a class="active" href="/{$languageURL}user/{$user.username}/">个人资料</a></li>
+      {/if}
+    </ul>
+    {/if}
+  </div>
+</div>
+{/if}

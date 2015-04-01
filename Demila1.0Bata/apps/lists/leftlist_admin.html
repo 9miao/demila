@@ -1,0 +1,51 @@
+<ul class="menulists">
+	<li><a{if $smarty.get.m == '' && $smarty.get.c == ''} class="active"{/if} href="/admin/" title="管理员首页">管理员首页</a></li>
+	<li><a{if $smarty.get.m == 'system' && $smarty.get.c == 'console'} class="active"{/if} href="/admin/?m=system&c=console" title="控制台">控制台</a></li>
+	<li><a{if $smarty.get.m == 'items' && $smarty.get.c == 'queue'} class="active"{/if} href="/admin/?m=items&c=queue" title="上传队列审核">上传队列审核</a></li>
+	<li><a{if $smarty.get.m == 'items' && $smarty.get.c == 'queue_update'} class="active"{/if} href="/admin/?m=items&c=queue_update" title="更新队列审核">更新队列审核</a></li>
+	<li><a{if $smarty.get.m == 'users' && $smarty.get.c == 'withdraws'} class="active"{/if} href="/admin/?m=users&c=withdraws" title="提现队列审核">提现队列审核</a></li>
+	<li><a{if $smarty.get.m == 'contacts' && $smarty.get.c == 'list'} class="active"{/if} href="/admin/?m=contacts&c=list" title="联系支持处理">联系支持处理</a></li>
+	<li><a{if $smarty.get.m == 'users' && $smarty.get.c == 'comments'} class="active"{/if} href="/admin/?m=users&c=comments" title="举报评论处理">举报评论处理</a></li>
+	<li>
+		<a{if $smarty.get.m == 'system' && $smarty.get.c == 'list'} class="active"{/if} href="/admin/?m=system&c=list" title="全局设置">全局设置</a>
+		<!--<ol>
+			<li><a href="" title="站点信息设置">站点信息设置</a></li>
+			<li><a href="" title="资金相关设置">资金相关设置</a></li>
+			<li><a href="" title="用户相关设置">用户相关设置</a></li>
+			<li><a href="" title="用户和属性设置">分类和属性设置</a></li>
+		</ol>-->
+	</li>
+	<li>
+		<a{if $smarty.get.m == 'items' && $smarty.get.c == 'list' && $smarty.get.order == ''} class="active nextmenu"{else} class="nextmenu"{/if} href="/admin/?m=items&c=list" title="作品管理">作品管理</a>
+		<ol>
+			<li><a{if $smarty.get.m == 'items' && $smarty.get.c == 'list' && $smarty.get.order == ''} class="active"{/if} href="/admin/?m=items&c=list" title="全部作品">全部作品</a></li>
+			<li><a{if $smarty.get.m == 'items' && $smarty.get.c == 'list' && $smarty.get.order == 'weekly'} class="active"{/if} href="/admin/?m=items&c=list&p=&q=&order=weekly&dir=desc" title="推荐作品">推荐作品</a></li>
+			<li><a{if $smarty.get.m == 'items' && $smarty.get.c == 'list' && $smarty.get.order == 'freefile'} class="active"{/if} href="/admin/?m=items&c=list&p=&q=&order=freefile&dir=desc" title="免费作品">免费作品</a></li>
+			<li><a{if $smarty.get.m == 'tags' && $smarty.get.c == 'list'} class="active"{/if} href="/admin/?m=tags&c=list" title="作品标签">作品标签</a></li>
+			<li><a{if $smarty.get.m == 'collections' && $smarty.get.c == 'list'} class="active"{/if} href="/admin/?m=collections&c=list" title="书签集">书签集</a></li>
+		</ol>
+	</li>
+	<li>
+		<a{if $smarty.get.m == 'users' && $smarty.get.c == 'list' && $smarty.get.u_type == ''} class="active nextmenu"{else} class="nextmenu"{/if} href="/admin/?m=users&c=list" title="用户管理">用户管理</a>
+		<ol>
+			<li><a{if $smarty.get.m == 'users' && $smarty.get.c == 'groups'} class="active"{/if} href="/admin/?m=users&c=groups" title="用户组权限设置">用户组权限设置</a></li>
+			<li><a{if $smarty.get.m == 'users' && $smarty.get.c == 'list' && $smarty.get.u_type == '1'} class="active"{/if} href="/admin/?m=users&c=list&u_type=1" title="普通用户">普通用户</a></li>
+			<li><a{if $smarty.get.m == 'users' && $smarty.get.c == 'list' && $smarty.get.u_type == '2'} class="active"{/if} href="/admin/?m=users&c=list&u_type=2" title="普通作者">普通作者</a></li>
+			<li><a{if $smarty.get.m == 'users' && $smarty.get.c == 'list' && $smarty.get.u_type == '3'} class="active"{/if} href="/admin/?m=users&c=list&u_type=3" title="签约作者">签约作者</a></li>
+			<li><a{if $smarty.get.m == 'users' && $smarty.get.c == 'list' && $smarty.get.u_type == '4'} class="active"{/if} href="/admin/?m=users&c=list&u_type=4" title="推荐作者">推荐作者</a></li>
+		</ol>
+	</li>
+	<li>
+		<a{if $smarty.get.m == 'bulletin' && $smarty.get.c == 'list'} class="active nextmenu"{else} class="nextmenu"{/if} href="/admin/?m=bulletin&c=list" title="其他">其他</a>
+		<ol>
+			<li><a{if $smarty.get.m == 'bulletin' && $smarty.get.c == 'list'} class="active"{/if} href="/admin/?m=bulletin&c=list" title="已发送新闻邮件列表">已发送新闻邮件列表</a></li>
+			<li><a{if $smarty.get.m == 'bulletin' && $smarty.get.c == 'emails'} class="active"{/if} href="/admin/?m=bulletin&c=emails" title="新闻邮件订阅者列表">新闻邮件订阅者列表</a></li>
+			<li><a{if $smarty.get.m == 'bulletin' && $smarty.get.c == 'add'} class="active"{/if} href="/admin/?m=bulletin&c=add" title="发送新闻邮件">发送新闻邮件</a></li>
+			<li><a{if $smarty.get.m == 'pages' && $smarty.get.c == 'list'} class="active"{/if} href="/admin/?m=pages&c=list" title="自定义页面">自定义页面</a></li>
+			<li><a{if $smarty.get.m == 'qnews' && $smarty.get.c == 'list'} class="active"{/if} href="/admin/?m=qnews&c=list" title="快讯列表">快讯列表</a></li>
+			<li><a{if $smarty.get.m == 'qnews' && $smarty.get.c == 'add'} class="active"{/if} href="/admin/?m=qnews&c=add" title="添加快讯">添加快讯</a></li>
+			<li><a{if $smarty.get.m == 'quiz' && $smarty.get.c == 'list'} class="active"{/if} href="/admin/?m=quiz&c=list" title="测验">测验</a></li>
+            <li><a{if $smarty.get.m == 'app_extends' && $smarty.get.c == 'list'} class="active"{/if} href="/admin/?m=app_extends&c=list" title="扩展功能">扩展功能</a></li>
+        </ol>
+	</li>
+</ul>

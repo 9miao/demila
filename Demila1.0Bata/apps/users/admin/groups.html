@@ -1,0 +1,68 @@
+<link href="/static/css/custom/ucenter.css" rel="stylesheet" />
+<div class="pagetit">
+  <div class="navblock">
+    <ul class="titnav clr">
+      <li><a href="/admin" title="管理首页">管理首页</a></li>
+      <li class="pipe">&gt;</li>
+      <li><a href="?m={$smarty.get.m}&c=groups">用户组</a></li>
+      <li class="pipe">&gt;</li>
+      <li>用户组设置</li>
+    </ul>
+    <h2>用户组设置</h2>
+  </div>
+</div>
+<div class="ucbg">
+	<div class="ucblock paddingt clr">
+    	{$errorMessage}
+		{include file="$root_path/apps/lists/leftlist_admin.html"}
+		<div class="rightdetail_admin">
+  	{if $paging !=""}
+       <div class="page-controls">
+        {$paging}
+       </div></div>
+	{/if}
+
+	{if is_array($data)}
+   <div class="general_table_border">
+	<table id="generlist" class="general_table" cellspacing="0" cellpadding="0" border="0">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>用户组名</th>
+				<th>描述</th>
+				<th width="150"></th>
+			</tr>
+		</thead>
+
+		<tbody>
+		{foreach from=$data item=d}
+			<tr id="row{$d.ug_id}" class="{cycle values="no,alt"}">
+				<td>{$d.ug_id}</td>
+				<td>{$d.name}</td>
+				<td>{$d.description}</td>						
+				<td>
+					<a href="?m={$smarty.get.m}&c=editGroup&id={$d.ug_id}" title="{$lang.edit}">编辑</a>
+					{if $d.ug_id!=2} | 
+					<a class="deletebtn" ajax-url="/apps/{$smarty.get.m}/ajax/delete.php" item-id="{$d.ug_id}" href="javascript:void(0);" title="{$lang.delete}">删除</a>{/if}
+				</td>					
+			</tr>
+			{/foreach}
+		</tbody>
+	</table>		
+  </div>
+{literal}
+<script type="text/javascript">
+seajs.use(["modules/ajax"], function(aj){
+  aj.deletebtninit("#generlist .deletebtn", "ajax-url", "item-id", {'deleteUserGroup':true,'id':''}, "deleteRow");
+});
+</script>
+{/literal}
+	{else}
+		无记录
+	{/if}
+    <div class="form-submit">
+     <button onclick="window.location='?m={$smarty.get.m}&c=addGroup';" type="button" class="btntheme2 btnsize">新增</button>
+    </div>
+    </div>
+ </div>
+</div>

@@ -1,0 +1,123 @@
+<link href="/static/css/custom/ucenter.css" rel="stylesheet" />
+{if $smarty.session.user.power_elite_author  == 'true' || $smarty.session.user.elite_author  == 'true'}
+<div class="pagetit pagetabs{if $smarty.session.user.power_elite_author  == 'true'} power-elite-author{/if}{if $smarty.session.user.elite_author  == 'true'} elite-author{/if}">
+  <div class="navblock">
+    <ul class="titnav clr">
+      <li><a href="/" title="主页">主页</a></li>
+      <li class="pipe">&gt;</li>
+      <li><a href="/{$languageURL}users/{$smarty.session.user.username}/">我的账号</a></li>
+    </ul>
+    <h2>下载<span class="sp">你共计购买了{$smarty.session.user.buy}件作品</span></h2>
+    {include file="$root_path/apps/users/views/tabsy.html"}
+  </div>
+</div>
+{else}
+<div class="pagetit pagetabs">
+  <div class="navblock">
+    <ul class="titnav clr">
+      <li><a href="/" title="主页">主页</a></li>
+      <li class="pipe">&gt;</li>
+      <li><a href="/{$languageURL}users/{$smarty.session.user.username}/">我的账号</a></li>
+    </ul>
+    <h2>下载<span class="sp">你共计购买了{$smarty.session.user.buy}件作品</span></h2>
+    {include file="$root_path/apps/users/views/tabsy.html"}
+  </div>
+</div>
+{/if}
+
+<div class="ucbg">
+  <div class="ucblock paddingt clr">
+    {$errorMessage}
+    <div class="leftdetail">
+      {if $items}
+      <ul class="sideblock downlist">
+        {foreach from=$items item=i name=foo}
+        <li class="clr">
+          <div class="thumbnail">
+            <a class="landscape-image-magnifier" href="/{$langaugeURL}items/{$i.id}" onclick="">
+            <img data-tooltip="{$i.name|escape}" alt="{$i.name|escape}" class="preload no_preview" data-item-author="作者 {$i.username}" data-item-category="{foreach from=$i.categories item=e}{foreach from=$e item=c name=foo}{$categories[$c].name} {if !$smarty.foreach.foo.last} \ {/if}{/foreach}{/foreach}" data-item-cost="{$i.price|escape}" data-item-name="{$i.name|escape}" data-preview-height="" data-preview-url="{$data_server}uploads/items/{$i.id}/preview.jpg" data-preview-width="" src="{$data_server}uploads/items/{$i.id}/{$i.thumbnail}" title="" border="0" />
+            </a>
+          </div>
+          <div class="item-info">
+            <h3><a href="/{$langaugeURL}items/{$i.id}">{$i.name}</a></h3>
+            <small>
+              <a href="/help/licenses/" target="_blank">共享许可</a>
+              &nbsp;&nbsp;|&nbsp;&nbsp;
+              <a href="/{$languageURL}users/downloads/{$i.id}/?certificate">许可文件</a>
+            </small>
+          </div>
+          <div class="download-action clr">
+            <form id="download{$i.id}" action="/{$languageURL}download/{$i.id}" method="post">
+              <input type="hidden" name="download" id="download" value="regular" />
+              <a href="javascript:;" onclick="document.getElementById('download{$i.id}').submit();" class="btntheme2">点击下载文件</a>
+            </form>
+            <div class="aside">
+              <div class="rating-container">
+                {if isset($ratedItems[$i.id])}
+                  {section name=foo start=1 loop=6 step=1}
+                    {if $ratedItems[$i.id].rate >= $smarty.section.foo.index}
+                    <img src="/static/img/star-on.png"/>
+                    {else}
+                    <img src="/static/img/star-off.png"/>
+                    {/if}
+                  {/section}
+                {else}
+                  <div id="stars_div_{$i.id}" class="stars" data-star-set-id="{$i.id}_star" data-rating="0">
+                    {section name=foo start=1 loop=6 step=1}
+                    <a href="/{$languageURL}users/downloads/{$i.id}?rating={$smarty.section.foo.index}" data-method="post" data-remote="true" rel="nofollow"><img alt="{$smarty.section.foo.index}" id="{$i.id}_star_{$smarty.section.foo.index}" src="/static/img/star-off.png"></a>
+                    {/section}
+                  </div>
+                {/if}
+              </div>
+              {literal}
+                  <script>
+                  seajs.use(["modules/rating"], function(rating){
+                    rating.init("stars_div_{/literal}{$i.id}{literal}");
+                  });
+                  </script>
+              {/literal}
+            </div>
+          </div>
+          <div class="download-action dreamhost clr">
+            <a class="btntheme2" href="http://www.9miao.com/forum-64-1.html" target="_blank">demila论坛</a>
+            <div class="aside">
+              <small class="affiliate-callout">
+                <a href="http://www.9miao.com/forum-79-1.html" target="_blank">4秒论坛</a>
+              </small>
+            </div>
+          </div>
+        </li>
+        {/foreach}
+      </ul>
+      {else}
+      <div class="content-box vertical-space">
+      <p>
+      <strong>你还没有购买任何作品。</strong>
+      </p>
+      </div>
+      {/if}
+    </div>
+
+    <div class="rightdetail">
+      <h3 class="bordertit">立即下载</h3>
+      <div class="borderbg">
+        <p>请购买后尽快下载文件，有时作者或者我们会基于某些必要原因(比如版权问题)而删除文件且无法给予你退款。</p>
+      </div>
+      <h3 class="bordertit">下载遇到麻烦？</h3>
+      <div class="borderbg">
+        <p>如果你在下载文件时遇到诸如“崩溃”或者“文件丢失”等问题，我们建议你采取以下步骤：</p>
+        <ol class="text-list decimal">
+          <li>检查你的网络连接并重新下载。“崩溃”或者“文件丢失”等问题一般是因为文件下载不完整造成的。</li>
+          <li>尝试其他解压工具来解压文件。</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+{literal}
+<script type="text/javascript">
+seajs.use(["pageui"], function(ui){
+  ui.imgMagnifier("a.landscape-image-magnifier");
+});
+</script>
+{/literal}

@@ -1,0 +1,58 @@
+<link href="/static/css/custom/ucenter.css" rel="stylesheet" />
+<div class="pagetit">
+  <div class="navblock">
+    <ul class="titnav clr">
+      <li><a href="/admin" title="管理首页">管理首页</a></li>
+      <li class="pipe">&gt;</li>
+      <li><a href="?m={$smarty.get.m}&c=list&p={$smarty.get.p}">新闻邮件</a></li>
+      <li class="pipe">&gt;</li>
+      <li>{$title}新建</li>
+    </ul>
+    <h2>{$title}新建</h2>
+  </div>
+</div>
+<!--<div class="page-info">
+    <div class="container">
+      <div id="breadcrumbs">
+        <a href="/admin" class="first">主页</a> \ <a href="?m={$smarty.get.m}&c=list&p={$smarty.get.p}">新闻邮件</a> \  
+      </div>
+      <h1 class="page-title">{$title}新建</h1>
+    </div>
+  </div>-->
+<div class="ucbg">
+  <div class="ucblock paddingt clr">
+    {include file="$root_path/apps/lists/leftlist_admin.html"}
+    <div class="rightdetail_admin">
+    <div class="content">
+     <script type="text/javascript" src="{$data_server}nicEditors/nicEdit.js"></script>
+     <script type="text/javascript">{literal}bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });{/literal}</script>
+   <div class="content-box">
+	<form action="" class="horizontal-form item-form disable-on-submit" action="" method="post" enctype="multipart/form-data">
+	 <div class="input-group">
+        <label for="name">{$lang.name}</label>
+        <div class="inputs">
+          <input id="name" type="text" name="name" value="{$smarty.post.name|escape}" required="true" />
+			{if isset($error.name)}
+				<small>{$error.name}</small>
+			{/if}
+        </div>
+    </div>
+	 <div class="input-group">
+        <label for="desc">{$lang.text}</label>
+        <div class="inputs">
+         <textarea id="text" name="text">{$smarty.post.text}</textarea>
+			{if isset($error.text)}
+				<small>{$error.text}</small>
+			{/if}
+        </div>
+    </div>
+	 <input type="hidden" name="send_to" value="site" />
+    <div class="form-submit">
+     <button type="submit" name="add" class="btntheme2 btnsize">{$lang.send}</button>
+    </div>
+	</form>
+    </div>
+   </div>
+   </div>
+  </div>
+ </div>

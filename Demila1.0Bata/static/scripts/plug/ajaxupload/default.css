@@ -1,0 +1,87 @@
+/* remember to define focus styles! */
+:focus {
+	outline: 0;
+}
+
+ol,ul {
+	list-style: none;
+}
+
+.progressWrapper {
+	width: 357px;
+	overflow: hidden;
+	border: 1px solid #d0d0d0; 
+	background-color: white; 
+	padding: 5px; 
+}
+
+.progressContainer {
+	margin: 5px;
+	padding: 4px;
+	border: solid 1px #E8E8E8;
+	background-color: #F7F7F7;
+	overflow: hidden;
+	position: relative;
+	width: 337px;
+}
+
+.progressName {
+	font-size: 14px;
+	font-weight: 700;
+	color: #555;
+	height: 20px;
+	text-align: left;
+	white-space: nowrap;
+	overflow: hidden;
+	float: left;
+	width: 95%;
+}
+
+.progressBarInProgress,.progressBarComplete,.progressBarError {
+	font-size: 0;
+	width: 0%;
+	height: 5px;
+	background-color: #1c90f2;
+	margin-top: 40px;
+}
+
+.progressBarComplete {
+	width: 100%;
+	background-color: green;
+	visibility: hidden;
+}
+
+.progressBarError {
+	width: 100%;
+	background-color: red;
+	visibility: hidden;
+}
+
+.progressBarStatus {
+	font-size: 14px;
+	font-family: Arial;
+	text-align: left;
+	white-space: nowrap;
+	float: left;
+	margin-left: 10px;
+}
+
+a.progressCancel {
+	font-size: 0;
+	display: block;
+	height: 14px;
+	width: 14px;
+	background-image: url(/static/img/custom/cancelbutton.gif);
+	background-repeat: no-repeat;
+	background-position: -14px 0px;
+	float: right;
+}
+
+a.progressCancel:hover {
+	background-position: 0px 0px;
+}
+
+/* -- SWFUpload Object Styles ------------------------------- */
+.swfupload {
+	vertical-align: top;
+}

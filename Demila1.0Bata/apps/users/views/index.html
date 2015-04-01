@@ -1,0 +1,246 @@
+<link href="/static/css/custom/ucenter.css" rel="stylesheet" />
+{include file="$root_path/apps/users/views/elite_profile.html"}
+
+<div class="ucbg">
+  <div class="ucblock paddingt clr">
+    {$errorMessage}
+    <div class="leftdetail">
+      <div class="sideblock authormainimg">
+        {if $user.homeimage != ''}
+        <img alt="{$user.username}" src="{$data_server}uploads/users/{$user.user_id}/A_{$user.homeimage}" />
+        {else}
+        <img alt="{$user.username}" src="{$data_server}img/default-Home2.jpg" />
+        {/if}
+      </div>
+      {if $user.profile_title != ''}
+      <h3 class="authortit">{$user.profile_title}</h3>
+      {/if}
+      {if $user.profile_desc != ''}
+      <div class="authortxt">{$user.profile_desc|nl2br}</div>
+      {/if}
+      {if $collections}
+      <h3 class="authortit">{$lang.public_collections}</h3>
+      <ul class="collectionlist clr">
+        {foreach from=$collections item=c} 
+        <li class="collection_item">
+          <a href="/{$languageURL}collections/view/{$c.id}">
+            {if $c.photo != ''}
+            <img alt="{$c.name|escape}" class="img" src="{$data_server}/uploads/collections/{$c.photo}" />
+            {else}
+            <img alt="{$c.name|escape}" class="img" src="{$data_server}img/default-collection.jpg" />
+            {/if}
+            <span>{$c.name}</span>
+          </a>
+          <div class="itemstars">
+            <div class="starnums" style="width:{$i.rating*2}0%;"><span class="allstars"></span></div>
+            <div class="starsbg"></div>
+          </div>
+        </li>
+        {/foreach}
+      </ul>
+      {else}
+        {if check_login_bool() && $user.user_id == $smarty.session.user.user_id}
+      <div class="tip">
+      最近创建的三个公开书签集会出现在这里<a href="/user/bookmarks/">创建书签集</a>。
+      </div>
+        {/if}
+      {/if}
+    </div>
+
+    <div class="rightdetail">
+      <div class="sideblock author">
+        <div class="clr">
+          <div class="authoravatar">
+            <a href="/{$languageURL}user/{$user.username}/" class="avatar" >
+              {if $user.avatar != ''} 
+              <img alt="{$user.username}" src="{$data_server}uploads/users/{$user.user_id}/A_{$user.avatar}" />
+              {else}
+              <img alt="{$user.username}" src="{$data_server}img/default-user.jpg" />
+              {/if}
+            </a>
+          </div>
+          <div class="details">
+            <h2>{$user.nickname}</h2>
+            <p>注册时间：{$user.register_datetime|date_format:"%Y-%m-%d"}</p>
+            <p>最后登录：{$user.last_login_datetime|date_format:"%Y-%m-%d"}</p>
+          </div>
+        </div>
+        <ul class="badges clr">
+          {foreach from=$user_badges item=b name=foo}
+          <img src="{$data_server}{$b.photo}" height="30" width="30" alt="{$b.name|escape}" title="{$b.name|escape}" />
+          {if $smarty.foreach.foo.last}{/if}
+          {/foreach}
+        </ul>
+        {if $user.power_elite_author  == 'true'}
+        <div class="power-elite-author">
+          {if $user.items != '0'} 
+          <a href="/{$languageURL}user/portfolio/{$user.username}/" class="btntheme2 authorbtn">查看作品集</a>{else}
+          {/if}
+          {if check_login_bool() && $smarty.session.user.user_id != $user.user_id}
+          {literal}
+          <a href="/{/literal}{$languageURL}users/{$user.username}/?follow{literal}" id="follow-user" onclick="$.ajax({complete:function(request){jQuery(&quot;#ajax-feedback&quot;).animate({&quot;height&quot;: &quot;toggle&quot;, &quot;opacity&quot;: &quot;toggle&quot;}, &quot;slow&quot;); }, dataType:'script', type:'post', url:'/{/literal}{$langaugeURL}users/{$user.username}/?follow{literal}'}); jQuery(&quot;#ajax-feedback&quot;).hide(); jQuery(&quot;#ajax-feedback&quot;).animate({&quot;height&quot;: &quot;toggle&quot;, &quot;opacity&quot;: &quot;toggle&quot;}, &quot;slow&quot;);return false;">
+          {/literal}
+          <button id="follow" class="btntheme authorbtn" type="submit">{if $user.is_follow}取消关注{else}关注{/if}</button>
+          </a>
+          {/if}
+        </div>
+        {else}
+          {if $user.items != '0'} 
+            <a href="/{$languageURL}user/portfolio/{$user.username}/" class="btntheme2 authorbtn">查看作品集</a>{else}
+          {/if}
+          {if check_login_bool() && $smarty.session.user.user_id != $user.user_id}
+            {literal}<a href="/{/literal}{$languageURL}users/{$user.username}/?follow{literal}" id="follow-user" onclick="$.ajax({complete:function(request){jQuery(&quot;#ajax-feedback&quot;).animate({&quot;height&quot;: &quot;toggle&quot;, &quot;opacity&quot;: &quot;toggle&quot;}, &quot;slow&quot;); }, dataType:'script', type:'post', url:'/{/literal}{$langaugeURL}users/{$user.username}/?follow{literal}'}); jQuery(&quot;#ajax-feedback&quot;).hide(); jQuery(&quot;#ajax-feedback&quot;).animate({&quot;height&quot;: &quot;toggle&quot;, &quot;opacity&quot;: &quot;toggle&quot;}, &quot;slow&quot;);return false;">{/literal}
+            <button id="follow" class="btntheme authorbtn" type="submit">{if $user.is_follow}取消关注{else}关注{/if}</button>
+            </a>
+          {/if}
+        {/if}
+      </div>
+      <div class="sideblock sidesales">
+        <p><span>{$user.sales}</span>销量</p>
+      </div>
+      <div class="sideblock sidefollow">
+        <p><span>{if $follow.to < '1'}0{else}{$follow.toto_count}{/if}</span>粉丝</p>
+      </div>
+      {if $user.votes > 2}
+      <div class="sideblock stars clr">
+        <p class="starstit">评分：</p>
+        <div class="itemstars">
+          <div class="starnums" style="width:{$user.rating*2}0%;"><span class="allstars"></span></div>
+          <div class="starsbg"></div>
+        </div>
+        <p class="starstxt">共计{$user.votes}票 平均{$user.rating}分</p>
+      </div>
+      {else}
+      <div class="sideblock stars clr">
+        <p class="starstit">评分：&nbsp;&nbsp;<span>最低需要3票。</span></p>
+      </div>
+      {/if} 
+
+      {if $user.items != '0'} 
+      <!--<div class="sideblock rss">
+        <a href="/{$languageURL}rss/?user={$user.user_id}" class="rss-feed-link">RSS Feed</a>
+      </div>-->
+      {/if}
+
+      {if $featureItem}  
+      <div class="sideblock featuredfile clr">
+        <a class="featimg" href="/{$languageURL}items/{$featureItem.id}">
+          <img data-tooltip="{$featureItem.name|escape}" alt="{$featureItem.name|escape}" class="landscape-image-magnifier preload no_preview" data-item-author="作者 {$user.username}" data-item-category="{foreach from=$featureItem.categories item=e}{foreach from=$e item=c name=foo}{$categories[$c].name} {if !$smarty.foreach.foo.last} \ {/if}{/foreach}{/foreach}" data-item-cost="{$featureItem.price}" data-item-name="{$featureItem.name|escape}" data-preview-height="" data-preview-url="{$data_server}uploads/items/{$featureItem.id}/preview.jpg" data-preview-width="" src="{$data_server}uploads/items/{$featureItem.id}/{$featureItem.thumbnail}" title="" border="0" />
+        </a>
+        <p><small>作者自荐的文件</small><br /><a href="/{$languageURL}items/{$featureItem.id}">{$featureItem.name}</a><br />已售数量:{$featureItem.sales}</p>
+      </div>
+      {/if}
+
+      <div class="sideblock countryinfo">
+        <table border="0" cellpadding="0" cellspacing="0">
+        {if $user.live_city != ''}
+        <tr>
+          <td class="attr-name">所在城市：</td>
+          <td class="attr-detail">{$user.live_city}</td>
+        </tr>
+        {/if}
+        {if $user.country_id != '0'}
+        <tr>
+          <td class="attr-name">国家或地区：</td>
+          <td class="attr-detail">{$user.country.name}</td>
+        </tr>
+        {/if}
+        <tr>
+          <td class="attr-name">注册时间：</td>
+          <td class="attr-detail">{$user.register_datetime|date_format:"%Y-%m-%d"}</td>
+        </tr>
+        {if $user.freelance == 'true'}
+        <tr>
+          <td class="attr-name">威客：</td>
+          <td class="attr-detail">是</td>
+        </tr>
+        {/if}
+        {if $user.last_login_datetime != ''}
+        <tr>
+          <td class="attr-name">最后登录：</td>
+          <td class="attr-detail">{$user.last_login_datetime|date_format:"%Y-%m-%d %H:%M"}</td>
+        </tr>
+        {/if}
+        </table>
+      </div>
+
+      {include file="$root_path/apps/users/views/social_profile.html"}
+
+      {if check_login_bool() && $user.user_id == $smarty.session.user.user_id}
+      {else}
+        {if check_login_bool()}
+        <h3 class="bordertit">给{$user.nickname}发邮件</h3>
+        <div class="borderbg emailform">
+          <p>{$lang.profile_email_info}</p>
+          <form action="" class="contact_form" method="post">
+            <fieldset class="horizontal-form">
+              <div class="input-group">
+                <label for="from">发自</label>
+                <div class="inputs">
+                  <input type="email" value="{$smarty.session.user.email}" name="from" id="from" disabled />
+                </div>
+              </div>
+              <div class="input-group">
+                <label for="message">消息</label>
+                <div class="inputs">
+                  <textarea name="message" id="message"></textarea>
+                </div>
+              </div>
+            </fieldset>
+            <div class="form-submit">
+              <input type="hidden" name="send_email" value="yes" />
+              <button type="submit"  name="send_email" value="yes" class="btntheme emailbtn">{$lang.send}</button>
+            </div>
+          </form>
+        </div>
+        {else}
+        <h2 class="bordertit">给{$user.nickname}发邮件</h2>
+        <div class="borderbg">
+        <p>请<a href="/sign_in/">登录</a>联系该作者。</p>
+        </div>
+        {/if}
+      {/if}
+    </div>
+  </div>
+</div>
+
+{if $follow.to < 1 && $follow.from < 1}{else}
+<div class="ucbg followbg">
+  <div class="ucblock clr">
+    <div class="followblock" id="bottom_follower_info">
+      <h3 class="blocktit">{if $follow.toto < '1'}0{else}{$follow.toto_count}{/if} {$lang.followers}</h3>
+      <ul class="followlist clr">
+      {if $follow.to}
+        {foreach from=$follow.to item=f}
+          <li><a class="avatar" title="{$f.username}" href="/{$languageURL}user/{$f.username}">
+            {if $f.avatar != ''}  
+            <img class="" src="{$data_server}uploads/users/{$f.user_id}/A_{$f.avatar}" alt="{$f.username}"></img>
+            {else}
+            <img class="" src="{$data_server}img/default-user.jpg" alt="{$f.username}"></img>
+            {/if}
+          </a></li>
+        {/foreach}
+      {/if}
+      </ul>
+      <!--{if $follow.from_count > 8}<a href=""></a>{/if}-->
+    </div>
+    <div class="followblock">
+      <h3 class="blocktit">{$lang.authors_i_follow}：{if $follow.fromfrom < '1'}0{else}{$follow.fromfrom_count}{/if} </h3>
+      <ul class="followlist clr">
+      {if $follow.from}
+        {foreach from=$follow.from item=f}
+          <li><a class="avatar" title="{$f.username}" href="/{$languageURL}user/{$f.username}">
+            {if $f.avatar != ''}  
+            <img class="" src="{$data_server}uploads/users/{$f.user_id}/A_{$f.avatar}" alt="{$f.username}"></img>
+            {else}
+            <img class="" src="{$data_server}img/default-user.jpg" alt="{$f.username}"></img>
+            {/if}
+          </a></li>
+        {/foreach}
+      {/if}
+      </ul>
+      <!--{if $follow.from_count > 8}<a href=""></a>{/if}-->
+    </div>
+  </div>
+</div>
+{/if}
