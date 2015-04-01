@@ -150,6 +150,7 @@
     </div>
     <div class="freeitemsmask">
     <ul class="itemlist clr" id="free_list">
+        {if $freeItems}
       {foreach from=$freeItem item=fi}
       <li class="landscape-image-magnifier">
         <a href="/{$languageURL}items/{$fi.id}" onclick="">
@@ -159,6 +160,8 @@
         </a>
       </li>
       {/foreach}
+        {/if}
+
       <!--<li><a href="#" title="作品1"><img src="images/items.jpg" alt="作品1" /></a></li>-->
     </ul>
     </div>
