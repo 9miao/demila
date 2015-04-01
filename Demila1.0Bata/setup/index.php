@@ -180,37 +180,19 @@ if(isset($_POST['install']) && !$isInstalled) {
 
 			mysql_close($dbl);
             $index = 'http://demila.org/';
-	        if (isset($_SERVER)){
-	            if (isset($_SERVER["HTTP_X_FORWARDED_FOR"])){
-	                $realip = $_SERVER["HTTP_X_FORWARDED_FOR"];
-	            } else if (isset($_SERVER["HTTP_CLIENT_IP"])) {
-	                $realip = $_SERVER["HTTP_CLIENT_IP"];
-	            } else {
-	                $realip = $_SERVER["REMOTE_ADDR"];
-	            }
-	        }else {
-	            if (getenv("HTTP_X_FORWARDED_FOR")){
-	                $realip = getenv("HTTP_X_FORWARDED_FOR");
-	            } else if (getenv("HTTP_CLIENT_IP")) {
-	                $realip = getenv("HTTP_CLIENT_IP");
-	            } else {
-	                $realip = getenv("REMOTE_ADDR");
-	            }
-	        }
-	        
-
+            
             require_once '../classes/Http.class.php';
             $http = new Http();
 		    $url = $index.'/statistics';
 		    $data = array(
-                'ip'     => $realip,
+                'ip'     => $_SERVER['SERVER_ADDR'] .':'.$_SERVER['SERVER_PORT'],
                 'domain' => $_SERVER['HTTP_HOST'],
                 'mobile' => $_POST['admin_phone'],
                 'email'  => $_POST['admin_mail'],
                 'server' => strpos($_SERVER['SERVER_SOFTWARE'], 'PHP')===false ? $_SERVER['SERVER_SOFTWARE'].'PHP/'.phpversion() : $_SERVER['SERVER_SOFTWARE'],
-                'os'         => PHP_OS,
+                'os'     => PHP_OS,
 		    );
-		    file_put_contents('22.txt', json_encode($data));
+
 		    $res = $http->curlPost($url,$data);
 			$complete = 'yes';
 		}
