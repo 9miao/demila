@@ -950,6 +950,9 @@
 .rightdetail .borderbg .text-list, .rightdetail .borderbg .text-list li{
 	list-style: outside none decimal;
 }
+.rightdetail .borderbg .text-list li {
+    margin: 10px 0 15px 20px;
+}
 .followbg{
 	background-color: #f5f5f5;
 	border: 1px solid #e9edf0;
