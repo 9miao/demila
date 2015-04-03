@@ -57,7 +57,7 @@ class uploads_extends extends base {
         mysql_query("insert into `app_extends`(`extend_name`,`state`,`m`,`c`)  VALUES  ('截图包上传',1,'uploads_extends','uploads_extends');");
 
         mysql_query("
-		 alter table temp_items change theme_preview theme_previre TEXT;
+		 alter table temp_items change theme_preview theme_preview TEXT;
 	    ");
 
         mysql_query("
