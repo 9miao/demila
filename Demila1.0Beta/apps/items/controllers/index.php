@@ -62,12 +62,13 @@ _setView(__FILE__);
 
     //判断有截图包模块
     require_once ROOT_PATH.'/apps/app_extends/models/app_extends.class.php';
-    $is_extends=false;
+    $is_extends='false';
     $app_extends=new app_extends();
 
     if($app_extends->is_uploads()){
-        $is_extends=true;
+        $is_extends='true';
     }
+
     abr("is_extends",$is_extends);
 
 

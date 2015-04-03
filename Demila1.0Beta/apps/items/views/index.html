@@ -66,7 +66,7 @@
 <script type="text/javascript">
 seajs.use(["pageui", "modules/screenshot"], function(ui, scre){
   ui.imgMagnifier("a.landscape-image-magnifier");
-  scre.init("#previewdom .screenbtn");
+  {/literal}{if $is_extends=='true'}scre.init("#previewdom .screenbtn");{/if}{literal}
 });
 </script>
 {/literal}
