@@ -50,11 +50,11 @@
 				<td>{$d.extend_name}</td>
 				<td>
 					{if $d.state ==0 }
-                        <img class="deletebtn" ajax-url="/apps/{$smarty.get.m}/ajax/edit.php" ajax-data="{literal}{'edit':true,'id':'{/literal}{$d.id}{literal}','state':'{/literal}{$d.state}{literal}'}{/literal}" item-id="{$d.id}"  src="{$data_server}admin/images/icons/24x24/accept.png" alt="" class="middle" />开启
+                        <img class="deletebtn" ajax-url="/apps/{$smarty.get.m}/ajax/edit.php" ajax-data="{literal}{'edit':true,'id':'{/literal}{$d.id}{literal}','state':'{/literal}{$d.state}{literal}'}{/literal}" item-id="{$d.id}"  src="{$data_server}admin/images/icons/24x24/delete.png" alt="" class="middle" />开启
 					{else}
 						<img class="deletebtn" ajax-url="/apps/{$smarty.get.m}/ajax/edit.php"
                              ajax-data="{literal}{'edit':true,'id':'{/literal}{$d.id}{literal}','state':'{/literal}{$d.state}{literal}'}{/literal}"
-                             item-id="{$d.id}" src="{$data_server}admin/images/icons/24x24/delete.png" alt="" class="middle" />关闭
+                             item-id="{$d.id}" src="{$data_server}admin/images/icons/24x24/accept.png" alt="" class="middle" />关闭
 					{/if}
 				</td>
 				<td>
