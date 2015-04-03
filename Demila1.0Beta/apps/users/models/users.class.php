@@ -779,20 +779,21 @@ public function getuserinfoById($id=0){
 					$groups[$k] = $v;
 				}			
 			}
-			
 			if($setQuery != '') {
 				$setQuery .= ',';
 			}
-			$setQuery .= " `groups` = '".serialize($groups)."' ";
-			
+
 			if(isset($_POST['featured_author'])) {
-				$setQuery .= " , `featured_author` = 'true' ";
+				$setQuery .= "  `featured_author` = 'true' ";
 			}
 			else {
-				$setQuery .= " , `featured_author` = 'false' ";
+				$setQuery .= "  `featured_author` = 'false' ";
 			}
 
-			if(isset($_POST['power_elite_author'])) {
+            if($id!=1)
+            $setQuery .= " , `groups` = '".serialize($groups)."' ";
+
+            if(isset($_POST['power_elite_author'])) {
 				$setQuery .= " , `power_elite_author` = 'true' ";
 			}
 			else {
