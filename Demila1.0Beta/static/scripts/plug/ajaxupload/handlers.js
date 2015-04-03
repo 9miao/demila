@@ -4,7 +4,8 @@ define(function (require, exports, module){
 			thumbnail: /^jpg|png|gif$/i,
 			sources: /^zip$/i,
 			fir_preview: /^jpg|gif|png|wma|mp3|wav|mp4|flv|wmv|swf$/i,
-			preview: /^jpg|gif|png|wma|mp3|wav|mp4|flv|wmv|swf$/i
+			preview: /^jpg|gif|png|wma|mp3|wav|mp4|flv|wmv|swf$/i,
+			preview_zip: /^zip$/i
 		},
 		selects = [
 			"temporary_files_to_assign_thumbnail",
@@ -208,6 +209,12 @@ uploadSuccess: function (file, serverData) {
 				elOptNew.html(fname);
 				elOptNew.val(json_data_object.file.filename);
 				addToSel($("#" + selects[3]), elOptNew);
+		  	}
+		  	if(!hasextend && filecheck.preview_zip.test(hz)){
+				var elOptNew = $("<option></option>");
+				elOptNew.html(fname);
+				elOptNew.val(json_data_object.file.filename);
+				addToSel($("#" + selects[1]), elOptNew);
 		  	}
 		  
 	  }else{
