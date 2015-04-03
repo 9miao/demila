@@ -368,7 +368,8 @@ define(function (require, exports, module){
 				upload_complete_handler : ajhand.uploadComplete,
 				queue_complete_handler : ajhand.queueComplete
 			})
-			ajhand.checkSelect(is_extend);
+			ajhand.setExtend(is_extend);
+			ajhand.checkSelect();
 			//ajhand.selectClickInit();
 			var swfu = new SWFUpload(pts);
 			$cleanbtn.on("click", function(){

@@ -11,7 +11,8 @@ define(function (require, exports, module){
 			"temporary_files_to_assign_source",
 			"temporary_files_to_assign_first_preview",
 			"temporary_files_to_assign_gallery_preview"
-		]
+		],
+		hasextend = false;
 	function getFileName(str){
 		var d = /\.[^\.]+$/.exec(str.toLowerCase())[0];
 		d = d.replace(".", "");
@@ -186,13 +187,21 @@ uploadSuccess: function (file, serverData) {
 				var elOptNew = $("<option></option>");
 				elOptNew.html(fname);
 				elOptNew.val(json_data_object.file.filename);
-				addToSel($("#" + selects[1]), elOptNew);
+				if(hasextend){
+					addToSel($("#" + selects[1]), elOptNew);
+				}else{
+					addToSel($("#" + selects[3]), elOptNew);
+				}
 			}
 	  		if(filecheck.fir_preview.test(hz)){
 				var elOptNew = $("<option></option>");
 				elOptNew.html(fname);
 				elOptNew.val(json_data_object.file.filename);
-				addToSel($("#" + selects[2]), elOptNew);
+				if(hasextend){
+					addToSel($("#" + selects[3]), elOptNew);
+				}else{
+					addToSel($("#" + selects[2]), elOptNew);
+				}
 			}
 	  		if(filecheck.preview.test(hz)){
 				var elOptNew = $("<option></option>");
@@ -338,7 +347,7 @@ FadeIn: function (element, opacity) {
 		}, rate);
 	}
 },
-checkSelect: function(hasextend){
+checkSelect: function(){
 	selectCheck($("#" + selects[0]), filecheck.thumbnail);
 	selectCheck($("#" + selects[1]), filecheck.sources);
 	selectCheck($("#" + selects[2]), filecheck.fir_preview);
@@ -347,6 +356,9 @@ checkSelect: function(hasextend){
 	}else{
 		selectCheck($("#" + selects[3]), filecheck.sources);
 	}
+},
+setExtend: function(tmp){
+	hasextend = tmp;
 }
 
 }

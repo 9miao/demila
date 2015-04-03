@@ -124,7 +124,7 @@
             </div>
             {/if}
             <div class="input-group">
-            <label>预览截图包</label>
+            <label>{if $is_extends=='true'}其它预览文件{else}预览截图包{/if}</label>
             <div class="inputs">
               <select class="input big ajaxinput"{if $is_extends=='true'} multiple='multiple'{else}{/if} id="temporary_files_to_assign_gallery_preview" name="theme_preview{if $is_extends=='true'}[]{else}{/if}">
                 <option class="placeholder" value=""></option>
@@ -330,7 +330,7 @@ button_placeholder_id: "spanButtonPlaceHolder"
 // The event handler functions are defined in handlers.js 
 // Queue plugin event       
 };
-  pui.ajaxupload_init(settings, $("#btnCancel"){/literal}{if $is_extends=='true'}, true{else}{/if}{literal});
+  pui.ajaxupload_init(settings, $("#btnCancel"){/literal}{if $is_extends==true}, true{else}{/if}{literal});
 });
 </script>
 {/literal}

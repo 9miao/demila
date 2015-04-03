@@ -1382,6 +1382,7 @@ h3.underlined {
 .rightdetail .uploadblock p{
 	text-align: center;
 	margin-top: 10px;
+	height: auto;
 }
 .rightdetail .uploadblock p a{
 	color: #fff;
