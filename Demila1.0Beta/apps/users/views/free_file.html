@@ -42,7 +42,7 @@
             <strong>{$u.items}</strong>作品<br>
             <strong>{$u.followers}</strong>粉丝<br>
             注册时间：{$u.register_datetime|date_format:"%Y-%m-%d"}<br>
-            {if $u.freelance == 'true'} 可承接威客工作<br>{/if}
+            {if $u.custom_made == 'true'} 可承接威客工作<br>{/if}
           </small>-->
     {else}
       <div class="content-box vertical-space">{$lang.no_users}</div>

@@ -505,7 +505,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `profile_desc` text COLLATE utf8_unicode_ci NOT NULL COMMENT '个人资料详情',
   `live_city` varchar(100) COLLATE utf8_unicode_ci NOT NULL COMMENT '所在城市',
   `country_id` int(11) NOT NULL DEFAULT '0' COMMENT '国家或地区的ID',
-  `freelance` enum('true','false') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'false' COMMENT '自由职业者（威客）',
+  `custom_made` enum('true','false') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'false' COMMENT '承接定制',
   `social` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `quiz` enum('false','true') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'false' COMMENT '通过测验问题',
   `deposit` float NOT NULL DEFAULT '0' COMMENT '充值金额的余额',
@@ -549,7 +549,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 	");
 	
 	mysql_query("
-		INSERT INTO `users` (`user_id`, `username`, `password`, `email`, `nickname`, `featured_item_id`, `exclusive_author`, `license`, `avatar`, `homeimage`, `firmname`, `profile_title`, `profile_desc`, `live_city`, `country_id`, `freelance`, `social`, `quiz`, `deposit`, `earning`, `total`, `sold`, `items`, `sales`, `buy`, `rating`, `score`, `votes`, `referals`, `referal_money`, `featured_author`, `power_elite_author`, `elite_author`, `register_datetime`, `last_login_datetime`, `ip_address`, `status`, `groups`, `remember_key`, `activate_key`, `referal_id`, `commission_percent`, `badges`, `weibo`, `tencent`, `baidu`, `netease`, `sohu`, `renren`) VALUES
+		INSERT INTO `users` (`user_id`, `username`, `password`, `email`, `nickname`, `featured_item_id`, `exclusive_author`, `license`, `avatar`, `homeimage`, `firmname`, `profile_title`, `profile_desc`, `live_city`, `country_id`, `custom_made`, `social`, `quiz`, `deposit`, `earning`, `total`, `sold`, `items`, `sales`, `buy`, `rating`, `score`, `votes`, `referals`, `referal_money`, `featured_author`, `power_elite_author`, `elite_author`, `register_datetime`, `last_login_datetime`, `ip_address`, `status`, `groups`, `remember_key`, `activate_key`, `referal_id`, `commission_percent`, `badges`, `weibo`, `tencent`, `baidu`, `netease`, `sohu`, `renren`) VALUES
 		(1, '".sql_quote($_POST['admin_username'])."', '".md5(md5($adminPassword))."', '".sql_quote($_POST['admin_mail'])."', 'admin', 0, 'false', 'a:2:{s:8:\"extended\";s:8:\"extended\";s:8:\"personal\";s:8:\"personal\";}', '', '', '', '', '', '', 1, 'true', '', 'true', 500, 0, 500, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'false', 'true', 'false', '2013-06-06 00:00:00', '2013-06-06 00:00:00', '127.0.0.1', 'activate', 'a:1:{i:2;s:2:\"on\";}', '', NULL, 0, 0, '45,47', '', '', '', '', '', '');
 	");
 	

@@ -103,8 +103,8 @@
 							<strong>{$u.items}</strong> {$lang.items}<br>
 							<strong>{$u.followers}</strong> {$lang.followers}<br>
 							{$lang.member_since}: {$u.register_datetime|date_format:"%Y-%m-%d"}<br>
-							{if $u.freelance == 'true'}
-							{$lang.available_freelancer}<br>
+							{if $u.custom_made == 'true'}
+							{$lang.available_custom_mader}<br>
 							{/if}
 						</small>
 						<div class="sale-info">

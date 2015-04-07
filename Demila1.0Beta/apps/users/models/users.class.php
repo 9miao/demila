@@ -1374,8 +1374,8 @@ public function getuserinfoById($id=0){
 			$_POST['country_id'] = '0';
 		}
 		
-		if(!isset($_POST['freelance'])) {
-			$_POST['freelance'] = 'false';
+		if(!isset($_POST['custom_made'])) {
+			$_POST['custom_made'] = 'false';
 		}
 		
 		$mysql->query("
@@ -1387,7 +1387,7 @@ public function getuserinfoById($id=0){
 					`profile_desc` = '".sql_quote($_POST['profile_desc'])."',
 					`live_city` = '".sql_quote($_POST['live_city'])."',
 					`country_id` = '".intval($_POST['country_id'])."',
-					`freelance` = '".sql_quote($_POST['freelance'])."'
+					`custom_made` = '".sql_quote($_POST['custom_made'])."'
 			WHERE `user_id` = '".intval($_SESSION['user']['user_id'])."'
 			LIMIT 1
 		");
@@ -1399,7 +1399,7 @@ public function getuserinfoById($id=0){
 		$_SESSION['user']['profile_desc'] = $_POST['profile_desc'];
 		$_SESSION['user']['live_city'] = $_POST['live_city'];
 		$_SESSION['user']['country_id'] = $_POST['country_id'];
-		$_SESSION['user']['freelance'] = $_POST['freelance'];
+		$_SESSION['user']['custom_made'] = $_POST['custom_made'];
 		
 		return true;
 		

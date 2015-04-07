@@ -17,7 +17,7 @@ $langArray = array(
 	'pay_buy_balance'=>'余额支付',
 	'deposit_type'=>'充值方式',
 	'withdraw_method'=>'提现方式',
-	'freelancer'=>'自由职业者',
+	'custom_mader'=>'自由职业者',
 	'bookmarks'=>'书签集',
 	'username' => '用户名',
 	'password' => '密码',
@@ -775,7 +775,7 @@ IBAN（如果有的话）：
 	'featured_authors' => '最新推荐作者',
 	'browse_categories' => '浏览分类',
 	'featured_files' => '推荐文件',
-	'available_freelancer' => 'Available for freelance work',
+	'available_custom_mader' => 'Available for custom_made work',
 	'top_authors' => '王牌作者',
 	'free_file' => '免费作品',
 	
@@ -831,7 +831,7 @@ http://{$DOMAIN}/{$LANGUAGEURL}items/{$ITEMID}
 =========== 该文件不可作为发票使用 ==========		
 	',
 
-	'freelance' => '自由职业者',
+	'custom_made' => '自由职业者',
 	'i_am_available' => '承接定制',
 	'this_week_stats' => '本周统计',
 	'you_earned' => '你已经获得',

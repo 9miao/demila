@@ -26,7 +26,7 @@ define("CACHE", ENGINE_PATH . "/data/cache/");
 define("DATA_SERVER_PATH", $config['data_server_path']);
 define("DATA_SERVER", $config['data_server']);
 define("TEMPLATE_PATH", ROOT_PATH . "/html/");
-define("VERSION", '1.0');
+define("VERSION", '1.0.1');
 #END;
 
 

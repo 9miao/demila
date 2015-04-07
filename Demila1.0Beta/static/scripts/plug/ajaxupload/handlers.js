@@ -216,6 +216,13 @@ uploadSuccess: function (file, serverData) {
 				elOptNew.val(json_data_object.file.filename);
 				addToSel($("#" + selects[1]), elOptNew);
 		  	}
+		  	if(hasextend && filecheck.preview.test(hz)){
+				var elOptNew = $("<option></option>");
+				elOptNew.html(fname);
+				elOptNew.val(json_data_object.file.filename);
+				addToSel($("#" + selects[2]), elOptNew);
+		  	}
+
 		  
 	  }else{
 		  alert(json_data_object.status);
