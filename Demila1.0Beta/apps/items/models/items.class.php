@@ -386,7 +386,6 @@ class items {
             if(!isset($_POST['free_request'])) {
                 $_POST['free_request'] = 'false';
             }
-
             require_once ROOT_PATH.'/apps/categories/models/categories.class.php';
             $categoriesClass = new categories();
 
@@ -452,33 +451,31 @@ class items {
                 $categories = array_reverse($categories);
                 $categories = ','.implode(',', $categories).',';
                 $mysql->query("
-				INSERT INTO `items_to_category` (
-					`item_id`,
-					`categories`
-				)
-				VALUES (
-					'".sql_quote($itemID)."',
-					'".sql_quote($categories)."'
-				)
-			");
+                    INSERT INTO `items_to_category` (
+                        `item_id`,
+                        `categories`
+                    )
+                    VALUES (
+                        '".sql_quote($itemID)."',
+                        '".sql_quote($categories)."'
+                    )
+                ");
             }
-
 
             #创建文件夹
             recursive_mkdir(DATA_SERVER_PATH.'/uploads/'.$this->uploadFileDirectory.$itemID.'/');
             recursive_mkdir(DATA_SERVER_PATH.'/uploads/'.$this->uploadFileDirectory.$itemID.'/preview/');
-#剪裁缩略图并创建预览图
+            #剪裁缩略图并创建预览图
             require_once ENGINE_PATH.'/classes/image.class.php';
             $imageClass = new Image();
+
             //缩略图目录
             recursive_mkdir(DATA_SERVER_PATH.'uploads/temporary/thumbnail');
             //缩略图文件路径
-            copy(DATA_SERVER_PATH.'/uploads/temporary/'.$_POST['thumbnail'], DATA_SERVER_PATH.'/uploads/'.$this->uploadFileDirectory.$itemID.'/'.$_POST['thumbnail']);
-            //删除裁剪前缩略图
-            //@unlink(DATA_SERVER_PATH.'uploads/temporary/'.$_POST['thumbnail']);               '
+            copy(DATA_SERVER_PATH.'/uploads/temporary/'.$_POST['thumbnail'], DATA_SERVER_PATH.'uploads/temporary/thumbnail/'.$_POST['thumbnail']);
             $imageClass->crop(DATA_SERVER_PATH.'uploads/temporary/thumbnail/'.$_POST['thumbnail'], 80, 80);
-            //缩略图
-            $thumbnail_dir = DATA_SERVER_PATH.'uploads/temporary/thumbnail/'.$_POST['thumbnail'];
+            copy(DATA_SERVER_PATH.'uploads/temporary/thumbnail/'.$_POST['thumbnail'], DATA_SERVER_PATH.'/uploads/'.$this->uploadFileDirectory.$itemID.'/'.$_POST['thumbnail']);
+
             $file_first  = pathinfo($_POST['first_preview']);
             if(in_array(strtolower($file_first['extension']),$this->support_format(1))){
                 //第一张预览图目录
@@ -486,24 +483,26 @@ class items {
                 //第一张预览图地址
                 copy(DATA_SERVER_PATH.'uploads/temporary/'.$_POST['first_preview'], DATA_SERVER_PATH.'/uploads/'.$this->uploadFileDirectory.$itemID.'/preview.jpg');
                 copy(DATA_SERVER_PATH.'uploads/temporary/'.$_POST['first_preview'], DATA_SERVER_PATH.'/uploads/'.$this->uploadFileDirectory.$itemID.'/'.$_POST['first_preview']);
-                $imageClass->crop(DATA_SERVER_PATH.'uploads/temporary/theme_preview/'.$_POST['first_preview'], 590, 300);
-                $theme_preview_dir = DATA_SERVER_PATH.'uploads/temporary/theme_preview/'.$_POST['first_preview'];
+                $imageClass->crop(DATA_SERVER_PATH.'/uploads/'.$this->uploadFileDirectory.$itemID.'/'.$_POST['first_preview'], 590, 300);
             }elseif(in_array(strtolower($file_first['extension']),$this->support_format(2))){
-                $theme_preview_dir = DATA_SERVER_PATH.'uploads/temporary/'.$_POST['first_preview'];
+                copy(DATA_SERVER_PATH.'uploads/temporary/'.$_POST['first_preview'], DATA_SERVER_PATH.'/uploads/'.$this->uploadFileDirectory.$itemID.'/'.$_POST['first_preview']);
+                $imageClass->crop(DATA_SERVER_PATH.'/uploads/'.$this->uploadFileDirectory.$itemID.'/'.$_POST['first_preview'], 590, 300);
             }
             //主程序包路径
-            $main_file_dir = DATA_SERVER_PATH.'uploads/temporary/'.$_POST['main_file'];
             copy(DATA_SERVER_PATH.'/uploads/temporary/'.$_POST['main_file'], DATA_SERVER_PATH.'/uploads/'.$this->uploadFileDirectory.$itemID.'/'.$_POST['main_file']);
             //预览包
             $file_arr = $_POST['theme_preview'];
+
+
+
             foreach($file_arr as $item_dir){
             copy(DATA_SERVER_PATH.'/uploads/temporary/'.$item_dir, DATA_SERVER_PATH.'/uploads/'.$this->uploadFileDirectory.$itemID.'/preview/'.$item_dir);
             }
             unset($_SESSION['temp']['uploaded_files']);
+
 #插入标签
             require_once ROOT_PATH.'/apps/tags/models/tags.class.php';
             $tagsClass = new tags();
-
             foreach($_POST['tags'] as $type=>$tags) {
                 $arr = explode(',', $tags);
                 foreach($arr as $tag) {
@@ -526,7 +525,6 @@ class items {
                     }
                 }
             }
-
 #插入属性
             $_POST['attributes'] = (array)(isset($_POST['attributes']) ? $_POST['attributes'] : array());
             foreach($_POST['attributes'] as $cID=>$a) {
@@ -563,17 +561,13 @@ class items {
             }
             return true;
         }
-
 		global $mysql, $langArray, $attributes;
-		
 		if(!isset($_POST['name']) || trim($_POST['name']) == '') {
 			$error['name'] = $langArray['error_not_set_name'];
 		}
-
 		if(!isset($_POST['description']) || trim($_POST['description']) == '') {
 			$error['description'] = $langArray['error_not_set_description'];
 		}
-		
 		if(!isset($_POST['thumbnail']) || trim($_POST['thumbnail']) == '') {
 			$error['thumbnail'] = $langArray['error_not_set_thumbnail'];
 		}
