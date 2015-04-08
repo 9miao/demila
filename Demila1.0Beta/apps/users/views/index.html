@@ -124,8 +124,8 @@
 
       {if $featureItem}  
       <div class="sideblock featuredfile clr">
-        <a class="featimg" href="/{$languageURL}items/{$featureItem.id}">
-          <img data-tooltip="{$featureItem.name|escape}" alt="{$featureItem.name|escape}" class="landscape-image-magnifier preload no_preview" data-item-author="作者 {$user.username}" data-item-category="{foreach from=$featureItem.categories item=e}{foreach from=$e item=c name=foo}{$categories[$c].name} {if !$smarty.foreach.foo.last} \ {/if}{/foreach}{/foreach}" data-item-cost="{$featureItem.price}" data-item-name="{$featureItem.name|escape}" data-preview-height="" data-preview-url="{$data_server}uploads/items/{$featureItem.id}/preview.jpg" data-preview-width="" src="{$data_server}uploads/items/{$featureItem.id}/{$featureItem.thumbnail}" title="" border="0" />
+        <a class="featimg landscape-image-magnifier" href="/{$languageURL}items/{$featureItem.id}">
+          <img data-tooltip="{$featureItem.name|escape}" alt="{$featureItem.name|escape}" class="preload no_preview" data-item-author="作者 {$user.username}" data-item-category="{foreach from=$featureItem.categories item=e}{foreach from=$e item=c name=foo}{$categories[$c].name} {if !$smarty.foreach.foo.last} \ {/if}{/foreach}{/foreach}" data-item-cost="{$featureItem.price}" data-item-name="{$featureItem.name|escape}" data-preview-height="" data-preview-url="{$data_server}uploads/items/{$featureItem.id}/preview.jpg" data-preview-width="" src="{$data_server}uploads/items/{$featureItem.id}/{$featureItem.thumbnail}" title="" border="0" />
         </a>
         <p><small>作者自荐的文件</small><br /><a href="/{$languageURL}items/{$featureItem.id}">{$featureItem.name}</a><br />已售数量:{$featureItem.sales}</p>
       </div>
@@ -244,3 +244,10 @@
   </div>
 </div>
 {/if}
+<script>
+{literal}
+seajs.use(["pageui"], function(ui){
+  ui.imgMagnifier("a.landscape-image-magnifier");
+});
+{/literal}
+</script>
