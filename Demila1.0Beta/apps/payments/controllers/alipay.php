@@ -15,13 +15,8 @@ header("Content-type: text/html; charset=utf-8");
  * 3、支付宝论坛（http://club.alipay.com/read-htm-tid-8681712.html）
  * 如果不想使用扩展功能请把扩展功能参数赋空值。
  */
-if(isset($meta["use_demilapay"])){
-    $pid = $meta['alipay_v_key1'];
-    $app_key = $meta['alipay_v_mid1'];
-}else{
-    $pid = $meta['alipay_v_key'];
-    $app_key = $meta['alipay_v_mid'];
-}
+$pid = $meta['alipay_v_key'];
+$app_key = $meta['alipay_v_mid'];
 $o_url = $_POST['WID_url'];//地址
 $v_amount = $_POST['WIDtotal_fee'];
 $u_email = $_POST['WIDseller_email'];
@@ -38,24 +33,13 @@ require_once ROOT_PATH.'/classes/Alipay/lib/alipay_submit.class.php';
         //支付类型
         $payment_type = "1";
         //必填，不能修改
-//判断是否使用代理支付
-        if(isset($meta["use_demilapay"])){
-            //服务器异步通知页面路径
-            $notify_url  = 'http://pay.demila.org/index.php/Home/Alinotify';//地址";
-            //需http://格式的完整路径，不能加?id=123这类自定义参数
 
-            //页面跳转同步通知页面路径
-            $return_url = 'http://pay.demila.org/index.php/Home/Alireturn';
-            //需http://格式的完整路径，不能加?id=123这类自定义参数，不能写成http://localhost/
-        }else{
-            //服务器异步通知页面路径
-            $notify_url  = 'http://'.$config['domain'].'/payments/ali_notify';//地址";
-            //需http://格式的完整路径，不能加?id=123这类自定义参数
+        //服务器异步通知页面路径
+        $notify_url  = 'http://'.$config['domain'].'/payments/ali_notify';//地址";
+        //需http://格式的完整路径，不能加?id=123这类自定义参数
 
-            //页面跳转同步通知页面路径
-            $return_url = 'http://'.$config['domain'].'/payments/ali_return';;
-        }
-
+        //页面跳转同步通知页面路径
+        $return_url = 'http://'.$config['domain'].'/payments/ali_return';
 
         //卖家支付宝帐户
         $seller_email = $_POST['WIDseller_email'];
@@ -88,9 +72,7 @@ require_once ROOT_PATH.'/classes/Alipay/lib/alipay_submit.class.php';
         $exter_invoke_ip = "";
         //非局域网的外网IP地址，如：221.0.0.1
 
-
 /************************************************************/
-
 //构造要请求的参数数组，无需改动
 $parameter = array(
 		"service" => "create_direct_pay_by_user",
