@@ -775,7 +775,7 @@ if (typeof(SyntaxHighlighter) == 'undefined') var SyntaxHighlighter = function()
             xmlComments					: /(&lt;|<)!--[\s\S]*?--(&gt;|>)/gm,
             url							: /\w+:\/\/[\w-.\/?%&=:@;#]*/g,
 
-            /** <?= ?> tags. */
+            /** <?php= ?> tags. */
             phpScriptTags 				: { left: /(&lt;|<)\?(?:=|php)?/g, right: /\?(&gt;|>)/g, 'eof' : true },
 
             /** <%= %> tags. */

@@ -68,7 +68,6 @@ _setView(__FILE__);
     if($app_extends->is_uploads()){
         $is_extends='true';
     }
-
     abr("is_extends",$is_extends);
 
 

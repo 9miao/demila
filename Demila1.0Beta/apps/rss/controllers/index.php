@@ -47,7 +47,7 @@ mb_internal_encoding("UTF-8");
 		}	
 	}
 	
-echo "<?xml version=\"1.0\" encoding=\"utf-8\" ?>
+echo "<?phpxml version=\"1.0\" encoding=\"utf-8\" ?>
 <rss version=\"2.0\">
 <channel>
 <title>".$config['domain']." - ".$name." RSS</title>

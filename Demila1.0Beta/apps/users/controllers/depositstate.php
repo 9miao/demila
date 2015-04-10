@@ -1,4 +1,4 @@
-<?
+<?php
 //修改充值状态
 if(isset($_GET["type"]) && $_GET["type"]==1){
     require_once ROOT_PATH . '/apps/users/models/deposit.class.php';

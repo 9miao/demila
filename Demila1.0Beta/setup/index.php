@@ -271,7 +271,7 @@ if(isset($_POST['install']) && !$isInstalled) {
 		<div class="box2">
 			<div class="box_error"><?php echo $error; ?></div>
 		</div>
-		<?php 
+		<?php
 		}
 		$fas_error = false;
 		?>
@@ -405,7 +405,7 @@ if(isset($_POST['install']) && !$isInstalled) {
 							<label for="country">选择语言</label>
 							<div class="inputs">
 								<select name="lang">
-								<?php 
+								<?php
 								if(isset($languages)) {
 								foreach($languages as $l) {
 								echo '<option value="'.$l.'"';
@@ -427,7 +427,7 @@ if(isset($_POST['install']) && !$isInstalled) {
 
 		<?php } ?>
 
-		<?php 
+		<?php
 		}
 		?>			
 

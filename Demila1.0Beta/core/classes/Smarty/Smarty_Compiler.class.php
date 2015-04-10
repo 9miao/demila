@@ -368,19 +368,19 @@ class Smarty_Compiler extends Smarty {
                 $text_blocks[$i+1] = preg_replace('~^(\r\n|\r|\n)~', '', $text_blocks[$i+1]);
             }
             // replace legit PHP tags with placeholder
-            $text_blocks[$i] = str_replace('<?', $tag_guard, $text_blocks[$i]);
-            $compiled_tags[$i] = str_replace('<?', $tag_guard, $compiled_tags[$i]);
+            $text_blocks[$i] = str_replace('<?php', $tag_guard, $text_blocks[$i]);
+            $compiled_tags[$i] = str_replace('<?php', $tag_guard, $compiled_tags[$i]);
             
             $compiled_content .= $text_blocks[$i] . $compiled_tags[$i];
         }
-        $compiled_content .= str_replace('<?', $tag_guard, $text_blocks[$i]);
+        $compiled_content .= str_replace('<?php', $tag_guard, $text_blocks[$i]);
 
         // escape php tags created by interleaving
-        $compiled_content = str_replace('<?', "<?php echo '<?' ?>\n", $compiled_content);
+        $compiled_content = str_replace('<?php', "<?php echo '<?php' ?>\n", $compiled_content);
         $compiled_content = preg_replace("~(?<!')language\s*=\s*[\"\']?\s*php\s*[\"\']?~", "<?php echo 'language=php' ?>\n", $compiled_content);
 
         // recover legit tags
-        $compiled_content = str_replace($tag_guard, '<?', $compiled_content); 
+        $compiled_content = str_replace($tag_guard, '<?php', $compiled_content);
         
         // remove \n from the end of the file, if any
         if (strlen($compiled_content) && (substr($compiled_content, -1) == "\n") ) {

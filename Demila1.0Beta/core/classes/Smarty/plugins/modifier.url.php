@@ -1,4 +1,4 @@
-<?
+<?php
 function smarty_modifier_url(&$url) {
 	
 	//remove html tags
