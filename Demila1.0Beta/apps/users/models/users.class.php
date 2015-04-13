@@ -773,34 +773,35 @@ public function getuserinfoById($id=0){
 		}
 
 		if($editFromAdmin) {
-			$groups = array();		
-			if(isset($_POST['groups']) && is_array($_POST['groups'])) {
-				foreach($_POST['groups'] as $k=>$v) {
-					$groups[$k] = $v;
-				}			
-			}
-			if($setQuery != '') {
-				$setQuery .= ',';
-			}
+            if($setQuery != '') {
+                $setQuery .= ',';
+            }
 
-			if(isset($_POST['featured_author'])) {
-				$setQuery .= "  `featured_author` = 'true' ";
-			}
-			else {
-				$setQuery .= "  `featured_author` = 'false' ";
-			}
+            if(isset($_POST['featured_author'])) {
+                $setQuery .= "  `featured_author` = 'true'  ";
+            }
+            else {
+                $setQuery .= "  `featured_author` = 'false'  ";
+            }
 
-            if($id!=1)
-            $setQuery .= " , `groups` = '".serialize($groups)."' ";
+            $groups = array();
+            if(isset($_POST['groups']) && is_array($_POST['groups']) && !empty($_POST['groups'])) {
+                foreach($_POST['groups'] as $k=>$v) {
+                    $groups[$k] = $v;
+                }
+                $setQuery .= " , `groups` = '".serialize($groups)."' ";
+            }
 
             if(isset($_POST['power_elite_author'])) {
-				$setQuery .= " , `power_elite_author` = 'true' ";
-			}
-			else {
-				$setQuery .= " , `power_elite_author` = 'false' ";
-			}
-			
-			
+                if(!empty($_POST['power_elite_author'])) {
+                    $setQuery .= " , `power_elite_author` = 'true' ";
+                }
+                else {
+                    $setQuery .= " , `power_elite_author` = 'false' ";
+                }
+            }
+
+
 			if(isset($_POST['elite_author'])) {
 				$setQuery .= " , `elite_author` = 'true' ";
 			}
