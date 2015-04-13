@@ -31,8 +31,12 @@ define(function (require, exports, module){
 				ajdata = eval("(" + that.attr(ajaxdata) + ")");
 			$.post(that.attr(attrurl), ajdata, function(data){
 				eAjaxData = data;
-				var func = callback + "()";
-				eval(func);
+                if(typeof callback == "function"){
+                    callback(data);
+                }else{
+                    var func = callback + "()";
+                    eval(func);
+                }
 				if(frush){
 					location.reload();
 				}
@@ -60,7 +64,13 @@ define(function (require, exports, module){
 		});
 	}
 	exports.ajaxradioinit = ajaxradioinit;
-	
+
+    function editRow(){
+        location.reload();
+    }
+    function unloadRow(){
+        location.reload();
+    }
 	function deleteRow(){
 		if(eAjaxData.status == 'true'){
 			$('#row'+eAjaxData.id).fadeTo("slow",0.01).slideUp("slow");
@@ -68,11 +78,4 @@ define(function (require, exports, module){
 			alert(eAjaxData.status);
 		}
 	}
-	function editRow(){
-    	location.reload();
-	}
-    function unloadRow(){
-        location.reload();
-
-    }
 });

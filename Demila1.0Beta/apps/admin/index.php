@@ -47,5 +47,21 @@
     $sysinfo['server_time'] = date('Y-m-d H:i:s').'&nbsp;'.date_default_timezone_get();
     $sysinfo['root_path'] = ROOT_PATH;
     abr('sysinfo',$sysinfo);
-	
+
+
+    if(isset($_POST["update_version"])&& $_POST["update_version"]=='true'){
+    $copyright=str_replace(' ', '',file_get_contents(ROOT_PATH.'html/footer.html'));
+    $str='<ahref="http://demila.org"target="_blank">Demila';
+    $res=strpos($copyright,$str);
+        $data["status"]='false';
+        if(!$res){
+            $data["msg"]='请保留Demila版权链接,谢谢！';
+        }else{
+            $data["status"]='true';
+            $data["msg"]='嘿嘿！';
+        }
+    echo json_encode($data);
+    die;
+    }
+
 ?>
