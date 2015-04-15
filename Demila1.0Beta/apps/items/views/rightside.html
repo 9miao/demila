@@ -3,7 +3,7 @@
   <div class="sideblock info">
     <p>这是您自己的文件</p>
     {if isset($item.user.license.personal)}<p>共享使用权：{$currency.symbol}{$item.price|string_format:"%.0f"}</p>{/if}
-    {if isset($item.user.license.extended)}<p>买断使用权：{$currency.symbol}{$item.extended_price|string_format:"%.0f"}</p>{/if}
+    {if isset($item.user.license.extended)}<p>专有使用权：{$currency.symbol}{$item.extended_price|string_format:"%.0f"}</p>{/if}
   </div>
   {/if}
   {if isset($item.is_buyed)}
@@ -53,7 +53,7 @@
             <option value="1">共享许可</option>
             {/if}
             {if isset($item.user.license.extended)}
-            <option value="0">买断许可</option>
+            <option value="0">专有许可</option>
             {/if}
           </select>
         </div>
@@ -67,7 +67,7 @@
         {if isset($item.user.license.extended)}
         <div class="licenitem" id="licenitem-extend">
           <span class="cost"><span>{$currency.symbol}</span>{$item.extended_price|string_format:"%.0f"}</span>
-          <p>买断使用权，作者不再继续出售。 - <a href="/help/licenses/">查看详情</a></p>
+          <p>专有使用权，作者不再继续出售。 - <a href="/help/licenses/">查看详情</a></p>
           <button class="buybtn" id="purchase_button2" onclick="chooseLicence('extended', '{$item.extended_price|string_format:"%.0f"}', '{$item.extended_price|string_format:"%.0f"}', 'none')" type="submit">马上购买</button>
         </div>
         {/if}
