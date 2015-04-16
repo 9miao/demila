@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Demila &#8250; 说明</title>
+
+    <style type="text/css">
+        html {
+            background: none repeat scroll 0% 0% #F1F1F1;
+            margin: 0px 20px;
+        }
+
+        body {
+            background: none repeat scroll 0% 0% #FFF;
+            color: #444;
+            font-family: "微软雅黑","黑体";
+            margin: 100px auto 25px;
+            padding: 20px 20px 10px;
+            max-width: 700px;
+            box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.13);
+        }
+
+        #logo {
+            margin: 6px 0px 14px;
+            border-bottom: medium none;
+            text-align: center;
+        }
+
+        #logo a {
+            background-image: none, url("../images/");
+            background-size: 84px auto;
+            background-position: center top;
+            background-repeat: no-repeat;
+            color: #999;
+            font-size: 20px;
+            font-weight: normal;
+            line-height: 1.3em;
+            margin: -130px auto 25px;
+            padding: 0px;
+            text-decoration: none;
+            height: 84px;
+            width: 84px;
+            text-indent: -9999px;
+            outline: medium none;
+            overflow: hidden;
+            display: block;
+        }
+
+        #logo_text {
+            margin: 6px 0px 14px;
+            border-bottom: medium none;
+            text-align: center;
+            font-size: 30px;
+        }
+
+        #logo_text a {
+            font-family: "微软雅黑","黑体";
+            color: #999;
+            font-size: 50px;
+            font-weight: normal;
+            line-height: 1.3em;
+            margin: -100px auto 5px;
+            padding: 0px;
+            text-decoration: none;
+            height: 70px;
+            width: 200px;
+            outline: medium none;
+            display: block;
+        }
+
+        #version_txet {
+            text-align: center;
+        }
+
+        h1 {
+            border-bottom: 1px solid #DEDEDE;
+            clear: both;
+            color: #666;
+            font-size: 24px;
+            margin: 30px 0px;
+            padding: 0px 0px 7px;
+            font-weight: normal;
+        }
+
+        h2 {
+            font-size: 16px;
+        }
+
+        p, li, dd, dt {
+            padding-bottom: 2px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        a {
+            color: #20C4FF;
+            text-decoration: none;
+        }
+
+        ul, ol, dl {
+            padding: 5px 5px 5px 22px;
+        }
+
+        ul, ol, dl {
+            padding: 5px 5px 5px 22px;
+        }
+    </style>
+
+</head>
+
+<body>
+<!--<h1 id="logo">
+	<a href="http://demila.org/"><img alt="Demila" src="" /></a>
+</h1>-->
+<h1 id="logo_text">
+    <a href="http://demila.org/">Demila</a>
+</h1>
+<p id="version_txet">版本1.0</p>
+<p style="text-align: center">优美的数字内容交易系统</p>
+
+<h1>写在前面：</h1>
+<p>感谢使用Demila。Demila是一款由<a href="http://9miao.com/">9秒社团</a>原创的、面向数字内容及其服务的、优美的在线交易系统，她除了能为站长提供一个建站解决方案之外，还能为那些技术精湛的设计者、开发者以及资源拥有者们提供无数个拓展其作品和资源之价值的机会，从而使那些精益求精者的智慧和创意，无论是价格，还是价值，都达到应有的尺度。这是<a href="http://9miao.com/">9秒社团</a>Demila项目组的宗旨，也是Demila的使命。我们热切希望能有更多的人为Demila添砖加瓦，使其更加优秀。现在，感谢您也参与其中。</p>
+<p style="text-align: right">&#8212; <a href="http://9miao.com/">9秒社团</a>Demila项目小组</p>
+
+<h1>系统需求：</h1>
+<h2>PHP和MySQL</h2>
+<ul>
+    <li>PHP<strong>5.3.28</strong>或更高版本。</li>
+    <li>MySQL<strong>5.0</strong>或更高版本。</li>
+</ul>
+
+<h2>WEB环境及服务</h2>
+<ul>
+    <li>Linux+Apache(或Nginx)+MySQL+PHP。</li>
+    <li>Apache和Nginx必须支持<strong>Rewrite</strong>。</li>
+    <li><strong>邮件服务</strong>是必须的。</li>
+</ul>
+
+<h1>安装：</h1>
+<ol>
+    <li>将下载的压缩包解压。</li>
+    <li>将UPLOAD目录中(注意不包含UPLOAD目录本身)的<strong>所有文件夹及文件</strong>上传至服务器。</li>
+    <li>修改以下目录的权限为<strong>0777</strong>：</li>
+    <ul>
+        <li><strong>/</strong></li>
+        <li><strong>/config</strong></li>
+        <li><strong>/core/data/cache/session</strong></li>
+        <li><strong>/core/data/cache/templates_cache</strong></li>
+        <li><strong>/static/uplaods</strong></li>
+
+    </ul>
+    <li>在浏览器中访问http://yourwebsite.com/setup/index.php，并根据提示填写安装信息，安装后，数据库连接信息及其它一些重要信息会写入/config/config.php文件；语言文件也会写到/config目录下。
+    </li>
+    <li>安装过程中遇到任何问题，请访问<a href="http://www.9miao.com/forum-64-1.html" title="Demila交流论坛">Demila交流论坛</a>寻求帮助。</li>
+</ol>
+
+<h1>使用：</h1>
+<p>因时间仓促，当前版本尚未配备使用文档，使用过程中遇到任何问题，请访问<a href="http://www.9miao.com/forum-64-1.html" title="Demila交流论坛">Demila交流论坛</a>寻求帮助。</p>
+
+<h1>互动：</h1>
+<p>对Demila有任何建议、想法、评论或发现了bug，请加入<a href="http://www.9miao.com/forum-64-1.html" title="Demila交流论坛">Demila交流论坛</a>。</p>
+
+<h1>分享精神：</h1>
+<p>如果您喜欢Demila，请将它介绍给自己的朋友，或者帮助他人安装一个Demila，又或者写一篇赞扬我们的文章。</p>
+
+<h1>许可证：</h1>
+<p>Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )。</p>
+
+</body>
+</html>

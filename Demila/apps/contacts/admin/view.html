@@ -1,0 +1,53 @@
+<link href="/static/css/custom/ucenter.css" rel="stylesheet" />
+<div class="pagetit">
+  <div class="navblock">
+    <ul class="titnav clr">
+      <li><a href="/admin" title="管理首页">管理首页</a></li>
+      <li class="pipe">&gt;</li>
+      <li><a href="?m={$smarty.get.m}&c=list&p={$smarty.get.p}">支持中心</a></li>
+      <li class="pipe">&gt;</li>
+      <li>{$title}消息</li>
+    </ul>
+    <h2>{$title}消息</h2>
+  </div>
+</div>
+<div class="ucbg">
+  <div class="ucblock paddingt clr">
+    {include file="$root_path/apps/lists/leftlist_admin.html"}
+    <div class="rightdetail_admin">
+    <div class="content">
+   <div class="content-box">
+	<form action="" class="horizontal-form item-form disable-on-submit" action="" method="post" enctype="multipart/form-data">
+	 <div class="input-group">
+        <label for="name">{$lang.name}</label>
+        <div class="inputs">
+          <input id="name" class="ipttheme" type="text" name="name" value="{$smarty.post.name|escape}" readonly="readonly" />
+        </div>
+    </div>
+	 <div class="input-group">
+        <label for="email">{$lang.email}</label>
+        <div class="inputs">
+          <input id="email" class="ipttheme" type="text" name="email" value="{$smarty.post.email|escape}" readonly="readonly" />
+        </div>
+    </div>
+	 <div class="input-group">
+        <label for="message">消息</label>
+        <div class="inputs">
+          <textarea name="short_text" class="ipttheme" id="message" readonly="readonly" style="width: 90%; height: 400px; resize:none;">{$smarty.post.short_text}</textarea>
+        </div>
+    </div>
+	 <div class="input-group">
+        <label for="answer">{$lang.answer}</label>
+        <div class="inputs">
+          <textarea id="answer" name="answer" style="width: 90%; height: 320px; resize:none;"></textarea>
+        </div>
+    </div>
+    <div class="form-submit">
+     <button type="submit" name="send" class="btntheme2 btnsize">{$lang.send}</button>
+    </div>
+	</form>
+    </div>
+   </div>
+   </div>
+  </div>
+ </div>

@@ -1,0 +1,382 @@
+<link href="/static/css/custom/ucenter.css" rel="stylesheet" />
+{if $smarty.session.user.power_elite_author  == 'true' || $smarty.session.user.elite_author  == 'true'}
+<div class="pagetit pagetabs{if $smarty.session.user.power_elite_author  == 'true'} power-elite-author{/if}{if $smarty.session.user.elite_author  == 'true'} elite-author{/if}">
+  <div class="navblock">
+    <ul class="titnav clr">
+      <li><a href="/" title="主页">主页</a></li>
+      <li class="pipe">&gt;</li>
+      <li><a href="/{$languageURL}users/{$smarty.session.user.username}/">我的账号</a></li>
+    </ul>
+    <h2>编辑个人资料</h2>
+    {include file="$root_path/apps/users/views/tabsy.html"}
+  </div>
+</div>
+{else}
+<div class="pagetit pagetabs">
+  <div class="navblock">
+    <ul class="titnav clr">
+      <li><a href="/" title="主页">主页</a></li>
+      <li class="pipe">&gt;</li>
+      <li><a href="/{$languageURL}users/{$smarty.session.user.username}/">我的账号</a></li>
+    </ul>
+    <h2>编辑个人资料</h2>
+    {include file="$root_path/apps/users/views/tabsy.html"}
+  </div>
+</div>
+{/if}
+
+<div class="ucbg">
+  <div class="ucblock paddingt clr">
+    {$errorMessage}
+
+    <div class="leftdetail" id="taber">
+      <div class="sideblock">
+        <h3 class="underlined">个人信息</h3>
+        <div id="profile" class="tab-content active">
+          <form class="horizontal-form disable-on-submit" action="" method="post">
+            <fieldset>
+              <div class="input-group">
+                <label for="nickname">昵称</label>
+                <div class="inputs">
+                  <input id="nickname" class="ipttheme" name="nickname" required="true" type="text" value="{$smarty.post.nickname|escape}" />
+                </div>
+              </div>
+              <div class="input-group">
+                <label for="invoice_to">公司名称</label>
+                <div class="inputs">
+                  <input id="invoice_to" class="ipttheme" name="firmname" type="text" value="{$smarty.post.firmname|escape}" />
+                  <small>没有请留空</small>
+                </div>
+              </div>
+              <div class="input-group">
+                <label for="lives_in">所在城市</label>
+                <div class="inputs">
+                  <input id="lives_in" class="ipttheme" name="live_city" type="text" value="{$smarty.post.live_city|escape}" />
+                  <small>比如：北京</small>
+                </div>
+              </div>
+              <div class="input-group">
+                <label for="email">邮件地址</label>
+                <div class="inputs">
+                  <input id="email" class="ipttheme" name="email" value="{$smarty.post.email|escape}" type="text">
+                </div>
+              </div>
+              <div class="input-group">
+                <label for="country">国家或地区</label>
+                <div class="inputs">
+                  <select name="country_id">
+                  <option value="">不显示我的国家</option>
+                    {if $countries}
+                    {foreach from=$countries item=c}
+                    <option value="{$c.id}" {if $smarty.post.country_id == $c.id}selected="selected"{/if}>{$c.name}</option>
+                    {/foreach}
+                    {/if}
+                  </select>
+                  <small>选择国家或地区后将显示相应的旗帜徽章</small>
+                </div>
+              </div>
+              <div class="input-group">
+                <label for="available_for_freelance">我是威客</label>
+                <div class="inputs">
+                  <input id="available_for_freelance" name="custom_made" type="checkbox" value="true" {if $smarty.post.custom_made == 'true'}checked="checked"{/if} /> 
+                </div>
+              </div>
+              <div class="input-group">
+                <label for="by_line">个人资料标题</label>
+                <div class="inputs">
+                  <input id="by_line" class="ipttheme" name="profile_title" type="text" value="{$smarty.post.profile_title|escape}" />
+                  <small>显示在个人资料页面</small>
+                </div>
+              </div>
+              <div class="input-group">
+                <label for="profile_desc">个人资料详情</label>
+                <div class="inputs">
+                    <!--初始化编辑器-->
+                    <script id="profile_desc" name="profile_desc" type="text/plain">
+                {$smarty.post.profile_desc}
+             </script>
+                    <!-- 配置文件 -->
+                    <script type="text/javascript" src="{$data_server}ueditor/ueditor.config.js"></script>
+                    <!-- 编辑器源码文件 -->
+                    <script type="text/javascript" src="{$data_server}ueditor/ueditor.all.js"></script>
+                    <!-- 实例化编辑器 -->
+                    <script type="text/javascript">
+                        var ue = UE.getEditor('profile_desc');
+                    </script>
+
+                  <!--<textarea class="tall" id="profile_desc" name="profile_desc">{$smarty.post.profile_desc}</textarea>-->
+                  <!--<small><div class="formatting-help">{$lang.formatting_help}</div></small>-->
+                </div>
+              </div>
+              <div class="form-submit"><input type="hidden" name="personal_edit" value="yes" />
+                <button id="personal_info_submit_button" class="btntheme2 btnsize" type="submit">保存</button>
+              </div>
+            </fieldset>
+          </form>  
+        </div>
+      </div>
+      <div class="sideblock">
+        <h3 class="underlined">更改密码</h3>
+        <div id="profile" class="tab-content active">
+          <form class="horizontal-form disable-on-submit" action="" method="post">
+            <fieldset>
+              <div class="input-group">
+                <label for="current_password">当前密码</label>
+                <div class="inputs">
+                  <input id="current_password" class="ipttheme" name="password" required="true" type="password" value="" />
+                </div>
+              </div>
+              <div class="input-group">
+                <label for="user_password">输入新密码</label>
+                <div class="inputs">
+                  <input type="password" class="ipttheme" id="user_password" name="new_password" />
+                </div>
+              </div>
+              <div class="input-group">
+                <label for="user_password_again">确认新密码</label>
+                <div class="inputs">
+                  <input type="password" class="ipttheme" id="user_password_again" name="new_password_confirm" />
+                </div>
+              </div>
+              <div class="form-submit"><input type="hidden" name="change_password" value="yes" />
+                <button id="personal_info_submit_button" class="btntheme2 btnsize" type="submit">保存</button>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+      <div class="sideblock">
+        <div id="profile" class="tab-content active">
+        <h3 class="underlined">头像和主页图片</h3>
+          <form class="horizontal-form disable-on-submit" action="" method="post" enctype="multipart/form-data">
+            <fieldset>
+              <div class="input-group">
+                <label for="profile_image">你的头像</label>
+                <div class="inputs">
+                  {if $smarty.session.user.avatar != ''}
+                  <img alt="{$smarty.session.user.username}" src="{$data_server}/uploads/users/{$smarty.session.user.user_id}/A_{$smarty.session.user.avatar}" width="90" height="90" />
+                  {/if}
+                  <input id="profile_image" name="profile_image" type="file" />
+                  <small>JPEG 90x90px</small>
+                </div>
+              </div>
+              <div class="input-group">
+                <label for="profile_image">主页图片</label>
+                <div class="inputs">
+                  {if $smarty.session.user.homeimage != ''}  
+                  <img alt="{$smarty.session.user.username}" src="{$data_server}/uploads/users/{$smarty.session.user.user_id}/A_{$smarty.session.user.homeimage}" class="homepage_image" />   
+                  {/if}
+                  <input id="homepage_image" name="homepage_image" type="file" />
+                  <small>JPEG 590x242</small>
+                </div>
+              </div>
+              <div class="form-submit">
+                <div class="form-submit"><input type="hidden" name="change_avatar_image" value="yes" />
+                  <button type="submit" class="btntheme2 btnsize">保存</button>
+                </div>
+              </div>
+            <fieldset>
+          </form>
+        </div>
+      </div> 
+      <div class="sideblock">
+        <div id="social_networks" class="tab-content active">
+          <h2 class="underlined">你的社交应用</h2>
+          <form class="horizontal-form disable-on-submit" action="" method="post">
+            <div class="input-group">
+              <label for="weibo">
+                <img alt="新浪微博" src="/static/img/custom/weibo.png" title="weibo" height="34" width="34">
+              </label>
+              <div class="inputs">
+                <input id="weibo" class="ipttheme" name="weibo" placeholder="http://新浪微博URL" value="{$smarty.post.weibo|escape}" type="text">
+              </div>
+            </div>
+            <div class="input-group">
+              <label for="tencent">
+                <img alt="腾讯微博" src="/static/img/custom/tencent.png" title="tencent" height="34" width="34">
+              </label>
+              <div class="inputs">
+                <input id="tencent" class="ipttheme" name="tencent" placeholder="http://腾讯微博URL" value="{$smarty.post.tencent|escape}" type="text">
+              </div>
+            </div>
+            <div class="input-group">
+              <label for="baidu">
+                <img alt="百度空间" src="/static/img/custom/baidu.png" title="baidu" height="34" width="34">
+              </label>
+              <div class="inputs">
+                <input id="baidu" class="ipttheme" name="baidu" placeholder="http://百度空间URL" value="{$smarty.post.baidu|escape}" type="text">
+              </div>
+            </div>
+            <div class="input-group">
+              <label for="netease">
+                <img alt="网易微博" src="/static/img/custom/netease.png" title="netease" height="34" width="34">
+              </label>
+              <div class="inputs">
+                <input id="netease" class="ipttheme" name="netease" placeholder="http://网易微博URL" value="{$smarty.post.netease|escape}" type="text">
+              </div>
+            </div>
+            <div class="input-group">
+              <label for="sohu">
+                <img alt="搜狐微博" src="/static/img/custom/sohu.png" title="sohu" height="34" width="34">
+              </label>
+              <div class="inputs">
+                <input id="sohu" class="ipttheme" name="sohu" placeholder="http://搜狐微博URL" value="{$smarty.post.sohu|escape}" type="text">
+              </div>
+            </div>
+            <div class="input-group">
+              <label for="renren">
+                <img alt="人人空间" src="/static/img/custom/renren.png" title="renren" height="34" width="34">
+              </label>
+              <div class="inputs">
+                <input id="renren" class="ipttheme" name="renren" placeholder="http://人人空间URL" value="{$smarty.post.renren|escape}" type="text">
+              </div>
+            </div>
+            <div class="form-submit">
+              <div class="form-submit"><input type="hidden" name="social_edit" value="yes" />
+                <button type="submit" class="btntheme2 btnsize">保存</button>
+              </div>
+            </div>
+          </form>
+        </div>  
+      </div>
+      {if $smarty.session.user.quiz == 'true'}
+      <!--<div class="sideblock">
+        <div id="exclusivity" class="tab-content active">
+          <h3 class="underlined">在本站独家出售你的作品</h3>
+          <p>如果你在本站独家出售作品的话，你的分成比例在60%-80%之间。在本站独家出售作品的意思是你不能在其他地方出售相同作品。</p>
+          <p>你账号目前的类型是:</p>
+          {if $smarty.session.user.exclusive_author == 'true'}
+          <h3 class="underlined">独家作者</h3>
+          <p>你可以转换作品出售类型，如果是从独家转换为非独家，可享受30天的延期，转换类型30天后生效。</p>
+          {else}
+          <h3 class="underlined">非独家作者</h3>
+          <p>你可以转换作品出售类型，如果是从独家转换为非独家，可享受30天的延期，转换类型30天后生效。</p>
+          {/if}
+          <form  action="" class="horizontal-form disable-on-submit" method="post">
+            {if $smarty.session.user.exclusive_author == 'true'}
+            <div class="form-submit">
+              <div class="form-submit"><input type="hidden" name="exclusive_false" value="yes" />
+                <button type="submit" class="btntheme2">取消本站独家出售</button>
+              </div>
+            </div>
+            {else}
+            <div class="form-submit">
+              <div class="form-submit"><input type="hidden" name="exclusive_true" value="yes" />
+                <button type="submit" class="btntheme2">开启本站独家出售</button>
+              </div>
+            </div>
+            {/if}
+          </form>
+        </div>
+      </div>-->
+      <div class="sideblock">
+        <h3 class="underlined">自荐作品</h3>
+        <div id="profile" class="tab-content active">
+          <form class="horizontal-form disable-on-submit" action="" method="post">
+            <fieldset>
+            <div class="input-group">
+              <label for="featured_items">选择自荐作品：</label>
+              <div class="inputs">
+                <select name="featured_item_id">
+                  <option value="0">暂不自荐</option>
+                  {if $items}
+                  {foreach from=$items item=i}  
+                  <option value="{$i.id}" {if $i.id == $smarty.session.user.featured_item_id}selected="selected"{/if}>{$i.name}</option>
+                  {/foreach}
+                  {/if}
+                </select> 
+              </div>
+            </div>
+            <div class="form-submit"><input type="hidden" name="feature_save" value="yes" />
+              <button id="personal_info_submit_button" class="btntheme2 btnsize" type="submit">保存</button>
+            </div>
+            </fieldset>
+          </form>  
+        </div>
+      </div>
+      <div class="sideblock">
+        <div id="item_licences" class="tab-content active">
+          <h3 class="underlined">作品许可</h3>
+          <p>选择你所售作品的许可，请注意并非所有作品都适合全部许可，标准的共享许可是必须的。</p>
+          <form action="" class="horizontal-form disable-on-submit" method="post">
+            <fieldset>
+              <div class="input-group">
+                <label>许可类型：</label>
+                <div class="inputs">
+                  <ul class="inputs-list">
+                    <li>
+                      <label for="extended"> 
+                        <input id="extended" name="license[extended]" type="checkbox" value="extended" {if isset($smarty.session.user.license.extended)}checked="checked"{/if} />
+                        专有许可
+                      </label>
+                      <label for="personal">
+                        <input id="personal" name="license[personal]" type="checkbox" value="personal" {if isset($smarty.session.user.license.personal)}checked="checked"{/if} />
+                        共享许可
+                      </label>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </fieldset>
+            <div class="form-submit"><input type="hidden" name="save_license" value="yes" />
+              <button type="submit" class="btntheme2 btnsize">保存</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      {/if}
+    </div>
+    <div class="rightdetail">
+      <div class="sideblock author">
+        <div class="clr">
+          <div class="authoravatar">
+            {if $smarty.session.user.avatar != ''}
+            <img class="avatar" src="{$data_server}/uploads/users/{$smarty.session.user.user_id}/A_{$smarty.session.user.avatar}" />
+            {else}
+            <img class="avatar" src="{$data_server}img/default-user.jpg" />
+            {/if}
+          </div>
+          <div class="details">
+            <h3>{$smarty.session.user.nickname}</h3>
+            <p>注册时间：{$smarty.session.user.register_datetime|date_format:"%Y-%m-%d"}</p>
+            <p>最后登录：{$smarty.session.user.last_login_datetime|date_format:"%Y-%m-%d"}</p>
+          </div>
+        </div>
+        <ul class="badges clr">
+          {foreach from=$user_badges item=b name=foo}
+          <img src="{$data_server}{$b.photo}" height="30" width="30" alt="{$b.name|escape}" title="{$b.name|escape}" />
+          {if $smarty.foreach.foo.last}{/if}
+          {/foreach}
+        </ul>
+        <p>
+          {if $smarty.session.user.country_id != '0'}
+          国家或地区: {$smarty.session.user.country.name}<br>
+          {/if}
+          当前余额：{$currency.symbol}{$smarty.session.user.total|string_format:"%.2f"}<br>
+        </p>
+          <!--注册时间：{$smarty.session.user.register_datetime|date_format:"%Y-%m-%d"}<br>
+          {if $smarty.session.user.last_login_datetime != ''}
+          最后登录： {$smarty.session.user.last_login_datetime|date_format:"%Y-%m-%d %H:%M"}<br>
+          {/if}-->
+      </div>
+      <ul class="side-tabs" id="ziper">
+        <li><a href="javascript:;" class="icon-process">个人信息</a></li>
+        <li><a href="javascript:;" class="icon-key">更改密码</a></li> 
+        <li><a href="javascript:;" class="icon-update">头像和主页图片</a></li>
+        <li><a href="javascript:;" class="icon-social">你的社交应用</a></li>
+        {if $smarty.session.user.quiz == 'true'}
+        <!--<li><a href="javascript:;" class="icon-tick">在本站独家出售你的作品</a></li>-->
+        <li><a href="javascript:;" class="icon-star">自荐作品</a></li>
+        <li><a href="javascript:;" class="icon-licence">作品许可</a></li>
+        {/if}	
+      </ul>
+    </div>
+    {literal}
+    <script type="text/javascript">
+    seajs.use(["jq", "pageui"], function($, ui){
+      ui.tabsinit($("#ziper").find("li"), $("#taber").find(".sideblock"), {"active": "active"});
+    });
+    </script>
+    {/literal}
+  </div>
+</div>

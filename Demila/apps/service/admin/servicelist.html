@@ -1,0 +1,72 @@
+<link href="/static/css/custom/ucenter.css" rel="stylesheet" />
+<div class="pagetit">
+  <div class="navblock">
+    <ul class="titnav clr">
+      <li><a href="/admin" title="管理首页">管理首页</a></li>
+      <li class="pipe">&gt;</li>
+      <li><a href="/admin/?m=users&c=service" title="客户服务管理">客户服务管理</a></li>
+      <li class="pipe">&gt;</li>
+      <li>用户列表</li>
+    </ul>
+    <h2>用户列表</h2>
+  </div>
+</div>
+<div class="ucbg">
+	<div class="ucblock paddingt clr">
+    	{$errorMessage}
+		{include file="$root_path/apps/lists/leftlist_admin.html"}
+		<div class="rightdetail_admin">
+	
+  	{if $paging !=""}
+       <div class="page-controls">
+        <form class="sort-control" method="post" style="width: 350px;" action="?m={$smarty.get.m}&c={$smarty.get.c}&id={$smarty.get.id}">
+         <input class="ipttheme" type="text" id="q" name="q" value="开始搜索..." onfocus="this.value=='开始搜索...'?this.value='':false;" onblur="this.value==''?this.value='开始搜索...':false;">
+          <button type="submit" class="btnsize btntheme2">搜索</button>
+        </form>
+        {$paging}
+       </div></div>
+	{/if}
+  
+	{if is_array($data)}
+	
+	<div class="general_table_border">
+		<table class="general_table" cellspacing="0" cellpadding="0" border="0">
+			<thead>
+				<tr>
+					<th>用户名</th>
+					<th>用户昵称</th>
+					<th>用户类型</th>
+					<th>购买作品数</th>
+					<th>在售作品数</th>
+				</tr>
+			</thead>
+			<tbody>
+				{foreach from=$data item=i}
+				<tr>
+					<td>{$i.username}</td>
+					<td>{$i.nickname}</td>
+					<td>
+						{if $i.quiz=='true'}
+							{if $i.exclusive_author=='true'}
+                            签约作者
+							{else}
+							普通作者
+							{/if}
+						{else}
+                        普通用户
+						{/if}
+					</td>
+					<td>{$i.buy}</td>
+					<td>{$i.items}</td>
+				</tr>
+				{/foreach}
+				
+			</tbody>
+		</table>
+	</div>
+    {else}
+		暂无记录
+	{/if}
+	</div>
+  </div>
+</div>

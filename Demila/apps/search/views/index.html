@@ -1,0 +1,221 @@
+<link href="/static/css/custom/resource.css" rel="stylesheet" />
+<div class="pagetit">
+  <div class="navblock">
+    <ul class="titnav clr">
+      <li><a href="/" title="主页">主页</a></li>
+      <li class="pipe">&gt;</li>
+      <li><a href="/categories/all/" title="搜索">搜索</a></li>
+    </ul>
+    <h2>{$searchText}</h2>
+  </div>
+</div>
+
+
+<div class="resourcebg">
+	<div class="pageblock clr">
+		<div class="leftdetail">
+			<div class="itemlist short">
+        		<div class="itemsort clr">
+					{if $type == 'users'}
+<form action="" class="sort-control" id="sortbyform" method="get">
+<input type="hidden" id="sort_by" name="sort_by" />
+<input id="type" name="type" type="hidden" value="users" />
+<input id="term" name="term" type="hidden" value="{$searchText|escape}" />
+<ul class="sortlist clr">
+<li><span>{$lang.order_by}：</span></li>
+<li><a href="javascript: void(0);" onclick="document.getElementById('sort_by').value='published_at';document.getElementById('sortbyform').submit();"{if $smarty.get.sort_by == 'published_at'} class="active"{/if} title="日期">日期</a></li>
+<li><a href="javascript: void(0);" onclick="document.getElementById('sort_by').value='name';document.getElementById('sortbyform').submit();"{if $smarty.get.sort_by == 'name'} class="active"{/if} title="标题">标题</a></li>
+<li><a href="javascript: void(0);" onclick="document.getElementById('sort_by').value='average_rating';document.getElementById('sortbyform').submit();"{if $smarty.get.sort_by == 'average_rating'} class="active"{/if} title="评分">评分</a></li>
+<li><a href="javascript: void(0);" onclick="document.getElementById('sort_by').value='sales_count';document.getElementById('sortbyform').submit();"{if $smarty.get.sort_by == 'sales_count'} class="active"{/if} title="销量">销量</a></li>
+</ul>
+</form>
+
+					{elseif $type == 'collections'}
+
+<form action="" class="sort-control" id="sortbyform" method="get">
+<input type="hidden" id="sort_by" name="sort_by" />
+<input id="type" name="type" type="hidden" value="collections" />			  
+<input id="term" name="term" type="hidden" value="{$searchText|escape}" />
+<ul class="sortlist clr">
+<li><span>{$lang.order_by}：</span></li>
+<li><a href="javascript: void(0);" onclick="document.getElementById('sort_by').value='published_at';document.getElementById('sortbyform').submit();"{if $smarty.get.sort_by == 'published_at'} class="active"{/if} title="日期">日期</a></li>
+<li><a href="javascript: void(0);" onclick="document.getElementById('sort_by').value='name';document.getElementById('sortbyform').submit();"{if $smarty.get.sort_by == 'name'} class="active"{/if} title="标题">标题</a></li>
+<li><a href="javascript: void(0);" onclick="document.getElementById('sort_by').value='average_rating';document.getElementById('sortbyform').submit();"{if $smarty.get.sort_by == 'average_rating'} class="active"{/if} title="评分">评分</a></li>
+</ul>
+</form>
+
+					{else}
+
+<form action="" class="sort-control" id="sortbyform" method="get">
+<input type="hidden" id="sort_by" name="sort_by" />
+<input id="type" name="type" type="hidden" value="files" />
+<input id="term" name="term" type="hidden" value="{$searchText|escape}" />
+<input id="collection_id" name="collection_id" type="hidden" value="{$smarty.get.collection_id}" />
+{if isset($smarty.get.categories) && is_array($smarty.get.categories)}
+{foreach from=$smarty.get.categories item=c key=k}
+<input type="hidden" name="categories[{$k}]" value="1" />
+{/foreach}
+{/if}
+<ul class="sortlist clr">
+<li><span>{$lang.order_by}：</span></li>
+<li><a href="javascript: void(0);" onclick="document.getElementById('sort_by').value='published_at';document.getElementById('sortbyform').submit();"{if $smarty.get.sort_by == 'published_at'} class="active"{/if} title="日期">日期</a></li>
+<li><a href="javascript: void(0);" onclick="document.getElementById('sort_by').value='name';document.getElementById('sortbyform').submit();"{if $smarty.get.sort_by == 'name'} class="active"{/if} title="标题">标题</a></li>
+<li><a href="javascript: void(0);" onclick="document.getElementById('sort_by').value='average_rating';document.getElementById('sortbyform').submit();"{if $smarty.get.sort_by == 'average_rating'} class="active"{/if} title="评分">评分</a></li>
+<li><a href="javascript: void(0);" onclick="document.getElementById('sort_by').value='sales_count';document.getElementById('sortbyform').submit();"{if $smarty.get.sort_by == 'sales_count'} class="active"{/if} title="销量">销量</a></li>
+<li><a href="javascript: void(0);" onclick="document.getElementById('sort_by').value='price';document.getElementById('sortbyform').submit();"{if $smarty.get.sort_by == 'price'} class="active"{/if} title="{$lang.price}">{$lang.price}</a></li>
+</ul>
+</form>
+
+					{/if}
+					<ul class="sortbtns clr">
+						<li class="layout-switcher sort-control btns">
+						<a class="layout-list sort-control-tooltip t1" href="#" data-tooltip="列表查看" title="列表查看">列表查看</a>
+						<a class="layout-grid sort-control-tooltip active t2" href="#" data-tooltip="网格查看" title="网格查看">网格查看</a>
+						</li>
+						<li class="page">{$paging}</li>
+					</ul>
+					<!--<div class="layout-switcher sort-control">
+						<a href="#" class="layout-list sort-control-tooltip active" data-tooltip="列表查看"></a>
+						<a href="#" class="layout-grid sort-control-tooltip" data-tooltip="网格查看"></a>
+					</div>
+					<div class="pagination">{$paging}</div>-->
+				</div>
+				{if $results}
+				{* SHOW USERS *}
+				{if $type == 'users'}
+				<ul class="user-list">
+					{foreach from=$results item=u name=foo}
+					<li>
+						<div class="thumbnail">
+							<a href="/{$languageURL}users/{$u.username}" class="avatar" title="{$u.username}">
+								{if $u.avatar != ''}  
+								<img alt="{$u.username}" src="{$data_server}/uploads/users/{$u.user_id}/A_{$u.avatar}" />
+								{else}
+								<img alt="{$u.username}" src="{$data_server}/images/common/default-user.jpg" />
+								{/if}
+							</a>
+						</div>
+						<div class="user-info">
+							<h3><a href="/{$languageURL}users/{$u.username}">{$u.username}</a></h3>
+							<ul class="badges"></ul>
+						</div>
+						<small class="meta">
+							<strong>{$u.items}</strong> {$lang.items}<br>
+							<strong>{$u.followers}</strong> {$lang.followers}<br>
+							{$lang.member_since}: {$u.register_datetime|date_format:"%Y-%m-%d"}<br>
+							{if $u.custom_made == 'true'}
+							{$lang.available_custom_mader}<br>
+							{/if}
+						</small>
+						<div class="sale-info">
+							<em class="sale-count">{$u.sales}</em>
+							<small>{$lang.sales}</small>
+							<div class="rating">
+								{section name=foo1 start=1 loop=6 step=1}
+								{if $u.rating >= $smarty.section.foo1.index}
+								<img src="/static/img/star-on.png" alt="" />
+								{else}
+								<img src="/static/img/star-off.png" alt="" />
+								{/if}
+								{/section}
+							</div>
+						</div>
+					</li>		
+					{/foreach}				
+				</ul>
+				{elseif $type == 'collections'}
+				<ul class="collection-list">
+					{foreach from=$results item=c name=foo}
+					<li class="content-box">
+						<a href="/{$languageURL}collections/view/{$c.id}" class="collection-image">
+							{if $c.photo != ''}
+							<img alt="{$c.name|escape}" src="{$data_server}/uploads/collections/{$c.photo}" width="260" height="140">
+							{else}
+							<img alt="{$c.name|escape}" src="/static/img/default-collection.jpg" width="260" height="140">
+							{/if}  					
+						</a>
+						<div class="collection-info">
+							<h3><a href="/{$languageURL}collections/view/{$c.id}">{$c.name}</a></h3>
+							<span>By <a href="/{$languageURL}users/{$users[$c.user_id].username}">{$users[$c.user_id].username}</a></span>
+							<p>{$c.text|nl2br}</p>  
+						</div>
+						<div class="collection-meta">
+							<strong>{$c.items} {$lang.items}</strong>
+							<br>
+							{section name=foo start=1 loop=6 step=1}
+							{if $c.rating >= $smarty.section.foo.index}
+							<img src="/static/img/star-on.png" alt="" />
+							{else}
+							<img src="/static/img/star-off.png" alt="" />
+							{/if}
+							{/section}
+							<br><small>{$c.votes}评分</small>
+						</div>
+					</li>
+					{/foreach}				
+				</ul>
+				{else}
+				<ul class="item-grid searches clr">
+					{foreach from=$results item=i name=foo}
+					<li class="itemobj">
+						<a class="itemimg" href="/{$langaugeURL}items/{$i.id}" onclick="">
+							<img alt="{$i.name|escape}" border="0" class="landscape-image-magnifier preload no_preview" data-item-author="作者 {$users[$i.user_id].username}" data-item-category="{foreach from=$i.categories item=e}{foreach from=$e item=c name=foo}{$categories[$c].name} {if !$smarty.foreach.foo.last} \ {/if}{/foreach}{/foreach}" data-item-cost="{$i.price}" data-item-name="{$i.name|escape}" data-preview-height="" data-preview-url="{$data_server}/uploads/items/{$i.id}/preview.jpg" data-preview-width="" src="{$data_server}/uploads/items/{$i.id}/{$i.thumbnail}" title="{$i.name|escape}" />
+						</a>
+						<div class="itemdetail">
+							<h3><a href="/{$languageURL}items/{$i.id}">{$i.name}</a></h3>
+							<p><span class="author">由</span> <a href="/{$languageURL}users/{$users[$i.user_id].username}/" class="author">{$users[$i.user_id].nickname}</a></p>
+						</div>
+						<div class="itemcate">
+						<p><span class="tips">分类：</span> {foreach from=$i.categories item=e}{foreach from=$e item=c name=foo}{$categories[$c].name} {if !$smarty.foreach.foo.last} \ {/if}{/foreach}{/foreach}</p>
+						</div>
+						<!--<small class="meta"><span class="meta-categories"> </span><br /></small>-->
+						<div class="itemstars">
+						<div class="starnums" style="width:{$i.rating*2}0%;"><span class="allstars"></span></div>
+						<div class="starsbg"></div>
+						</div>
+						<div class="sales">
+						<p class="nums"><span>{$i.sales}</span>{$lang.sales}</p>
+						<p class="price">{$currency.symbol}<span>{$i.price}</span></p>
+						</div>
+					</li>
+					{/foreach}
+				</ul>
+				{/if}	
+				<div class="pagination">{$paging}</div>
+				{else}
+				<div class="content-box vertical-space">{$lang.no_results_found}</div>
+				{/if}
+			</div>
+		</div>
+		<div class="rightdetail">
+			<h3 class="tipstit">微调结果</h3>
+			<div class="tipsdetail">
+				<p><strong>搜索这些结果</strong></p>
+				<form class="sidebar-search" action="/{$languageURL}search/" method="get">
+					<input class="ipttheme" type="text" onclick="this.value = &quot;&quot;" type="text" value="{$lang.search_within}"></input>
+					<input id="type" name="type" type="hidden" value="{$type}" />
+					<input id="category" name="category" type="hidden" value="" />
+					<input id="base" name="base" type="hidden" value="{$smarty.get.term|escape}" />
+					<input id="collection_id" name="collection_id" type="hidden" value="{$smarty.get.collection_id}" />
+					{if isset($smarty.get.categories) && is_array($smarty.get.categories)}
+					{foreach from=$smarty.get.categories item=c key=k}
+					<input type="hidden" name="categories[{$k}]" value="1" />
+					{/foreach}
+					{/if}
+					<button type="submit" class="btntheme2 btnsize3">搜索</button>
+				</form>
+			</div>
+		</div>
+		<script>
+		{literal}
+	    seajs.use(["jq", "pageui", "modules/itemlist"], function($, ui, list){
+	      ui.imgMagnifier("a.landscape-image-magnifier");
+	      list.init({
+	        ajaxPagination: true,
+	        layoutSwitcher: true
+	      });
+	    });
+	    {/literal}
+		</script>
+	</div>
+</div>

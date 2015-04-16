@@ -1,0 +1,54 @@
+<link href="/static/css/custom/ucenter.css" rel="stylesheet" />
+<div class="pagetit">
+	<div class="navblock">
+		<ul class="titnav clr">
+			<li><a href="/" title="主页">主页</a></li>
+			<li class="pipe">&gt;</li>
+			<li><a href="/make_money/become_an_author" title="入门指南">入门指南</a></li>
+			<li class="pipe">&gt;</li>
+			<li>成为作者</li>
+		</ul>
+		<h2>成为作者</h2>
+	</div>
+</div>
+<div class="ucbg">
+  <div class="ucblock clr">
+  	{$errorMessage}
+	<div class="authortest">
+		<p>正确完成这些多项选择题，简单几步就可成为作者。</p>
+		<form action="" method="post">
+			{if $questions}
+			{foreach from=$questions item=q name=foo}
+				<h3 class="underlined">{$lang.question} {$smarty.foreach.foo.index+1}</h3>
+				{$q.name}
+				<br />
+				{if isset($answers[$q.id])}
+				{foreach from=$answers[$q.id] item=a}
+					<br />
+					<input id="answers_{$smarty.foreach.foo.index}_{$a.id}" name="answers[{$q.id}]" type="radio" value="{$a.id}" />{$a.name}
+				{/foreach}
+				{/if}
+				<br />
+				<br />
+			{/foreach}
+			<div class="form-submit-left" href="javascript: void(0);" onclick="$('#btn-sbm').click();">
+				<button type="submit" name="submit" id="btn-sbm" class="btntheme2 btnsize">{$lang.check_quiz}</button>
+			</div>
+			{/if}
+		</form>
+	</div>
+  </div>
+</div>
+
+<!--
+
+
+    <div id="content">
+      <div class="container">
+	  		
+			
+
+
+  			
+      </div>
+    </div>-->

@@ -1,0 +1,79 @@
+@charset "UTF-8";
+#user-account-nav li > a{
+	padding: 0 16px;
+	height: 33px;
+	line-height: 33px;
+	display: inline-block;
+}
+#user-account-nav > li:first-child a{
+	width: 95px;
+}
+.idxsearch .searchlink{
+	margin: 25px 0 0 330px;
+}
+.idxsearch .searchlink li{
+	float: left;
+}
+.idxblock .itemlist, #recent-files .inner-border ul{
+	margin-left: 10px;
+}
+.idxblock .itemlist li, #recent-files .inner-border ul li{
+	margin-right: 17px;
+}
+.idxblock .freeitemsmask .itemlist li{
+	margin-right: 20px;
+}
+.idxblock .btnlist{
+	margin-left: 232px;
+}
+.idxblock .btnlist li{
+	float: left;
+}
+.pagenav .navsearch .navsearchipt{
+	margin-top: 6px;
+}
+.pagestate .topnav li ol, .pagestate .userstate li ol, .pagenav li ol{
+	border: 1px solid #000;
+}
+.pagenav .pageblock{
+	z-index: 100;
+}
+.itemlist_jiu .itemobj .itemimg{
+	left: 0;
+    margin: 26px 0 0 0;
+    position: relative;
+}
+.itemlist_jiu .itemobj .itemimg img{
+	margin-left: 30px;
+}
+
+.idxsearch .searchform .iptbg .searchipt {
+    margin: 10px 0 0 20px;
+}
+.idxlb{
+	text-align: left;
+}
+.resourcebg .leftdetail .otheritems a{
+	margin-right: 20px;
+}
+.idxblock .itemlist{
+	padding-left: 10px;
+}
+.idxblock .itemlist li{
+	margin-right: 16px;
+}
+.frees .idxblock .itemlist{
+	padding-left: 0;
+}
+.pagenav .main-nav .navsearch .navsearchipt{
+	margin-top: 6px;
+}
+.panel .choices .choicescen span.cenobj{
+	display: none;
+}
+div.account-required div.inner-boundary{
+	height: 115px;
+}
+.resourcebg .leftdetail .otheritems .emptyitem{
+	margin-right: 20px;
+}

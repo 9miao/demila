@@ -1,0 +1,11 @@
+<div class="thumbnails">
+  {foreach from=$previewFiles item=f name=foo}  
+    <a href="/{$languageURL}items/screenshots_file/{$item.id}?index={$smarty.foreach.foo.index}" target="preview">
+    	<img src="{$data_server}uploads/items/{$item.id}/preview/{$f}" height="60" />
+    </a>
+  {/foreach}
+</div>
+<div class="purchase">
+    <a href="/{$languageURL}items/{$item.id}" target="_top">
+	<img alt="{$domain} Purchase This" class="purchase" src="{$data_server}img/custom/preview-logo.png"></a>
+</div>

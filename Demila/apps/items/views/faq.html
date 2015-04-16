@@ -1,0 +1,113 @@
+<link href="/static/css/custom/resource.css" rel="stylesheet" />
+<div class="pagetit pagetabs">
+  <div class="navblock">
+    <ul class="titnav clr">
+      <li><a href="/" title="主页">主页</a></li>
+      <li class="pipe">&gt;</li>
+      <li><a href="/categories/all/" title="文件">文件</a></li>
+      <li class="pipe">&gt;</li>
+      {foreach from=$item.categories item=e}
+        {foreach from=$e item=c name=foo}
+          <li><a href="/{$languageURL}categories/{$categories[$c].id}" title="{$categories[$c].name}">{$categories[$c].name}</a></li>
+          {if !$smarty.foreach.foo.last}<li class="pipe">&gt;</li>{/if}
+        {/foreach}
+      {/foreach}
+    </ul>
+    <h2>{$item.name}</h2>
+    <ul class="pagetab clr">
+      <li><a href="/{$languageURL}items/{$item.id}" title="文件详情">作品详情</a></li>
+      {if $faqs>0 || check_login_bool() && $item.user_id == $smarty.session.user.user_id}
+      <li><a{if $smarty.get.controller == 'faq'} class="active"{/if} href="/{$languageURL}items/faq/{$item.id}" title="常见问题解答">常见问题解答</a></li>
+      {/if}
+      {if check_login_bool() && $item.user_id == $smarty.session.user.user_id}
+      <li><a{if $smarty.get.controller == 'edit'} class="active"{/if} href="/{$languageURL}items/edit/{$item.id}" title="编辑">编辑</a></li>
+      {/if}
+      <li><a{if $smarty.get.controller == 'comments'} class="active"{/if} href="/{$languageURL}items/comments/{$item.id}" title="评论">评论</a></li>
+    </ul>
+  </div>
+</div>
+<div class="resourcebg">
+  <div class="pageblock clr">
+    {$errorMessage}
+    {include file="$root_path/apps/items/views/purchase_panel.html"}
+    <div class="leftdetail">
+      {if $faq}
+      <div class="faqlist" id="faq-index">
+        {foreach from=$faq item=f}
+        <div class="faqitem">
+        <h3 class="question">{$f.question|nl2br}</h3>
+        <div class="answer"><p>{$f.answer|nl2br}</p></div>
+        {if check_login_bool() && $item.user_id == $smarty.session.user.user_id}
+        <div class="controls"><a href="/{$languageURL}items/faq/{$item.id}/?del={$f.id}">删除</a></div>
+        {/if}
+        </div>
+        {/foreach}
+      </div>
+      {else}
+      <div class="nofaqblock">尚无常见问题与解答</div>
+      {/if}
+
+      {if check_login_bool() && $item.user_id == $smarty.session.user.user_id}
+      <h3 class="contenttit">创建常见问题解答</h3>
+      <div class="contentbox">
+        <!--<script type="text/javascript" src="{$data_server}nicEditors/nicEdit.js"></script>-->
+        <!--<script type="text/javascript">-->
+        <!--{literal}bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });{/literal}-->
+        <!--</script>-->
+        <form action="" method="post">
+          <fieldset class="horizontal-form">
+            <div class="input-group">
+              <label for="item_question">问题</label>
+              <div class="inputs">
+
+                  <!--初始化编辑器-->
+                  <script id="item_question" name="question" type="text/plain">
+             </script>
+
+                <!--<textarea id="item_question" name="question" rows="10"></textarea>-->
+              </div>
+            </div>
+            <div class="input-group">
+              <label for="item_answer">解答</label>
+              <div class="inputs">
+                  <script id="item_answer" name="answer" type="text/plain">
+                  </script>
+
+                  <!-- 配置文件 -->
+                  <script type="text/javascript" src="{$data_server}ueditor/ueditor.config.js"></script>
+                  <!-- 编辑器源码文件 -->
+                  <script type="text/javascript" src="{$data_server}ueditor/ueditor.all.js"></script>
+                  <!-- 实例化编辑器 -->
+                  <script type="text/javascript">
+                      var ue = UE.getEditor('item_question');
+                      var ue = UE.getEditor('item_answer');
+                  </script>
+
+                <!--<textarea id="item_answer" name="answer" rows="10"></textarea>-->
+              </div>
+            </div>
+          </fieldset>
+          <div class="form-submit"><input type="hidden" name="add" value="yes" />
+            <button type="submit" name="add" class="btntheme post-reply">创建问答</button>
+          </div>
+        </form>
+      </div>
+      {/if}
+
+      <div class="otheritems clr">
+      {if $otherItems}
+      {foreach from=$otherItems item=i}   
+      <a href="/{$languageURL}items/{$i.id}"><img alt="{$i.name|escape}" border="0" class="landscape-image-magnifier preload no_preview" data-item-author="作者 {$item.user.username}" data-item-category="{foreach from=$i.categories item=e}{foreach from=$e item=c name=foo}{$categories[$c].name} {if !$smarty.foreach.foo.last} \ {/if}{/foreach}{/foreach}" data-item-cost="{$i.price}" data-item-name="{$i.name|escape}" data-preview-height="" data-preview-url="{$data_server}uploads/items/{$i.id}/preview.jpg" data-preview-width="" src="{$data_server}uploads/items/{$i.id}/{$i.thumbnail}" title="{$i.name|escape}" /></a>          
+      {/foreach}
+      {/if}
+      {if $otherItemsCount < 6}
+      {section name=foo start=$otherItemsCount loop=6 step=1}
+        <span class="emptyitem"></span>
+      {/section}      
+      {/if}
+      </div>
+      <a class="otherlink" href="/{$languageURL}user/portfolio/{$item.user.username}">{$item.user.nickname}的其它作品</a>
+    </div>
+    {include file="$root_path/apps/items/views/rightside.html"}
+  </div>
+</div>
