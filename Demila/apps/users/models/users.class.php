@@ -1378,15 +1378,19 @@ public function getuserinfoById($id=0){
 		if(!isset($_POST['custom_made'])) {
 			$_POST['custom_made'] = 'false';
 		}
+        if(!isset($_POST['address'])) {
+            $_POST['address'] = '';
+        }
 		
 		$mysql->query("
 			UPDATE `users`
-			SET `nickname` = '".sql_quote($_POST['nickname'])."',
+			SET     `nickname` = '".sql_quote($_POST['nickname'])."',
 					`email` = '".sql_quote($_POST['email'])."',
 					`firmname` = '".sql_quote($_POST['firmname'])."',
 					`profile_title` = '".sql_quote($_POST['profile_title'])."',
 					`profile_desc` = '".sql_quote($_POST['profile_desc'])."',
 					`live_city` = '".sql_quote($_POST['live_city'])."',
+					`address` = '".sql_quote($_POST['address'])."',
 					`country_id` = '".intval($_POST['country_id'])."',
 					`custom_made` = '".sql_quote($_POST['custom_made'])."'
 			WHERE `user_id` = '".intval($_SESSION['user']['user_id'])."'
@@ -1399,7 +1403,8 @@ public function getuserinfoById($id=0){
 		$_SESSION['user']['profile_title'] = $_POST['profile_title'];
 		$_SESSION['user']['profile_desc'] = $_POST['profile_desc'];
 		$_SESSION['user']['live_city'] = $_POST['live_city'];
-		$_SESSION['user']['country_id'] = $_POST['country_id'];
+        $_SESSION['user']['address'] = $_POST['address'];
+        $_SESSION['user']['country_id'] = $_POST['country_id'];
 		$_SESSION['user']['custom_made'] = $_POST['custom_made'];
 		
 		return true;

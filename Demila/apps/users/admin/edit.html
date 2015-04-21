@@ -94,6 +94,14 @@
                   </div>
                 </div>
                 {/if}
+                  {if $user.address != ''}
+                  <div class="input-group">
+                      <label> 详细地址:</label>
+                      <div class="right">
+                          <strong>{$user.address}</strong>
+                      </div>
+                  </div>
+                  {/if}
                 <div class="input-group">
                   <label>充值金额：</label>
                   <div class="right">

@@ -55,7 +55,6 @@ class orders {
 		if($mysql->num_rows() == 0) {
 			return false;
 		}
-		
 		return $mysql->fetch_array();
 	}
 	
@@ -85,8 +84,8 @@ class orders {
 		
 		return $mysql->insert_id();
 	}
-	
-	/* v 1.0 */
+
+    /* v 1.0 */
 	public function IsPay($order_id) {
 		$row = $this->get($order_id);
 		if(!is_array($row)) {

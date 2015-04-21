@@ -2383,6 +2383,23 @@ class items {
             return array();
         }
     }
+    public function record($itemID){
+        global $mysql;
+        $mysql->query("
+            SELECT t1.datetime,price,t2.username,nickname
+            FROM orders t1
+            JOIN users t2
+            ON t1.user_id = t2.user_id
+            WHERE t1.item_id = '".intval($itemID)."'
+        ");
+        if($mysql->num_rows() == 0) {
+            return false;
+        }
+        $arr=array();
+        while( $d=$mysql->fetch_array()){
+            $arr[]=  $d;
+        }
+        return $arr;
+    }
 }
-
 ?>

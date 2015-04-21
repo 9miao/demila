@@ -802,7 +802,7 @@
 .resourcebg .leftdetail .otheritems a{
 	float: left;
 	display: block;
-	margin-right: 25px;
+	margin-right: 29px;
 }
 .resourcebg .leftdetail .otheritems a:last-child{
 	margin-right: 0;

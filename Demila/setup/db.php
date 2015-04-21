@@ -504,6 +504,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `profile_title` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '个人资料标题',
   `profile_desc` text COLLATE utf8_unicode_ci NOT NULL COMMENT '个人资料详情',
   `live_city` varchar(100) COLLATE utf8_unicode_ci NOT NULL COMMENT '所在城市',
+  `address` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '详细地址',
   `country_id` int(11) NOT NULL DEFAULT '0' COMMENT '国家或地区的ID',
   `custom_made` enum('true','false') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'false' COMMENT '承接定制',
   `social` varchar(255) COLLATE utf8_unicode_ci NOT NULL,

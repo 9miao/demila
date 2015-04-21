@@ -255,7 +255,8 @@ if(!check_login_bool()) {
 		$_POST['profile_desc'] = $_SESSION['user']['profile_desc'];
 		$_POST['live_city'] = $_SESSION['user']['live_city'];
 		$_POST['country_id'] = $_SESSION['user']['country_id'];
-		$_POST['custom_made'] = $_SESSION['user']['custom_made'];
+        $_POST['address'] = $_SESSION['user']['address'];
+        $_POST['custom_made'] = $_SESSION['user']['custom_made'];
 	}
 	
 

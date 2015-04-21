@@ -23,6 +23,9 @@
       {if check_login_bool() && $item.user_id == $smarty.session.user.user_id}
       <li><a{if $smarty.get.controller == 'edit'} class="active"{/if} href="/{$languageURL}items/edit/{$item.id}" title="编辑">编辑</a></li>
       {/if}
+        {if check_login_bool() && $item.user_id == $smarty.session.user.user_id}
+        <li><a{if $smarty.get.controller == 'record'} class="active"{/if} href="/{$languageURL}items/record/{$item.id}" title="购买记录">购买记录</a></li>
+        {/if}
       <li><a{if $smarty.get.controller == 'comments'} class="active"{/if} href="/{$languageURL}items/comments/{$item.id}" title="评论">评论</a></li>
     </ul>
   </div>
@@ -45,14 +48,14 @@
       <div class="detailtxt">{$item.description}</div>
       <div class="otheritems clr">
       {if $otherItems}
-      {foreach from=$otherItems item=i}   
-      <a href="/{$languageURL}items/{$i.id}" class="landscape-image-magnifier"><img alt="{$i.name|escape}" border="0" class="preload no_preview" data-item-author="作者 {$item.user.username}" data-item-category="{foreach from=$i.categories item=e}{foreach from=$e item=c name=foo}{$categories[$c].name} {if !$smarty.foreach.foo.last} \ {/if}{/foreach}{/foreach}" data-item-cost="{$i.price}" data-item-name="{$i.name|escape}" data-preview-height="" data-preview-url="{$data_server}uploads/items/{$i.id}/preview.jpg" data-preview-width="" src="{$data_server}uploads/items/{$i.id}/{$i.thumbnail}" title="{$i.name|escape}" /></a>          
+      {foreach from=$otherItems item=i}
+      <a href="/{$languageURL}items/{$i.id}" class="landscape-image-magnifier"><img alt="{$i.name|escape}" border="0" class="preload no_preview" data-item-author="作者 {$item.user.username}" data-item-category="{foreach from=$i.categories item=e}{foreach from=$e item=c name=foo}{$categories[$c].name} {if !$smarty.foreach.foo.last} \ {/if}{/foreach}{/foreach}" data-item-cost="{$i.price}" data-item-name="{$i.name|escape}" data-preview-height="" data-preview-url="{$data_server}uploads/items/{$i.id}/preview.jpg" data-preview-width="" src="{$data_server}uploads/items/{$i.id}/{$i.thumbnail}" title="{$i.name|escape}" /></a>
       {/foreach}
       {/if}
       {if $otherItemsCount < 6}
       {section name=foo start=$otherItemsCount loop=6 step=1}
         <span class="emptyitem"></span>
-      {/section}      
+      {/section}
       {/if}
       </div>
       <a class="otherlink" href="/{$languageURL}user/portfolio/{$item.user.username}">{$item.user.nickname}的其它作品</a>
