@@ -33,6 +33,8 @@
     $version = $http->curlGet($url);
     $version = json_decode($version,1);
     abr('version',$version[0]);
+    $download=$index."/demiladata/data/";
+    abr('download',$download);
 
     //系统信息
     $sysinfo = array();

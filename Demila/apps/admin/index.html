@@ -74,6 +74,7 @@
 					<td>Demila{$smarty.const.VERSION}
                     {if $smarty.const.VERSION < $version.content}
                     &nbsp;&nbsp;&nbsp;&nbsp;<a style="cursor: pointer;" class="update" ajax-url="/admin/index" ajax-data="{literal}{'update_version':'true'}{/literal}" >更新Demila</a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<a href="{$download}demila{$version.content}.zip"> <input type="button" value="下载Demila{$version.content}"></a>
                     {/if}
                     </td>
 				</tr>

@@ -1,0 +1,1056 @@
+@charset "UTF-8";
+@media only screen and (max-width : 1024px){
+body{
+	font-size: 16px;
+}
+.followbg .ucblock .followblock h3{
+	font-size: 1.5em;
+}
+.idxlb{
+	display: none;
+}
+.header, .pagetop, .pagenav, .pagefooter, .pagetit, .idxsearch, .recombg, .uptodate, .frees, .author, .idxlb, .idxfeature, .idxlb .idxlbbg, .ucbg, #content, .pagesearch, .pageblock{
+	min-width: 320px;
+}
+.container, .pagenav ul, .pageblock, .titblock, .navblock, .pagefooter .footercopy, .idxblock, .idxlb .idxblock, .frees .freeitemsmask, .recombg .recomitemsmask, .ucbg .ucblock, .pagetit .navblock, .ucblock .txtlistnav, .pagenav .navcontent, .pagetit .titblock, .pagetit .navblock, .ucblock .listform{
+	width: 100%;
+}
+.header .marketplace, .pagefooter .footertop a{
+	left: 5px;
+}
+.header h1.pagelogo .marketplace{
+	background: url(/static/img/custom/logo@2x.png) no-repeat center center;
+	background-size: 100% 100%;
+}
+.pagefooter .footertop a{
+	background: url(/static/img/custom/logo@2x.png) no-repeat center center;
+	background-size: 100% 100%;
+}
+.idxblock .blocktit h2{
+	margin-left: 5px;
+}
+.pagetit .navblock, .ucblock .txtlistnav{
+	padding: 0;
+}
+.idxlb .idxblock{
+	margin: 0;
+	left: 0;
+}
+.idxblock .itemlist{
+	height: auto;
+}
+.pagefooter .footertop .footertxt{
+	right: 5px;
+}
+.pagefooter .footerbtm .btmitems{
+	padding: 10px 0 20px 0;
+}
+.account-wrapper, .idxblock .blocktit .morelink{
+	margin-right: 5px;
+}
+.pagenav{
+	
+}
+.ucblock .txtlistnav, .ucblock .detailtxt{
+	float: none;
+}
+.pagetit .navblock .titnav, .pagetit .navblock h2{
+	padding-left: 5px;
+}
+.ucblock .txtlistnav li{
+	display: inline-block;
+	width: 18%;
+}
+.ucblock .txtlistnav li:first-child a, .ucblock .txtlistnav li a, .ucblock .txtlistnav li:last-child a{
+	border-radius: 0;
+}
+.ucblock .txtlistnav li a{
+	padding: 0;
+	text-align: center;
+	width: 100%;
+	background-color: #ddd;
+}
+.ucblock .detailtxt{
+	width: 98%;
+	padding: 1%;
+	min-height: 0;
+}
+.mobile_pagemask{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #fff;
+	opacity: 0;
+	z-index: 11000;
+	display: none;
+}
+.idxblock .itemlist li, #recent-files .inner-border ul.itemlist li, .frees .freeitemsmask .itemlist li:nth-child(10n), .recombg .recomitemsmask .itemlist li:nth-child(10n){
+	width: 14.5%;
+	margin: 0 1% 10px 1%;
+}
+.idxblock .itemlist li a, #recent-files .inner-border ul.itemlist li a, .authorblock .authors a{
+	width: 100%;
+	height: auto;
+}
+.idxblock .itemlist li a img, #recent-files .inner-border ul.itemlist li a img, .authorblock .authors img{
+	position: relative;
+	width: 100%;
+	height: auto;
+}
+.idxblock .itemlist li a span.types, .idxblock .itemlist li a span.bg, .authorblock .authors span.name, .authorblock .authors span.bg{
+	width: 100%;
+	top: auto;
+	bottom: 0;
+}
+#recent-files .inner-border ul.itemlist, .frees .freeitemsmask, .recombg .recomitemsmask{
+	height: auto;
+}
+.frees .freeitemsmask .itemlist, .recombg .recomitemsmask .itemlist{
+	width: 100%;
+	position: relative;
+}
+.idxblock .authorblock{
+	margin: 20px 0;
+}
+.authorblock .authors{
+	width: 10.5%;
+	margin: 0 1% 10px;
+	height: auto;
+}
+.authorblock .authors span.bg, .authorblock .authors span.name{
+	bottom: 4px;
+	left: 0;
+}
+.resourcebg .leftdetail .detailimg .links, .resourcebg .leftdetail .detailimg .links .linkbtn, .resourcebg .leftdetail .detailimg .links .bdsharebuttonbox{
+	left: 0;
+}
+.resourcebg .leftdetail .detailimg .links .bdsharebuttonbox{
+	display: inline-block;
+}
+.pagefooter .footerbtm{
+	font-size: 1.5em;
+}
+.footerbtm .btmitems li{
+	width: 33.3%;
+	border: none;
+	height: 118px;
+	font-size: .7em;
+}
+.footerbtm .btmitems li .itemtxt{
+	left: 36%;
+	top: 4px;
+}
+.footerbtm .btmitems li .imglink{
+	left: 5px;
+	top: 5px;
+	width: 34%;
+	font-size: .875em;
+	bottom: auto;
+}
+.footerbtm .btmitems li .imglink img{
+	width: 100%;
+	height: auto;
+}
+.footerbtm .btmitems li .itemtxt .nums{
+	font-size: 2em;
+}
+.footerbtm .btmitems li .itemtxt .author{
+	font-size: 1.25em;
+}
+.pagetit.pagetabs h2, .pagetit .navblock .titnav, .pagetit.pagetabs .pagetab{
+	padding-left: 1%;
+}
+.resourcebg .leftdetail, .ucbg .ucblock .leftdetail{
+	width: 64%;
+	margin: 0 1%;
+}
+.resourcebg .rightdetail, .ucbg .ucblock .rightdetail{
+	width: 32%;
+	margin: 0 1%;
+	padding-bottom: 0;
+}
+.resourcebg .rightdetail .sideblock, .resourcebg .rightdetail .sideblock.copyright, .resourcebg .rightdetail .sideblock.attribute, .resourcebg .rightdetail .sideblock.tips, .rightdetail .sideblock.sidesales, .rightdetail .sideblock.sidefollow, .ucblock .rightdetail .countryinfo{
+	width: 90%;
+	padding: 10px 5%;
+}
+.resourcebg .rightdetail .sideblock.author, .ucblock .rightdetail .sideblock.author{
+	min-width: 0;
+}
+.price .licenses .licenitem .buybtn, .author .authorbtn, .btnsize, .author .authorbtn, .rightdetail .borderbg .emailbtn{
+	width: 100%;
+	margin: 0;
+}
+.author .authorbtn, .btnsize{
+	margin-bottom: 10px;
+}
+.btnsize{
+	margin-top: 10px;
+}
+.price .licenses .licenitem p{
+	margin-bottom: 15px;
+}
+.panel{
+	margin: 0 1%;
+	width: 98%;
+}
+.panel .choices .choicescen{
+	float: none;
+	left: 0;
+}
+.panel .choices .choicescen .cenobj{
+	left: 0;
+	float: none;
+	display: inline-block;
+	margin-bottom: 30px;
+}
+.panel .choices .choicescen span.cenobj, .resourcebg .leftdetail .otheritems .emptyitem{
+	display: none;
+}
+.resourcebg .rightdetail .sideblock.tips.t1, .resourcebg .rightdetail .sideblock.tips.t2, .resourcebg .rightdetail .sideblock.tips.t3, .resourcebg .rightdetail .sideblock.sidesales, .resourcebg .rightdetail .sideblock.sidecomment, .resourcebg .rightdetail .sideblock.info, .rightdetail .sideblock.sidedownload, .resourcebg .rightdetail .sideblock.browses{
+	padding-left: 20%;
+	width: 75%
+}
+.resourcebg .leftdetail .otheritems a{
+	width: 23%;
+	margin: 0 1% 15px 1%;
+}
+.resourcebg .leftdetail .otheritems a img{
+	width: 100%;
+	height: auto;
+}
+.price .licenses .licenitem .cost{
+	position: relative;
+}
+.price .licenses .licenitem{
+	height: auto;
+	padding-top: 6px;
+}
+.author .authordetail .details{
+	width: 100%;
+}
+.rightdetail .sideblock.follow .bookmark{
+	margin: 0;
+}
+.ucblock .listform .ipttxt{
+	width: 100px;
+}
+.ucblock .regtxt{
+	padding-left: 30px;
+}
+.ucbg .ucblock, .resourcebg .pageblock{
+	min-height: 0;
+	margin-bottom: 0;
+}
+.comment .comment__user{
+	width: 14%;
+	margin-right: 1%;
+}
+.comment .comment__user a span{
+	width: 100%;
+}
+.comment .comment__user a{
+	width: 100%;
+	height: auto;
+}
+.comment .comment__user a img{
+	width: 100%;
+	height: auto;
+}
+.comment .comment__container{
+	width: 85%;
+}
+.pagetit.pagetabs{
+	height: auto;
+}
+.resourcebg .taglist, .ucblock .followblock .followlist li{
+	width: 18%;
+	margin: 0 1%;
+}
+.resourcebg .itemlist{
+	width: 78%;
+	margin: 0 1%;
+}
+.resourcebg .itemlist .item-grid, .ucbg .itemlist .item-grid{
+	width: 100%;
+	padding: 0;
+}
+.itemlist .item-grid .itemobj:nth-child(5n+1)::before, .topauthorlist.item-grid li:nth-of-type(4n+5)::before, .itemlist .item-grid .itemobj:nth-child(4n+1)::before, .topauthorlist .authoritem:nth-child(6n+7)::before{
+	display: none;
+}
+.itemlist .item-grid .itemobj, .itemlist .item-grid .itemobj:nth-child(5n+5), .resourcebg .topauthorlist.item-grid li, .topauthorlist .authoritem{
+	width: 18%;
+	margin: 0 1%;
+}
+.itemlist .item-grid .itemobj, .item-grid li, .ucbg .itemlist .itemsort{
+	height: auto;
+}
+.itemlist .item-grid .itemobj, .itemlist .item-grid .itemobj, .itemlist .item-grid .itemobj:nth-child(5n+5), .ucbg .itemlist .listpage{
+	margin-bottom: 25px;
+}
+.item-grid h3 a{
+	width: 100%;
+}
+.item-grid .itemobj .itemstars, .featuredetail .itemstars{
+	position: relative;
+	left: 50%;
+	margin-left: -52px;
+}
+.item-grid .itemobj .itemimg, .item-grid .itemobj .itemimg img{
+	width: 100%;
+	height: auto;
+	margin: 0;
+	left: 0;
+}
+.item-grid .itemobj h3{
+	width: 100%;
+	margin: 10px 0 0 0;
+}
+.itemlist .itemsort .sortlist li{
+	margin-right: 8px;
+	padding-right: 12px;
+}
+.itemlist .itemsort .sortlist li:first-child{
+	padding: 0;
+	margin: 0;
+}
+.resourcebg .itemlist .item-list .itemobj, .ucbg .itemlist .item-list .itemobj{
+	width: 100%;
+	padding: 0;
+}
+.itemlist .item-list .itemimg{
+	margin-left: 20px;
+}
+.itemlist .item-list .itemdetail{
+	width: 33%;
+}
+.itemlist .item-list .itemcate{
+	width: 25%;
+}
+.resourcebg .itemlist .item-list .itemstars{
+	right: 10px;
+}
+.ucbg .itemlist .item-list .itemstars{
+	right: 0;
+}
+.itemlist .item-list .sales{
+	width: 13%;
+	margin-right: 10px;
+}
+.leftdetail .item-list .sales .price{
+	font-size: 18px;
+}
+.rightdetail .rightauthorlist .itemobj{
+	margin: 0 1% 10px 1%;
+	width: 31.333%;
+}
+.rightauthorlist .itemobj .avatar{
+	width: 100%;
+	height: auto;
+	margin: 0;
+	left: 0;
+}
+.rightdetail .tipsdetail p, .rightdetail .tipsdetail2 p{
+	margin: 0;
+}
+.rightdetail .tipsdetail span, .rightdetail .tipsdetail2 span{
+	width: 100%;
+	text-align: center;
+	display: block;
+}
+.resourcebg .topauthorlist.item-grid{
+	padding: 10px 0;
+}
+.ucblock .topauthorlist{
+	width: 98%;
+	margin: 10px 1%;
+	padding: 10px 0;
+}
+.topauthorlist .authoritem .itemstars{
+	margin: 10px 0 0 -51px;
+	left: 50%;
+}
+.ucbg .itemlist{
+	width: 100%;
+}
+.followbg .ucblock .followblock{
+	margin: 0 1%;
+	width: 48%;
+}
+.ucblock .followblock .followlist li a, .ucblock .followblock .followlist li a img{
+	width: 100%;
+	height: auto;
+}
+.horizontal-form .inputs, .horizontal-form .inputs.sp{
+	width: 62%;
+}
+.box.box-error, .box.box-success{
+	margin: 10px 1%;
+	width: 88%;
+	padding: 30px 0 30px 10%;
+}
+.rightdetail .sideblock.sidesales, .rightdetail .sideblock.sidefollow{
+	padding: 10px 5% 10px 15%;
+	width: 80%;
+}
+.leftdetail .sideblock.downlist .item-info h3{
+	width: auto;
+}
+}
+@media only screen and (max-width: 864px){
+.pagenav{
+	height: 45px;
+}
+.pagenav .navcontent{
+	padding-top: 0;
+}
+.pagenav .navsearch{
+	top: 7px;
+}
+.pagenav .main-nav{
+	display: none;
+}
+.pagenav .navcontent #pagemainnavbtn{
+	display: block;
+	background: url(/static/img/mobile/list.png) no-repeat center center;
+	background-size: 100% 100%;
+	width: 45px;
+	height: 45px;
+}
+.pagenav{
+	z-index: 12000;
+}
+.pagenav ul li .dropdown, .info-nav li .dropdown, .info-nav, .pagenav ul li, .info-nav li, #user-account-nav li div, #user-account-nav li > a, #user-account-nav{
+	z-index: 14000;
+}
+.pagenav .main-nav{
+	width: 40%;
+	min-width: 150px;
+	background-color: #000;
+	overflow-y: scroll;
+	position: fixed;
+	top: 0;
+	z-index: 12000;
+	background-color: #fff;
+	border-right: 2px solid #999;
+	height: 100%;
+}
+.pagenav ul li div,.info-nav li div{
+	display:block;
+}
+.footerbtm .btmitems li{
+	font-size: .55em;
+	height: 100px
+}
+.pagefooter .footertop .footertxt{
+	font-size: 1em;
+	top: auto;
+	bottom: 5px;
+}
+.authorblock .authors{
+	width: 12%;
+}
+.pagenav ul > li{
+	float: none;
+	display: block;
+	width: 100%;
+	font-size: 1em;
+}
+.pagenav ul li .dropdown{
+	display: block;
+	width: 98%;
+	position: relative;
+	top: auto;
+}
+.pagenav ul a{
+	color: #000;
+	font-size: 1em;
+}
+.pagenav ul li:hover a{
+	background: none;
+	color: #000;
+}
+.resourcebg .leftdetail .detailimg .links{
+	width: 100%;
+}
+.resourcebg .leftdetail .detailimg .links .linkbtn{
+	width: 20%;
+}
+.price .licenses .licensescho select{
+	width: 90%;
+}
+.pagetit .titblock h2, .pagetit .navblock h2, .pagetit .titblock p{
+	margin-left: 5px;
+}
+.ucblock .regtxt{
+	width: 26%;
+	background: none;
+	padding-left: 0;
+	margin: 0 1%;
+}
+.ucblock .ucreg{
+	width: 70%;
+	margin: 53px 1% 0;
+}
+.ucblock .listform .ipttxt{
+	padding-left: 5px;
+}
+.ucblock .listform .errtxt, .ucblock .listform .suctxt{
+	margin-left: 103px;
+}
+.ucblock .listform .suctxt{
+	margin-left: 0;
+}
+.ucblock .listform .formitem{
+	margin-bottom: 10px;
+}
+.itemlist .itemsort .sortlist{
+	width: 98%;
+	margin: 0 0 5px 2%;
+	padding-left: 0;
+}
+.resourcebg .itemlist .itemsort{
+	height: auto;
+}
+.item-grid .itemobj h3, .item-grid .itemobj .itemstars, .featuredetail .itemstars{
+	margin-top: 6px;
+}
+.item-grid .itemobj .itemstars, .featuredetail .itemstars, .topauthorlist .authoritem .itemstars{
+	width: 86px;
+	margin-left: -43px;
+}
+.itemobj .itemstars .starsbg, .featuredetail .itemstars .starsbg, .itemobj .itemstars .starnums .allstars, .featuredetail .itemstars .starnums .allstars, .topauthorlist .authoritem .itemstars .starsbg, .topauthorlist .authoritem .itemstars .starnums .allstars{
+	width: 86px;
+	background-size: 100% auto;
+}
+.resourcebg .taglist{
+	width: 20%;
+}
+.resourcebg .itemlist{
+	width: 76%;
+}
+.item-grid .itemobj .sales .nums, .item-grid .itemobj .sales .price{
+	font-size: 12px;
+}
+.itemlist .item-list .itemdetail{
+	width: 28%;
+}
+.itemlist .item-list .itemcate, .ucblock .followblock .followlist li{
+	width: 23%;
+}
+.item-list .sales .price{
+	font-size: 18px;
+}
+.resourcebg .itemlist .item-list .itemstars, .ucbg .itemlist .item-list .itemstars{
+	width: 86px;
+	bottom: 5px;
+}
+.itemlist .item-list .sales{
+	width: 14%;
+}
+.item-list .itemobj .sales .price, .itemlist .item-list .itemdetail h3{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.pagetit .navblock .pagetabmask{
+	overflow-x: scroll;
+	overflow-y: hidden;
+	width: 100%;
+	height: 37px;
+}
+.pagetit.pagetabs .pagetab{
+	width: auto;
+	padding-left: 0;
+	height: 37px;
+	margin-top: 0;
+}
+.pagetit.pagetabs .pagetab li{
+	width: 7em;
+	text-align: center;
+	margin: 0 5px;
+}
+.pagetit.pagetabs .pagetab li a{
+	padding: 0 8px;
+}
+.leftdetail .itemlist .item-list .itemdetail{
+	margin-left: 10px;
+}
+.leftdetail .item-list .sales .price {
+	font-size: 14px;
+}
+.deposit-amounts{
+	padding: 10px 0;
+	margin: 0 5%;
+	width: 90%;
+}
+.deposit-amounts li{
+	width: 50%;
+}
+.rightdetail .sideblock.sidesales, .rightdetail .sideblock.sidefollow{
+	padding: 10px 5% 10px 20%;
+	width: 75%;
+}
+.rightdetail .stars .starstxt{
+	float: left;
+}
+}
+@media only screen and (max-width: 640px){
+.resourcebg .leftdetail, .resourcebg .rightdetail{
+	width: 98%;
+	float: none;
+}
+.footerbtm .btmitems li{
+	font-size: .4em;
+	height: 80px
+}
+.ucblock .txtlistnav li{
+	width: 20%;
+}
+.idxblock .itemlist li, #recent-files .inner-border ul.itemlist li, .frees .freeitemsmask .itemlist li:nth-child(10n), .recombg .recomitemsmask .itemlist li:nth-child(10n){
+	width: 18%;
+}
+.idxblock .authorblock{
+	padding-left: 2%;
+}
+.authorblock .authors{
+	width: 14%;
+	margin: 0 1.2% 10px;
+}
+.info-nav{
+	display: none;
+}
+.resourcebg .rightdetail .sideblock.sidesales, .resourcebg .rightdetail .sideblock.sidecomment, .resourcebg .rightdetail .sideblock.tips.t1, .resourcebg .rightdetail .sideblock.tips.t2, .resourcebg .rightdetail .sideblock.tips.t3, .resourcebg .rightdetail .sideblock.info, .ucblock .rightdetail .sideblock.sidesales, .ucblock .rightdetail .sideblock.sidefollow, .rightdetail .sideblock.sidedownload, .resourcebg .rightdetail .sideblock.browses{
+	padding-left: 14%;
+	width: 81%;
+}
+.author .authordetail .details, .author .details{
+	width: 50%;
+}
+.ucblock .ucreg, .ucblock .regtxt, .ucbg .ucblock .leftdetail, .ucbg .ucblock .rightdetail{
+	width: 98%;
+}
+.ucblock .listform .ipttxt{
+	padding: 0;
+	width: 27%;
+	margin-right: 2%;
+	text-align: right;
+}
+.ucblock .listform .errtxt, .ucblock .listform .suctxt{
+	margin-left: 29%;
+}
+.ucblock .listform .suctxt{
+	margin-left: 0;
+}
+.ucblock .regtxt{
+	padding: 0 0 0 28%;
+	width: 71%;
+}
+.rightdetail .countryinfo td.attr-name{
+	width: 25%;
+}
+.ucbg .ucblock .leftdetail{
+	padding-bottom: 0;
+}
+.resourcebg .leftdetail{
+	padding-bottom: 20px;
+}
+.pagesearch{
+	display: none;
+}
+.resourcebg .taglist, .resourcebg .itemlist{
+	width: 98%;
+}
+.resourcebg .itemlist .listpage{
+	margin-bottom: 15px;
+}
+.resourcebg .taglist ul li{
+	float: left;
+	margin: 0 5px;
+}
+.resourcebg .taglist ul li a, .resourcebg .taglist ul li.active ol a{
+	padding: 0;
+}
+.resourcebg .taglist ul li a, .resourcebg .taglist ul li.active ol a{
+	width: 100%;
+}
+.resourcebg .taglist ul li.all{
+	border: none;
+}
+.resourcebg .taglist ul ol{
+	display: none;
+}
+.content-box{
+	margin-bottom: 15px;
+}
+.resourcebg div.week-switcher{
+	margin-top: 10px;
+}
+.topauthorlist .authoritem .avatar{
+	width: 100%;
+	height: auto;
+	left: 0;
+	margin-left: 0;
+}
+.topauthorlist .authoritem{
+	width: 23%;
+	height: auto;
+	margin-bottom: 10px;
+}
+.leftdetail .fastmsg .fastmsgimg{
+	width: 60%;
+}
+.leftdetail .fastmsg img{
+	width: 100%;
+	height: auto;
+}
+.leftdetail .fastmsg .fastmsgtxt{
+	width: 38%;
+	margin-left: 2%;
+}
+.ucbg .ucblock .rightdetail{
+	margin-top: 20px;
+}
+.rightdetail .side-tabs{
+	position: fixed;
+	bottom: 0;
+	width: 25%;
+	left: 0;
+	z-index: 3000;
+	display: none;
+}
+.rightdetail .side-tabs li{
+	width: 100%;
+}
+.rightdetail .side-tabs li a{
+	background: none;
+	background-color: #ededed;
+	padding: 0;
+	height: 36px;
+	line-height: 36px;
+	text-align: center;
+	display: block;
+}
+.rightdetail .side-tabs li.active a{
+	background-color: #d1ccc6;
+}
+.rightdetail .side-tabs li a:before{
+	display: none;
+}
+.rightdetail .tabtipmask{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	z-index: 2000;
+	top: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.0);
+}
+.rightdetail .tabtips{
+	position: fixed;
+	left: 10px;
+	bottom: 10px;
+	height: 48px;
+	width: 48px;
+	background: url(/static/img/mobile/ulist.png) no-repeat center center rgba(0, 0, 0, 0.6);
+	background-size: 60% 60%;
+	display: block;
+	z-index: 2000;
+	border-radius: 24px;
+}
+.box.box-error, .box.box-success{
+	width: 83%;
+	padding: 30px 0 30px 15%;
+}
+div.fancy-purchase-panel div.inner-boundary div.inner-border .or{
+	display: none;
+}
+.panel .inner-boundary{
+	height: auto;
+}
+.idxblock .blocktit .lbbtns{
+	display: none;
+}
+}
+@media only screen and (max-width: 480px){
+body{
+	font-size: 14px;
+}
+#user-account-nav>li:first-child>a{
+	margin-top: 4px;
+}
+.account-wrapper{
+	margin-top: 12px;
+}
+#user-account-nav li{
+	background: none;
+	box-shadow: none;
+}
+#sign-out-button, #user-account-nav li a.login-btn, #user-account-nav li a.reg-btn{
+	height: 40px;
+	width: 40px;
+	overflow: hidden;
+	text-indent: -99999px;
+	border-radius: 0;
+	margin-right: 5px;
+}
+#sign-out-button{
+	background: url(/static/img/mobile/logout.png) no-repeat center center;
+	background-size: 100% 100%;
+}
+#user-account-nav li a.login-btn{
+	background: url(/static/img/mobile/login.png) no-repeat center center;
+	background-size: 100% 100%;
+	padding: 0;
+}
+#user-account-nav>li:first-child{
+	min-width: 0;
+}
+#user-account-nav li a.reg-btn{
+	background: url(/static/img/mobile/reg.png) no-repeat center center;
+	background-size: 100% 100%;
+	padding: 0;
+	margin: 0 5px 0 0;
+	position: relative;
+	height: 40px;
+	width: 40px;
+}
+.footerbtm .btmitems li{
+	height: 64px
+}
+.footerbtm .btmitems li .itemtxt .nums{
+	font-size: 1.5em;
+}
+.footerbtm .btmitems li .itemtxt{
+	left: 38%;
+}
+.footerbtm .btmitems li .txtlink{
+	font-size: .8em;
+	right: 5px;
+}
+.ucblock .txtlistnav li{
+	width: 24%;
+}
+.idxblock .itemlist li, #recent-files .inner-border ul.itemlist li, .frees .freeitemsmask .itemlist li:nth-child(10n), .recombg .recomitemsmask .itemlist li:nth-child(10n){
+	width: 23%;
+}
+.idxblock .authorblock{
+	padding-left: 0;
+}
+.authorblock .authors{
+	width: 18%;
+	margin: 0 1% 10px;
+}
+#user-account-nav>li:first-child:hover div{
+	display: none;
+}
+#user-account-nav>li:hover>a,#user-account-nav>li:hover #sign-out-button,#user-account-nav>li>.active{
+    background-color: rgba(0, 0, 0, 0);
+}
+.itemlist .item-grid .itemobj, .itemlist .item-grid .itemobj:nth-child(5n+5), .resourcebg .topauthorlist.item-grid li{
+	width: 23%;
+}
+.itemlist .item-list .itemimg{
+	margin: 15px 0 15px 10px;
+}
+.resourcebg .itemlist .item-list .itemobj, .ucbg .itemlist .item-list .itemobj{
+	height: auto;
+}
+.itemlist .item-list .itemdetail{
+	margin: 18px 0 0 10px;
+}
+.itemlist .item-list .itemcate{
+	width: 20%;
+	margin: 18px 0 0 10px;
+}
+.item-list .sales .price{
+	margin-top: 18px;
+}
+.itemlist .item-list .sales{
+	width: 19%;
+}
+.item-list .sales .nums{
+	top: 9px;
+}
+.itemlist .item-list .itemimg img{
+	width: 70px;
+	height: 70px;
+}
+.topauthorlist .authoritem .itemstars{
+	margin-top: 4px;
+}
+.graph .bar strong{
+	width: 20%;
+}
+.followbg .ucblock .followblock{
+	width: 98%;
+	margin-bottom: 10px;
+}
+.ucblock .followblock .followlist li{
+	width: 18%;
+}
+.rightdetail .side-tabs{
+	width: 30%;
+}
+.box.box-error, .box.box-success{
+	padding: 20px 0 20px 15%;
+	background-position: 8px center;
+}
+.ucblock .ucreg{
+	margin-top: 20px;
+}
+.leftdetail .sideblock.downlist .download-action{
+	width: 100%;
+}
+.sideblock.downlist .download-action .downtxt{
+	height: 20px;
+	line-height: 20px;
+	margin: 0 10px 0 0;
+}
+.sideblock.downlist .download-action .aside{
+	margin-top: 0;
+}
+.leftdetail .fastmsg .fastmsgimg{
+	width: 100%;
+}
+.leftdetail .fastmsg .fastmsgtxt{
+	margin-left: 0;
+	width: 100%;
+}
+}
+@media only screen and (max-width: 375px){
+body{
+	font-size: 12px;
+}
+.header .container{
+	height: 47px;
+}
+.pagefooter .footertop{
+	height: 47px;
+}
+.header h1.pagelogo .marketplace, .pagefooter .footertop a{
+	width: 100px;
+	height: 38px;
+	top: 4px;
+}
+.account-wrapper{
+	margin-top: 4px;
+}
+.pagefooter .footertop a{
+	top: 4px;
+}
+.pagefooter .footerbtm .btmitems{
+	text-align: center;
+}
+.footerbtm .btmitems li{
+	font-size: .8em;
+	margin: 0 20% 5px;
+	width: 60%;
+	height: 89px;
+	position: relative;
+	display: inline;
+}
+.footerbtm .btmitems li .imglink{
+	position: relative;
+	width: 34%;
+	display: block;
+}
+.footerbtm .btmitems li .itemtxt{
+	left: 38%;
+	text-align: left;
+}
+.idxblock .itemlist li, #recent-files .inner-border ul.itemlist li, .frees .freeitemsmask .itemlist li:nth-child(10n), .recombg .recomitemsmask .itemlist li:nth-child(10n){
+	width: 31.333%;
+	margin-bottom: 5px;
+}
+#recent-files .category-links a{
+	width: 40%;
+}
+.authorblock .authors{
+	width: 23%;
+	margin: 0 1% 10px;
+}
+.pagefooter .footertop .footertxt .mr20{
+	margin-right: 8px;
+}
+.resourcebg .rightdetail .sideblock.sidesales, .resourcebg .rightdetail .sideblock.sidecomment, .resourcebg .rightdetail .sideblock.sidedownload, .resourcebg .rightdetail .sideblock.browses{
+	padding-left: 15%;
+	width: 80%;
+}
+.resourcebg .leftdetail .detailimg .links .linkbtn, .resourcebg .leftdetail .detailimg .links .bdsharebuttonbox{
+	margin: 0 5px;
+}
+.pagetit.pagetabs .pagetab li a, .pagetit.pagetabs .pagetab li a.active:hover, .pageblock .leftdetail .pagetab li a, .pageblock .leftdetail .pagetab li a.active:hover{
+	padding: 0 5px;
+}
+.pagetit.pagetabs .pagetab li a.active, .pageblock .leftdetail .pagetab li a.active{
+	padding: 0 10px;
+}
+.resourcebg .leftdetail .detailimg{
+	padding: 5px;
+}
+.ucblock .listform .ipttxt{
+	width: 16%;
+}
+.ucblock .listform .errtxt, .ucblock .listform .suctxt{
+	margin-left: 16%;
+}
+.ucblock .listform .suctxt{
+	margin-left: 0;
+}
+.ucblock .regtxt{
+	width: 84%;
+	padding-left: 15%;
+}
+.rightdetail .countryinfo td.attr-name{
+	width: 30%;
+}
+.comment .comment__user{
+	width: 19%;
+	margin-right: 1%;
+}
+.comment .comment__container{
+	width: 80%;
+}
+.content-box{
+	padding: 5px;
+}
+.horizontal-form label{
+	width: 25%;
+}
+.itemlist .item-grid .itemobj, .itemlist .item-grid .itemobj:nth-child(5n+5), .resourcebg .topauthorlist.item-grid li{
+	width: 31.3333%;
+}
+.itemlist .item-list .itemcate{
+	position: absolute;
+	top: 40px;
+	width: 44%;
+	left: 80px;
+}
+.itemlist .item-list .sales{
+	width: 23%;
+}
+.item-list .sales .price{
+	margin-top: 9px;
+}
+.item-list .sales .nums{
+	margin-top: 0;
+	top: 38px;
+}
+.resourcebg .itemlist .item-list .itemstars{
+	bottom: 2px;
+}
+.itemlist .item-list .itemdetail{
+	width: 45%;
+}
+.topauthorlist .authoritem{
+	width: 31.33333%;
+}
+.ucblock .followblock .followlist li{
+	width: 23%;
+}
+.rightdetail .side-tabs{
+	min-width: 100px;
+}
+}

@@ -88,6 +88,13 @@ a.btntheme{
 	background-color: #0cb3ff;
 	background-image: none;
 }
+.btntheme2.disabled{
+	cursor: not-allowed;
+}
+.btntheme2.disabled:hover{
+	background-color: #0093d6;
+	background-image: none;
+}
 a.btntheme2{
 	color: #fff;
 }
@@ -109,20 +116,16 @@ a.btntheme2{
 	position:relative;
 	*z-index:8001
 }
-.header .marketplace{
+.header h1.pagelogo .marketplace{
+	background: url(/static/img/custom/logo.png) no-repeat center center;
     left: 0px;
-    top: 2px;
+    top: 5px;
 	display:block;
 	position:absolute;
-	width:206px
-}
-.header .marketplace img{
-	position:absolute;
-    display: block;
-    width: 200px;
-    height: 60px;
-    left: 0;
-    top: 0;
+    width: 140px;
+    height: 53px;
+    overflow: hidden;
+    text-indent: -99999px;
 }
 .header .container{
 	height:64px;
@@ -785,8 +788,8 @@ a.btntheme2{
 	position: absolute;
 	top: 14px;
 	z-index: 1;
-	width: 200px;
-	height: 60px;
+	width: 140px;
+	height: 53px;
 	display: block;
 	background: url(/static/img/custom/logo.png) no-repeat center center;
 	overflow: hidden;
@@ -1094,14 +1097,19 @@ a.btntheme2{
 .pagetit.pagetabs h2{
 	margin-top: 10px;
 }
+.pageblock .leftdetail .pagetab{
+	padding-top: 16px;
+	background-color: #f5f5f5;
+	margin-bottom: 10px;
+}
 .pagetit.pagetabs .pagetab{
 	margin-top: 16px;
 }
-.pagetit.pagetabs .pagetab li{
+.pageblock .leftdetail .pagetab li, .pagetit.pagetabs .pagetab li{
 	float: left;
 	margin: 0 .1em;
 }
-.pagetit.pagetabs .pagetab li a{
+.pageblock .leftdetail .pagetab li a, .pagetit.pagetabs .pagetab li a{
 	height: 37px;
 	line-height: 36px;
 	color: #636262;
@@ -1110,7 +1118,7 @@ a.btntheme2{
 	padding: 0 18px;
 	border-radius: 3px 3px 0 0;
 }
-.pagetit.pagetabs .pagetab li a:hover{
+.pageblock .leftdetail .pagetab li a:hover, .pagetit.pagetabs .pagetab li a:hover{
 	background-color: #e0e0e0;
 	border: 1px solid #e0e0e0;
 	border-bottom-color: #e0e0e0;
@@ -1119,7 +1127,7 @@ a.btntheme2{
 	padding: 0 17px;
 	line-height: 34px;
 }
-.pagetit.pagetabs .pagetab li a.active, .pagetit.pagetabs .pagetab li a.active:hover{
+.pageblock .leftdetail .pagetab li a.active, .pageblock .leftdetail .pagetab li a.active:hover, .pagetit.pagetabs .pagetab li a.active, .pagetit.pagetabs .pagetab li a.active:hover{
 	background-color: #fff;
 	border: 1px solid #e1e8ed;
 	border-bottom-color: #fff;
@@ -1345,6 +1353,13 @@ select {
 	overflow:hidden;
 	width:610px
 }
+.horizontal-form .errtxt, .horizontal-form .suctxt{
+	float: left;
+	margin: 4px 0 0 5px;
+}
+.horizontal-form .errtxt{
+	color: #f00;
+}
 .horizontal-form label{
 	display:block;
 	float:left;
@@ -1366,7 +1381,10 @@ select {
 .horizontal-form .inputs{
 	float:left;
 	position:relative;
-	width:78.68852%
+	width:52%
+}
+.horizontal-form .inputs.sp{
+	width: 65%;
 }
 .horizontal-form .right{
     display: block;
@@ -1383,7 +1401,7 @@ select {
 }
 .horizontal-form .inputs input[type=email],.horizontal-form .inputs input[type=url],.horizontal-form .inputs input[type=password],.horizontal-form .inputs input[type=text],.horizontal-form .inputs input[type=file],.horizontal-form .inputs select{
 	display:block;
-	width:64.58333%
+	width:98%
 }
 .horizontal-form .inputs input[type=email].inline,.horizontal-form .inputs input[type=url].inline,.horizontal-form .inputs input[type=password].inline,.horizontal-form .inputs input[type=text].inline,.horizontal-form .inputs input[type=file].inline,.horizontal-form .inputs select.inline{
 	display:inline-block
@@ -1696,7 +1714,66 @@ table.general_table tfoot td a{
 .leftdetail .commentblock .content-box textarea{
 	resize: none;
 }
-.box-info { background: #dcd7cd url(/static/img/note.gif) no-repeat 19px 10px; border: 1px solid #9d948e; padding: 30px; padding-left: 60px; }.tip { background: #f5f5b4 url(/static/img/tip.gif) no-repeat 19px 10px; border: 1px solid #b6a375; padding: 30px; padding-left: 60px; }.box-error, .fsError { background: #fac7ae url(/static/img/alert.png) no-repeat 19px center; border: 1px solid #bb726f; padding: 30px; padding-left: 70px; }.fsValidationError input.fsRequired, .fsValidationError input.input { border: 2px solid #bb726f; }.box-warning { background: #f5f5b4 url(/static/img/info.gif) no-repeat 20px 15px; border: 1px solid #b6a375; padding: 30px; padding-left: 60px; }.box-success { background: #b7cf9d url(/static/img/success.png) no-repeat 15px center; border: 1px solid; border-color: #6e8768; background-color: #cbe6c2; padding: 20px; padding-left: 70px; }.box-info, .tip, .box-error, .box-warning, .box-success, .fsError { color: #404040; margin-top: 10px; margin-bottom: 10px; clear: both; }.box-info ul, .box-info ol, .tip ul, .tip ol, .box-error ul, .box-error ol, .box-warning ul, .notice ol, .box-success ul, .box-success ol, .fsError ul, .fsError ol { margin-bottom: 6px; margin-top: 6px; list-style-position: outside; margin-left: 20px; }.box-info ul li, .box-info ol li, .tip ul li, .tip ol li, .box-error ul li, .box-error ol li, .box-warning ul li, .box-warning ol li, .box-success ul li, .box-success ol li, .fsError ul li, .fsError ol li { padding-left: 8px; margin-bottom: 2px; }.box-info ul, .tip ul, .box-error ul, .box-warning ul, .box-success ul, .fsError ul { list-style-type: square; }.box-info ol, .tip ol, .box-error ol, .box-warning ol, .box-success ol, .fsError ol { list-style-type: decimal; }.box-info p, .tip p, .box-error p, .box-warning p, .box-success p, .fsError p { padding-top: 0px; }
+.box-info{
+	background: #dcd7cd url(/static/img/note.gif) no-repeat 19px 10px;
+	border: 1px solid #9d948e;
+	padding: 30px;
+	padding-left: 60px;
+}
+.tip{
+	background: #f5f5b4 url(/static/img/tip.gif) no-repeat 19px 10px;
+	border: 1px solid #b6a375;
+	padding: 30px;
+	padding-left: 60px;
+}
+.box-error, .fsError{
+	background: #fac7ae url(/static/img/alert.png) no-repeat 19px center;
+	border: 1px solid #bb726f;
+	padding: 30px;
+	padding-left: 70px;
+}
+.fsValidationError input.fsRequired, .fsValidationError input.input{
+	border: 2px solid #bb726f;
+}
+.box-warning{
+	background: #f5f5b4 url(/static/img/info.gif) no-repeat 20px 15px;
+	border: 1px solid #b6a375;
+	padding: 30px;
+	padding-left: 60px;
+}
+.box-success{
+	background: #b7cf9d url(/static/img/success.png) no-repeat 15px center;
+	border: 1px solid;
+	border-color: #6e8768;
+	background-color: #cbe6c2;
+	padding: 20px;
+	padding-left: 70px;
+}
+.box-info, .tip, .box-error, .box-warning, .box-success, .fsError{
+	color: #404040;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	clear: both;
+}
+.box-info ul, .box-info ol, .tip ul, .tip ol, .box-error ul, .box-error ol, .box-warning ul, .notice ol, .box-success ul, .box-success ol, .fsError ul, .fsError ol{
+	margin-bottom: 6px;
+	margin-top: 6px;
+	list-style-position: outside;
+	margin-left: 20px;
+}
+.box-info ul li, .box-info ol li, .tip ul li, .tip ol li, .box-error ul li, .box-error ol li, .box-warning ul li, .box-warning ol li, .box-success ul li, .box-success ol li, .fsError ul li, .fsError ol li{
+	padding-left: 8px;
+	margin-bottom: 2px;
+}
+.box-info ul, .tip ul, .box-error ul, .box-warning ul, .box-success ul, .fsError ul{
+	list-style-type: square;
+}
+.box-info ol, .tip ol, .box-error ol, .box-warning ol, .box-success ol, .fsError ol{
+	list-style-type: decimal;
+}
+.box-info p, .tip p, .box-error p, .box-warning p, .box-success p, .fsError p{
+	padding-top: 0px;
+}
 .comment__reply {
     background-color: #e5e5e5;
     margin: 0 1px 1px;
@@ -2009,12 +2086,13 @@ table.general_table tfoot td a{
 }
 .panel{
 	margin-bottom:20px;
-	background:#fff;
-	border:1px solid #a6a6a6;
+	background:#f7f6f6;
 	position:relative
 }
 .panel .inner-boundary{
-	padding:10px
+	padding: 0 10px;
+	height: 108px;
+	overflow: hidden;
 }
 .panel .choices{
 	position:relative;
@@ -2046,9 +2124,8 @@ div.account-required div.inner-boundary{
 	position:relative
 }
 div.fancy-purchase-panel div.inner-boundary div.inner-border div.buynow,div.fancy-purchase-panel div.inner-boundary div.inner-border div.prepaid{
-	width:390px;
 	float:right;
-	padding:10px 50px 10px 50px
+	padding:25px 0;
 }
 div.fancy-purchase-panel div.inner-boundary div.inner-border div.buynow h2,div.fancy-purchase-panel div.inner-boundary div.inner-border div.buynow p,div.fancy-purchase-panel div.inner-boundary div.inner-border div.prepaid h2,div.fancy-purchase-panel div.inner-boundary div.inner-border div.prepaid p{
 	text-align:center

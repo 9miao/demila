@@ -16,7 +16,7 @@
 <body>
 <div class="header">
   <div class="container">
-    <a href="/" class="marketplace"><img alt="{$domain}" src="{$data_server}img/custom/logo.png" title="{$domain}" /></a>
+    <h1 class="pagelogo"><a href="/" class="marketplace" title="{$domain}">{$domain}</a></h1>
     {if check_login_bool()}
     <div class="account-wrapper">
       <ul id="user-account-nav">
@@ -63,9 +63,9 @@
   	{else}
     <div class="account-wrapper">
       <ul id="user-account-nav">
-        <li><a href="/{$languageURL}sign_up/"><span>创建账号</span></a></li>
+        <li><a class="reg-btn" href="/{$languageURL}sign_up/"><span>创建账号</span></a></li>
         <li>
-          <a href="/{$languageURL}sign_in/" rel="nofollow">登录</a>
+          <a class="login-btn" href="/{$languageURL}sign_in/" rel="nofollow">登录</a>
         </li>
       </ul>
     </div>
@@ -117,7 +117,8 @@
 </div>
 <div role="navigation" class="pagenav clearfix">
   <div class="navcontent">
-    <ul class="main-nav clr">
+    <span id="pagemainnavbtn"></span>
+    <ul id="pagemainnav" class="main-nav clr">
       <li>
         <a href="/{$languageURL}categories/all/">全部文件</a>
         <div class="dropdown">
@@ -152,16 +153,24 @@
       <li>
         <a href="http://www.9miao.com/forum-64-1.html" target="_blank" class="cross-site-category nobora" title="Demila论坛">Demila论坛</a>
       </li>
-      <li class="navsearch">
-        <form id="search" action="/{$languageURL}search/" method="GET" class="aweform inline-form">
-          <input type="text" class="navsearchipt" name="term" value="在所有作品中搜索" onfocus="this.value=='在所有作品中搜索'?this.value='':false;" onblur="this.value==''?this.value='在所有作品中搜索':false;" />
-          <input type="submit" class="navsearchsub" value="搜索" />
-        </form>
-      </li>
     </ul>
+    <div class="navsearch">
+      <form id="search" action="/{$languageURL}search/" method="GET" class="aweform inline-form">
+        <input type="text" class="navsearchipt" name="term" value="在所有作品中搜索" onfocus="this.value=='在所有作品中搜索'?this.value='':false;" onblur="this.value==''?this.value='在所有作品中搜索':false;" />
+        <input type="submit" class="navsearchsub" value="搜索" />
+      </form>
+    </div>
   </div>
 </div>
+{literal}
+<script type="text/javascript">
+seajs.use(["modules/mobile"], function(mob){
+  mob.pagenavInit("#pagemainnavbtn", "#pagemainnav");
+});
+</script>
+{/literal}
 {include file=$content_template}
+<link href="{$data_server}css/custom/mobile.css" media="screen" rel="stylesheet" type="text/css" />
 {include file="$root_path/html/footer.html"}
 <div id="ajax-feedback" class="ajax-feedback" style="display:none;">
   <span><img alt="Loader" height="22" src="/static/img/loader.gif" width="126" />请求执行中...</span>
