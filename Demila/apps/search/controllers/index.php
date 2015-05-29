@@ -13,17 +13,23 @@ _setView(__FILE__);
 
 	if(!isset($_GET['type'])) {
 		$_GET['type'] = '';
-	}
+	}else{
+        $_GET['type'] = htmlspecialchars($_GET['type']);
+    }
 	if(!isset($_GET['term'])) {
 		$_GET['term'] = '';
-	}
-	
-	$s = '';
+	}else{
+        $_GET['term'] = htmlspecialchars($_GET['term']);
+    }
+
+    $s = '';
 	if(isset($_GET['base'])) {
+        $_GET['base'] = htmlspecialchars($_GET['base']);
 		$s = trim($_GET['base']).' ';
 	}
 	
 	$s .= trim($_GET['term']);
+    $s=htmlspecialchars($s);
 	abr('searchText', $s);		
 
 	$limit = 20;
@@ -36,12 +42,12 @@ _setView(__FILE__);
 #搜索位置
 	switch($_GET['type']) {
 		case 'users':
-			
 			abr('type', 'users');
-			
 			if(!isset($_GET['sort_by'])) {
 				$_GET['sort_by'] = '';
-			}
+			}else{
+                $_GET['sort_by'] = htmlspecialchars($_GET['sort_by']);
+            }
 			switch($_GET['sort_by']) {
 				case 'name':
 					$order = '`username`';
@@ -52,7 +58,6 @@ _setView(__FILE__);
 				case 'sales_count':
 					$order = '`sales`';
 					break;
-				
 				default:
 					$order = '`register_datetime`';
 					break;
@@ -75,7 +80,9 @@ _setView(__FILE__);
 						
 			if(!isset($_GET['sort_by'])) {
 				$_GET['sort_by'] = '';
-			}
+			}else{
+                $_GET['sort_by'] = htmlspecialchars($_GET['sort_by']);
+            }
 			switch($_GET['sort_by']) {
 				case 'name':
 					$order = '`name`';
@@ -110,7 +117,9 @@ _setView(__FILE__);
 						
 			if(!isset($_GET['sort_by'])) {
 				$_GET['sort_by'] = '';
-			}
+			}else{
+                $_GET['sort_by'] = htmlspecialchars($_GET['sort_by']);
+            }
 			switch($_GET['sort_by']) {
 				case 'name':
 					$order = '`name` ASC';
@@ -144,21 +153,24 @@ _setView(__FILE__);
 				$whereQuery = " AND (".$whereQuery.") ";
 			}
 
+            if(isset($_GET['collection_id'])){
+                $_GET['collection_id'] = get_new_str($_GET['collection_id']);
+                $_GET['collection_id'] = htmlspecialchars($_GET['collection_id']);
+                if(!is_numeric($_GET['collection_id'])){
+                    unset($_GET['collection_id']);
+                }
+            }
 #加载书签集作品
 			if(isset($_GET['collection_id']) && is_numeric($_GET['collection_id'])) {
-				
-				require_once ROOT_PATH.'/apps/collections/models/collections.class.php';
+                require_once ROOT_PATH.'/apps/collections/models/collections.class.php';
 				$collectionsClass = new collections();
-				
 				$items = $collectionsClass->getItems($_GET['collection_id'], $start, $limit, " AND `status` = 'active' AND (`name` = '".sql_quote($s)."' OR `description` LIKE '%".sql_quote($s)."%') ".$whereQuery, "$order", true);
 				if(is_array($items)) {
 					$users = $usersClass->getAll(0, 0, $collectionsClass->usersWhere);
 					abr('users', $users);
 				}
 				abr('results', $items);
-				
 				abr('paging', paging('/'.$languageURL.'search/?type=files&term='.$s.'&p=', $pagingUrl.'&sort_by='.$_GET['sort_by'], PAGE, $limit, $collectionsClass->foundRows));
-				
 			}				
 			else {		
 			
@@ -179,12 +191,10 @@ _setView(__FILE__);
 		
 			$categories = $categoriesClass->getAll();
 			abr('categories', $categories);	
-			
-			
+
 			break;
 #在类别中结束搜索			
-	}	
-	
+	}
 #面包屑	
 	abr('breadcrumb', '<a href="/'.$languageURL.'" title="">'.$langArray['home'].'</a> \ <a href="/'.$languageURL.'search/" title="">'.$langArray['searching'].'</a>');		
 	

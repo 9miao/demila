@@ -111,9 +111,7 @@ class deposit {
 			$mysql->query("
 				UPDATE `deposit`
 				SET 
-				`paid` = 'true',
-				`balance` = '".sql_quote($user_deposit)."',
-				`total_balance` = '".sql_quote($user_total)."' 								
+				`paid` = 'true'
 				WHERE `id` = '".intval($deposit_id)."'
 			");
 			
@@ -292,7 +290,7 @@ class deposit {
 		}
 		
 		if(isset($_POST['maximum_at_period_end']) && $_POST['maximum_at_period_end'] == 'true') {
-			$_POST['amount'] = 'all to '.date('t M Y');
+			$_POST['amount'] = '截至'.date('Y m d');
 		}
 		
 		$mysql->query("
@@ -322,17 +320,22 @@ class deposit {
 	}
 	
 	
-	public function getWithdraws($start=0, $limit=0) {
+	public function getWithdraws($start=0, $limit=0,$where='') {
 		global $mysql;
 		
 		$limitQuery = '';
 		if($limit!=0) {
 			$limitQuery = " LIMIT $start,$limit ";
 		}
+        if($where!='') {
+            $where = " where $where ";
+        }
+
+
 		
 		$mysql->query("
 			SELECT SQL_CALC_FOUND_ROWS *
-			FROM `withdraw`
+			FROM `withdraw` $where
 			ORDER BY `datetime` DESC
 			$limitQuery
 		");

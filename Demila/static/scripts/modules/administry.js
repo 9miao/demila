@@ -303,6 +303,22 @@ define(function (require, exports, module){
 	}
 	exports.plotInit = plotInit;
 
+	function leftListInit(filter){
+		var objs = $(filter);
+		objs.each(function(){
+			var that = $(this);
+			if(that.hasClass("active")){
+				that.next("ol").show();
+			}
+			that.on("click", function(){
+				that.parent().siblings("li").find(".nextmenu").removeClass("active").next("ol").slideUp();
+				that.addClass("active").next("ol").slideDown();
+				return false;
+			});
+		});
+	}
+	exports.leftListInit = leftListInit;
+
 	function showTooltip(x, y, contents) {
 		$('<div id="tooltip">' + contents + '</div>').css({
 			position: 'absolute',

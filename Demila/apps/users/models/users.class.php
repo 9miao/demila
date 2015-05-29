@@ -1275,23 +1275,21 @@ public function getuserinfoById($id=0){
 		if(!isset($_POST['license']) || !is_array($_POST['license'])) {
 			$error['license'] = $langArray['error_choose_license'];
 		}
-		
-		if(isset($error)) {
+        $license=serialize($_POST["license"]);
+        if($license !='a:2:{s:8:"extended";s:8:"extended";s:8:"personal";s:8:"personal";}' && $license != 'a:1:{s:8:"personal";s:8:"personal";}' && $license !='a:1:{s:8:"extended";s:8:"extended";}')
+            $error['license'] = $langArray['error_choose_license'];
+        if(isset($error)) {
 			return $error;
 		}
-		
-		$mysql->query("
+        $mysql->query("
 			UPDATE `users`
-			SET `license` = '".serialize($_POST['license'])."'
+			SET `license` = '".$license."'
 			WHERE `user_id` = '".intval($_SESSION['user']['user_id'])."'
 			LIMIT 1
 		");
-		
 		$_SESSION['user']['license'] = $_POST['license'];
-		
 		return true;
 	}
-	
 	public function editChangeAvatarImage() {
 		global $mysql, $langArray, $config;
 		

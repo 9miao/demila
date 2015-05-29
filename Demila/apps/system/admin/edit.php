@@ -31,5 +31,6 @@ _setTitle ( $langArray ['edit'] );
 	}
 	
 	$_POST['help_text'] = isset($_POST['key']) && isset($langArray[$_POST['key'] . '_help']) ? $langArray[$_POST['key'] . '_help'] : '';
+require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
 
 ?>

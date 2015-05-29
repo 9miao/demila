@@ -12,7 +12,7 @@
 $admin_config = array (
 	'show' => true,	
 	
-	'add' => false, 
+	'add' => false,
 	'list' => false, 
 	'edit' => false, 
 	'delete' => false 

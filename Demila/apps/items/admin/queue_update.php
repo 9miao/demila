@@ -19,5 +19,6 @@ _setTitle($langArray['queue_update']);
 
 	$p = paging ( "?m=" . $_GET ['m'] . "&c=queue_update&p=", "", PAGE, LIMIT, $cms->foundRows );
 	abr ( 'paging', $p );
-	
+
+require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
 ?>

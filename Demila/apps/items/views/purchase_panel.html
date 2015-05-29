@@ -20,6 +20,7 @@
           </p>
           <form id="prepaid-form" action="/{$languageURL}items/{$item.id}/" method="post">
             <input id="stored-item-name" type="hidden" value="{$item.name|escape}">
+            <input id="stored-item-category" type="hidden" value="{foreach from=$item.categories item=e}{foreach from=$e item=c name=foo}{if !$smarty.foreach.foo.last}{$categories[$c].name}{/if}{/foreach}{/foreach}">
             <input type="hidden" name="licence" id="licence" value="regular" />
             <input type="hidden" name="pay_method" value="deposit" />
             <input type="submit" name="buy" value="{$lang.purchase}"/>

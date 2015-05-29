@@ -122,8 +122,8 @@ a.btntheme2{
     top: 5px;
 	display:block;
 	position:absolute;
-    width: 140px;
-    height: 53px;
+    width: 200px;
+    height: 60px;
     overflow: hidden;
     text-indent: -99999px;
 }
@@ -788,8 +788,8 @@ a.btntheme2{
 	position: absolute;
 	top: 14px;
 	z-index: 1;
-	width: 140px;
-	height: 53px;
+	width: 200px;
+	height: 60px;
 	display: block;
 	background: url(/static/img/custom/logo.png) no-repeat center center;
 	overflow: hidden;
@@ -1212,9 +1212,15 @@ a.btntheme2{
 	color:#fff;
 	height: 40px;
 }
+.magnifier .price.freepri{
+	color: #999;
+}
 .magnifier .price .symbol{
 	font-size: 16px;
     vertical-align: 19px;
+}
+.magnifier .price.freepri .cost{
+	text-decoration: line-through;
 }
 .magnifier .price sup{
 	font-size:23px;

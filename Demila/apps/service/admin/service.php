@@ -18,4 +18,5 @@
 	abr('data',$data);
 	$p = paging ( "?m=" . $_GET ['m'] . "&c=service&p=", "&id=".$_GET['id'], PAGE, LIMIT, $service->foundRows );
 	abr ( 'paging', $p );
+require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
 ?>

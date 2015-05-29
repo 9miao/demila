@@ -122,6 +122,18 @@ class tags extends base {
 		
 		return true;
 	}
+
+    //通过作品ID删除已绑定的作品推荐标签
+    public function del_by_item_id($item_id){
+        global $mysql;
+
+        $mysql->query("
+			DELETE FROM `items_tags`
+			WHERE `item_id` = '".intval($item_id)."'
+		", __FUNCTION__ );
+
+        return true;
+    }
 	
 	public function isExistTag($tag) {
 		global $mysql;
@@ -152,7 +164,39 @@ class tags extends base {
 		
 		return $mysql->insert_id();
 	}
-	
+
+    //通过作品ID获取关联标签
+    public function get_tags_by_item_id($item_id = 0){
+        global $mysql;
+
+        $return = $mysql->getAll("
+			SELECT
+			tags.id as id, tags.name as name, items_tags.item_id as item_id
+			FROM `items_tags`
+			JOIN `tags`
+			ON `tags`.`id` = `items_tags`.`tag_id`
+			WHERE `item_id` = '".$item_id."';
+		");
+        return $return;
+    }
+
+    //添加标签
+    public function add_tags($data){
+        global $mysql;
+        $mysql->query("
+			INSERT INTO `items_tags` (
+				`item_id`,
+				`tag_id`
+			)
+			VALUES (
+				'".intval($data['item_id'])."',
+				'".intval($data['tag_id'])."'
+			)
+		");
+        return true;
+    }
+
+
 
 }
 ?>

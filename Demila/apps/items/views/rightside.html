@@ -61,14 +61,14 @@
         <div class="licenitem" id="licenitem-price">
           <span class="cost"><span>{$currency.symbol}</span>{$item.price|string_format:"%.0f"}</span>
           <p>共享使用权，作者仍可继续出售。- <a href="/help/licenses/">查看详情</a></p>
-          <button class="buybtn" id="purchase_button" onclick="chooseLicence('regular', '{$item.price|string_format:"%.0f"}', '{$item.prepaid_price|string_format:"%.0f"}', 'block')" type="submit">马上购买</button>
+          <button class="buybtn" id="purchase_button" onclick="" type="submit">马上购买</button>
         </div>
         {/if}
         {if isset($item.user.license.extended)}
         <div class="licenitem" id="licenitem-extend">
           <span class="cost"><span>{$currency.symbol}</span>{$item.extended_price|string_format:"%.0f"}</span>
           <p>专有使用权，作者不再继续出售。 - <a href="/help/licenses/">查看详情</a></p>
-          <button class="buybtn" id="purchase_button2" onclick="chooseLicence('extended', '{$item.extended_price|string_format:"%.0f"}', '{$item.extended_price|string_format:"%.0f"}', 'none')" type="submit">马上购买</button>
+          <button class="buybtn" id="purchase_button2" onclick="" type="submit">马上购买</button>
         </div>
         {/if}
         {literal}
@@ -77,7 +77,9 @@
             lens.init({
               "form": "purchase-form",
               "price": '{/literal}{$item.price|string_format:"%.0f"}{literal}',
-              "prepaid_price": '{/literal}{$item.prepaid_price|string_format:"%.0f"}{literal}'
+              "prepaid_price": '{/literal}{$item.prepaid_price|string_format:"%.0f"}{literal}',
+              "extended_price": '{/literal}{if $item.extended_price < 0}0.00{else}{$item.extended_price|string_format:"%.2f"}{/if}{literal}',
+              "discount": '{/literal}{$meta.prepaid_price_discount}{literal}'
             });
           });
           </script>

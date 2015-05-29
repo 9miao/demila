@@ -26,7 +26,7 @@ define("CACHE", ENGINE_PATH . "/data/cache/");
 define("DATA_SERVER_PATH", $config['data_server_path']);
 define("DATA_SERVER", $config['data_server']);
 define("TEMPLATE_PATH", ROOT_PATH . "/html/");
-define("VERSION", '1.0.1');
+define("VERSION", '1.0.2');
 #END;
 
 
@@ -43,8 +43,8 @@ ini_set ( "session.use_trans_sid", false );
 
 ini_set ( "session.cookie_domain", "");
 ini_set ( "session.save_path", CACHE . "/session/" );
-ini_set ( "session.use_only_cookies", false );
-ini_set ( "session.use_trans_sid", true );
+ini_set ( "session.use_only_cookies", true ); //是否仅仅使用cookie在客户端保存会话sessionid
+ini_set ( "session.use_trans_sid",  false );  //客户端浏览器禁止cookie的时候，页面上的链接会基于url传递SESSIONID
 
 
 ini_set ( "arg_separator.output", "&amp;" );

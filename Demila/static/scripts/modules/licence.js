@@ -23,7 +23,8 @@ define(function (require, exports, module){
 			return false;
 		});
 		$("#purchase_button2").click(function(){
-			chooseLicence('extended', opt.price, opt.prepaid_price, 'none');
+			//chooseLicence('extended', opt.price, opt.prepaid_price, 'none');
+			chooseLicence('extended', getExtenedPrice(opt.extended_price, opt.discount), opt.extended_price, 'none');
 			animatePanel();
 			return false;
 		});
@@ -52,13 +53,26 @@ define(function (require, exports, module){
 	}
 	exports.init = init;
 
+	function getExtenedPrice(pri, dis){
+		//console.log(pri + "," + dis);
+		var tmp = (parseFloat(pri) + parseFloat(dis)) + "";
+		if(tmp.indexOf(".") < 0){
+			tmp += ".00";
+		}else{
+			tmp = Math.round(tmp * 100) / 100;
+		}
+		return tmp;
+	}
+
 	function animatePanel(e){
 		var t = e ? e : "show";
 		$("div.fancy-purchase-panel, div.account-required.panel").animate({
 			height: t,
 			opacity: t,
 			marginBottom: t
-		}, "slow")
+		}, "slow", function(){
+			$(window).scrollTop($("div.fancy-purchase-panel, div.account-required.panel").offset().top);
+		});
 	}
 	function confirm_purchase(e, t) {
 		return confirm("您即将使用您的预付款余额购买 " + e + " (来自 " + t + " 分类)。\n\n请认真查看该作品的属性以确保该作品满足您的需求。当且仅当您尚未下载该作品而作品已经被删除的情形我们才接受退款。\n\n点击确定后您将立即获得该作品的下载权限。")

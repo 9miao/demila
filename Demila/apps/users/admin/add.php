@@ -28,5 +28,6 @@ _setTitle ( $langArray ['add'] );
 	
 	$groups = $g->getAll();
 	abr('groups', $groups);
+require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
 	
 ?>

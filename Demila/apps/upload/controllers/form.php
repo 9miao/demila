@@ -1,4 +1,4 @@
-<?php
+    <?php
 // +----------------------------------------------------------------------
 // | Demila [ Beautiful Digital Content Trading System ]
 // +----------------------------------------------------------------------
@@ -8,9 +8,7 @@
 // +----------------------------------------------------------------------
 // | Email author@demila.org
 // +----------------------------------------------------------------------
-
 _setView(__FILE__);
-
 if(!check_login_bool()) {
 		$_SESSION['temp']['golink'] = '/'.$languageURL.'upload/index/';
 		refresh('/'.$languageURL.'sign_in/');
@@ -23,15 +21,6 @@ if(!check_login_bool()) {
 	if(!isset($_GET['category']) || !is_numeric($_GET['category']) || $_GET['category'] == '0') {
             $_GET['category'] = '';
 	}
-//判断有截图包模块
-require_once ROOT_PATH.'/apps/app_extends/models/app_extends.class.php';
-$is_extends=false;
-$app_extends=new app_extends();
-
-if($app_extends->is_uploads()){
-    $is_extends=true;
-}
-abr("is_extends",$is_extends);
 
 $allCategories = $categoriesClass->getAllWithChilds(0, " `visible` = 'true' ");
 	if(!array_key_exists($_GET['category'], $allCategories)) {
@@ -85,7 +74,16 @@ $allCategories = $categoriesClass->getAllWithChilds(0, " `visible` = 'true' ");
 	  abr('sessID', session_id());
 		
 	}
-	
+
+
+    //获取所有推荐标签
+    require_once ROOT_PATH.'/apps/tags/models/tags.class.php';
+    $tagsClass = new tags();
+    $tags_all = $tagsClass->getAll();
+    $all_tags = json_encode($tags_all);
+
+    abr('all_tags',$all_tags);
+
 #面包屑	
 	abr('breadcrumb', '<a href="/'.$languageURL.'" title="">'.$langArray['home'].'</a> \ <a href="/'.$languageURL.'upload/form/?category='.$_GET['category'].'" title="">'.$langArray['upload_theme'].'</a>');		
 	

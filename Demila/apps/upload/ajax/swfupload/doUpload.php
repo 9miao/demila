@@ -30,6 +30,31 @@ if (! isset ( $_FILES ["file"] )) {
 	exit ( 0 );
 }
 
+//文件删除接口
+if(isset($_POST['action'])){
+    if($_POST['filename'] && $_POST['filetype']){
+        if($_POST['action'] == 'a_delete'){
+            $is_del_file = DATA_SERVER_PATH.'uploads/temporary/'.$_SESSION['user']['user_id'].'/'.$_POST['filename'];
+        }else{
+            $is_del_file = DATA_SERVER_PATH.'uploads/temporary/'.$_SESSION['user']['user_id'].'/'.$_POST['filetype'].'/'.$_POST['filename'];
+        }
+        //删除文件
+        @unlink($is_del_file);
+        //更新session
+        $type = $_POST['filetype'];
+        $edit = $_POST['filename'];
+        unset($_SESSION['temp']['uploaded_files'][$type][$edit]);
+        die('success');
+    }else{
+        die('error');
+    }
+}
+
+if (! isset ( $_FILES ["file"] )) {
+    echo "ERROR:invalid upload";
+    exit ( 0 );
+}
+
 require_once '../../models/files.class.php';
 $filesClass = new files( );
 

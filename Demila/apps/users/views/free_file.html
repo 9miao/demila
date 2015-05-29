@@ -20,9 +20,9 @@
     {if $freeItem}
       <ul class="topauthorlist clr">
       {foreach from=$freeItem item=fi}
-        <li class="authoritem">
+        <li class="authoritem landscape-image-magnifier">
           <a class="avatar" href="/{$languageURL}items/{$fi.id}" onclick="">
-        <img alt="{$fi.name|escape}" border="0" class="landscape-image-magnifier preload no_preview" data-item-author="作者 {$users[$fi.user_id].nickname}" data-item-category="{foreach from=$i.categories item=e}{foreach from=$e item=c name=foo}{$categories[$c].name} {if !$smarty.foreach.foo.last} \ {/if}{/foreach}{/foreach}" data-item-cost="{$fi.price}" data-item-name="{$fi.name|escape}" data-preview-height="" data-preview-url="{$data_server}uploads/items/{$fi.id}/preview.jpg" data-preview-width="" src="{$data_server}uploads/items/{$fi.id}/{$fi.thumbnail}" title="{$fi.name|escape}" />
+        <img alt="{$fi.name|escape}" border="0" class="preload no_preview" data-item-author="作者 {$users[$fi.user_id].nickname}" data-item-category="{foreach from=$i.categories item=e}{foreach from=$e item=c name=foo}{$categories[$c].name} {if !$smarty.foreach.foo.last} \ {/if}{/foreach}{/foreach}" data-item-cost="{$fi.price}" data-item-name="{$fi.name|escape}" data-preview-height="" data-preview-url="{$data_server}uploads/items/{$fi.id}/{$i.theme_preview}" data-preview-width="" src="{$data_server}uploads/items/{$fi.id}/{$fi.thumbnail}" title="{$fi.name|escape}" item-type-free="1" />
         </a>
           <div class="itemdetail">
             <h3><a title="{$fi.name}" href="/{$languageURL}user/{$u.username}">{$fi.name}</a></h3>

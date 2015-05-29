@@ -36,6 +36,7 @@ if(isset($form[$key . '_key'])) {
 } else {
     abr('v_key', isset($meta[$key . '_key']) ? $meta[$key . '_key'] : '');
 }
+require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
 
 
 

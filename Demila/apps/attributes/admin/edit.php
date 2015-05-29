@@ -48,6 +48,7 @@ _setTitle ( $langArray ['edit'] );
 		}		
 		abr('categories', $categories);
 	}
-	
-	
+require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
+
+
 ?>

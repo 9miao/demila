@@ -28,6 +28,7 @@ _setView ( __FILE__ );
 	else {
 		$_POST = $get_info;
 	}
-	
+
+require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
 				
 ?>

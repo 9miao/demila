@@ -20,4 +20,5 @@ _setTitle ( $langArray ['edit'] );
 		$user_info = $cms->get($_GET['id']);
 		abr('user_info',$user_info);
 	}
+require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
 ?>

@@ -30,5 +30,6 @@ _setTitle ( $langArray ['edit'].' '.@$langArray['qnews'] );
 		$_POST = $cms->get($_GET['fid']);
 		$_POST['thumb'] = '/static/uploads/qnews/192x64/' . $_POST['photo'];
 	}
-				
+
+require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
 ?>

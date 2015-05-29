@@ -19,5 +19,5 @@ if(!check_login_bool()) {
 	if($_SESSION['user']['quiz'] != 'true') {
 		refresh('/'.$languageURL.'quiz/');
 	} 
-	
+
 ?>

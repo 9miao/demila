@@ -36,7 +36,7 @@
     {include file="$root_path/apps/items/views/purchase_panel.html"}
     <div class="leftdetail">
       <div class="detailimg clr" id="previewdom">
-        <a class="mainlink screenbtn" href="/{$languageURL}items/screenshots/{$item.id}" target="_blank" screenshot-img="{foreach from=$previewFiles item=file name=foo}{$file}{if !$smarty.foreach.foo.last}|{/if}{/foreach}" screenshot-tit="{$item.name|escape}"><img src="{$data_server}/uploads/items/{$item.id}/preview.jpg" alt="{$item.name|escape}" /></a>
+        <a class="mainlink screenbtn" href="/{$languageURL}items/screenshots/{$item.id}" target="_blank" screenshot-img="{foreach from=$previewFiles item=file name=foo}{$file}{if !$smarty.foreach.foo.last}|{/if}{/foreach}" screenshot-tit="{$item.name|escape}"><img src="{$data_server}/uploads/items/{$item.id}/{$item.theme_preview}" alt="{$item.name|escape}" /></a>
         <div class="links clr">{if $item.demo_url}<a class="linkbtn btntheme" href="/{$languageURL}items/preview/{$item.id}" target='_blank' title="在线预览">在线预览</a>{/if}<a class="linkbtn btntheme screenbtn" href="/{$languageURL}items/screenshots/{$item.id}" target='_blank' title="截图预览" screenshot-img="{foreach from=$previewFiles item=file name=foo}{$file}{if !$smarty.foreach.foo.last}|{/if}{/foreach}" screenshot-tit="{$item.name|escape}">截图预览</a><div class="bdsharebuttonbox"><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div></div>
       </div>
       <script>{literal}
@@ -44,12 +44,12 @@
         return str.replace(/<[^>]+>/g,"");
       }
       var ttt = delHtmlTag('{/literal}{$item.description}{literal}');
-      window._bd_share_config={"common":{"bdSnsKey":{},"bdText":ttt,"bdMini":"2","bdMiniList":false,"bdPic":"{/literal}{$data_server}/uploads/items/{$item.id}/preview.jpg{literal}","bdStyle":"1","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];{/literal}</script>
+      window._bd_share_config={"common":{"bdSnsKey":{},"bdText":ttt,"bdMini":"2","bdMiniList":false,"bdPic":"{/literal}{$data_server}/uploads/items/{$item.id}/{$item.theme_preview}{literal}","bdStyle":"1","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];{/literal}</script>
       <div class="detailtxt">{$item.description}</div>
       <div class="otheritems clr">
       {if $otherItems}
       {foreach from=$otherItems item=i}
-      <a href="/{$languageURL}items/{$i.id}" class="landscape-image-magnifier"><img alt="{$i.name|escape}" border="0" class="preload no_preview" data-item-author="作者 {$item.user.username}" data-item-category="{foreach from=$i.categories item=e}{foreach from=$e item=c name=foo}{$categories[$c].name} {if !$smarty.foreach.foo.last} \ {/if}{/foreach}{/foreach}" data-item-cost="{$i.price}" data-item-name="{$i.name|escape}" data-preview-height="" data-preview-url="{$data_server}uploads/items/{$i.id}/preview.jpg" data-preview-width="" src="{$data_server}uploads/items/{$i.id}/{$i.thumbnail}" title="{$i.name|escape}" /></a>
+      <a href="/{$languageURL}items/{$i.id}" class="landscape-image-magnifier"><img alt="{$i.name|escape}" border="0" class="preload no_preview" data-item-author="作者 {$item.user.username}" data-item-category="{foreach from=$i.categories item=e}{foreach from=$e item=c name=foo}{$categories[$c].name} {if !$smarty.foreach.foo.last} \ {/if}{/foreach}{/foreach}" data-item-cost="{$i.price}" data-item-name="{$i.name|escape}" data-preview-height="" data-preview-url="{$data_server}uploads/items/{$i.id}/{$i.theme_preview}" data-preview-width="" src="{$data_server}uploads/items/{$i.id}/{$i.thumbnail}" title="{$i.name|escape}" /></a>
       {/foreach}
       {/if}
       {if $otherItemsCount < 6}
@@ -64,7 +64,7 @@
     {include file="$root_path/apps/items/views/rightside.html"}
   </div>
 </div>
-<link href="/static/scripts/plug/swipebox/swipebox.min.css" rel="stylesheet" />
+<link href="/static/scripts/plug/demilamedia/jquery.demilamedia.css" rel="stylesheet" />
 {literal}
 <script type="text/javascript">
 seajs.use(["pageui", "modules/screenshot"], function(ui, scre){

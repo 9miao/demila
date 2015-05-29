@@ -649,6 +649,16 @@ class orders {
 			ORDER BY `sales` DESC
 			$limitQuery
 		");
+
+
+//        echo    "
+//			SELECT *, COUNT(`owner_id`) AS `sales`
+//			FROM `orders`
+//			WHERE `type` = 'buy' AND `paid` = 'true' $where
+//			GROUP BY `owner_id`
+//			ORDER BY `sales` DESC
+//			$limitQuery
+//		<br>";
 			
 		if($mysql->num_rows() == 0) {
 			return false;

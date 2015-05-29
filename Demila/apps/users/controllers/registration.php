@@ -57,10 +57,21 @@ if(check_login_bool()) {
 
 		#用户注册操作
 		if(isset($_POST['add'])) {
+            require_once ROOT_PATH.'/apps/system/models/system.class.php';
+
+            $cms = new system ();
+
+            $data = $cms->getAll(0,0,null,"send_mail");
+
+            if($data[0]["value"] == 0){
+                $_POST['status'] = 'activate';
+            }
 			$usersClass = new users();
-			
 			$s = $usersClass->add();
 			if($s === true) {
+                if($data[0]["value"] == 0){
+                    refresh('/'.$languageURL.'sign_in/');
+                }
 				refresh('/'.$languageURL.'sign_up/verify/');
 			}
 			else {

@@ -29,4 +29,5 @@ _setTitle ( $langArray ['edit'] );
 		$_POST = $cms->get($_GET['id']);
 		$_POST['rights'] = unserialize($_POST['rights']);
 	}
+require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
 ?>

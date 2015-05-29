@@ -52,3 +52,4 @@ if (isset ( $_POST ['edit'] )) {
 		refresh ( "?m=" . $_GET ['m'] . "&c=balance&id=" . $_GET['user_id'], $langArray ['add_complete'] );
 	}	
 }
+require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';

@@ -1,72 +1,59 @@
 html body{
-width:100%;
-height:100%;
-padding:0px;
-margin:0px;
-overflow:hidden;
-font-family:arial;
-font-size:10px;
-color:#6e6e6e;
-background-color:#000
+	width:100%;
+	height:100%;
+	padding:0px;
+	margin:0px;
+	overflow:hidden;
+	font-family:arial;
+	font-size:12px;
+	color:#6e6e6e;
+	background-color:#666;
+	text-align: center;
 }
 #header-bar{
-height:53px;
-background-color:#000;
-border-bottom:1px solid #191919;
-z-index:100;
-line-height:53px;
-margin-bottom:1px
-}
-#header-bar a.site-loopback{
-display:block;
-margin-top:1px;
-margin-left:-10px;
-float:right;
-background-repeat:no-repeat;
-background-position:left center;
-text-indent:-9999px
+	background-color: #232323;
+	height:53px;
+	border-bottom:1px solid #191919;
+	z-index:100;
+	line-height:53px;
 }
 #header-bar .preview-logo{
-background-image:url(/static/img/custom/preview-logo.png);
-width:270px;height:52px}
+	float:right;
+	display:block;
+	background-image:url(/static/img/custom/logo.png);
+	width:200px;
+	height:60px;
+	margin: 0 10px 0 0;
+	overflow: hidden;
+	text-indent: -99999px;
+}
 #header-bar p.meta-data{
-padding:0px;
-margin:0px;
-float:left
+	padding: 0;
+	margin: 0;
+	float: left;
 }
 #header-bar p.meta-data p{
-display:inline;
-margin:0px
+	display:inline;
+	margin:0px
 }
 #header-bar p.meta-data a{
-text-decoration:none;
-color:#6e6e6e;
-font-size:14px;
+	text-decoration:none;
+	color:#6e6e6e;
+	font-size:14px;
 }
 #header-bar p.meta-data a.purchase{
-margin-left:10px;
-border-left:1px solid #6e6e6e;
-padding-left:15px
+	margin-left:10px;
+	border-left:1px solid #6e6e6e;
+	padding-left:15px
 }
-#header-bar p.meta-data a:hover,
-#header-bar p.meta-data a.activated{
+#header-bar p.meta-data a:hover, #header-bar p.meta-data a.activated{
 color:#fff
 }
-#header-bar span.preview{
-display:none;
-color:#d2d1d0;
-font-size:13px;
-letter-spacing:1px;
-text-decoration:none;
-margin-left:10px;
-padding-left:20px;
-background:transparent url(/static/img/right-slide.png) no-repeat 0px 1px;
-font-family:"Helvetica Neue",Arial,sans-serif}
 #header-bar div.close-header{
-width:40px;
-margin-left:5px;
-height:52px;
-float:left
+	width:40px;
+	margin-left:5px;
+	height:52px;
+	float:left
 }
 #header-bar div.close-header a#close-button {
     display: block;
@@ -78,5 +65,39 @@ float:left
     background-image: url("/static/img/button.gif");
     background-repeat: no-repeat;
 }
-#header-bar div.close-header a
-#close-button:hover,#header-bar div.close-header a#close-button.activated{background-position:0px -16px}#preview-frame{width:100%;background-color:#fff}
+#header-bar div.close-header a#close-button:hover, #header-bar div.close-header a#close-button.activated{
+	background-position:0px -16px
+}
+#preview-frame{
+	width:100%;
+	background-color:#fff;
+	margin: 0 auto;
+}
+#header-bar .sizechange{
+	float: left;
+	position: absolute;
+	left: 50%;
+}
+#header-bar .sizechange a{
+	float: left;
+    height: 53px;
+    left: -50%;
+    margin: 0 15px;
+    position: relative;
+    width: 53px;
+    background: url(/static/img/custom/computer.png) no-repeat center 9px;
+    overflow: hidden;
+    text-indent: -99999px;
+    cursor: pointer;
+}
+#header-bar .sizechange a.t1{
+	width: 77px;
+}
+#header-bar .sizechange a.t2{
+    background: url(/static/img/custom/iphone.png) no-repeat center 9px;
+	width: 62px;
+}
+#header-bar .sizechange a.t3{
+    background: url(/static/img/custom/ipad.png) no-repeat center 9px;
+	width: 56px;
+}

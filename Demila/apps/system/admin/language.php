@@ -45,5 +45,6 @@ _setTitle ( $langArray ['language'] );
 			refresh('?m='.$_GET['m'].'&c='.$_GET['c'], $langArray['complete_change_language'], 'complete');
 		} 
 	}
+require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
 	
 ?>

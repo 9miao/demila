@@ -1,0 +1,184 @@
+@charset "UTF-8";
+#demilamedia_mask{
+	position: fixed;
+	_position: absolute;
+	background-color: #000;
+	opacity: .6;
+	filter: alpha(opacity=60);
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	z-index: 10000;
+	display: none;
+}
+#demilamedia_tit{
+	position: fixed;
+	_position: absolute;
+	*left: 0;
+	color: #fff;
+	width: 100%;
+	text-align: center;
+	z-index: 10500;
+	display: none;
+}
+#demilamedia_tips{
+	position: fixed;
+	_position: absolute;
+	*left: 0;
+	color: #fff;
+	width: 100%;
+	text-align: center;
+	z-index: 11500;
+	display: none;
+	font-size: 12px;
+}
+#demilamedia{
+	position: fixed;
+	_position: absolute;
+	display: none;
+	top: 50%;
+	left: 50%;
+	z-index: 11000;
+}
+#demilamedia .demilamedia_top, #demilamedia .demilamedia_bottom{
+	height: 20px;
+    position: relative;
+    *position: absolute;
+    *left: 0;
+    *right: 0;
+}
+#demilamedia .hlb_left{
+	height: 20px;
+    left: 0;
+    position: absolute;
+    width: 20px;
+}
+#demilamedia .hlb_middle{
+	height: 20px;
+    left: 20px;
+    position: absolute;
+    right: 20px;
+    background: url("images/borderbg.png") repeat left top;
+}
+#demilamedia .hlb_right{
+	height: 20px;
+    left: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 20px;
+}
+#demilamedia .demilamedia_top .hlb_left{
+	background: url("images/sprite.png") no-repeat 0 0;
+}
+#demilamedia .demilamedia_top .hlb_right{
+	background: url("images/sprite.png") no-repeat -22px 0;
+}
+#demilamedia .demilamedia_bottom .hlb_left{
+	background: url("images/sprite.png") no-repeat 0 -27px;
+}
+#demilamedia .demilamedia_bottom .hlb_right{
+	background: url("images/sprite.png") no-repeat -22px -27px;
+}
+#demilamedia #demilamedia_objs{
+	position: relative;
+	overflow: hidden;
+	*top: 20px;
+}
+#demilamedia_objs .objleftbg{
+	background: url(images/borderbg.png) repeat-y left center;
+	padding-left: 20px;
+}
+#demilamedia_objs .objrightbg{
+	background: url(images/borderbg.png) repeat-y right center;
+	padding-right: 20px;
+}
+#demilamedia_objs #demilamedia_main{
+	background: url(images/borderbg.png) repeat center center;
+}
+#demilamedia_objs #demilamedia_loading, #demilamedia_objs .loading{
+	background: url(images/loader.gif) no-repeat center center;
+	width: 24px;
+	height: 24px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin: -2px 0 0 -12px;
+	display: none;
+}
+#demilamedia_objs .loading{
+	display: block;
+}
+#demilamedia #demilamedia_arrbtn{
+	height: 45px;
+	position: relative;
+	background: url(images/borderbg.png) repeat left center;
+	*position: absolute;
+	*left: 0;
+	*right: 0;
+	*margin-top: 20px;
+}
+#demilamedia .demilamedia_bottom{
+	*margin-top: 65px;
+}
+#demilamedia #demilamedia_arrbtn #demilamedia_pagenum{
+	color: #fff;
+}
+#demilamedia #demilamedia_arrbtn a{
+	background: url(images/btn.png) no-repeat 0 0;
+	position: absolute;
+	top: 2px;
+	height: 41px;
+	width: 45px;
+	display: block;
+	cursor: pointer;
+}
+#demilamedia #demilamedia_arrbtn a#demilamedia_leftbtn{
+	background-position: 0 0;
+	left: 20px;
+}
+#demilamedia #demilamedia_arrbtn a#demilamedia_rightbtn{
+	background-position: -45px 0;
+	right: 20px;
+}
+#demilamedia #demilamedia_arrbtn a#demilamedia_leftbtn:hover{
+	background-position: 0 -41px;
+}
+#demilamedia #demilamedia_arrbtn a#demilamedia_rightbtn:hover{
+	background-position: -45px -41px;
+}
+#demilamedia #demilamedia_arrbtn a#demilamedia_leftbtn.disable{
+	cursor: default;
+}
+#demilamedia #demilamedia_arrbtn a#demilamedia_rightbtn.disable{
+	cursor: default;
+}
+#demilamedia #demilamedia_arrbtn a#demilamedia_leftbtn.disable:hover{
+	background-position: 0 0;
+
+}
+#demilamedia #demilamedia_arrbtn a#demilamedia_rightbtn.disable:hover{
+	background-position: -45px 0;
+}
+#demilamedia #demilamedia_closebtn{
+	right: -10px;
+	top: -10px;
+	position: absolute;
+	width: 30px;
+	height: 30px;
+	background: url(images/icons.png) no-repeat 5px 2px;
+	overflow: hidden;
+	cursor: pointer;
+	text-indent: -99999px;
+}
+#demilamedia #demilamedia_sound{
+	width: 100%;
+	top: 50%;
+	margin-top: -10px;
+	position: relative;
+}
+#demilamedia #demilamedia_video{
+	width: 100%;
+	height: 100%;
+}

@@ -46,5 +46,6 @@ _setTitle ( $langArray ['report_comments'] );
 		$users = $usersClass->getAll(0, 0, $usersWhere);
 		abr('users', $users);
 	}
-	
+
+require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
 ?>

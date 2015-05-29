@@ -77,11 +77,16 @@
           <a href="/{$languageURL}user/portfolio/{$user.username}/" class="btntheme2 authorbtn">查看作品集</a>{else}
           {/if}
           {if check_login_bool() && $smarty.session.user.user_id != $user.user_id}
-          {literal}
-          <a href="/{/literal}{$languageURL}users/{$user.username}/?follow{literal}" id="follow-user" onclick="$.ajax({complete:function(request){jQuery(&quot;#ajax-feedback&quot;).animate({&quot;height&quot;: &quot;toggle&quot;, &quot;opacity&quot;: &quot;toggle&quot;}, &quot;slow&quot;); }, dataType:'script', type:'post', url:'/{/literal}{$langaugeURL}users/{$user.username}/?follow{literal}'}); jQuery(&quot;#ajax-feedback&quot;).hide(); jQuery(&quot;#ajax-feedback&quot;).animate({&quot;height&quot;: &quot;toggle&quot;, &quot;opacity&quot;: &quot;toggle&quot;}, &quot;slow&quot;);return false;">
-          {/literal}
+          <a href="/{$languageURL}users/{$user.username}/?follow" id="follow-user">
           <button id="follow" class="btntheme authorbtn" type="submit">{if $user.is_follow}取消关注{else}关注{/if}</button>
           </a>
+          <script type="text/javascript">
+          {literal}
+          seajs.use(["jq", "modules/follow"], function($, follow){
+            follow.followBtnInit($("#follow-user"), "/{/literal}{$langaugeURL}users/{$user.username}/?follow{literal}");
+          });
+          {/literal}
+          </script>
           {/if}
         </div>
         {else}
@@ -89,9 +94,16 @@
             <a href="/{$languageURL}user/portfolio/{$user.username}/" class="btntheme2 authorbtn">查看作品集</a>{else}
           {/if}
           {if check_login_bool() && $smarty.session.user.user_id != $user.user_id}
-            {literal}<a href="/{/literal}{$languageURL}users/{$user.username}/?follow{literal}" id="follow-user" onclick="$.ajax({complete:function(request){jQuery(&quot;#ajax-feedback&quot;).animate({&quot;height&quot;: &quot;toggle&quot;, &quot;opacity&quot;: &quot;toggle&quot;}, &quot;slow&quot;); }, dataType:'script', type:'post', url:'/{/literal}{$langaugeURL}users/{$user.username}/?follow{literal}'}); jQuery(&quot;#ajax-feedback&quot;).hide(); jQuery(&quot;#ajax-feedback&quot;).animate({&quot;height&quot;: &quot;toggle&quot;, &quot;opacity&quot;: &quot;toggle&quot;}, &quot;slow&quot;);return false;">{/literal}
+            <a href="/{$languageURL}users/{$user.username}/?follow" id="follow-user">
             <button id="follow" class="btntheme authorbtn" type="submit">{if $user.is_follow}取消关注{else}关注{/if}</button>
             </a>
+            <script type="text/javascript">
+            {literal}
+            seajs.use(["jq", "modules/follow"], function($, follow){
+              follow.followBtnInit($("#follow-user"), "/{/literal}{$langaugeURL}users/{$user.username}/?follow{literal}");
+            });
+            {/literal}
+            </script>
           {/if}
         {/if}
       </div>
@@ -125,7 +137,7 @@
       {if $featureItem}  
       <div class="sideblock featuredfile clr">
         <a class="featimg landscape-image-magnifier" href="/{$languageURL}items/{$featureItem.id}">
-          <img data-tooltip="{$featureItem.name|escape}" alt="{$featureItem.name|escape}" class="preload no_preview" data-item-author="作者 {$user.username}" data-item-category="{foreach from=$featureItem.categories item=e}{foreach from=$e item=c name=foo}{$categories[$c].name} {if !$smarty.foreach.foo.last} \ {/if}{/foreach}{/foreach}" data-item-cost="{$featureItem.price}" data-item-name="{$featureItem.name|escape}" data-preview-height="" data-preview-url="{$data_server}uploads/items/{$featureItem.id}/preview.jpg" data-preview-width="" src="{$data_server}uploads/items/{$featureItem.id}/{$featureItem.thumbnail}" title="" border="0" />
+          <img data-tooltip="{$featureItem.name|escape}" alt="{$featureItem.name|escape}" class="preload no_preview" data-item-author="作者 {$user.username}" data-item-category="{foreach from=$featureItem.categories item=e}{foreach from=$e item=c name=foo}{$categories[$c].name} {if !$smarty.foreach.foo.last} \ {/if}{/foreach}{/foreach}" data-item-cost="{$featureItem.price}" data-item-name="{$featureItem.name|escape}" data-preview-height="" data-preview-url="{$data_server}uploads/items/{$featureItem.id}/{$i.theme_preview}" data-preview-width="" src="{$data_server}uploads/items/{$featureItem.id}/{$featureItem.thumbnail}" title="" border="0" />
         </a>
         <p><small>作者自荐的文件</small><br /><a href="/{$languageURL}items/{$featureItem.id}">{$featureItem.name}</a><br />已售数量:{$featureItem.sales}</p>
       </div>

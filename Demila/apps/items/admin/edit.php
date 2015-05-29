@@ -27,7 +27,14 @@ _setTitle ( $langArray ['edit'] );
 	
 	$data = $cms->get($_GET['id'], false);
 	$data['user'] = $usersClass->get($data['user_id']);
-	abr('data', $data);
+    //路径
+    $data["thumbnail"] =DATA_SERVER.'/uploads/items/'.$_GET['id'].'/'. $data["thumbnail"];
+    $data["theme_preview"]= DATA_SERVER.'/uploads/items/'.$_GET['id'].'/'. $data["theme_preview"];
+    $data["main_file"]= DATA_SERVER.'/uploads/items/'.$_GET['id'].'/'. $data["main_file"];
+
+    //获取所有预览图
+    $data['preview'] = $itemsClass->get_theme_preview($_GET['id']);
+    abr('data', $data);
 	
 #加载属性
 	require_once ROOT_PATH.'/apps/attributes/models/attributes.class.php';
@@ -76,5 +83,18 @@ _setTitle ( $langArray ['edit'] );
 	$allCategories = $categoriesClass->getAllWithChilds(0, " `visible` = 'true' ");
 	$categoriesSelect = $categoriesClass->generateSelect($allCategories, $tmp, (int)$first_category);
 	abr('categoriesSelect', $categoriesSelect);
-	
+
+    //获取所有推荐标签
+    require_once ROOT_PATH.'/apps/tags/models/tags.class.php';
+    $tagsClass = new tags();
+    $tags_all = $tagsClass->getAll();
+    $all_tags = json_encode($tags_all);
+    abr('all_tags',$all_tags);
+
+    //获取当前作品推荐标签
+    $tag_relation = $tagsClass ->get_tags_by_item_id($_GET['id']);
+    abr('item_tags',json_encode($tag_relation));
+    abr('sessID', session_id());
+
+require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
 ?>

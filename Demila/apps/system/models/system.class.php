@@ -53,20 +53,22 @@ class system extends base {
 
 		return $return;
 	}
-	
-	public function getAll($start=0, $limit=0, $group = null) {
-		global $mysql;
-		
-		$limitQuery = "";
-		if($limit!=0) {
-			$limitQuery = "LIMIT $start,$limit";
-		}
-		
-		$where = '';
-		if($group) {
-			$where = "WHERE `group` = '" . sql_quote($group) . "'";
-		}
-		
+
+    public function getAll($start=0, $limit=0, $group = null,$key= null) {
+        global $mysql;
+
+        $limitQuery = "";
+        if($limit!=0) {
+            $limitQuery = "LIMIT $start,$limit";
+        }
+
+        $where = "WHERE id <> 0";
+        if($group) {
+            $where .= " and `group` = '" . sql_quote($group) . "'";
+        }
+        if($key) {
+            $where .= " and `key` = '" . sql_quote($key) . "'";
+        }
 		$return = $mysql->getAll("
 			SELECT SQL_CALC_FOUND_ROWS *
 			FROM `system`

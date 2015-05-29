@@ -22,5 +22,6 @@ _setTitle ( $langArray ['add'].' '.$langArray['country'] );
 			refresh ( "?m=" . $_GET ['m'] . "&c=list", $langArray ['add_complete'] );
 		}
 	}
-		
+
+require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
 ?>

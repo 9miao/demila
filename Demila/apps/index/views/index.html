@@ -26,7 +26,7 @@
         {foreach from=$followingItems item=f}
           <li class="thumbnail landscape-image-magnifier">
           <a href="/{$languageURL}items/{$f.id}" onclick="">
-            <img data-tooltip="{$f.name|escape}" alt="{$f.name|escape}" class="preload no_preview" data-item-author="作者 {$users[$f.user_id].nickname}" data-item-category="{foreach from=$f.categories item=e}{foreach from=$e item=c name=foo}{$categories[$c].name} {if !$smarty.foreach.foo.last} \ {/if}{/foreach}{/foreach}" data-item-cost="{$f.price|escape}" data-item-name="{$f.name|escape}" data-preview-height="" data-preview-url="{$data_server}uploads/items/{$f.id}/preview.jpg" data-preview-width="" src="{$data_server}uploads/items/{$f.id}/{$f.thumbnail}" title="" border="0" />
+            <img data-tooltip="{$f.name|escape}" alt="{$f.name|escape}" class="preload no_preview" data-item-author="作者 {$users[$f.user_id].nickname}" data-item-category="{foreach from=$f.categories item=e}{foreach from=$e item=c name=foo}{$categories[$c].name} {if !$smarty.foreach.foo.last} \ {/if}{/foreach}{/foreach}" data-item-cost="{$f.price|escape}" data-item-name="{$f.name|escape}" data-preview-height="" data-preview-url="{$data_server}uploads/items/{$f.id}/{$i.theme_preview}" data-preview-width="" src="{$data_server}uploads/items/{$f.id}/{$f.thumbnail}" title="" border="0" />
             <span class="types">{foreach from=$f.categories item=e}{foreach from=$e item=c name=foo}{if !$smarty.foreach.foo.last}{else}{$categories[$c].name}{/if}{/foreach}{/foreach}</span>
             <span class="bg"></span>
             </a>
@@ -86,7 +86,7 @@
         {if $weeklyItems}
           {foreach from=$weeklyItems item=i}
           <li class="thumbnail landscape-image-magnifier">
-          <a href="/{$languageURL}items/{$i.id}"><img data-tooltip="{$i.name|escape}" alt="{$i.name|escape}" class="preload no_preview" data-item-author="作者 {$users[$i.user_id].nickname}" data-item-category="{foreach from=$i.categories item=e}{foreach from=$e item=c name=foo}{$categories[$c].name} {if !$smarty.foreach.foo.last} \ {/if}{/foreach}{/foreach}" data-item-cost="{$i.price}" data-item-name="{$i.name|escape}" data-preview-height="" data-preview-url="{$data_server}uploads/items/{$i.id}/preview.jpg" data-preview-width="" src="{$data_server}uploads/items/{$i.id}/{$i.thumbnail}" title="" border="0" />
+          <a href="/{$languageURL}items/{$i.id}"><img data-tooltip="{$i.name|escape}" alt="{$i.name|escape}" class="preload no_preview" data-item-author="作者 {$users[$i.user_id].nickname}" data-item-category="{foreach from=$i.categories item=e}{foreach from=$e item=c name=foo}{$categories[$c].name} {if !$smarty.foreach.foo.last} \ {/if}{/foreach}{/foreach}" data-item-cost="{$i.price}" data-item-name="{$i.name|escape}" data-preview-height="" data-preview-url="{$data_server}uploads/items/{$i.id}/{$i.theme_preview}" data-preview-width="" src="{$data_server}uploads/items/{$i.id}/{$i.thumbnail}" title="" border="0" />
           <span class="types">{foreach from=$i.categories item=e}{foreach from=$e item=c name=foo}{if !$smarty.foreach.foo.last}{else}{$categories[$c].name}{/if}{/foreach}{/foreach}</span>
           <span class="bg"></span>
           </a>
@@ -118,7 +118,7 @@
 	     {foreach from=$recentItems item=i}
         <li class="thumbnail landscape-image-magnifier">
 	     <a href="/{$languageURL}items/{$i.id}">
-          <img alt="{$i.name|escape}" border="0" class="preload no_preview" data-item-author="作者 {$users[$i.user_id].nickname}" data-item-category="{foreach from=$i.categories item=e}{foreach from=$e item=c name=foo}{$categories[$c].name} {if !$smarty.foreach.foo.last} \ {/if}{/foreach}{/foreach}" data-item-cost="{$i.price|string_format:"%.0f"}" data-item-name="{$i.name|escape}" data-preview-height="" data-preview-url="{$data_server}uploads/items/{$i.id}/preview.jpg" data-preview-width="" src="{$data_server}uploads/items/{$i.id}/{$i.thumbnail}" title="{$i.name|escape}" />
+          <img alt="{$i.name|escape}" border="0" class="preload no_preview" data-item-author="作者 {$users[$i.user_id].nickname}" data-item-category="{foreach from=$i.categories item=e}{foreach from=$e item=c name=foo}{$categories[$c].name} {if !$smarty.foreach.foo.last} \ {/if}{/foreach}{/foreach}" data-item-cost="{$i.price|string_format:"%.0f"}" data-item-name="{$i.name|escape}" data-preview-height="" data-preview-url="{$data_server}uploads/items/{$i.id}/{$i.theme_preview}" data-preview-width="" src="{$data_server}uploads/items/{$i.id}/{$i.thumbnail}" title="{$i.name|escape}" />
          </a>
 	    </li>
 	   	{/foreach}
@@ -154,7 +154,7 @@
       {foreach from=$freeItem item=fi}
       <li class="landscape-image-magnifier">
         <a href="/{$languageURL}items/{$fi.id}" onclick="">
-        <img alt="{$fi.name|escape}" border="0" class="preload no_preview" data-item-author="作者 {$users[$fi.user_id].nickname}" data-item-category="{foreach from=$i.categories item=e}{foreach from=$e item=c name=foo}{$categories[$c].name} {if !$smarty.foreach.foo.last} \ {/if}{/foreach}{/foreach}" data-item-cost="{$fi.price}" data-item-name="{$fi.name|escape}" data-preview-height="" data-preview-url="{$data_server}uploads/items/{$fi.id}/preview.jpg" data-preview-width="" src="{$data_server}uploads/items/{$fi.id}/{$fi.thumbnail}" title="{$fi.name|escape}" />
+        <img alt="{$fi.name|escape}" border="0" class="preload no_preview" data-item-author="作者 {$users[$fi.user_id].nickname}" data-item-category="{foreach from=$i.categories item=e}{foreach from=$e item=c name=foo}{$categories[$c].name} {if !$smarty.foreach.foo.last} \ {/if}{/foreach}{/foreach}" data-item-cost="{$fi.price}" data-item-name="{$fi.name|escape}" data-preview-height="" data-preview-url="{$data_server}uploads/items/{$fi.id}/{$i.theme_preview}" data-preview-width="" src="{$data_server}uploads/items/{$fi.id}/{$fi.thumbnail}" title="{$fi.name|escape}" item-type-free="1" />
         <span class="types">{foreach from=$i.categories item=e}{foreach from=$e item=c name=foo}{if !$smarty.foreach.foo.last}{else}{$categories[$c].name}{/if}{/foreach}{/foreach}</span>
         <span class="bg"></span>
         </a>

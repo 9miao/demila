@@ -19,21 +19,35 @@ _setTitle($langArray['queue']);
 	if(!isset($_GET['p'])) {
 		$_GET['p'] = '';
 	}
-	
+
 	$cms = new items ( );
 	
 	require_once ROOT_PATH.'/apps/users/models/users.class.php';
 	$usersClass = new users();
-	
-	$data = $cms->getForUpdate($_GET['id']);
-	abr('data', $data);
-	
+
+    $data = $cms->getForUpdate($_GET['id']);
+    //获取所有预览图
+    $data['preview'] = $itemsClass->get_theme_preview($data['item_id'],true);
+    $data['preview_status'] = 0;
+    if(empty($data['theme_preview'])){
+        $data['preview_status'] = 1;
+    }
+    //路径
+    $data["thumbnail"] = empty($data["thumbnail"])?"":DATA_SERVER.'/uploads/items/'.$data['item_id'].'/'. $data["thumbnail"];
+    $data["first_preview"]= empty($data["first_preview"])?"":DATA_SERVER.'/uploads/items/'.$data['item_id'].'/'. $data["first_preview"];
+    $data["main_file"]= empty($data["main_file"])?"":DATA_SERVER.'/uploads/items/'.$data['item_id'].'/'. $data["main_file"];
+    abr('data', $data);
+
 	$item = $cms->get($data['item_id']);
+
 	if(!is_array($item)) {
 		refresh('?m='.$_GET['m'].'&c=queue_update', 'WRONG ID', 'error');
 	}
 	$item['user'] = $usersClass->get($item['user_id']);
-	abr('item', $item);	
+    $item["thumbnail"] =DATA_SERVER.'/uploads/items/'.$data['item_id'].'/'. $item["thumbnail"];
+    $item["theme_preview"]= DATA_SERVER.'/uploads/items/'.$data['item_id'].'/'. $item["theme_preview"];
+    $item["main_file"]= DATA_SERVER.'/uploads/items/'.$data['item_id'].'/'. $item["main_file"];
+	abr('item', $item);
 	
 	if(isset($_POST['submit'])) {
 		
@@ -56,5 +70,6 @@ _setTitle($langArray['queue']);
 			}
 		}		
 	}
-	
+
+require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
 ?>

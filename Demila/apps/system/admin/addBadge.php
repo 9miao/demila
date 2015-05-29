@@ -55,3 +55,4 @@ if(!isset($_GET['type']) || !in_array($_GET['type'], array('other','buyers','aut
 	}
 	
 	abr('types_system', $types_system);
+require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';

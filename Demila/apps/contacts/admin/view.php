@@ -35,5 +35,6 @@ _setTitle($langArray['view']);
 	}
 	
 	$_POST = $data;
+    require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
 	
 ?>

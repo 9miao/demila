@@ -37,7 +37,8 @@ $balanceClass = new balance();
 
 $data = $balanceClass->getUserBalance($_GET['id'], null);
 
-abr('data', $data); 
+abr('data', $data);
 
+require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
 
 ?>

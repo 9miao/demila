@@ -26,4 +26,6 @@ _setTitle ( $langArray ['withdraws'] );
 
 	$p = paging ( "?m=" . $_GET ['m'] . "&c=withdraws&p=", "", PAGE, LIMIT, $cms->foundRows );
 	abr ( 'paging', $p );
+require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
+
 ?>

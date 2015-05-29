@@ -51,6 +51,7 @@ _setView ( __FILE__ );
 	} else {
 		abr('v_num', isset($meta[$key . '_v_num']) ? $meta[$key . '_v_num'] : '');
 	}
+require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
 	
 	
 	

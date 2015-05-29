@@ -18,5 +18,6 @@ _setView ( __FILE__ );
 
     abr("data",$extendsList);
 
+require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
 
 ?>

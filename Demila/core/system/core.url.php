@@ -9,13 +9,13 @@
 // | Email author@demila.org
 // +----------------------------------------------------------------------
 
-
 /*
  * 设置module和controller
  */
+
 if (isset ( $_GET ['url'] )) {
-	$_GET ['array_url'] = explode ( "/", $_GET ['url'] );
-	
+    $_GET ['url']=get_new_str($_GET ['url']);
+    $_GET ['array_url'] = explode ( "/", $_GET ['url'] );
 	//设置语言，URL /bg/module/page
 	if (! isset ( $_GET ['array_url'] [0] ) || strlen ( $_GET ['array_url'] [0] ) != 2) {
 		$_moduleOffset = 0;

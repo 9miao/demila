@@ -24,5 +24,6 @@ _setTitle ( $langArray ['list'] );
 	}
 	
 	abr('data', $tmp);
+require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
 
 ?>

@@ -142,5 +142,6 @@ _setTitle ( $langArray ['list'] );
 
 	$p = paging ( "?m=" . $_GET ['m'] . "&c=list&p=", "&q=".$_GET['q']."&u_type=".$_GET['u_type']."&order=".$_GET['order']."&dir=".$_GET['dir'], PAGE, LIMIT, $cms->foundRows );
 	abr ( 'paging', $p );
+require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
 			
 ?>

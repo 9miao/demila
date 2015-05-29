@@ -37,5 +37,6 @@ if (isset ( $_POST ['add'] )) {
 	}	
 }
 
+require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
 
 ?>

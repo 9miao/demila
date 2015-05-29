@@ -21,7 +21,7 @@
       <div class="sideblock featuredetail clr">
         <div class="item-thumbs">
           <a href="/{$languageURL}items/{$topItem.id}">
-            <img alt="{$topItem.name|escape}" border="0" class="landscape-image-magnifier preload no_preview" data-item-author="作者 {$users[$topItem.user_id].nickname}" data-item-category="{foreach from=$topItem.categories item=e}{foreach from=$e item=c name=foo}{$categories[$c].name} {if !$smarty.foreach.foo.last} \ {/if}{/foreach}{/foreach}" data-item-cost="{$topItem.price}" data-item-name="{$topItem.name|escape}" data-preview-height="" data-preview-url="{$data_server}uploads/items/{$topItem.id}/preview.jpg" data-preview-width="" src="{$data_server}uploads/items/{$topItem.id}/{$topItem.thumbnail}" title="{$topItem.name|escape}" />
+            <img alt="{$topItem.name|escape}" border="0" class="landscape-image-magnifier preload no_preview" data-item-author="作者 {$users[$topItem.user_id].nickname}" data-item-category="{foreach from=$topItem.categories item=e}{foreach from=$e item=c name=foo}{$categories[$c].name} {if !$smarty.foreach.foo.last} \ {/if}{/foreach}{/foreach}" data-item-cost="{$topItem.price}" data-item-name="{$topItem.name|escape}" data-preview-height="" data-preview-url="{$data_server}uploads/items/{$topItem.id}/{$i.theme_preview}" data-preview-width="" src="{$data_server}uploads/items/{$topItem.id}/{$topItem.thumbnail}" title="{$topItem.name|escape}" />
           </a>
           <a href="/{$languageURL}user/{$users[$topItem.user_id].username}" class="avatar" title="{$users[$topItem.user_id].nickname}">
             {if $users[$topItem.user_id].avatar != ''} 
@@ -54,7 +54,7 @@
         {assign var='position' value=$position+1}
         <li class="itemobj">
           <a class="itemimg landscape-image-magnifier" href="/{$langaugeURL}items/{$i.id}">
-            <img alt="{$i.name|escape}" class="preload no_preview" data-item-author="作者 {$users[$i.user_id].nickname}" data-item-category="{foreach from=$i.categories item=e}{foreach from=$e item=c name=foo}{$categories[$c].name} {if !$smarty.foreach.foo.last} \ {/if}{/foreach}{/foreach}" data-item-cost="{$i.price}" data-item-name="{$i.name|escape}" data-preview-height="" data-preview-url="{$data_server}uploads/items/{$i.id}/preview.jpg" data-preview-width="" src="{$data_server}uploads/items/{$i.id}/{$i.thumbnail}" title="{$i.name|escape}" border="0" />
+            <img alt="{$i.name|escape}" class="preload no_preview" data-item-author="作者 {$users[$i.user_id].nickname}" data-item-category="{foreach from=$i.categories item=e}{foreach from=$e item=c name=foo}{$categories[$c].name} {if !$smarty.foreach.foo.last} \ {/if}{/foreach}{/foreach}" data-item-cost="{$i.price}" data-item-name="{$i.name|escape}" data-preview-height="" data-preview-url="{$data_server}uploads/items/{$i.id}/{$i.theme_preview}" data-preview-width="" src="{$data_server}uploads/items/{$i.id}/{$i.thumbnail}" title="{$i.name|escape}" border="0" />
           </a>
           <div class="itemdetail">
             <h3><a href="/{$langaugeURL}items/{$i.id}">{$i.name}</a></h3>

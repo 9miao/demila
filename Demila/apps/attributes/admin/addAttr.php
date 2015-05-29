@@ -35,5 +35,6 @@ _setTitle ( $langArray ['add'].' '.$langArray['attribute'] );
 	$categoriesClass = new categories();
 	$pdata = $categoriesClass->get($_GET['id']);
 	abr('pdata', $pdata);
-		
+require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
+
 ?>

@@ -37,5 +37,6 @@ _setTitle ( $langArray ['edit'].' '.$langArray['answer'] );
 	$categoriesClass = new quiz();
 	$pdata = $categoriesClass->get($_GET['id']);
 	abr('pdata', $pdata);
+require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
 				
 ?>

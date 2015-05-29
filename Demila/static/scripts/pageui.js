@@ -1,5 +1,7 @@
 define(function (require, exports, module){
-	var $ = require("jq");
+	var $ = require("jq"),
+		ybro = require("modules/hbrowser"),
+		theDef = require("default");
 
 	function idxTopLbinit(opts){
 		var $lbdom = opts.lbdom,
@@ -258,10 +260,20 @@ define(function (require, exports, module){
 	exports.navSearchHide = navSearchHide;
 
 	function imgMagnifier(filter){
-		$(filter).on("mouseenter", function() {
-			showMagnifier($(this).find("img"));
-		}), $(filter).on("mouseleave", function() {
-			hideMagnifier($(this).find("img"));
+		if(checkMobile()){
+			return;
+		}
+		$(filter).each(function(){
+			var that = $(this);
+				imgs = that.find("img");
+			that.on("mouseenter", function() {
+				showMagnifier($(this).find("img"));
+			}).on("mouseleave", function() {
+				hideMagnifier($(this).find("img"));
+			});
+			if(!theDef.checkImage(imgs.attr("data-preview-url"))){
+				that.append("<span class='controls'></span>");
+			}
 		});
 	}
 	exports.imgMagnifier = imgMagnifier;
@@ -352,7 +364,7 @@ define(function (require, exports, module){
 	}
 	exports.tabsinit = tabsinit;
 
-	function ajaxupload_init(pts, $cleanbtn, is_extend){
+	function ajaxupload_init_old(pts, $cleanbtn, is_extend){
 		require.async(["ajaxup", "ajaxupque", "ajaxupfile", "ajaxuphand"], function(ajman, ajque, ajfile, ajhand){
 			ajman();
 			ajque();
@@ -378,7 +390,7 @@ define(function (require, exports, module){
 
 		});
 	}
-	exports.ajaxupload_init = ajaxupload_init;
+	exports.ajaxupload_init_old = ajaxupload_init_old;
 
 	function itemlistAjax($btns, $list, $loading){
 		var itemlistcach = {};
@@ -414,17 +426,51 @@ define(function (require, exports, module){
 	}
 	exports.itemlistAjax = itemlistAjax;
 
+	function uploadInit(url, sessid, funtype){
+		var domid = [],
+			filetype = ["thumbnail", "main_file", "first_preview", "theme_preview"],
+			nums = ["single", "single", "single", "multiple"],
+			showtype = ["image", "zip", "image", "prev"],
+			issubmit = false;
+		if(funtype === "edit"){
+			window.onbeforeunload = function(){
+				if(!issubmit){
+			    	return ("您的修改尚未保存，确定离开此页面？");
+				}
+			}
+			$("form").on("submit", function(){
+				issubmit = true;
+			});
+			domid = ["#thumbnail_edit", "#main_file_edit", "#first_preview_edit", "#theme_preview_edit"];
+		}else{
+			domid = ["#thumbnail", "#main_file", "#first_preview", "#theme_preview"];
+		}
+		if(window.FormData === undefined){
+			require.async(["modules/ajaxupload_old"], function(upload){
+				upload.init(domid, filetype, nums, showtype, url, sessid, funtype);
+			});
+		}else{
+			require.async(["modules/ajaxupload"], function(upload){
+				upload.init(domid, filetype, nums, showtype, url, sessid, funtype);
+			});
+		}
+	}
+	exports.uploadInit = uploadInit;
+
 
 	//私有属性
 	var IMGMSG = {mw: 494, mh: 339, pi: {w: 90, h: 90}, pw: 1080},
 		price_prefix = "";
+	function checkMobile(){
+		return ybro.versions.mobile || ybro.versions.iPad;
+	}
 	function makeItemHtml(data){
 		var tmp = "";
 		for(var i = 0, len = data.length; i < len; i++){
 			var j = data[i];
 			tmp += "<li class='thumbnail landscape-image-magnifier'>\
 				<a href='/items/" + j.id + "'>\
-				<img alt='" + j.name + "' border='0' class='preload no_preview' data-item-author='作者 " + (j.user_info)["item-author"] + "' data-item-category='" + getCateStr(j.item_categories) + "' data-item-cost='" + j.price + "' data-item-name='" + j.name + "' data-preview-height='' data-preview-url='" + j.theme_preview + "' data-preview-width='' src='" + j.thumbnail + "' title='" + j.name + "' />\
+				<img alt='" + j.name + "' border='0' class='preload no_preview' data-item-author='作者 " + (j.user_info)["item-author"] + "' data-item-category='" + getCateStr(j.item_categories) + "' data-item-cost='" + j.price + "' data-item-name='" + j.name + "' data-preview-height='' data-preview-url='/uploads/items/" + j.id + "/preview.jpg' data-preview-width='' src='/uploads/items/" + j.id + "/" + j.thumbnail + "' title='" + j.name + "' />\
 				</a>\
 				</li>";
 		}
@@ -460,15 +506,28 @@ define(function (require, exports, module){
 		});
 	}
 	function populateMagnifierFrom(e) {
-		bindMetaData(e)
-      var t, n = magnifierDiv(),
-        r = n.find("div.size-limiter"),
-        i = $(e);
-      //i.attr("data-preview-url") ? 
-      //alert(i.attr("data-preview-url"));
-      t = new Image, $(t).attr("src", i.attr("data-preview-url"))
-      //, i.attr("data-preview-height") && ($(t).attr("height", 350), $(t).attr("width", 350 / i.attr("data-preview-height") * i.attr("data-preview-width"))), 
-      r.empty(), r.append(t)//, r.show()) : r.hide(), bindMetaData(e)
+		bindMetaData(e);
+		var t,
+			n = magnifierDiv(),
+			r = n.find("div.size-limiter"),
+			tit = n.find("strong"),
+			i = $(e),
+			path = i.attr("data-preview-url"),
+			free = i.attr("item-type-free");
+		if(free == "1"){
+			n.find(".price").addClass("freepri");
+		}else{
+			n.find(".price").removeClass("freepri");
+		}
+		if(theDef.checkImage(path)){
+			t = new Image;
+			$(t).attr("src", path);
+			r.show().empty().append(t);
+			tit.removeClass("autow");
+		}else{
+			r.hide();
+			tit.addClass("autow");
+		}
     }
 	function bindMetaData(e) {
 		var t = $(e),

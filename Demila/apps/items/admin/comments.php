@@ -41,5 +41,6 @@ _setView(__FILE__);
 	$item = $itemsClass->get($_GET['id']);
 	
 	_setTitle($item['name'].' &rsaquo; '.$langArray['comments']);
-	
+
+require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
 ?>

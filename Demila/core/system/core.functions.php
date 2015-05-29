@@ -55,6 +55,7 @@ function abr($var, $value) {
 	$smarty->assign_by_ref ( $var, $value );
 }
 
+
 /*
  * 替换文本中的变量
  */
@@ -81,19 +82,52 @@ function get_id($level) {
 	if($config['use_language']) {
 		$level = $level + 1;
 	}
-	
 	if (! isset ( $_GET ['array_url'] [$level] )) {
 		return false;
 	}
-	
-	if (strstr ( $_GET ['array_url'] [$level], "." )) {
-		$all = explode ( ".", $_GET ['array_url'] [$level] );
-	} else {
-		$all [0] = $_GET ['array_url'] [$level];
-	}
-	return $all [0];
-	
-	return $_GET ['array_url'] [$level];
+
+    if (strstr ( $_GET ['array_url'] [$level], "." )) {
+        $all = explode ( ".", $_GET ['array_url'] [$level] );
+        return $all;
+    } else {
+        $all [0] = $_GET ['array_url'] [$level];
+    }
+    return $all [0];
+}
+/*
+ * url过滤
+ */
+function get_new_str($str){
+    $str=str_replace("'", "",  $str);
+    $str=str_replace('"', "",  $str);
+    $str=str_replace(",", "",  $str);
+    $str=str_replace("(", "",  $str);
+    $str=str_replace(")", "",  $str);
+    $str=str_replace("`", "",  $str);
+    $str=str_replace(" ", "",  $str);
+    $str=str_replace("<", "",  $str);
+    $str=str_replace(">", "",  $str);
+    $str=str_replace("and", "",  $str);
+    $str=str_replace("AND", "",  $str);
+    $str=str_replace("delete", "",  $str);
+    $str=str_replace("DELETE", "",  $str);
+    $str=str_replace("update", "",  $str);
+    $str=str_replace("UPDATE", "",  $str);
+    $str=str_replace("WHERE", "",  $str);
+    $str=str_replace("where", "",  $str);
+    $str=str_replace("INSERT", "",  $str);
+    $str=str_replace("insert", "",  $str);
+    $str=str_replace("CREATE", "",  $str);
+    $str=str_replace("create", "",  $str);
+    $str=str_replace("modify", "",  $str);
+    $str=str_replace("MODIFY", "",  $str);
+    $str=str_replace("DROP", "",  $str);
+    $str=str_replace("drop", "",  $str);
+    $str=str_replace("ALTER", "",  $str);
+    $str=str_replace("alter", "",  $str);
+    $str=str_replace("select", "",  $str);
+    $str=str_replace("SELECT", "",  $str);
+    return $str;
 }
 
 /*
@@ -362,7 +396,6 @@ function deldir($dir) {
             }
         }
     }
-
     closedir($dh);
     //删除当前文件夹：
     if(rmdir($dir)) {
@@ -387,4 +420,72 @@ function add_debug($val) {
 	return true;
 }
 
+function recursiveChmod($path, $filePerm=0644, $dirPerm=0755)
+{
+    // Check if the path exists
+    if(!file_exists($path))
+    {
+        return(FALSE);
+    }
+    // See whether this is a file
+    if(is_file($path))
+    {
+        // Chmod the file with our given filepermissions
+        chmod($path, $filePerm);
+        // If this is a directory...
+    } elseif(is_dir($path)) {
+        // Then get an array of the contents
+        $foldersAndFiles = scandir($path);
+        // Remove "." and ".." from the list
+        $entries = array_slice($foldersAndFiles, 2);
+        // Parse every result...
+        foreach($entries as $entry)
+        {
+            // And call this function again recursively, with the same permissions
+            recursiveChmod($path."/".$entry, $filePerm, $dirPerm);
+        }
+        // When we are done with the contents of the directory, we chmod the directory itself
+        chmod($path, $dirPerm);
+    }
+    // Everything seemed to work out well, return TRUE
+    return(TRUE);
+}
+
+function getFile($url,$save_dir='',$filename='',$type=0){
+    if(trim($url)==''){
+        return false;
+    }
+    if(trim($save_dir)==''){
+        $save_dir='./';
+    }
+    if(0!==strrpos($save_dir,'/')){
+        $save_dir.='/';
+    }
+    //创建保存目录
+    if(!file_exists($save_dir)&&!mkdir($save_dir,0777,true)){
+        return false;
+    }
+    //获取远程文件所采用的方法
+    if($type){
+        $ch=curl_init();
+        $timeout=5;
+        curl_setopt($ch,CURLOPT_URL,$url);
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+        curl_setopt($ch,CURLOPT_CONNECTTIMEOUT,$timeout);
+        $content=curl_exec($ch);
+        curl_close($ch);
+    }else{
+        ob_start();
+        readfile($url);
+        $content=ob_get_contents();
+        ob_end_clean();
+    }
+    $size=strlen($content);
+    //文件大小
+    $fp2=@fopen($save_dir.$filename,'a');
+    fwrite($fp2,$content);
+    fclose($fp2);
+    unset($content,$url);
+    return array('file_name'=>$filename,'save_path'=>$save_dir.$filename);
+}
 ?>

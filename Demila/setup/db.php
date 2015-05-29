@@ -359,6 +359,7 @@ function sql_quote($value, $toStrip = true) {
 		  `name` varchar(255) NOT NULL COMMENT '页面名称',
 		  `text` longtext NOT NULL COMMENT '页面详细内容',
 		  `menu` enum('true','false') NOT NULL default 'false' COMMENT '加入顶部菜单',
+		  `footer` ENUM( 'true', 'false' ) NOT NULL,
 		  `visible` enum('true','false') NOT NULL default 'false' COMMENT '可见',
 		  `order_index` int(11) NOT NULL COMMENT '排序',
 		  PRIMARY KEY  (`id`),
@@ -366,7 +367,7 @@ function sql_quote($value, $toStrip = true) {
 		  KEY `key` (`key`)
 		) ENGINE=InnoDB COMMENT='自定义页面';
 	");
-	
+
 	mysql_query("
 		CREATE TABLE IF NOT EXISTS `percents` (
 		  `id` int(11) NOT NULL auto_increment COMMENT 'ID',
@@ -670,6 +671,10 @@ CREATE TABLE IF NOT EXISTS `users` (
 	mysql_query("
 		INSERT INTO `system` (`id`, `key`, `value`, `system`) VALUES (NULL, 'site_logo', '', '1');
 	");
+
+    mysql_query("
+		INSERT INTO `system` (`id`, `key`, `value`, `system`) VALUES (NULL, 'send_mail', '1', '1');
+	");
 //(6, 'alipay_v_num1', '906484688@qq.com'),
 //			(7, 'alipay_v_mid1', '2088002024513441'),
 //			(8, 'alipay_v_key1', '2e8mtfx8xfw6hpjjlia35px8qz767om6')
@@ -762,11 +767,7 @@ INSERT INTO `badges` (`id`, `name`, `photo`, `visible`, `from`, `to`, `type`, `s
 	mysql_query("
 		ALTER TABLE `users` ADD `badges` TEXT NOT NULL;
 	");
-	
-	mysql_query("
-		ALTER TABLE `pages` ADD `footer` ENUM( 'true', 'false' ) NOT NULL AFTER `menu` , ADD INDEX ( `footer` );
-	");
-	
+
 	mysql_query("
 		ALTER TABLE `users_referals_count` ADD `referal_id` INT( 11 ) NOT NULL , ADD INDEX ( `referal_id` ); 
 	");
@@ -818,6 +819,27 @@ INSERT INTO `badges` (`id`, `name`, `photo`, `visible`, `from`, `to`, `type`, `s
 (4, '中国台湾', 'twn.png', 'true', 4),
 (5, '美利坚合众国', 'usa.png', 'true', 5);
 	");
+    mysql_query("
+            CREATE TABLE IF NOT EXISTS `service` (
+              `id` int(11) NOT NULL AUTO_INCREMENT,
+              `user_name` varchar(20) NOT NULL COMMENT '客服姓名',
+              `email` varchar(30) DEFAULT NULL COMMENT '邮件',
+              `info` varchar(255) DEFAULT NULL COMMENT '备注',
+              `status` enum('true','false') DEFAULT 'true' COMMENT '状态',
+              `time` int(11) DEFAULT NULL COMMENT '时间',
+              `service_num` int(11) DEFAULT NULL,
+              `service_status` tinyint(1) DEFAULT '1' COMMENT '服务状态（0：该轮已服务，1：该轮未服务）',
+              PRIMARY KEY (`id`)
+            ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+        ");
+
+    mysql_query("
+            CREATE TABLE IF NOT EXISTS `service_relation` (
+            `user_id` int(11) NOT NULL COMMENT '用户id',
+            `service_user_id` int(11) NOT NULL COMMENT '客服id',
+            PRIMARY KEY (`user_id`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='客服用户关联表';
+        ");
 	
 	mysql_query("	
            INSERT INTO `deposit` (`id`, `user_id`, `deposit`, `paid`, `datetime`, `from_admin`) VALUES
@@ -837,7 +859,7 @@ INSERT INTO `badges` (`id`, `name`, `photo`, `visible`, `from`, `to`, `type`, `s
 
     //截图包上传
 
-    mysql_query("insert into `app_extends`(`extend_name`,`state`,`m`,`c`)  VALUES  ('截图包上传',0,'uploads_extends','uploads_extends');");
+    mysql_query("insert into `app_extends`(`extend_name`,`state`,`m`,`c`)  VALUES  ('截图包上传',1,'uploads_extends','uploads_extends');");
 
     mysql_query("
 		 alter table temp_items change theme_preview theme_preview TEXT;

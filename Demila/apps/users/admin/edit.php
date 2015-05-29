@@ -81,5 +81,6 @@ _setTitle ( $langArray ['edit'] );
 	} else {
 		$_POST['badges'] = array();
 	}
-	
+
+require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
 ?>

@@ -648,7 +648,8 @@
 	overflow: hidden;
 }
 .itemobj .itemstars .starnums .allstars, .featuredetail .itemstars .starnums .allstars{
-	background: url(/static/img/custom/starbg.jpg) no-repeat center center;
+	background: url(/static/img/custom/starbg.png) no-repeat center center;
+	_background: url(/static/img/custom/starbg.jpg) no-repeat center center;
 	width: 103px;
 	height: 19px;
 	display: block;
@@ -658,7 +659,8 @@
 	width: 103px;
 	height: 19px;
 	z-index: 5;
-	background: url(/static/img/custom/starbg2.jpg) no-repeat center center;
+	background: url(/static/img/custom/starbg2.png) no-repeat center center;
+	_background: url(/static/img/custom/starbg2.jpg) no-repeat center center;
 }
 .item-grid .itemobj .sales{
 	font-size: 14px;
@@ -789,6 +791,20 @@
 }
 .resourcebg .leftdetail .detailimg .links .bdshare-button-style1-32 a.bds_weixin{
 	background-position: -72px -346px;
+}
+.resourcebg .leftdetail .radiogroup{
+	margin: 15px 0 10px 0;
+}
+.leftdetail .radiogroup input, .leftdetail .radiogroup label{
+	float: left;
+	height: 18px;
+	line-height: 18px;
+}
+.leftdetail .radiogroup input{
+	margin: 0 4px 0 0;
+}
+.leftdetail .radiogroup label{
+	margin-right: 12px;
 }
 .resourcebg .leftdetail .detailtxt{
 	color: #5d5c5c;
@@ -1146,9 +1162,11 @@
 	font-size: 16px;
 	color: #505050;
 }
-.leftdetail .editblock .inputs span{
-	font-size: 14px;
-	margin-top: 4px;
+.leftdetail .editblock span.inputtips{
+	position: relative;
+	display: block;
+	font-size: 12px;
+	margin: -20px 0 25px 21.5%;
 	color: #7d7d7d;
 }
 .leftdetail .editblock .inputs span.sp{
@@ -1424,4 +1442,229 @@ h3 .header-note {
     background: url("/static/img/note.gif") no-repeat scroll 19px 10px #dcd7cd;
     border: 1px solid #9d948e;
     padding: 20px 20px 20px 60px;
+}
+.inputs .tagtips{
+}
+.horizontal-form .inputs.tagsinputs{
+	width: 76%;
+}
+.inputs .tagtips .tageditbtn{
+	float: left;
+	height: 24px;
+	line-height: 24px;
+	font-size: 14px;
+	display: block;
+	color: #fff;
+	background: url(/static/img/custom/edittip.jpg) no-repeat 4px center;
+	background-color: #bbb;
+	padding: 0 12px 0 26px;
+	border-radius: 4px;
+	cursor: pointer;
+	margin-top: 4px;
+}
+.inputs .tagtips .tagtipobj, .rightdetail .sideblock.attribute .attr-detail.itemtags a{
+	float: left;
+	height: 22px;
+	line-height: 22px;
+	border: 1px solid #25a5da;
+	border-radius: 5px;
+	padding: 0 6px 0 8px;
+	margin-right: 6px;
+	color: #25a5da;
+	margin-top: 4px;
+}
+.inputs .tagtips .tagtipobj .tiptxt{
+	float: left;
+	padding-right: 5px;
+}
+.inputs .tagtips .tagtipobj .delbtn{
+	float: left;
+	background: url(/static/img/custom/closetip.jpg) no-repeat center center;
+	width: 19px;
+	height: 22px;
+	cursor: pointer;
+}
+.inputs .addtags{
+	display: none;
+	margin-top: 6px;
+}
+.inputs .addtags .tagiptbg{
+	float: left;
+	width: 40%;
+	position: relative;
+}
+.inputs .addtags .tagiptbg .addtaglist{
+	display: none;
+	border: 1px solid #bbb;
+	border-top: none;
+	position: absolute;
+	width: 98%;
+	background-color: #fff;
+	z-index: 2000;
+	max-height: 120px;
+	overflow-y: scroll;
+}
+.inputs .addtags .tagiptbg .addtaglist .addtagobj{
+	height: 24px;
+	line-height: 24px;
+	padding: 2px 5px;
+}
+.inputs .addtags .tagiptbg .addtaglist .addtagobj.hover{
+	background-color: #e5e4e4;
+	cursor: pointer;
+}
+.inputs .addtags .addtagsbtn{
+	float: left;
+	height: 32px;
+	line-height: 32px;
+	background-color: #e5e4e4;
+	color: #787878;
+	border-radius: 5px;
+	padding: 0 15px;
+	cursor: pointer;
+	margin-left: 1%;
+}
+.inputs.checkobjs{
+	width: 76%;
+	padding-top: 6px;
+}
+.inputs.checkobjs .checkobj{
+	float: left;
+	width: 20%;
+	margin-bottom: 5px;
+}
+.inputs.checkobjs .checkobj input, .inputs.checkobjs .checkobj .checktxt{
+	float: left;
+}
+.inputs.checkobjs .checkobj input{
+	margin: 4px 2px 0 0;
+}
+.inputs.checkobjs .checkobj .checktxt{
+	margin: 0;
+}
+.inputs.uploadobjs{
+	width: 76%;
+	padding-top: 6px;
+}
+.inputs.uploadobjs .uploadobj{
+	float: left;
+	width: 90px;
+	height: 90px;
+	margin: 0 1% 3px 1%;
+	position: relative;
+}
+.inputs.uploadobjs .uploadobj input{
+	border: none;
+	background: none;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	opacity: 0;
+	padding: 0;
+	filter: alpha(opacity=0);
+	z-index: 200;
+	cursor: pointer;
+}
+.inputs.uploadobjs .uploadobj.uploadcus input{
+	width: 17px;
+	height: 17px;
+	z-index: 400;
+	top: 0;
+	left: 0;
+}
+.inputs.uploadobjs .uploadobj .objimg{
+	position: absolute;
+	z-index: 100;
+	border: 1px dashed #999;
+	width: 98%;
+	height: 98%;
+}
+.inputs.uploadobjs .uploadobj .objimg.uploading, .inputs.uploadobjs .uploadobj .objimg.hasobj, .inputs.uploadobjs .uploadobj .objimg.onuploading{
+	border: none;
+	width: 100%;
+	height: 100%;
+}
+.inputs.uploadobjs .uploadobj .objimg.addNew{
+	background: url(/static/img/custom/plus.png) no-repeat center center;
+}
+.inputs.uploadobjs .uploadobj:hover .objimg.addNew{
+	background-color: #eee;
+}
+.inputs.uploadobjs .uploadobj .objimg.imgupload{
+	background: url(/static/img/custom/image.png) no-repeat center center;
+}
+.inputs.uploadobjs .uploadobj .objimg.zipupload{
+	background: url(/static/img/custom/file_zip.png) no-repeat center center;
+}
+.inputs.uploadobjs .uploadobj .objimg.onuploading{
+	background: url(/static/img/loading.gif) no-repeat center center;
+}
+.inputs.uploadobjs .uploadobj .objimg.filebg{
+	background: url(/static/img/custom/file_bg.png) no-repeat center center;
+	height: 90px;
+	line-height: 90px;
+	text-align: center;
+	color: #828282;
+	font-weight: bold;
+	cursor: default;
+	font-size: 18px;
+}
+.inputs.uploadobjs .uploadobj .objimg img{
+	width: 60%;
+	margin: 11% 20%;
+	height: 78%;
+	display: block;
+}
+.inputs.uploadobjs .uploadobj .progress{
+	display: none;
+	position: absolute;
+	z-index: 150;
+	width: 100%;
+	height: 0;
+	background-color: #000;
+	opacity: .5;
+	filter: alpha(opacity=50);
+	bottom: 0;
+}
+.inputs.uploadobjs .uploadobj .progresstxt{
+	display: none;
+	position: absolute;
+	z-index: 150;
+	width: 100%;
+	height: 100%;
+	line-height: 90px;
+	color: #999;
+	text-align: center;
+	font-size: 2em;
+}
+.inputs.uploadobjs .uploadobj .objtools{
+	position: absolute;
+	top: 0;
+	width: 16px;
+	height: 16px;
+	z-index: 300;
+	background-color: #eee;
+	cursor: pointer;
+	display: none;
+}
+.inputs.uploadobjs .uploadobj .objtools.editbtn{
+	left: 0;
+	width: 17px;
+	height: 17px;
+	background: url(/static/img/sprites.png) no-repeat 0 -1266px;
+}
+.inputs.uploadobjs .uploadobj .objtools.deletbtn{
+	right: 0;
+	background: url(/static/img/custom/delete.png) no-repeat center center;
+}
+.inputs.uploadobjs .uploadobj .errtxt{
+	margin: 0;
+	padding-top: 20%;
+	height: 80%;
+	width: 100%;
+	position: absolute;
+	z-index: 200;
+	text-align: center;
+	background-color: rgba(255, 255, 255, .5);
+	color: #f00;
 }

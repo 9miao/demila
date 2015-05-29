@@ -59,5 +59,6 @@ if(!isset($_GET['fid']) || !is_numeric($_GET['fid'])) {
 	}
 	
 	abr('types_system', $types_system);
+require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
 				
 ?>

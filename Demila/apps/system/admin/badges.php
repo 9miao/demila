@@ -36,3 +36,4 @@ abr('data', $data);
 
 $p = paging ( "?m=" . $_GET ['m'] . "&c=badges&type=" . $_GET['type'] . "&p=", "", PAGE, LIMIT, $badges->foundRows );
 abr ( 'paging', $p );
+require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';

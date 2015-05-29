@@ -23,5 +23,6 @@ _setTitle ( $langArray ['add'] );
 			refresh ( "?m=" . $_GET ['m'] . "&c=service", $langArray ['add_complete'] );
 		}
 	}
-	
+
+require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
 ?>

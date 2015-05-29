@@ -9,14 +9,6 @@
     <h2>管理员控制面板</h2>
   </div>
 </div>
-<!--<div class="page-info">
-    <div class="container">
-      <div id="breadcrumbs">
-        <a href="/" class="first">主页</a> \ </div>
-       <h2 class="page-title">管理员控制面板 </h2>
-    </div>
-	{include file="$root_path/apps/admin/admin_tabsy.html"}
-</div>-->
 <div class="ucbg">
 	<div class="ucblock paddingt clr">
 		{include file="$root_path/apps/lists/leftlist_admin.html"}
@@ -73,8 +65,13 @@
 					<td>当前版本：</td>
 					<td>Demila{$smarty.const.VERSION}
                     {if $smarty.const.VERSION < $version.content}
-                    &nbsp;&nbsp;&nbsp;&nbsp;<a style="cursor: pointer;" class="update" ajax-url="/admin/index" ajax-data="{literal}{'update_version':'true'}{/literal}" >更新Demila</a>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<a href="{$download}demila{$version.content}.zip"> <input type="button" value="下载Demila{$version.content}"></a>
+                       <div id="update_button" >
+                           <a style="cursor: pointer;" class="update" ajax-url="/update.php" ajax-data="{literal}{'update_version':'true'}{/literal}" >更新Demila</a>
+                           &nbsp;&nbsp;&nbsp;&nbsp;<a href="{$download}Demila{$version.content}.zip"> <input type="button" value="下载Demila{$version.content}"></a>
+                       </div>
+                        <div id="update_ing" style="display: none;" >
+                            &nbsp;&nbsp;&nbsp;&nbsp;<b>正在更新…请稍等…更新过程中不要关闭窗口…</b>
+                        </div>
                     {/if}
                     </td>
 				</tr>
@@ -91,8 +88,10 @@
 {literal}
 <script type="text/javascript">
     seajs.use(["modules/ajax"], function(aj){
-        aj.ajaxbtninit("#versions .update", "ajax-url", "ajax-data", function(data){
+        aj.ajaxbtnupdate("#versions .update", "ajax-url", "ajax-data", function(data){
+            if(data.msg)
             alert(data.msg);
+            window.location.reload();
         }, false, true);
     });
 </script>

@@ -117,5 +117,6 @@ _setTitle($langArray['items']);
 
 	$users = $usersClass->getAll(0, 0, '', '`username` ASC');
 	abr('users', $users);
-	
+
+require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
 ?>

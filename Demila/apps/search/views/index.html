@@ -159,7 +159,7 @@
 					{foreach from=$results item=i name=foo}
 					<li class="itemobj">
 						<a class="itemimg" href="/{$langaugeURL}items/{$i.id}" onclick="">
-							<img alt="{$i.name|escape}" border="0" class="landscape-image-magnifier preload no_preview" data-item-author="作者 {$users[$i.user_id].username}" data-item-category="{foreach from=$i.categories item=e}{foreach from=$e item=c name=foo}{$categories[$c].name} {if !$smarty.foreach.foo.last} \ {/if}{/foreach}{/foreach}" data-item-cost="{$i.price}" data-item-name="{$i.name|escape}" data-preview-height="" data-preview-url="{$data_server}/uploads/items/{$i.id}/preview.jpg" data-preview-width="" src="{$data_server}/uploads/items/{$i.id}/{$i.thumbnail}" title="{$i.name|escape}" />
+							<img alt="{$i.name|escape}" border="0" class="landscape-image-magnifier preload no_preview" data-item-author="作者 {$users[$i.user_id].username}" data-item-category="{foreach from=$i.categories item=e}{foreach from=$e item=c name=foo}{$categories[$c].name} {if !$smarty.foreach.foo.last} \ {/if}{/foreach}{/foreach}" data-item-cost="{$i.price}" data-item-name="{$i.name|escape}" data-preview-height="" data-preview-url="{$data_server}/uploads/items/{$i.id}/{$i.theme_preview}" data-preview-width="" src="{$data_server}/uploads/items/{$i.id}/{$i.thumbnail}" title="{$i.name|escape}" />
 						</a>
 						<div class="itemdetail">
 							<h3><a href="/{$languageURL}items/{$i.id}">{$i.name}</a></h3>

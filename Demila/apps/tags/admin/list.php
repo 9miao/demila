@@ -17,4 +17,5 @@ _setTitle ( $langArray ['list'] );
 	$data = $cms->getAll();
 	abr('data', $data);
 
+require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
 ?>

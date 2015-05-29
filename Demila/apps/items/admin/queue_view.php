@@ -24,12 +24,17 @@ _setTitle($langArray['queue']);
 	
 	require_once ROOT_PATH.'/apps/users/models/users.class.php';
 	$usersClass = new users();
-	
-	$data = $cms->get($_GET['id'], false);
-	$data['user'] = $usersClass->get($data['user_id']);
-	abr('data', $data); 
-	
-	if(isset($_POST['submit'])) {
+
+    $data = $cms->get($_GET['id'], false);
+    $data['preview'] = $cms->get_theme_preview($_GET['id']);
+    $data['user'] = $usersClass->get($data['user_id']);
+    //路径
+    $data["thumbnail"] =DATA_SERVER.'/uploads/items/'.$_GET['id'].'/'. $data["thumbnail"];
+    $data["theme_preview"]= DATA_SERVER.'/uploads/items/'.$_GET['id'].'/'. $data["theme_preview"];
+    $data["main_file"]= DATA_SERVER.'/uploads/items/'.$_GET['id'].'/'. $data["main_file"];
+    abr('data', $data);
+
+if(isset($_POST['submit'])) {
 		
 		if($_POST['action'] == 'approve') {
 			$s = $cms->approve($_GET['id']);
@@ -66,5 +71,15 @@ _setTitle($langArray['queue']);
 
 	$categories = $categoriesClass->getAll();
 	abr('categories', $categories);
-	
+
+    //获取所有推荐标签
+    require_once ROOT_PATH.'/apps/tags/models/tags.class.php';
+    $tagsClass = new tags();
+
+    //获取当前作品推荐标签
+    $tag_relation = $tagsClass ->get_tags_by_item_id($_GET['id']);
+    abr('item_tags',json_encode($tag_relation));
+
+
+require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
 ?>

@@ -11,9 +11,7 @@
 
 _setView(__FILE__);
 _setTitle($langArray['popular_files']);
-
 	abr('checkItemsType', 'yes');
-
 	$year = get_id(2);
 	$month = get_id(3);
 	$day = get_id(4);
@@ -22,8 +20,8 @@ _setTitle($langArray['popular_files']);
 		$month = date('m');
 		$day = date('d');
 	}
-	
-	$dayOfWeek = date('N', mktime(0, 0, 0, $month, $day, $year));
+    $dayOfWeek = date('N', mktime(0, 0, 0, $month, $day, $year));
+
 	$dayOfWeek = 7-$dayOfWeek;
 	if($dayOfWeek > 0) {
 		$endDate = date('Y-m-d', mktime(0, 0, 0, $month, ($day + $dayOfWeek), $year));
@@ -37,7 +35,6 @@ _setTitle($langArray['popular_files']);
 		}
 		$endDate = $year.'-'.$month.'-'.$day;
 	}
-	
 	$startDate = date('Y-m-d', (strtotime($endDate) - 604800));
 	abr('endDate', $endDate);
 	
@@ -59,7 +56,7 @@ _setTitle($langArray['popular_files']);
 	
 #获取作品	
 	$ordersClass = new orders();
-	
+
 	require_once ROOT_PATH.'/apps/users/models/users.class.php';
 	$usersClass = new users();
 	

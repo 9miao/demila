@@ -29,5 +29,6 @@ _setTitle ( $langArray ['edit'].' '.$langArray['country'] );
 	else {
 		$_POST = $cms->get($_GET['fid']);
 	}
+require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
 				
 ?>

@@ -26,6 +26,7 @@ _setTitle ( $langArray ['add'] );
 	else {
 		$_POST['visible'] = 'true';
 	}
+require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
 
-	
+
 ?>

@@ -3,12 +3,17 @@ define(function (require, exports, module){
 		yBrowser = require("modules/hbrowser");
 
 	function init(filter){
-		require.async(["swipebox"], function(swipebox){
-			swipebox($);
 
+		if(yBrowser.versions.isIE6){
+			return;
+		}
+		require.async(["demilamedia"], function(demilamedia){
+			demilamedia($);
 			$(filter).on("click", function(){
 				var tmp = getImgsJson($(this).attr("screenshot-img"), $(this).attr("screenshot-tit"));
-				$.swipebox(tmp);
+				//$.demilamedia("df");
+				$.demilamedia.open(tmp);
+				//$(this).demilamedia.open(tmp);
 				return false;
 			});
 		});

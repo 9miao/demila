@@ -25,5 +25,7 @@ _setTitle ( $langArray ['add'].' '.$langArray['country'] );
 	else {
 		$_POST['visible'] = 'true';
 	}
+
+require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
 		
 ?>

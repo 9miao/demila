@@ -19,4 +19,5 @@ _setTitle ( $langArray ['groups'] );
 
 	$p = paging ( "?m=" . $_GET ['m'] . "&c=groups&p=", "", PAGE, LIMIT, $cms->foundRows );
 	abr ( 'paging', $p );
+require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
 ?>

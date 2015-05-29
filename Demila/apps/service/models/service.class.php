@@ -207,7 +207,6 @@ class service extends base {
     }
     //创建表
     public function setup(){
-        mysql_query("insert into `app_extends`(`extend_name`,`state`,`m`,`c`)  VALUES ('客户服务管理',1,'service','service');");
 
         mysql_query("
 		CREATE TABLE IF NOT EXISTS `service` (

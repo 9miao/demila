@@ -22,16 +22,16 @@ define(function (require, exports, module){
 	function selectCheck($dom, exr){
 		var t = $dom.find("option");
 		if(t.length > 1){
-			t.each(function(){
+			if((t.parent().attr("id") != "temporary_files_to_assign_gallery_preview")){
+				t.parent().prepend("<option class='tmpoption' value='-1' selected='selected'>请选择...</option>");
+			}
+			t.each(function(e){
 				if($(this).val() == null || $(this).val() == ""){
 					$(this).remove();
 				}else if(!exr.test(getFileName($(this).val()))){
 					$(this).remove();
 				}
 			});
-			if(t.parent().attr("id") != "temporary_files_to_assign_gallery_preview"){
-				t.before("<option class='tmpoption' value='-1' selected='selected' style='display:none;'>请选择...</option>");
-			}
 		}
 	}
 	function addToSel($dom, obj){
@@ -202,7 +202,7 @@ The FileProgress class is not part of SWFUpload.
 							addToSel($("#" + selects[2]), elOptNew);
 						}
 					}
-			  		if(filecheck.preview.test(hz)){
+			  		if(!hasextend && filecheck.preview.test(hz)){
 						var elOptNew = $("<option></option>");
 						elOptNew.html(fname);
 						elOptNew.val(json_data_object.file.filename);

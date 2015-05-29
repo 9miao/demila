@@ -23,7 +23,13 @@ if(!check_login_bool()) {
 		header("HTTP/1.0 404 Not Found");
         header("Location: http://". DOMAIN ."/error");
 	}
-	abr('item', $item);
+    //路径
+    $item["thumbnail"] =DATA_SERVER.'/uploads/items/'.$itemID.'/'. $item["thumbnail"];
+    $item["theme_preview"]= DATA_SERVER.'/uploads/items/'.$itemID.'/'. $item["theme_preview"];
+    $item["main_file"]= DATA_SERVER.'/uploads/items/'.$itemID.'/'. $item["main_file"];
+    //获取所有预览图
+    $item['preview'] = $itemsClass->get_theme_preview($itemID);
+    abr('item', $item);
 
 
 #加载分类
@@ -135,5 +141,24 @@ if(!check_login_bool()) {
 	}
 	
 	abr('sessID', session_id());
+    $fileTypes = '';
+    foreach($config['upload_ext'] as $ext) {
+        if($fileTypes != '') {
+            $fileTypes .= ';';
+        }
+        $fileTypes .= '*.'.$ext;
+    }
+    abr('fileTypes', $fileTypes);
+
+    //获取所有推荐标签
+    require_once ROOT_PATH.'/apps/tags/models/tags.class.php';
+    $tagsClass = new tags();
+    $tags_all = $tagsClass->getAll();
+    $all_tags = json_encode($tags_all);
+    abr('all_tags',$all_tags);
+
+    //获取当前作品推荐标签
+    $tag_relation = $tagsClass ->get_tags_by_item_id($itemID);
+    abr('item_tags',json_encode($tag_relation));
 	
 ?>

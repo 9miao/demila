@@ -124,5 +124,6 @@
 	abr('sales_array', javascript::encode($new_array2));
 	abr('days', json_encode($days));
 	abr('valuta', html_entity_decode($currency['symbol'], ENT_QUOTES, 'utf-8'));
+require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
 	
 ?>

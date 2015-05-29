@@ -28,7 +28,7 @@
 				<table id="taglisttable" class="general_table" cellspacing="0" cellpadding="0" border="0">
 				<thead>
 				<tr>
-				<th>{$lang.name}</th>
+				<th>{$lang.name}   </th>
 				<th width="150"></th>
 				</tr>
 				</thead>
@@ -56,6 +56,9 @@
 			{else}
 				{$lang.no_records}
 			{/if}
+            <div class="form-submit">
+                <button onclick="window.location='?m={$smarty.get.m}&c=add';" type="button" class="btntheme2 btnsize">{$lang.add_new}</button>
+            </div>
 		</div>
 	</div>
 </div>

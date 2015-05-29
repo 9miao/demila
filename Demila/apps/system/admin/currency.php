@@ -21,5 +21,6 @@ _setTitle ( $langArray ['language'] );
 	
 	$data = $cms->getCurrency();
 	abr('data', $data);
+require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
 	
 ?>
