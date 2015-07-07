@@ -9,9 +9,7 @@
 
 WEB环境及服务:
 
-    Linux+Apache(或Nginx)+MySQL+PHP。
-    Apache和Nginx必须支持Rewrite。
-    邮件服务是必须的。
+    Linux+Apache(或Nginx)+MySQL+PHP。
 
 
 安装：
