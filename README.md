@@ -9,8 +9,7 @@
 
 WEB环境及服务:
 
-    Linux+Apache(或Nginx)+MySQL+PHP。
-
+    Linux+Apache(或Nginx)+MySQL+PHP。
 
 安装：
 
