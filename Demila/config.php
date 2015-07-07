@@ -19,11 +19,12 @@ $config = array (
 'system_core' => $configArr['system_core'], 	
 'root_path' => $configArr['root_path'], 
 'domain' => $configArr['domain'],  
-'site_title' => 'DeMiLa',  
-'use_language' => false,
+'site_title' => 'Demila',
+'use_language' => true,//get_id() +1
 'default_language' => 'zh',
 'langs' => array('zh'),
-
+    //模板
+'template'=>'default',
 'debug' => false,
 'debug_ips' => array (
 	'localhost', '::1', 
@@ -74,10 +75,8 @@ $config = array (
 'homeimage_photo_sizes' => array (
 	'A' => '590x242' 
 ),
-	
-	
-);
 
+);
 
 $config['data_server_path'] = $config['root_path'].'static/';
 

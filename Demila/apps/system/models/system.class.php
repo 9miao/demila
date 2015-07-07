@@ -355,7 +355,101 @@ class system extends base {
 		
 		return true;
 	}
-	
 
-}
+    /*SMTP*/
+    public function smtp_edit($data){
+         global $mysql;
+         if(isset($data["smtp_host"]) && !empty($data["smtp_host"])){
+             $mysql->query("
+			UPDATE `system`
+			SET `value` = '".sql_quote($data["smtp_host"])."'
+			WHERE `key` = 'smtp_host'
+		    ", __FUNCTION__ );
+         }
+         if(isset($data["smtp_from"]) && !empty($data["smtp_from"])){
+             $mysql->query("
+			UPDATE `system`
+			SET `value` = '".sql_quote($data["smtp_from"])."'
+			WHERE `key` = 'smtp_from'
+		    ", __FUNCTION__ );
+         }
+         if(isset($data["smtp_port"]) && !empty($data["smtp_port"])){
+             $mysql->query("
+			UPDATE `system`
+			SET `value` = '".sql_quote($data["smtp_port"])."'
+			WHERE `key` = 'smtp_port'
+		    ", __FUNCTION__ );
+         }
+         if(isset($data["smtp_user"]) && !empty($data["smtp_user"])){
+             $mysql->query("
+			UPDATE `system`
+			SET `value` = '".sql_quote($data["smtp_user"])."'
+			WHERE `key` = 'smtp_user'
+		    ", __FUNCTION__ );
+         }
+         if(isset($data["smtp_pass"]) && !empty($data["smtp_pass"])){
+             $mysql->query("
+			UPDATE `system`
+			SET `value` = '".sql_quote($data["smtp_pass"])."'
+			WHERE `key` = 'smtp_pass'
+		    ", __FUNCTION__ );
+         }
+         if(isset($data["smtp_from_name"]) && !empty($data["smtp_from_name"])){
+             $mysql->query("
+			UPDATE `system`
+			SET `value` = '".sql_quote($data["smtp_from_name"])."'
+			WHERE `key` = 'smtp_from_name'
+		    ", __FUNCTION__ );
+         }
+         return true;
+     }
+
+    public function is_smtp(){
+        global $mysql;
+
+        $return=$mysql->getAll("
+        SELECT 'id' FROM `system` WHERE `key` = 'use_smtp'
+        ");
+
+        return $return;
+    }
+    public function use_smtp(){
+        global $mysql;
+        $mysql->query("
+			INSERT INTO `system` (
+				`key`,
+				`value`
+			)
+			VALUES (
+				'use_smtp',
+				'1'
+			)
+		", __FUNCTION__ );
+
+        return true;
+    }
+    public function unuse_smtp(){
+        global $mysql;
+
+        $mysql->query("
+			DELETE FROM `system` WHERE `key` = 'use_smtp'
+			", __FUNCTION__ );
+
+        return true;
+    }
+
+    //模板设置
+    public function edit_template($val = ""){
+        global $mysql;
+        $mysql->query("
+			UPDATE `system` set `value` = '".sql_quote($val)."'
+			WHERE `key` = 'template'
+			", __FUNCTION__ );
+
+        return true;
+    }
+
+
+
+    }
 ?>

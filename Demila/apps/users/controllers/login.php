@@ -17,9 +17,6 @@ if(check_login_bool()) {
 	refresh('/'.$languageURL.'edit/');
 }
 
-
-
-
     //重新发送邮件
     if(isset($_POST['res_send']) && $_POST['res_send'] == 'yes' && isset($_POST['user_id']) && !empty($_POST['user_id'])){
         $usersClass = new users();
@@ -81,6 +78,4 @@ if(check_login_bool()) {
 	
 #面包屑	
 	abr('breadcrumb', '<a href="/'.$languageURL.'" title="">'.$langArray['home'].'</a> \ <a href="/'.$languageURL.'users/login/" title="">'.$langArray['login'].'</a>');
-
-
 ?>

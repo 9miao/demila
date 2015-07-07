@@ -3,7 +3,7 @@
 		{foreach from=$modules item=conf key=m}
 		<li>
 			<a href="/{$languageURL}{$smarty.get.module}/?m={$m}&c=list" title="">
-				<img src="{$data_server}/admin/images/icons/64x64/{$m}.png" alt="" />
+				<img src="{$template_data}/admin/images/icons/64x64/{$m}.png" alt="" />
 				<span>{$lang.$m}</span>
 			</a>
 		</li>
@@ -11,7 +11,7 @@
 	{/if}		
 		<li>
 			<a href="/{$languageURL}{$smarty.get.module}/?m=system&c=list" title="">
-				<img src="{$data_server}/admin/images/icons/64x64/system.png" alt="" />
+				<img src="{$template_data}/admin/images/icons/64x64/system.png" alt="" />
 				<span>系统设置</span>
 			</a>
 		</li>

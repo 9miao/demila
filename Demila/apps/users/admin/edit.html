@@ -4,19 +4,19 @@
     <ul class="titnav clr">
       <li><a href="/" title="主页">主页</a></li>
       <li class="pipe">&gt;</li>
-      <li><a href="/admin/?m=users&c=list" title="用户">用户</a></li>
+      <li><a href="/{$languageURL}admin/?m=users&c=list" title="用户">用户</a></li>
       <li class="pipe">&gt;</li>
       <li>管理员控制面板</li>
     </ul>
     <h2>{$user.username}</h2>
     <ul class="pagetab clr">
     {if $user.items != '0'}
-    <li><a class="active" href="/admin/?m=users&c=edit&id={$user.user_id}">个人资料</a></li>
-    <li><a href="/admin/?m=users&c=balance&id={$user.user_id}">编辑余额</a></li>
-    <li><a href="/admin/?m=items&c=list&user={$user.user_id}">作品集</a></li>
+    <li><a class="active" href="/{$languageURL}admin/?m=users&c=edit&id={$user.user_id}">个人资料</a></li>
+    <li><a href="/{$languageURL}admin/?m=users&c=balance&id={$user.user_id}">编辑余额</a></li>
+    <li><a href="/{$languageURL}admin/?m=items&c=list&user={$user.user_id}">作品集</a></li>
     {else}
-    <li><a class="active" href="/admin/?m=users&c=edit&id={$user.user_id}">个人资料</a></li>
-    <li><a href="/admin/?m=users&c=balance&id={$user.user_id}">编辑余额</a></li>
+    <li><a class="active" href="/{$languageURL}admin/?m=users&c=edit&id={$user.user_id}">个人资料</a></li>
+    <li><a href="/{$languageURL}admin/?m=users&c=balance&id={$user.user_id}">编辑余额</a></li>
     {/if}
     </ul>
   </div>
@@ -284,7 +284,7 @@
             {if $user.avatar != ''}
             <img class="img-border" src="{$data_server}/uploads/users/{$user.user_id}/A_{$user.avatar}" style="margin-top:15px" />
             {else}
-            <img class="img-border" src="/static/img/default-user.jpg" style="margin-top:15px" />
+            <img class="img-border" src="/static/templates/default/img/default-user.jpg" style="margin-top:15px" />
             {/if}
           </div>
           <div class="details">

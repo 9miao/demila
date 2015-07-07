@@ -3,8 +3,8 @@ define(function (require, exports, module){
 		starOnUrl = "",
 		starOffUrl = "";
 	function init(e){
-		starOnUrl = "/static/img/custom/star-on.png";
-		starOffUrl = "/static/img/custom/star-off.png";
+		starOnUrl = "/static/templates/default/img/custom/star-on.png";
+		starOffUrl = "/static/templates/default/img/custom/star-off.png";
 		initEvents($("#" + e));
 	}
 	exports.init = init;

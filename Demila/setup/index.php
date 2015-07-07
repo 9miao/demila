@@ -180,7 +180,8 @@ if(isset($_POST['install']) && !$isInstalled) {
 
 			mysql_close($dbl);
             $index = 'http://demila.org/';
-            
+
+
             require_once '../classes/Http.class.php';
             $http = new Http();
 		    $url = $index.'/statistics';
@@ -224,7 +225,7 @@ if(isset($_POST['install']) && !$isInstalled) {
 <body>
 <div class="header">
 	<div class="container">
-		<a href="/" class="marketplace"><img alt="" src="/static/img/custom/logo.png" title="Demila"></a>
+		<a href="/" class="marketplace"><img alt="" src="/static/templates/default/img/custom/logo.png" title="Demila"></a>
 	</div>
 </div>
 <div class="pagetit">
@@ -260,7 +261,7 @@ if(isset($_POST['install']) && !$isInstalled) {
 			<br /><br />
 			<a href="/" title="" target="_blank">去网站前台</a>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="/admin/" title=""  target="_blank">去管理面板</a>
+			<a href="/index.php/admin/" title=""  target="_blank">去管理面板</a>
 		</div>
 		<?php
 		}else{

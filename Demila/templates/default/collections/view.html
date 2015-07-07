@@ -1,0 +1,204 @@
+<link href="/static/css/custom/ucenter.css" rel="stylesheet" />
+<div class="pagetit">
+  <div class="navblock">
+    <ul class="titnav clr">
+      <li><a href="/" title="主页">主页</a></li>
+      <li class="pipe">&gt;</li>
+      <li><a href="/{$languageURL}collections">书签集</a></li>
+    </ul>
+    <h2>{$collection.name}</h2>
+  </div>
+</div>
+<div class="ucbg">
+  <div class="ucblock paddingt clr">
+    <script>{literal}
+    marketplace.queue( function(){
+      marketplace.initializers.itemList({
+        ajaxPagination: true,
+        layoutSwitcher: true
+      });
+    });{/literal}
+    </script>
+    <div class="leftdetail">
+      {if $collection.text != ''}
+      <div class="collection-header">
+        <div class="collection-info">
+          {$collection.text|nl2br}
+        </div>
+      </div>
+      {/if}
+      <div class="itemlist">
+        <div class="itemsort clr">
+          <form action="" class="sort-control" id="sortbyform" method="get">
+          <input id="order-type" name="order" type="hidden" value="{if $smarty.get.order == 'asc'}desc{else}asc{/if}" />
+          <input type="hidden" id="sort_by" name="sort_by" />
+          <ul class="sortlist clr">
+            <li><span>排序：</span></li>
+            <li{if $smarty.get.sort_by == 'published_at'}{if $smarty.get.order == 'asc'} class="asc"{else} class="desc"{/if}{/if}><a href="javascript: void(0);" onclick="document.getElementById('sort_by').value='published_at';document.getElementById('sortbyform').submit();"{if $smarty.get.sort_by == 'published_at'} class="active"{/if} title="日期">日期</a></li>
+            <li{if $smarty.get.sort_by == 'name'}{if $smarty.get.order == 'asc'} class="asc"{else} class="desc"{/if}{/if}><a href="javascript: void(0);" onclick="document.getElementById('sort_by').value='name';document.getElementById('sortbyform').submit();"{if $smarty.get.sort_by == 'name'} class="active"{/if} title="标题">标题</a></li>
+            <li{if $smarty.get.sort_by == 'root_category'}{if $smarty.get.order == 'asc'} class="asc"{else} class="desc"{/if}{/if}><a href="javascript: void(0);" onclick="document.getElementById('sort_by').value='root_category';document.getElementById('sortbyform').submit();"{if $smarty.get.sort_by == 'root_category'} class="active"{/if} title="分类">分类</a></li>
+            <li{if $smarty.get.sort_by == 'average_rating'}{if $smarty.get.order == 'asc'} class="asc"{else} class="desc"{/if}{/if}><a href="javascript: void(0);" onclick="document.getElementById('sort_by').value='average_rating';document.getElementById('sortbyform').submit();"{if $smarty.get.sort_by == 'average_rating'} class="active"{/if} title="评分">评分</a></li>
+            <li{if $smarty.get.sort_by == 'sales_count'}{if $smarty.get.order == 'asc'} class="asc"{else} class="desc"{/if}{/if}><a href="javascript: void(0);" onclick="document.getElementById('sort_by').value='sales_count';document.getElementById('sortbyform').submit();"{if $smarty.get.sort_by == 'sales_count'} class="active"{/if} title="销量">销量</a></li>
+            <li{if $smarty.get.sort_by == 'cost'}{if $smarty.get.order == 'asc'} class="asc"{else} class="desc"{/if}{/if}><a href="javascript: void(0);" onclick="document.getElementById('sort_by').value='cost';document.getElementById('sortbyform').submit();"{if $smarty.get.sort_by == 'cost'} class="active"{/if} title="价格">价格</a></li>
+          </ul>
+          </form>
+          <ul class="sortbtns clr">
+            <li class="layout-switcher sort-control btns">
+            <a class="layout-list sort-control-tooltip t1" href="#" data-tooltip="列表查看" title="列表查看">列表查看</a>
+            <a class="layout-grid sort-control-tooltip active t2" href="#" data-tooltip="网格查看" title="网格查看">网格查看</a>
+            </li>
+            <li class="page">{$paging}</li>
+          </ul>
+        </div>
+        {if $items}
+<ul class="item-grid clr">
+{foreach from=$items item=i name=foo}
+<li class="itemobj">
+<a class="itemimg landscape-image-magnifier" href="/{$languageURL}items/{$i.id}" onclick="">
+<img data-tooltip="{$i.name|escape}" alt="{$i.name|escape}" class="preload no_preview" data-item-author="作者 {$users[$i.user_id].nickname}" data-item-category="{foreach from=$i.categories item=e}{foreach from=$e item=c name=foo}{$categories[$c].name} {if !$smarty.foreach.foo.last} \ {/if}{/foreach}{/foreach}" data-item-cost="{$i.price}" data-item-name="{$i.name|escape}" data-preview-height="" data-preview-url="{$data_server}uploads/items/{$i.id}/{$i.theme_preview}" data-preview-width="" src="{$data_server}uploads/items/{$i.id}/{$i.thumbnail}" title="" />
+</a>
+<div class="itemdetail">
+<h3><a href="/{$languageURL}items/{$i.id}" title="{$i.name}">{$i.name}</a></h3>
+<p><span class="author">由</span><a href="/{$languageURL}user/{$users[$i.user_id].username}/" class="author">{$users[$i.user_id].nickname}</a>{if check_login_bool() && $collection.user_id == $smarty.session.user.user_id}<a href="/{$languageURL}collections/view/{$collection.id}/?delete={$i.id}" title="从这个书签集中删除这个作品" class="x-button" href="#" onclick="{literal}return confirm('确定从书签集中删除这个书签吗？');{/literal}">删除</a>{/if}</p>
+</div>
+<div class="itemcate">
+<p><span class="tips">分类：</span> {foreach from=$i.categories item=e}{foreach from=$e item=c name=foo}{$categories[$c].name} {if !$smarty.foreach.foo.last} \ {/if}{/foreach}{/foreach}</p>
+</div>
+<div class="itemstars">
+<div class="starnums" style="width:{$i.rating*2}0%;"><span class="allstars"></span></div>
+<div class="starsbg"></div>
+</div>
+<div class="sales">
+<p class="nums"><span>{$i.sales}</span>销量</p>
+<p class="price">{$currency.symbol}<span>{$i.price}</span></p>
+</div>
+</li>
+{/foreach}
+</ul>
+<ul class="listpage clr">
+{$paging}
+</ul>
+{else}
+<div class="sideblock">这个书签集内尚无书签，要添加书签到这个书签集，请在你喜欢的作品页面边栏位置使用“添加至书签集”工具。我们建议你从<a href="/{$languageURL}top_sellers/">热门作品</a>页面开始。</div>
+{/if}
+      </div>
+    </div>
+    <div class="rightdetail">
+      <div class="sideblock sidecollrate">
+        {if $collection.photo != ''} 
+        <img class="collimg" alt="{$collection.name|escape}" src="{$data_server}uploads/collections/{$collection.photo}" />  
+        {else}
+        <img class="collimg" alt="{$collection.name|escape}" src="{$template_data}img/default-collection.jpg" />  
+        {/if}
+        {if check_login_bool()}
+        <div class="clr">
+          <h3>给这个书签集评分</h3>
+          <div class="rate_collection">
+            {if $collection.rate}
+            <div class="ratestar">
+            {section name=foo start=1 loop=6 step=1}
+            {if $collection.rate.rate >= $smarty.section.foo.index}<img src="/static/templates/default/img/custom/star-on.png" alt="" class="left" />{else}<img src="/static/templates/default/img/custom/star-off.png" alt="" class="left" />
+            {/if}
+            {/section}
+            </div>
+            {else}
+            <div id="stars_div_{$collection.id}" class="stars" data-star-set-id="{$collection.id}_star" data-rating="0">
+              {section name=foo start=1 loop=6 step=1}
+              <a href="/{$languageURL}collections/rate/{$collection.id}?rating={$smarty.section.foo.index}" data-method="post" data-remote="true" onmouseover="marketplace.rating.toggle_stars('{$collection.id}_star', {$smarty.section.foo.index});" rel="nofollow">
+              <img alt="{$smarty.section.foo.index}" id="{$collection.id}_star_{$smarty.section.foo.index}" src="/static/templates/default/img/custom/star-off.png"></a>
+              {/section}
+            </div>
+            {/if}
+            <small>( {$collection.votes} {$lang.votes} )</small>{if $collection.rate}<small>你投了：{$collection.rate.rate}星</small>{/if}
+            <script>
+            {literal}marketplace.queue(function(){
+            marketplace.rating.init();
+            }); {/literal}
+            </script>
+          </div>
+        </div>
+        {/if}
+      </div>
+      <h3 class="bordertit">书签集创建人</h3>
+      <div class="borderbg author">
+        <div class="clr">
+          <div class="authoravatar">
+            <a href="/{$languageURL}user/{$collection.user.username}/" class="avatar" title="{$collection.user.username}">
+              {if $collection.user.avatar != ''}  
+              <img alt="{$collection.user.username}" src="{$data_server}uploads/users/{$collection.user.user_id}/A_{$collection.user.avatar}" />
+              {else}
+              <img alt="{$collection.user.username}" src="{$template_data}img/default-user.jpg" />
+              {/if}
+            </a>
+          </div>
+          <div class="details">
+            <h2><a href="/{$languageURL}user/{$collection.user.username}/" rel="author">{$collection.user.nickname}</a></h2>
+            <p>注册时间：{$collection.user.register_datetime|date_format:"%Y-%m-%d"}</p>
+            <p>最后登录：{$collection.user.last_login_datetime|date_format:"%Y-%m-%d"}</p>
+          </div>
+        </div>
+        <div class="badges">
+        {foreach from=$user_badges item=b name=foo}
+        <img src="{$data_server}{$b.photo}" height="30" width="30" alt="{$b.name|escape}" title="{$b.name|escape}" />
+        {if $smarty.foreach.foo.last}{/if}
+        {/foreach}
+        </div>
+      </div>
+      {if check_login_bool() && $collection.user_id == $smarty.session.user.user_id}
+      <h3 class="bordertit">{$lang.edit_collection}</h3>
+      <div class="borderbg">
+        <form class="vertical-form" enctype="multipart/form-data" id="edit_collection" method="post">
+          <div class="input-group">
+            <label for="title">名称*</label>
+            <div class="inputs">
+              <input class="ipttheme" id="collection_name" name="name" size="30" type="text" value="{$collection.name|escape}" />
+            </div>
+          </div>
+          <div class="input-group">
+            <label for="image">图片</label>
+            <div class="inputs">
+              <input id="file_upload" name="file_upload" type="file" />
+              <small>260x140px</small>
+            </div>
+          </div>
+          <div class="input-group">
+            <label for="description">描述</label>
+            <div class="inputs">
+              <textarea cols="20" id="collection_description" name="description" rows="10">{$collection.text}</textarea>
+              <label for="collection_publically_visible">
+              <input name="collection[publically_visible]" type="hidden" value="0" />
+              <input id="collection_publically_visible" name="publically_visible" type="checkbox" value="1" {if $collection.public == 'true'}checked="checked"{/if} />
+              公开显示？
+              </label>
+            </div>
+          </div>
+          <div class="form-submit">
+            <div class="form-submit">
+              <input type="hidden" name="edit" value="yes" />
+              <button type="submit" class="btntheme2 btnsize">编辑书签集</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <h3 class="bordertit">删除书签集？</h3>
+      <div class="borderbg clr">
+        <form action="" method="post">
+          <input type="hidden" name="delete" value="yes" />
+          <button type="submit" onclick="return confirm('确定删除这个书签集吗？');" class="btntheme2 rf btnsize">确定删除</button>
+        </form>
+      </div>
+      {/if}
+    </div>
+  </div>
+</div>
+<script>
+{literal}
+seajs.use(["jq", "pageui", "modules/itemlist"], function($, ui, list){
+  ui.imgMagnifier("a.landscape-image-magnifier");
+  list.init({
+    ajaxPagination: true,
+    layoutSwitcher: true
+  });
+});
+{/literal}
+</script>

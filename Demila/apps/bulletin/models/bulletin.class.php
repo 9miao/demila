@@ -259,9 +259,17 @@ class bulletin extends base {
 		    	'EMAIL' => $email,
 		    	'CONTENT' => $_POST['text']
 		    ));
-		
-		    $mail->send();
-		    
+            require_once ROOT_PATH.'/apps/system/models/system.class.php';
+            $system = new system();
+            $smtp = $system ->is_smtp();
+            $smtpconf=$system->getAllKeyValue();
+            if($smtp){
+                $mail->email_sock($smtpconf["smtp_host"],$smtpconf["smtp_port"],0,'error',10,1,$smtpconf["smtp_user"],$smtpconf["smtp_pass"],$smtpconf["smtp_from"]);
+                $mail->send_mail_sock($mail->subject,$mail->message,$email,$smtpconf["smtp_from_name"]) ;
+                unset($emailClass);
+            }else {
+                $mail->send();
+            }
 		    unset($mail);
 			}
 		}

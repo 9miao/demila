@@ -4,7 +4,7 @@
     <ul class="titnav clr">
       <li><a href="/" title="主页">主页</a></li>
       <li class="pipe">&gt;</li>
-      <li><a href="/admin/?m=users&c=list">用户</a></li>
+      <li><a href="/{$languageURL}admin/?m=users&c=list">用户</a></li>
       <li class="pipe">&gt;</li>
       <li><a href="?m={$smarty.get.m}&c=withdraws">提现</a></li>
       <li class="pipe">&gt;</li>
@@ -17,7 +17,7 @@
 <!--<div class="page-info">
     <div class="container">
       <div id="breadcrumbs">
-        <a href="/admin" class="first">主页</a> \ <a href="/admin/?m=users&c=list">用户</a> \ <a href="?m={$smarty.get.m}&c=withdraws">提现</a>
+        <a href="/{$languageURL}admin" class="first">主页</a> \ <a href="/{$languageURL}admin/?m=users&c=list">用户</a> \ <a href="?m={$smarty.get.m}&c=withdraws">提现</a>
       </div>
       <h1 class="page-title">付出</h1>
     </div>
@@ -33,7 +33,7 @@
 	 <div class="input-group">
         <label>用户</label>
         <div class="right">
-          <a href="/admin/?m=users&c=edit&id={$user.user_id}" title="" target="_blank">{$user.username}</a>
+          <a href="/{$languageURL}admin/?m=users&c=edit&id={$user.user_id}" title="" target="_blank">{$user.username}</a>
         </div>
       </div>
 	 <div class="input-group">
@@ -61,7 +61,7 @@
 				<strong>营业执照号码:</strong> {$data.ccn}
 			{/if}
 		{else}
-			<img src="{$data_server}admin/images/icons/24x24/delete.png" alt="" class="middle" />
+			<img src="{$template_data}admin/images/icons/24x24/delete.png" alt="" class="middle" />
 		{/if}
        </div>
     </div>
@@ -81,9 +81,9 @@
         <label>是否已处理</label>
         <div class="right">
 		{if $data.paid == 'true'}
-			<img src="{$data_server}admin/images/icons/24x24/accept.png" alt="" class="middle" />
+			<img src="{$template_data}admin/images/icons/24x24/accept.png" alt="" class="middle" />
 		{else}
-			<img src="{$data_server}admin/images/icons/24x24/delete.png" alt="" class="middle" />
+			<img src="{$template_data}admin/images/icons/24x24/delete.png" alt="" class="middle" />
 		{/if}
         </div>
       </div>

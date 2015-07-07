@@ -36,10 +36,10 @@ _setView(__FILE__);
 	$stars = '';
 	for($i=1;$i<6;$i++) {
 		if($collection['rating'] >= $i) {
-			$stars .= '<img src="/static/img/star-on.png" alt="" class="left" />';
+			$stars .= '<img src="/static/templates/default/img/star-on.png" alt="" class="left" />';
 		}
 		else {
-			$stars .= '<img src="/static/img/star-off.png" alt="" class="left" />';
+			$stars .= '<img src="/static/templates/default/img/star-off.png" alt="" class="left" />';
 		}
 	}
 	

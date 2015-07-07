@@ -675,15 +675,12 @@ CREATE TABLE IF NOT EXISTS `users` (
     mysql_query("
 		INSERT INTO `system` (`id`, `key`, `value`, `system`) VALUES (NULL, 'send_mail', '1', '1');
 	");
-//(6, 'alipay_v_num1', '906484688@qq.com'),
-//			(7, 'alipay_v_mid1', '2088002024513441'),
-//			(8, 'alipay_v_key1', '2e8mtfx8xfw6hpjjlia35px8qz767om6')
-	
 	mysql_query("
 		UPDATE `system` SET `system` = 1 WHERE `key` IN ('meta_title','meta_keywords','meta_description','admin_mail','report_mail','referal_sum','referal_percent','prepaid_price_discount','extended_price','no_exclusive_author_percent','exclusive_author_percent','site_logo');
 	");
-	
-	mysql_query("
+
+
+mysql_query("
 		ALTER TABLE `users` ADD `commission_percent` INT( 2 ) NOT NULL DEFAULT '0';
 	");
 	
@@ -807,7 +804,7 @@ INSERT INTO `badges` (`id`, `name`, `photo`, `visible`, `from`, `to`, `type`, `s
 	
 	mysql_query("
      INSERT INTO `qnews` (`id`, `name`, `description`, `url`, `photo`, `visible`, `order_index`) VALUES
-     (1, '用DigBank做数字内容的生意。', '这是一个示例新闻，你可以点击标题更换。', '/admin/?m=qnews&c=list', 'fd80c3904925cc129c975db0d348e8e1.jpg', 'true', 1);
+     (1, '用DigBank做数字内容的生意。', '这是一个示例新闻，你可以点击标题更换。', 'index.php/admin/?m=qnews&c=list', 'fd80c3904925cc129c975db0d348e8e1.jpg', 'true', 1);
 	");
 	
 	
@@ -889,6 +886,34 @@ INSERT INTO `badges` (`id`, `name`, `photo`, `visible`, `from`, `to`, `type`, `s
 		  PRIMARY KEY (`id`)
 		) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 	");
+
+
+/*邮件设置*/
+mysql_query("
+		INSERT INTO `system` (`id`, `key`, `value`, `system`,`group`) VALUES (NULL, 'smtp_host', '', '1','mailconf');
+	  ");
+mysql_query("
+            INSERT INTO `system` (`id`, `key`, `value`, `system`,`group`) VALUES (NULL, 'smtp_from', '', '1','mailconf');
+        ");
+
+mysql_query("
+            INSERT INTO `system` (`id`, `key`, `value`, `system`,`group`) VALUES (NULL, 'smtp_port', '25', '1','mailconf');
+        ");
+
+mysql_query("
+            INSERT INTO `system` (`id`, `key`, `value`, `system`,`group`) VALUES (NULL, 'smtp_user', '', '1','mailconf');
+        ");
+
+mysql_query("
+                INSERT INTO `system` (`id`, `key`, `value`, `system`,`group`) VALUES (NULL, 'smtp_pass', '', '1','mailconf');
+        ");
+mysql_query("
+                INSERT INTO `system` (`id`, `key`, `value`, `system`,`group`) VALUES (NULL, 'smtp_from_name', '', '1','mailconf');
+        ");
+mysql_query("
+                INSERT INTO `system` (`id`, `key`, `value`, `system`,`group`) VALUES (NULL, 'template', 'default', '1','template');
+        ");
+
 
 
 

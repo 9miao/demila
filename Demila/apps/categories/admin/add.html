@@ -2,7 +2,7 @@
 <div class="pagetit">
   <div class="navblock">
     <ul class="titnav clr">
-      <li><a href="/admin" title="管理首页">管理首页</a></li>
+      <li><a href="/{$languageURL}admin" title="管理首页">管理首页</a></li>
       <li class="pipe">&gt;</li>
       {if isset($pdata)}
       <li><a href="?m={$smarty.get.m}&c=list">作品分类</a></li>
@@ -23,7 +23,7 @@
 <!--<div class="page-info">
     <div class="container">
       <div id="breadcrumbs">
-        <a href="/admin" class="first">主页</a> \ {if isset($pdata)}<a href="?m={$smarty.get.m}&c=list">分类</a> \ <a href="?m={$smarty.get.m}&c=list&sub_of={$smarty.get.sub_of}&p={$smarty.get.p}">{$pdata.name}</a> \ <a href="#">{$smarty.post.name|escape}</a>{else}<a href="?m={$smarty.get.m}&c=list">分类</a> \{/if} 
+        <a href="/{$languageURL}admin" class="first">主页</a> \ {if isset($pdata)}<a href="?m={$smarty.get.m}&c=list">分类</a> \ <a href="?m={$smarty.get.m}&c=list&sub_of={$smarty.get.sub_of}&p={$smarty.get.p}">{$pdata.name}</a> \ <a href="#">{$smarty.post.name|escape}</a>{else}<a href="?m={$smarty.get.m}&c=list">分类</a> \{/if} 
       </div>
       <h1 class="page-title">{$title}</h1>
     </div>

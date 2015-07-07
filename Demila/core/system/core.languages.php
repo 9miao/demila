@@ -9,7 +9,6 @@
 // | Email author@demila.org
 // +----------------------------------------------------------------------
 
-
 $lang_file_for_module = null;
 	if($_GET['module'] == 'admin') {
 		if(isset($_GET['m'])) {
@@ -26,7 +25,8 @@ $lang_file_for_module = null;
 	}
 
 	abr("lang", $langArray);
-	$languageURL = '';
+    $languageURL = 'index.php/';
+	$languageURL .= '';
 	
 	abr("languageURL", $languageURL);
 	

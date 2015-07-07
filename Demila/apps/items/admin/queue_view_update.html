@@ -2,11 +2,11 @@
 <div class="pagetit">
   <div class="navblock">
     <ul class="titnav clr">
-      <li><a href="/admin" title="管理首页">管理首页</a></li>
+      <li><a href="/{$languageURL}admin" title="管理首页">管理首页</a></li>
       <li class="pipe">&gt;</li>
       <li><a href="?m={$smarty.get.m}&c=list">作品</a></li>
       <li class="pipe">&gt;</li>
-      <li><a href="/admin/?m=items&c=queue_update">队列更新</a></li>
+      <li><a href="/{$languageURL}admin/?m=items&c=queue_update">队列更新</a></li>
       <li class="pipe">&gt;</li>
       <li>{$item.name}</li>
     </ul>
@@ -16,7 +16,7 @@
 <!--<div class="page-info">
     <div class="container">
       <div id="breadcrumbs">
-        <a href="/admin" class="first">主页</a> \ <a href="?m={$smarty.get.m}&c=list">作品</a> \ <a href="/admin/?m=items&c=queue_update">队列更新</a> \
+        <a href="/{$languageURL}admin" class="first">主页</a> \ <a href="?m={$smarty.get.m}&c=list">作品</a> \ <a href="/{$languageURL}admin/?m=items&c=queue_update">队列更新</a> \
       </div>
       <h1 class="page-title">{$item.name}</h1>
 	  </div> 
@@ -32,7 +32,7 @@
             <div class="input-group">
               <label>卖家</label>
               <div class="right">
-                <a href="/admin/?m=users&c=edit&id={$item.user.user_id}" title="" target="_blank">{$item.user.username}</a>
+                <a href="/{$languageURL}admin/?m=users&c=edit&id={$item.user.user_id}" title="" target="_blank">{$item.user.username}</a>
               </div>
             </div>
             <div class="input-group">

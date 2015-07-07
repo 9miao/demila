@@ -58,9 +58,9 @@ _setTitle ( $langArray ['edit'] );
 	}
 	
 
-	$user = $cms->get($_GET['id']);
-	$user['stats'] = $cms->getStatistic($_GET['id']);
-	abr('user', $user);
+	$users = $cms->get($_GET['id']);
+	$users['stats'] = $cms->getStatistic($_GET['id']);
+	abr('user', $users);
 
 	require_once ROOT_PATH.'/apps/'.$_GET['m'].'/models/groups.class.php';
 	$g = new groups();

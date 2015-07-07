@@ -12,7 +12,6 @@
 _setView(__FILE__);
 
 	$itemID = get_id(2);
-	
 	$itemsClass = new items();
 	
 	$item = $itemsClass->get($itemID);

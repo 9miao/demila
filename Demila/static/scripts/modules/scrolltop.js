@@ -35,11 +35,11 @@ define(function (require, exports, module){
 		//if(!mobile){
 			tmp += "<ul>";
 			for(var i = 0, len = qqs.length; i < len; i++){
-				tmp += "<li><a href='http://wpa.qq.com/msgrd?v=3&uin=" + qqs[i] + "&site=qq&menu=yes' target='_blank'><div class='sidebox'><img src='/static/img/custom/icon04.png'>联系我们</div></a></li>";
+				tmp += "<li><a href='http://wpa.qq.com/msgrd?v=3&uin=" + qqs[i] + "&site=qq&menu=yes' target='_blank'><div class='sidebox'><img src='/static/templates/default/img/custom/icon04.png'>联系我们</div></a></li>";
 			}
-			tmp += "<li><a><div class='sidebox2'><img class='icon' src='/static/img/custom/icon06.png' /><span>微信帐号</span></div></a></li>\
-	  			<li class='lastitem'><a title='回到顶部' class='sidetop'><img alt='回到顶部' src='/static/img/custom/icon05.png'><span></span></a></li></ul>\
-	  			<img class='tdcimg' src='/static/img/custom/tdc.jpg'/></ul>";
+			tmp += "<li><a><div class='sidebox2'><img class='icon' src='/static/templates/default/img/custom/icon06.png' /><span>微信帐号</span></div></a></li>\
+	  			<li class='lastitem'><a title='回到顶部' class='sidetop'><img alt='回到顶部' src='/static/templates/default/img/custom/icon05.png'><span></span></a></li></ul>\
+	  			<img class='tdcimg' src='/static/templates/default/img/custom/tdc.jpg'/></ul>";
 		//}else{
 			//tmp += "<a title='回到顶部' class='sidetop_m'><span></span></a>";
 		//}

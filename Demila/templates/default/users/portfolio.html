@@ -1,0 +1,102 @@
+<link href="/static/css/custom/ucenter.css" rel="stylesheet" />
+{include file="$template_path/users/elite_portfolio.html"}
+
+<div class="ucbg">
+  <div class="ucblock paddingt clr">
+    {$errorMessage}
+    <div class="leftdetail">
+      <div class="itemlist">
+      <div class="itemsort clr">
+        <form action="" class="sort-control" id="sortbyform" method="get">
+        <input id="order-type" name="order" type="hidden" value="{if $smarty.get.order == 'asc'}desc{else}asc{/if}" />
+        <input type="hidden" id="sort_by" name="sort_by" />
+        <ul class="sortlist clr">
+          <li><span>排序：</span></li>
+          <li{if $smarty.get.sort_by == 'published_at'}{if $smarty.get.order == 'asc'} class="asc"{else} class="desc"{/if}{/if}><a href="javascript: void(0);" onclick="document.getElementById('sort_by').value='published_at';document.getElementById('sortbyform').submit();"{if $smarty.get.sort_by == 'published_at'} class="active"{/if} title="日期">日期</a></li>
+          <li{if $smarty.get.sort_by == 'name'}{if $smarty.get.order == 'asc'} class="asc"{else} class="desc"{/if}{/if}><a href="javascript: void(0);" onclick="document.getElementById('sort_by').value='name';document.getElementById('sortbyform').submit();"{if $smarty.get.sort_by == 'name'} class="active"{/if} title="标题">标题</a></li>
+          <li{if $smarty.get.sort_by == 'root_category'}{if $smarty.get.order == 'asc'} class="asc"{else} class="desc"{/if}{/if}><a href="javascript: void(0);" onclick="document.getElementById('sort_by').value='root_category';document.getElementById('sortbyform').submit();"{if $smarty.get.sort_by == 'root_category'} class="active"{/if} title="分类">分类</a></li>
+          <li{if $smarty.get.sort_by == 'average_rating'}{if $smarty.get.order == 'asc'} class="asc"{else} class="desc"{/if}{/if}><a href="javascript: void(0);" onclick="document.getElementById('sort_by').value='average_rating';document.getElementById('sortbyform').submit();"{if $smarty.get.sort_by == 'average_rating'} class="active"{/if} title="评分">评分</a></li>
+          <li{if $smarty.get.sort_by == 'sales_count'}{if $smarty.get.order == 'asc'} class="asc"{else} class="desc"{/if}{/if}><a href="javascript: void(0);" onclick="document.getElementById('sort_by').value='sales_count';document.getElementById('sortbyform').submit();"{if $smarty.get.sort_by == 'sales_count'} class="active"{/if} title="销量">销量</a></li>
+          <li{if $smarty.get.sort_by == 'cost'}{if $smarty.get.order == 'asc'} class="asc"{else} class="desc"{/if}{/if}><a href="javascript: void(0);" onclick="document.getElementById('sort_by').value='cost';document.getElementById('sortbyform').submit();"{if $smarty.get.sort_by == 'cost'} class="active"{/if} title="价格">价格</a></li>
+        </ul>
+        </form>
+        <ul class="sortbtns clr">
+          <li class="layout-switcher sort-control btns">
+          <a class="layout-list sort-control-tooltip t1" href="#" data-tooltip="列表查看" title="列表查看">列表查看</a>
+          <a class="layout-grid sort-control-tooltip active t2" href="#" data-tooltip="网格查看" title="网格查看">网格查看</a>
+          </li>
+          <li class="page">{$paging}</li>
+        </ul>
+      </div>
+{if $items}
+<ul class="item-grid clr">
+{foreach from=$items item=i name=foo}
+<li class="itemobj">
+<a class="itemimg landscape-image-magnifier" href="/{$languageURL}items/{$i.id}" onclick="">
+<img data-tooltip="{$i.name|escape}" alt="{$i.name|escape}" class="preload no_preview" data-item-author="作者 {$users.username}" data-item-category="{foreach from=$i.categories item=e}{foreach from=$e item=c name=foo}{$categories[$c].name} {if !$smarty.foreach.foo.last} \ {/if}{/foreach}{/foreach}" data-item-cost="{$i.price}" data-item-name="{$i.name|escape}" data-preview-height="" data-preview-url="{$data_server}uploads/items/{$i.id}/{$i.theme_preview}" data-preview-width="" src="{$data_server}uploads/items/{$i.id}/{$i.thumbnail}" title="" />
+</a>
+<div class="itemdetail">
+<h3><a href="/{$languageURL}items/{$i.id}" title="{$i.name}">{$i.name}</a></h3>
+<p><span class="author">作者：</span> <a href="/{$languageURL}user/{$user.user_id}/" class="author">{$user.nickname}</a></p>
+</div>
+<div class="itemcate">
+<p><span class="tips">分类：</span> {foreach from=$i.categories item=e}{foreach from=$e item=c name=foo}{$categories[$c].name} {if !$smarty.foreach.foo.last} \ {/if}{/foreach}{/foreach}</p>
+</div>
+<div class="itemstars">
+<div class="starnums" style="width:{$i.rating*2}0%;"><span class="allstars"></span></div>
+<div class="starsbg"></div>
+</div>
+<div class="sales">
+<p class="nums"><span>{$i.sales}</span>销量</p>
+<p class="price">{$currency.symbol}<span>{$i.price}</span></p>
+</div>
+</li>
+{/foreach}
+</ul>
+<ul class="listpage clr">
+{$paging}
+</ul>
+{else}
+<div class="sideblock">还没有作品</div>
+{/if}
+      </div>
+    </div>
+    <div class="rightdetail">
+      <div class="sideblock author">
+        <div class="clr">
+          <div class="authoravatar">
+            <a href="/{$languageURL}user/{$user.username}/" class="avatar" >
+              {if $user.avatar != ''} 
+              <img alt="{$user.username}" src="{$data_server}uploads/users/{$user.user_id}/A_{$user.avatar}" />
+              {else}
+              <img alt="{$user.username}" src="{$template_data}img/default-user.jpg" />
+              {/if}
+            </a>
+          </div>
+          <div class="details">
+            <h2>{$user.nickname}</h2>
+            <p>注册时间：{$user.register_datetime|date_format:"%Y-%m-%d"}</p>
+            <p>最后登录：{$user.last_login_datetime|date_format:"%Y-%m-%d"}</p>
+          </div>
+        </div>
+        <ul class="badges clr">
+          {foreach from=$user_badges item=b name=foo}
+          <img src="{$data_server}{$b.photo}" height="30" width="30" alt="{$b.name|escape}" title="{$b.name|escape}" />
+          {if $smarty.foreach.foo.last}{/if}
+          {/foreach}
+        </ul>
+      </div>
+    </div>
+    <script>
+    {literal}
+    seajs.use(["jq", "pageui", "modules/itemlist"], function($, ui, list){
+      ui.imgMagnifier("a.landscape-image-magnifier");
+      list.init({
+        ajaxPagination: true,
+        layoutSwitcher: true
+      });
+    });
+    {/literal}
+    </script>
+  </div>
+</div>

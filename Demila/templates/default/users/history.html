@@ -1,0 +1,76 @@
+<link href="/static/css/custom/ucenter.css" rel="stylesheet" />
+{if $smarty.session.user.power_elite_author  == 'true' || $smarty.session.user.elite_author  == 'true'}
+<div class="pagetit pagetabs{if $smarty.session.user.power_elite_author  == 'true'} power-elite-author{/if}{if $smarty.session.user.elite_author  == 'true'} elite-author{/if}">
+  <div class="navblock">
+    <ul class="titnav clr">
+      <li><a href="/" title="主页">主页</a></li>
+      <li class="pipe">&gt;</li>
+      <li><a href="/{$languageURL}users/{$smarty.session.user.username}/">我的账号</a></li>
+    </ul>
+    <h2>历史记录</h2>
+    {include file="$template_path/users/tabsy.html"}
+  </div>
+</div>
+{else}
+<div class="pagetit pagetabs">
+  <div class="navblock">
+    <ul class="titnav clr">
+      <li><a href="/" title="主页">主页</a></li>
+      <li class="pipe">&gt;</li>
+      <li><a href="/{$languageURL}users/{$smarty.session.user.username}/">我的账号</a></li>
+    </ul>
+    <h2>历史记录</h2>
+    {include file="$template_path/users/tabsy.html"}
+  </div>
+</div>
+{/if}	
+<div id="content">
+      <div class="container">
+	  		{$errorMessage}
+<div class="content-l">
+
+  <div class="general_table_border">
+  
+    <table class="general_table" border="0" cellpadding="0" cellspacing="0">
+      <thead>
+        <tr>
+          <td>事件</td>
+          <td>时间</td>
+          <td>事务ID</td>
+		   <td>发票</td>
+        </tr>
+      </thead>
+      <tbody>
+	  {foreach from=$history item=h}
+    {if $history} 
+	<tr>
+        <td>{$h.action}</td>
+        <td>{$h.datetime|date_format:"%Y-%m-%d"}</td>
+        <td><small>{$h.transaction_id}</small><!-- include item number here --></td>
+		<td><a href="#" popup="true">-</a></td>
+      </tr>
+{else}
+	<tr>
+        <td></td>
+        <td></td>
+        <td>暂无记录</td>
+		<td></td>
+    </tr>
+	{/if}
+	  {/foreach}
+      </tbody>
+    </table>
+	
+  </div>
+
+</div>
+
+<div class="sidebar-s sidebar-right">
+  <h2 class="box-heading">当前余额</h2>
+  <div class="content-box current-balance">
+   {$currency.symbol}{$smarty.session.user.total|string_format:"%.2f"}
+  </div>
+</div>
+
+      </div>
+    </div>

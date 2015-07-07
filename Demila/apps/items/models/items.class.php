@@ -189,13 +189,13 @@ class items {
 			JOIN `tags` AS t
 			ON t.`id` = it.`tag_id`
 			WHERE it.`item_id` = '".intval($id)."'			
-		");	
-		
-		if($mysql->num_rows() > 0) {
-			while($d = $mysql->fetch_array()) {
-				$return['tags'][$d['type']][$d['tag_id']] = $d['name'];
-			}
-		}
+		");
+
+        if($mysql->num_rows() > 0) {
+            while($d = $mysql->fetch_array()) {
+                $return['tags'][] = $d;
+            }
+        }
 		
         #加载属性
 		$mysql->query("
@@ -1357,9 +1357,19 @@ class items {
 								&nbsp;&nbsp;&nbsp;&nbsp;专属小编：['.$theservice['user_name'].']<br />
 								&nbsp;&nbsp;&nbsp;&nbsp;['.$meta['meta_title'].']<br />
 								&nbsp;&nbsp;&nbsp;&nbsp;['.date('Y-m-d H:i:s',time()).']<br />';
-            $emailClass->to($data['user']['email']);
-            $emailClass->send();
-            unset($emailClass);
+            require_once ROOT_PATH.'/apps/system/models/system.class.php';
+            $system = new system();
+            $smtp = $system ->is_smtp();
+            $smtpconf=$system->getAllKeyValue();
+            if($smtp){
+                $emailClass->email_sock($smtpconf["smtp_host"],$smtpconf["smtp_port"],0,'error',10,1,$smtpconf["smtp_user"],$smtpconf["smtp_pass"],$smtpconf["smtp_from"]);
+                $emailClass->send_mail_sock($emailClass->subject,$emailClass->message,$data['user']['email'],$smtpconf["smtp_from_name"]) ;
+                unset($emailClass);
+            }else{
+                $emailClass->to($data['user']['email']);
+                $emailClass->send();
+                unset($emailClass);
+            }
 
 
         }
@@ -1420,10 +1430,19 @@ class items {
 								&nbsp;&nbsp;&nbsp;&nbsp;专属小编：['.$theservice['user_name'].']<br />
 								&nbsp;&nbsp;&nbsp;&nbsp;['.$meta['meta_title'].']<br />
 								&nbsp;&nbsp;&nbsp;&nbsp;['.date('Y-m-d H:i:s',time()).']<br />';
-
-            $emailClass->to($data['user']['email']);
-            $emailClass->send();
-            unset($emailClass);
+            require_once ROOT_PATH.'/apps/system/models/system.class.php';
+            $system = new system();
+            $smtp = $system ->is_smtp();
+            $smtpconf=$system->getAllKeyValue();
+            if($smtp){
+                $emailClass->email_sock($smtpconf["smtp_host"],$smtpconf["smtp_port"],0,'error',10,1,$smtpconf["smtp_user"],$smtpconf["smtp_pass"],$smtpconf["smtp_from"]);
+                $emailClass->send_mail_sock($emailClass->subject,$emailClass->message,$data['user']['email'],$smtpconf["smtp_from_name"]) ;
+                unset($emailClass);
+            }else{
+                $emailClass->to($data['user']['email']);
+                $emailClass->send();
+                unset($emailClass);
+            }
         }else{
             #给用户发邮件
             require_once ENGINE_PATH.'/classes/email.class.php';
@@ -1435,9 +1454,19 @@ class items {
                 'THEMENAME' => $data['name'],
                 'COMMENT' => $_POST['comment_to_user']
             ));
-            $emailClass->to($data['user']['email']);
-            $emailClass->send();
-            unset($emailClass);
+            require_once ROOT_PATH.'/apps/system/models/system.class.php';
+            $system = new system();
+            $smtp = $system ->is_smtp();
+            $smtpconf=$system->getAllKeyValue();
+            if($smtp){
+                $emailClass->email_sock($smtpconf["smtp_host"],$smtpconf["smtp_port"],0,'error',10,1,$smtpconf["smtp_user"],$smtpconf["smtp_pass"],$smtpconf["smtp_from"]);
+                $emailClass->send_mail_sock($emailClass->subject,$emailClass->message,$data['user']['email'],$smtpconf["smtp_from_name"]) ;
+                unset($emailClass);
+            }else {
+                $emailClass->to($data['user']['email']);
+                $emailClass->send();
+                unset($emailClass);
+            }
         }
 
 
@@ -1487,10 +1516,19 @@ class items {
 								&nbsp;&nbsp;&nbsp;&nbsp;专属小编：['.$theservice['user_name'].']<br />
 								&nbsp;&nbsp;&nbsp;&nbsp;['.$meta['meta_title'].']<br />
 								&nbsp;&nbsp;&nbsp;&nbsp;['.date('Y-m-d H:i:s',time()).']<br />';
-
-            $emailClass->to($data['user']['email']);
-            $emailClass->send();
-            unset($emailClass);
+            require_once ROOT_PATH.'/apps/system/models/system.class.php';
+            $system = new system();
+            $smtp = $system ->is_smtp();
+            $smtpconf=$system->getAllKeyValue();
+            if($smtp){
+                $emailClass->email_sock($smtpconf["smtp_host"],$smtpconf["smtp_port"],0,'error',10,1,$smtpconf["smtp_user"],$smtpconf["smtp_pass"],$smtpconf["smtp_from"]);
+                $emailClass->send_mail_sock($emailClass->subject,$emailClass->message,$data['user']['email'],$smtpconf["smtp_from_name"]) ;
+                unset($emailClass);
+            }else{
+                $emailClass->to($data['user']['email']);
+                $emailClass->send();
+                unset($emailClass);
+            }
         }else{
             #给用户发邮件
             require_once ENGINE_PATH.'/classes/email.class.php';
@@ -1502,9 +1540,19 @@ class items {
                 'THEMENAME' => $data['name'],
                 'COMMENT' => $_POST['comment_to_user']
             ));
-            $emailClass->to($data['user']['email']);
-            $emailClass->send();
-            unset($emailClass);
+            require_once ROOT_PATH.'/apps/system/models/system.class.php';
+            $system = new system();
+            $smtp = $system ->is_smtp();
+            $smtpconf=$system->getAllKeyValue();
+            if($smtp){
+                $emailClass->email_sock($smtpconf["smtp_host"],$smtpconf["smtp_port"],0,'error',10,1,$smtpconf["smtp_user"],$smtpconf["smtp_pass"],$smtpconf["smtp_from"]);
+                $emailClass->send_mail_sock($emailClass->subject,$emailClass->message,$data['user']['email'],$smtpconf["smtp_from_name"]) ;
+                unset($emailClass);
+            }else {
+                $emailClass->to($data['user']['email']);
+                $emailClass->send();
+                unset($emailClass);
+            }
         }
 		return true;
 	}
@@ -1585,10 +1633,19 @@ class items {
 //								&nbsp;&nbsp;&nbsp;&nbsp;专属小编：['.$theservice['user_name'].']<br />
 //								&nbsp;&nbsp;&nbsp;&nbsp;['.$meta['meta_title'].']<br />
 //								&nbsp;&nbsp;&nbsp;&nbsp;['.date('Y-m-d H:i:s',time()).']<br />';
+//        require_once ROOT_PATH.'/apps/system/models/system.class.php';
+//        $system = new system();
+//        $smtp = $system ->is_smtp();
+//        $smtpconf=$system->getAllKeyValue();
+//        if($smtp){
+//            $emailClass->email_sock($smtpconf["smtp_host"],$smtpconf["smtp_port"],0,'error',10,1,$smtpconf["smtp_user"],$smtpconf["smtp_pass"],$smtpconf["smtp_from"]);
+//            $emailClass->send_mail_sock($emailClass->subject,$emailClass->message,$user_info['email'],$smtpconf["smtp_from_name"]) ;
+//            unset($emailClass);
+//        }else {
 //            $emailClass->to($user_info['email']);
 //            $emailClass->send();
 //            unset($emailClass);
-
+//        }
 
 		$this->deleteUpdate($item['id']);
 		
@@ -1636,9 +1693,19 @@ class items {
 								&nbsp;&nbsp;&nbsp;&nbsp;专属小编：['.$theservice['user_name'].']<br />
 								&nbsp;&nbsp;&nbsp;&nbsp;['.$meta['meta_title'].']<br />
 								&nbsp;&nbsp;&nbsp;&nbsp;['.date('Y-m-d H:i:s',time()).']<br />';
-            $emailClass->to($user_info['email']);
-            $emailClass->send();
-            unset($emailClass);
+            require_once ROOT_PATH.'/apps/system/models/system.class.php';
+            $system = new system();
+            $smtp = $system ->is_smtp();
+            $smtpconf=$system->getAllKeyValue();
+            if($smtp){
+                $emailClass->email_sock($smtpconf["smtp_host"],$smtpconf["smtp_port"],0,'error',10,1,$smtpconf["smtp_user"],$smtpconf["smtp_pass"],$smtpconf["smtp_from"]);
+                $emailClass->send_mail_sock($emailClass->subject,$emailClass->message,$user_info['email'],$smtpconf["smtp_from_name"]) ;
+                unset($emailClass);
+            }else{
+                $emailClass->to($user_info['email']);
+                $emailClass->send();
+                unset($emailClass);
+            }
         }else{
             #给用户发邮件
             require_once ENGINE_PATH.'/classes/email.class.php';
@@ -1650,9 +1717,19 @@ class items {
                 'THEMENAME' => $item['name'],
                 'COMMENT' => $_POST['comment_to_user']
             ));
-            $emailClass->to($item['user']['email']);
-            $emailClass->send();
-            unset($emailClass);
+            require_once ROOT_PATH.'/apps/system/models/system.class.php';
+            $system = new system();
+            $smtp = $system ->is_smtp();
+            $smtpconf=$system->getAllKeyValue();
+            if($smtp){
+                $emailClass->email_sock($smtpconf["smtp_host"],$smtpconf["smtp_port"],0,'error',10,1,$smtpconf["smtp_user"],$smtpconf["smtp_pass"],$smtpconf["smtp_from"]);
+                $emailClass->send_mail_sock($emailClass->subject,$emailClass->message,$user_info['email'],$smtpconf["smtp_from_name"]) ;
+                unset($emailClass);
+            }else {
+                $emailClass->to($item['user']['email']);
+                $emailClass->send();
+                unset($emailClass);
+            }
         }
 		return true;
 	}

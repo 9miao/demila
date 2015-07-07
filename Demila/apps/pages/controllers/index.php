@@ -16,7 +16,7 @@ _setView(__FILE__);
 	$page = $pagesClass->getByKey($key);
 	if(!is_array($page)) {
 		header("HTTP/1.0 404 Not Found");
-        header("Location: http://". DOMAIN ."/error");	
+        header("Location: http://". DOMAIN ."/".$languageURL."error");	
 	}
 	abr('page', $page);
 

@@ -2,7 +2,7 @@
 <div class="pagetit">
   <div class="navblock">
     <ul class="titnav clr">
-      <li><a href="/admin" title="管理首页">管理首页</a></li>
+      <li><a href="/{$languageURL}admin" title="管理首页">管理首页</a></li>
       <li class="pipe">&gt;</li>
       <li>设置</li>
     </ul>
@@ -42,10 +42,10 @@
 							</td>
 							<td>{$d.value}</td>
 							<td>
-								<a href="?m={$smarty.get.m}&c=edit&id={$d.id}" title="编辑"><img class="middle" src="{$data_server}/admin/images/icons/16x16/edit.png" />编辑</a>
+								<a href="?m={$smarty.get.m}&c=edit&id={$d.id}" title="编辑"><img class="middle" src="{$template_data}admin/images/icons/16x16/edit.png" />编辑</a>
 								{if !$d.system}
 								<br/>
-								<a class="deletebtn" ajax-url="/apps/{$smarty.get.m}/ajax/delete.php" item-id="{$d.id}" href="javascript:void(0);" title="{$lang.delete}"><img class="middle" src="{$data_server}/admin/images/icons/16x16/delete.png" />删除</a>
+								<a class="deletebtn" ajax-url="/apps/{$smarty.get.m}/ajax/delete.php" item-id="{$d.id}" href="javascript:void(0);" title="{$lang.delete}"><img class="middle" src="{$template_data}admin/images/icons/16x16/delete.png" />删除</a>
 								{/if}
 							</td>
 						</tr>
@@ -54,9 +54,19 @@
 						<tr>
 							<td>站点LOGO</td>
 							<td></td>
-							<td><a href="/admin/?m=system&c=logo" title="编辑"><img class="middle" src="{$data_server}/admin/images/icons/16x16/edit.png" /> 编辑</a></td>
+							<td><a href="/{$languageURL}admin/?m=system&c=logo" title="编辑"><img class="middle" src="{$template_data}admin/images/icons/16x16/edit.png" /> 编辑</a></td>
 						</tr>
-					</tbody>
+                        <tr>
+                            <td>邮件发送方式</td>
+                            <td></td>
+                            <td><a href="/{$languageURL}admin/?m=system&c=sendmail" title="编辑"><img class="middle" src="{$template_data}admin/images/icons/16x16/edit.png" /> 编辑</a></td>
+                        </tr>
+                        <tr>
+                            <td>模板设置</td>
+                            <td></td>
+                            <td><a href="/{$languageURL}admin/?m=system&c=template" title="编辑"><img class="middle" src="{$template_data}admin/images/icons/16x16/edit.png" /> 编辑</a></td>
+                        </tr>
+                    </tbody>
 				</table>
 				<table class="general_table" cellspacing="0" cellpadding="0" border="0" style="display:none;">
 					<thead>
@@ -68,15 +78,15 @@
 					<tbody>
 						<tr>
 							<td>系统货币</td>
-							<td><a href="/admin/?m=system&c=currency" title="编辑"><img class="middle" src="{$data_server}/admin/images/icons/16x16/edit.png" /> 编辑</a></td>
+							<td><a href="/{$languageURL}admin/?m=system&c=currency" title="编辑"><img class="middle" src="{$template_data}admin/images/icons/16x16/edit.png" /> 编辑</a></td>
 						</tr>
 						<tr>
 							<td>支付方式</td>
-							<td><a href="/admin/?m=payments&c=list" title="编辑"><img class="middle" src="{$data_server}/admin/images/icons/16x16/edit.png" /> 编辑</a></td>
+							<td><a href="/{$languageURL}admin/?m=payments&c=list" title="编辑"><img class="middle" src="{$template_data}admin/images/icons/16x16/edit.png" /> 编辑</a></td>
 						</tr>
 						<tr>
 							<td>分成比例</td>
-							<td><a href="/admin/?m=percents&c=list" title="编辑"><img class="middle" src="{$data_server}/admin/images/icons/16x16/edit.png" /> 编辑</a></td>
+							<td><a href="/{$languageURL}admin/?m=percents&c=list" title="编辑"><img class="middle" src="{$template_data}admin/images/icons/16x16/edit.png" /> 编辑</a></td>
 						</tr>
 					</tbody>
 				</table>
@@ -90,27 +100,27 @@
 					<tbody>
 						<tr>
 							<td>社区徽章</td>
-							<td><a href="/admin/?m=system&c=badges" title="编辑"><img class="middle" src="{$data_server}/admin/images/icons/16x16/edit.png" /> 编辑</a></td>
+							<td><a href="/{$languageURL}admin/?m=system&c=badges" title="编辑"><img class="middle" src="{$template_data}admin/images/icons/16x16/edit.png" /> 编辑</a></td>
 						</tr>
 						<tr>
 							<td>国家或地区</td>
-							<td><a href="/admin/?m=countries&c=list" title="编辑"><img class="middle" src="{$data_server}/admin/images/icons/16x16/edit.png" /> 编辑</a></td>
+							<td><a href="/{$languageURL}admin/?m=countries&c=list" title="编辑"><img class="middle" src="{$template_data}admin/images/icons/16x16/edit.png" /> 编辑</a></td>
 						</tr>
 						<tr>
 							<td>成为作者测试问题</td>
-							<td><a href="/admin/?m=quiz&c=list" title="编辑"><img class="middle" src="{$data_server}/admin/images/icons/16x16/edit.png" /> 编辑</a></td>
+							<td><a href="/{$languageURL}admin/?m=quiz&c=list" title="编辑"><img class="middle" src="{$template_data}admin/images/icons/16x16/edit.png" /> 编辑</a></td>
 						</tr>
 						<tr>
 							<td>作者控制面板快讯</td>
-							<td><a href="/admin/?m=qnews&c=list" title="编辑"><img class="middle" src="{$data_server}/admin/images/icons/16x16/edit.png" /> 编辑</a></td>
+							<td><a href="/{$languageURL}admin/?m=qnews&c=list" title="编辑"><img class="middle" src="{$template_data}admin/images/icons/16x16/edit.png" /> 编辑</a></td>
 						</tr>
 						<tr>
 							<td>联系支持类别</td>
-							<td><a href="/admin/?m=contacts&c=categories" title="编辑"><img class="middle" src="{$data_server}/admin/images/icons/16x16/edit.png" /> 编辑</a></td>
+							<td><a href="/{$languageURL}admin/?m=contacts&c=categories" title="编辑"><img class="middle" src="{$template_data}admin/images/icons/16x16/edit.png" /> 编辑</a></td>
 						</tr>
 						<tr>
 							<td>用户提现列表</td>
-							<td><a href="/admin/?m=users&c=withdraws" title="编辑"><img class="middle" src="{$data_server}/admin/images/icons/16x16/edit.png" /> 编辑</a></td>
+							<td><a href="/{$languageURL}admin/?m=users&c=withdraws" title="编辑"><img class="middle" src="{$template_data}admin/images/icons/16x16/edit.png" /> 编辑</a></td>
 						</tr>
 					</tbody>
 				</table>
@@ -124,35 +134,35 @@
 					<tbody>
 						<tr>
 							<td>作品分类</td>
-							<td><a href="/admin/?m=categories&c=list" title="编辑"><img class="middle" src="{$data_server}/admin/images/icons/16x16/edit.png" /> 编辑</a></td>
+							<td><a href="/{$languageURL}admin/?m=categories&c=list" title="编辑"><img class="middle" src="{$template_data}admin/images/icons/16x16/edit.png" /> 编辑</a></td>
 						</tr>
 						<tr>
 							<td>属性类别和属性</td>
-							<td><a href="/admin/?m=attributes&c=list" title="编辑"><img class="middle" src="{$data_server}/admin/images/icons/16x16/edit.png" /> 编辑</a></td>
+							<td><a href="/{$languageURL}admin/?m=attributes&c=list" title="编辑"><img class="middle" src="{$template_data}admin/images/icons/16x16/edit.png" /> 编辑</a></td>
 						</tr>
 						<tr>
 							<td>书签集</td>
-							<td><a href="/admin/?m=collections&c=list" title="编辑"><img class="middle" src="{$data_server}/admin/images/icons/16x16/edit.png" /> 编辑</a></td>
+							<td><a href="/{$languageURL}admin/?m=collections&c=list" title="编辑"><img class="middle" src="{$template_data}admin/images/icons/16x16/edit.png" /> 编辑</a></td>
 						</tr>
 						<tr>
 							<td>新闻邮件</td>
-							<td><a href="/admin/?m=bulletin&c=list" title="编辑"><img class="middle" src="{$data_server}/admin/images/icons/16x16/edit.png" /> 编辑</a></td>
+							<td><a href="/{$languageURL}admin/?m=bulletin&c=list" title="编辑"><img class="middle" src="{$template_data}admin/images/icons/16x16/edit.png" /> 编辑</a></td>
 						</tr>
 						<tr>
 							<td>新闻邮件订阅</td>
-							<td><a href="/admin/?m=bulletin&c=list" title="编辑"><img class="middle" src="{$data_server}/admin/images/icons/16x16/edit.png" /> 编辑</a></td>
+							<td><a href="/{$languageURL}admin/?m=bulletin&c=list" title="编辑"><img class="middle" src="{$template_data}admin/images/icons/16x16/edit.png" /> 编辑</a></td>
 						</tr>
 						<tr>
 							<td>生成报表</td>
-							<td><a href="/admin/?m=reports&c=list" title="编辑"><img class="middle" src="{$data_server}/admin/images/icons/16x16/edit.png" /> 编辑</a></td>
+							<td><a href="/{$languageURL}admin/?m=reports&c=list" title="编辑"><img class="middle" src="{$template_data}admin/images/icons/16x16/edit.png" /> 编辑</a></td>
 						</tr>
 						<tr>
 							<td>举报的评论</td>
-							<td><a href="/admin/?m=users&c=comments" title="编辑"><img class="middle" src="{$data_server}/admin/images/icons/16x16/edit.png" /> 编辑</a></td>
+							<td><a href="/{$languageURL}admin/?m=users&c=comments" title="编辑"><img class="middle" src="{$template_data}admin/images/icons/16x16/edit.png" /> 编辑</a></td>
 						</tr>
 						<tr>
 							<td>标签</td>
-							<td><a href="/admin/?m=tags&c=list" title="编辑"><img class="middle" src="{$data_server}/admin/images/icons/16x16/edit.png" /> 编辑</a></td>
+							<td><a href="/{$languageURL}admin/?m=tags&c=list" title="编辑"><img class="middle" src="{$template_data}admin/images/icons/16x16/edit.png" /> 编辑</a></td>
 						</tr>
 					</tbody>
 				</table>

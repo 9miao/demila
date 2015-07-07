@@ -17,12 +17,12 @@ if(!isset($_GET['user_id']) || !is_numeric($_GET['user_id'])) {
 }
 
 $cms = new users();
-$user = $cms->get($_GET['user_id']);
-if(!$user) {
+$userinfo = $cms->get($_GET['user_id']);
+if(!$userinfo) {
 	refresh('?m='.$_GET['m'].'&c=list', 'INVALID ID', 'error');
 }
 
-_setTitle ( $user['username'] . ' › ' . $langArray ['balance1'] );
+_setTitle ( $userinfo['username'] . ' › ' . $langArray ['balance1'] );
 
 if (isset ( $_POST ['add'] )) {
 	#加载余额

@@ -2,7 +2,7 @@
 <div class="pagetit">
   <div class="navblock">
     <ul class="titnav clr">
-      <li><a href="/admin" title="管理首页">管理首页</a></li>
+      <li><a href="/{$languageURL}admin" title="管理首页">管理首页</a></li>
       <li class="pipe">&gt;</li>
       <li>支持中心</li>
     </ul>
@@ -41,9 +41,9 @@
 				<td>{$d.issue}</td>
 				<td>{$d.datetime|date_format:"%Y-%m-%d"}</td>
 				<td>
-					<a href="?m={$smarty.get.m}&c=view&id={$d.id}&p={$smarty.get.p}" title="{$lang.view}"><img class="middle" src="{$data_server}admin/images/icons/16x16/view.png" /> {$lang.view} Ticket</a>
+					<a href="?m={$smarty.get.m}&c=view&id={$d.id}&p={$smarty.get.p}" title="{$lang.view}"><img class="middle" src="{$template_data}admin/images/icons/16x16/view.png" /> {$lang.view} Ticket</a>
 					<br/>
-					<a class="deletebtn" ajax-url="/apps/{$smarty.get.m}/ajax/delete.php" item-id="{$d.id}" href="javascript:void(0);" title="{$lang.delete}"><img class="middle" src="{$data_server}admin/images/icons/16x16/delete.png" /> {$lang.delete} Ticket</a>
+					<a class="deletebtn" ajax-url="/apps/{$smarty.get.m}/ajax/delete.php" item-id="{$d.id}" href="javascript:void(0);" title="{$lang.delete}"><img class="middle" src="{$template_data}admin/images/icons/16x16/delete.png" /> {$lang.delete} Ticket</a>
 				</td>					
 			</tr>
 			{/foreach}

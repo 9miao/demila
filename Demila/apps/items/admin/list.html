@@ -2,11 +2,11 @@
 <div class="pagetit">
   <div class="navblock">
     <ul class="titnav clr">
-      <li><a href="/admin" title="管理首页">管理首页</a></li>
+      <li><a href="/{$languageURL}admin" title="管理首页">管理首页</a></li>
       <li class="pipe">&gt;</li>
-      <li><a href="/admin/?m=users&amp;c=list">用户</a></li>
+      <li><a href="/{$languageURL}admin/?m=users&amp;c=list">用户</a></li>
       <li class="pipe">&gt;</li>
-      <li><a href="/admin/?m=users&c=edit&id={$smarty.get.user}">{foreach from=$data item=d name=foo}{if $smarty.foreach.foo.index < 1}{$users[$d.user_id].username}{/if}{/foreach}</a></li>
+      <li><a href="/{$languageURL}admin/?m=users&c=edit&id={$smarty.get.user}">{foreach from=$data item=d name=foo}{if $smarty.foreach.foo.index < 1}{$users[$d.user_id].username}{/if}{/foreach}</a></li>
       <li class="pipe">&gt;</li>
       <li>作品集</li>
     </ul>
@@ -57,28 +57,28 @@
 					
 					{if $d.free_request == 'true'}
 						{if $d.free_file == 'true'}
-						    <img class="statusbtn" id="status_pic_{$d.id}" status="{$d.free_file}" item="{$d.id}" src="{$data_server}/admin/images/icons/24x24/accept.png" style="cursor:pointer"/>
+						    <img class="statusbtn" id="status_pic_{$d.id}" status="{$d.free_file}" item="{$d.id}" src="{$template_data}admin/images/icons/24x24/accept.png" style="cursor:pointer"/>
 						{else}
-							<img class="statusbtn" id="status_pic_{$d.id}" status="{$d.free_file}" item="{$d.id}" src="{$data_server}/img/question.png" style="cursor:pointer"/>
+							<img class="statusbtn" id="status_pic_{$d.id}" status="{$d.free_file}" item="{$d.id}" src="{$template_data}img/question.png" style="cursor:pointer"/>
 						{/if}
-						<img src='{$data_server}/img/loading.gif' class="status_pic_{$d.id}" style="display:none"/>
+						<img src='{$template_data}img/loading.gif' class="status_pic_{$d.id}" style="display:none"/>
 					{else}
-					    <img src="{$data_server}/admin/images/icons/24x24/delete.png"/>
+					    <img src="{$template_data}/admin/images/icons/24x24/delete.png"/>
 					{/if}
 				</td>
 				<td>
 					{if $d.weekly_to == ''}
-						<img src="{$data_server}/admin/images/icons/24x24/delete.png">
+						<img src="{$template_data}/admin/images/icons/24x24/delete.png">
 					{else}
-						<img src="{$data_server}/admin/images/icons/24x24/accept.png">
+						<img src="{$template_data}/admin/images/icons/24x24/accept.png">
 					{/if}
 				</td>
 				<td>
-					<a href="?m={$smarty.get.m}&c=comments&id={$d.id}" title="{$lang.comments}"><img class="middle" src="{$data_server}/admin/images/icons/16x16/icon-comments.png" /> {$d.comments} {$lang.comments} </a>
+					<a href="?m={$smarty.get.m}&c=comments&id={$d.id}" title="{$lang.comments}"><img class="middle" src="{$template_data}admin/images/icons/16x16/icon-comments.png" /> {$d.comments} {$lang.comments} </a>
 					<br/>
-					<a href="?m={$smarty.get.m}&c=edit&id={$d.id}&p={$smarty.get.p}" title="编辑"><img class="middle" src="{$data_server}/admin/images/icons/16x16/edit.png" /> 编辑作品</a>
+					<a href="?m={$smarty.get.m}&c=edit&id={$d.id}&p={$smarty.get.p}" title="编辑"><img class="middle" src="{$template_data}admin/images/icons/16x16/edit.png" /> 编辑作品</a>
 					<br/>
-					<a class="deletebtn" ajax-url="/apps/{$smarty.get.m}/ajax/delete.php" item-id="{$d.id}" href="javascript:void(0);" title="删除"><img class="middle" src="{$data_server}/admin/images/icons/16x16/delete.png" /> 删除作品</a>
+					<a class="deletebtn" ajax-url="/apps/{$smarty.get.m}/ajax/delete.php" item-id="{$d.id}" href="javascript:void(0);" title="删除"><img class="middle" src="{$template_data}admin/images/icons/16x16/delete.png" /> 删除作品</a>
 				</td>					
 			</tr>
 			{/foreach}
@@ -104,7 +104,7 @@ seajs.use(["modules/ajax"], function(aj){
 <script>
 {literal}
 seajs.use(["modules/administry"], function(adm){
-	adm.cheange_status("#status_pic .statusbtn", "/{/literal}{$langaugeURL}{literal}admin/?m=items&c=list");
+	adm.cheange_status("#status_pic .statusbtn", "/{/literal}{$languageURL}{literal}admin/?m=items&c=list");
 });
 {/literal}
 </script>

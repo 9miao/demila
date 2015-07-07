@@ -430,7 +430,7 @@ define(function (require, exports, module){
 		var domid = [],
 			filetype = ["thumbnail", "main_file", "first_preview", "theme_preview"],
 			nums = ["single", "single", "single", "multiple"],
-			showtype = ["image", "zip", "image", "prev"],
+			showtype = ["image", "zip", "prev", "prev"],
 			issubmit = false;
 		if(funtype === "edit"){
 			window.onbeforeunload = function(){
@@ -470,7 +470,7 @@ define(function (require, exports, module){
 			var j = data[i];
 			tmp += "<li class='thumbnail landscape-image-magnifier'>\
 				<a href='/items/" + j.id + "'>\
-				<img alt='" + j.name + "' border='0' class='preload no_preview' data-item-author='作者 " + (j.user_info)["item-author"] + "' data-item-category='" + getCateStr(j.item_categories) + "' data-item-cost='" + j.price + "' data-item-name='" + j.name + "' data-preview-height='' data-preview-url='/uploads/items/" + j.id + "/preview.jpg' data-preview-width='' src='/uploads/items/" + j.id + "/" + j.thumbnail + "' title='" + j.name + "' />\
+				<img alt='" + j.name + "' border='0' class='preload no_preview' data-item-author='作者 " + (j.user_info)["item-author"] + "' data-item-category='" + getCateStr(j.item_categories) + "' data-item-cost='" + j.price + "' data-item-name='" + j.name + "' data-preview-height='' data-preview-url='/static/uploads/items/" + j.id + "/" + j.theme_preview + "' data-preview-width='' src='/static/uploads/items/" + j.id + "/" + j.thumbnail + "' title='" + j.name + "' />\
 				</a>\
 				</li>";
 		}
@@ -487,12 +487,13 @@ define(function (require, exports, module){
 		return tmp;
 	}
 	function showMagnifier(e) {
-		$(e).attr("data-tooltip") === undefined && ($(e).attr("data-tooltip", $(e).attr("title")), $(e).attr("title", ""), $("img", e).attr("title", "")), populateMagnifierFrom(e), positionMagnifierNextTo(e), magnifierDiv().css({
-			display: "inline"
-		});
+		$(e).attr("data-tooltip") === undefined && ($(e).attr("data-tooltip", $(e).attr("title")), $(e).attr("title", ""), $("img", e).attr("title", "")),
+		populateMagnifierFrom(e),
+		positionMagnifierNextTo(e),
+		magnifierDiv().css({display: "inline"});
 	}
 	function hideMagnifier() {
-		magnifierDiv().hide()
+		magnifierDiv().hide();
 	}
 	function magnifierDiv() {
 		return $("div#landscape-image-magnifier");
@@ -513,7 +514,8 @@ define(function (require, exports, module){
 			tit = n.find("strong"),
 			i = $(e),
 			path = i.attr("data-preview-url"),
-			free = i.attr("item-type-free");
+			free = i.attr("item-type-free"),
+			pretxt = i.attr("data-preview-txt");
 		if(free == "1"){
 			n.find(".price").addClass("freepri");
 		}else{
@@ -523,6 +525,9 @@ define(function (require, exports, module){
 			t = new Image;
 			$(t).attr("src", path);
 			r.show().empty().append(t);
+			if(pretxt && pretxt != ""){
+				r.append("<span class='pretxt'>" + pretxt + "</span><span class='prebg'></span>");
+			}
 			tit.removeClass("autow");
 		}else{
 			r.hide();

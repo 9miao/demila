@@ -2,7 +2,7 @@
 <div class="pagetit">
   <div class="navblock">
     <ul class="titnav clr">
-      <li><a href="/admin" title="管理首页">管理首页</a></li>
+      <li><a href="/{$languageURL}admin" title="管理首页">管理首页</a></li>
       <li class="pipe">&gt;</li>
       <li><a href="?m={$smarty.get.m}&c=list&p={$smarty.get.p}">支持中心</a></li>
       <li class="pipe">&gt;</li>
@@ -16,7 +16,7 @@
 <!--<div class="page-info">
     <div class="container">
       <div id="breadcrumbs">
-        <a href="/admin" class="first">主页</a> \ <a href="?m={$smarty.get.m}&c=list&p={$smarty.get.p}">支持中心</a> \
+        <a href="/{$languageURL}admin" class="first">主页</a> \ <a href="?m={$smarty.get.m}&c=list&p={$smarty.get.p}">支持中心</a> \
 		<a href="?m={$smarty.get.m}&c=categories&p={$smarty.get.p}">问题分类</a> \
       </div>
       <h1 class="page-title">{$title} {if $smarty.get.c=='edit'}{$smarty.post.name|escape} Issue{else}新问题{/if}</h1>

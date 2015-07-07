@@ -20,22 +20,6 @@ require_once 'config.php';
 require_once $config ['root_path'] . '/core/functions.php';
 include_once $config ['system_core'] . "/initEngine.php";
 
-require_once ROOT_PATH.'/apps/system/models/system.class.php';
-$systemClass = new system();
-	
-$currency = $systemClass->getActiveCurrency();
-abr('currency', $currency);
-
-#元数据
-$meta = $systemClass->getAllKeyValue();
-
-
-$smarty->assign('title', $meta['meta_title']);
-$smarty->assign('meta_keywords', $meta['meta_keywords']);
-$smarty->assign('meta_description', $meta['meta_description']);
-$smarty->assign('site_logo', $meta['site_logo']);
-
-	
 
 if($_GET['module'] != 'admin') {
 	

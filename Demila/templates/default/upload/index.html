@@ -1,0 +1,89 @@
+<link href="/static/css/custom/resource.css" rel="stylesheet" />
+{if $smarty.session.user.power_elite_author  == 'true' || $smarty.session.user.elite_author  == 'true'}
+<div class="pagetit pagetabs{if $smarty.session.user.power_elite_author  == 'true'} power-elite-author{/if}{if $smarty.session.user.elite_author  == 'true'} elite-author{/if}">
+  <div class="navblock">
+    <ul class="titnav clr">
+      <li><a href="/" title="主页">主页</a></li>
+      <li class="pipe">&gt;</li>
+      <li><a href="/{$languageURL}author_dashboard/">我的账号</a></li>
+    </ul>
+    <h2>上传至{$domain}</h2>
+    {include file="$template_path/users/tabsy.html"}
+  </div>
+</div>
+{else}
+<div class="pagetit pagetabs">
+  <div class="navblock">
+    <ul class="titnav clr">
+      <li><a href="/" title="主页">主页</a></li>
+      <li class="pipe">&gt;</li>
+      <li><a href="/{$languageURL}author_dashboard/">我的账号</a></li>
+    </ul>
+    <h2>上传至{$domain}</h2>
+    {include file="$template_path/users/tabsy.html"}
+  </div>
+</div>
+{/if}
+
+<div class="resourcebg">
+  <div class="pageblock clr">
+    {$errorMessage}
+    <div class="leftdetail">
+      <h2 class="underlined">为你的上传选择一个类别：</h2>
+
+        <form id="begin-upload" action="/{$languageURL}upload/form/" method="get">
+            <div class="radiogroup clr">
+                {if $mainCategories}
+                {foreach from=$mainCategories item=c name=foo}
+                <input type="radio" name="category"{if $smarty.foreach.foo.first} checked="checked"{/if} id="category_{$c.id}" value="{$c.id}" />
+                <label for="category_{$c.id}">{$c.name}</label>
+                {/foreach}
+                {/if}
+            </div>
+            <button type="submit" class="btntheme2 btnsize3">下一步</button>
+        </form>
+
+      <!--<form id="begin-upload" action="/" method="get">-->
+        <!--<p>-->
+        <!--<select class="inline" id="category" name="category">-->
+        <!--{if $mainCategories}-->
+        <!--{foreach from=$mainCategories item=c}-->
+        <!--<option value="{$c.id}">{$c.name}</option>-->
+        <!--{/foreach}-->
+        <!--{/if}-->
+        <!--</select>-->
+        <!--<button onclick="window.location='/upload/form/?category=' + document.getElementById('category').options[document.getElementById('category').selectedIndex].value;" type=button class="btntheme2 btnsize3">下一步</button>-->
+        <!--</p>-->
+      <!--</form>-->
+
+      <div class="notice">
+        <p><strong>需要选择类别方面的帮助？</strong></p>
+        <p>最好的办法是通过浏览<a href="/{$languageURL}categories/">我们的类别</a>来查看其他作者都出售了哪些作品。</p>
+      </div>
+    </div>
+    <div class="rightdetail">
+      <h3 class="tipstit">如何让文件更受欢迎？</h3>
+      <div class="tipsdetail">
+        <p>请确保做到以下几点:</p>
+        <ul class="tiplist">
+          <li>浏览 <a href='/{$languageURL}help/upload/'>上传说明</a>。</li>
+          <li>给作品添加有用并且准确的标签和描述。</li>
+        </ul>
+      </div>
+      <h3 class="tipstit">上传遇到问题？</h3>
+      <div class="tipsdetail">
+        <p>有些用户上传遇到问题，我们准备了一个<a href="/{$languageURL}help/upload/">常见问题列表</a>。请查看这个文档，如果还是有问题请联系管理员处理。</p>
+      </div>
+      <h3 class="tipstit">zip文件问题</h3>
+      <div class="tipsdetail">
+        <p>我们的服务器不支持以下格式的压缩包：</p>
+        <ul class="tiplist">
+          <li>7zip</li>
+          <li>lzarc</li>
+          <li>WinZip</li>
+        </ul>
+        <p>请选择其他压缩工具以减少上传问题。</p>
+      </div>
+    </div>
+  </div>
+</div>

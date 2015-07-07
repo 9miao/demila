@@ -40,8 +40,10 @@ $langArray = array(
 	'list' => '预览',
 	'send' => '发送',
 	'save' => '保存',
+    'test' => '测试',
 
-	'yes' => '是',
+
+    'yes' => '是',
 	'no' => '否',
 
 	'up' => '上',
@@ -447,7 +449,7 @@ $langArray = array(
 	'country_info' => '您的国家的选择将决定您的徽章标志是什么',
 	'available_freelance' => '自由职业者可行',
 	'formatting_help' => '
-<p>可以使用基本 HTML 格式你的资料. <a href="/help/basic#formatpost">了解详细资料</a>, 或者参考这里:</p>
+<p>可以使用基本 HTML 格式你的资料. <a href="/{$languageURL}help/basic#formatpost">了解详细资料</a>, 或者参考这里:</p>
 <p>
 	&lt;strong&gt;&lt;/strong&gt; 加粗<br />
 	&lt;em&gt;&lt;/em&gt; to 强调<br />
@@ -464,7 +466,7 @@ $langArray = array(
   <img src="/static/smileys/grin.png" alt=":grin:" />
   <img src="/static/smileys/shocked.png" alt=":shocked:" />
   <img src="/static/smileys/crying.png" alt=":cry:" />
-<a href="/help/basic#emoticons">Complete List of Smiley Codes</a>
+<a href="/{$languageURL}help/basic#emoticons">Complete List of Smiley Codes</a>
 </p>
 
 
@@ -1091,6 +1093,8 @@ $langArray['suggested_price_from_user'] = '用户建议售价';
 $langArray['suggested_price_info'] = '在这里，你可以输入你想卖你的产品的数量。请注意，这个价格将由我们adminisrtator进行审查，他将决定你的产品的最终价格.';
 $langArray['error_suggested_price'] = '建议零售价应该是以下格式: 数字(.数字)';
 $langArray['payments'] = '付款方式';
+$langArray['sendmail'] = '邮件发送方式';
+$langArray['template'] = '模板设置';
 $langArray['active'] = '可用';
 $langArray['unactive'] = '不可用';
 $langArray['col_status'] = '状态';

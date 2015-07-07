@@ -15,11 +15,14 @@ _setTitle($langArray['popular_files']);
 	$year = get_id(2);
 	$month = get_id(3);
 	$day = get_id(4);
+
 	if(!checkdate(intval($month), intval($day), intval($year))) {
 		$year = date('Y');
 		$month = date('m');
 		$day = date('d');
 	}
+
+
     $dayOfWeek = date('N', mktime(0, 0, 0, $month, $day, $year));
 
 	$dayOfWeek = 7-$dayOfWeek;

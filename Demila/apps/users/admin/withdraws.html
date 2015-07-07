@@ -2,9 +2,9 @@
 <div class="pagetit">
   <div class="navblock">
     <ul class="titnav clr">
-      <li><a href="/admin" title="管理首页">管理首页</a></li>
+      <li><a href="/{$languageURL}admin" title="管理首页">管理首页</a></li>
       <li class="pipe">&gt;</li>
-      <li><a href="/admin/?m=users&c=list">用户</a></li>
+      <li><a href="/{$languageURL}admin/?m=users&c=list">用户</a></li>
       <li class="pipe">&gt;</li>
       <li>提现</li>
     </ul>
@@ -14,7 +14,7 @@
 <!--<div class="page-info">
     <div class="container">
       <div id="breadcrumbs">
-        <a href="/admin" class="first">主页</a> \ <a href="/admin/?m=users&c=list">用户</a> \
+        <a href="/{$languageURL}admin" class="first">主页</a> \ <a href="/{$languageURL}admin/?m=users&c=list">用户</a> \
       </div>
       <h1 class="page-title">提现</h1>
     </div>
@@ -66,18 +66,18 @@
 				<td>{$d.datetime|date_format:"%Y-%m-%d"}</td>
 				<td>
 					{if $d.paid == 'true'}
-						<img src="{$data_server}admin/images/icons/24x24/accept.png" alt="" class="middle" />
+						<img src="{$template_data}admin/images/icons/24x24/accept.png" alt="" class="middle" />
 
 						{$d.paid_datetime|date_format:"%Y-%m-%d"}
 					{else}
-						<img src="{$data_server}admin/images/icons/24x24/delete.png" alt="" class="middle" />
+						<img src="{$template_data}admin/images/icons/24x24/delete.png" alt="" class="middle" />
 					{/if}
 				</td>
 				<td>
 					{if $d.paid == 'false'}
-						<a href="?m={$smarty.get.m}&c=pay&id={$d.id}" title="处理"><img class="middle" src="{$data_server}admin/images/icons/16x16/edit.png" />处理</a>
+						<a href="?m={$smarty.get.m}&c=pay&id={$d.id}" title="处理"><img class="middle" src="{$template_data}admin/images/icons/16x16/edit.png" />处理</a>
 
-						<a class="deletebtn" ajax-url="/apps/{$smarty.get.m}/ajax/delete.php" item-id="{$d.id}" href="javascript:void(0);" title="删除"><img class="middle" src="{$data_server}admin/images/icons/16x16/delete.png" /> 删除</a>
+						<a class="deletebtn" ajax-url="/apps/{$smarty.get.m}/ajax/delete.php" item-id="{$d.id}" href="javascript:void(0);" title="删除"><img class="middle" src="{$template_data}admin/images/icons/16x16/delete.png" /> 删除</a>
 					{/if}
 				</td>					
 			</tr>

@@ -2,9 +2,9 @@
 <div class="pagetit">
   <div class="navblock">
     <ul class="titnav clr">
-      <li><a href="/admin" title="管理首页">管理首页</a></li>
+      <li><a href="/{$languageURL}admin" title="管理首页">管理首页</a></li>
       <li class="pipe">&gt;</li>
-      <li><a href="/admin/?m=users&c=list">用户</a></li>
+      <li><a href="/{$languageURL}admin/?m=users&c=list">用户</a></li>
       <li class="pipe">&gt;</li>
       <li>{$title}</li>
     </ul>
@@ -14,7 +14,7 @@
 <!--<div class="page-info">
     <div class="container">
       <div id="breadcrumbs">
-        <a href="/admin" class="first">主页</a> \ <a href="/admin/?m=users&c=list">用户</a> \
+        <a href="/{$languageURL}admin" class="first">主页</a> \ <a href="/{$languageURL}admin/?m=users&c=list">用户</a> \
       </div>
       <h1 class="page-title">{$title}</h1>
     </div>
@@ -50,9 +50,9 @@
 				<td><a href="/{$languageURL}items/{$d.item_id}/" title="" target="_blank">{$d.item_name}</a></td>
 				<td>{$users[$d.report_by].username}</td>
 				<td>
-					<a href="?m={$smarty.get.m}&c=comments&check={$d.id}" title="{$lang.report_check}"><img class="middle" src="{$data_server}/admin/images/icons/16x16/edit.png" /> 忽略</a>
+					<a href="?m={$smarty.get.m}&c=comments&check={$d.id}" title="{$lang.report_check}"><img class="middle" src="{$template_data}admin/images/icons/16x16/edit.png" /> 忽略</a>
 					<br/>
-					<a class="deletebtn" ajax-url="/apps/{$smarty.get.m}/ajax/delete.php" item-id="{$d.id}" href="javascript:void(0);" title="{$lang.delete}"><img class="middle" src="{$data_server}/admin/images/icons/16x16/delete.png" />删除</a>
+					<a class="deletebtn" ajax-url="/apps/{$smarty.get.m}/ajax/delete.php" item-id="{$d.id}" href="javascript:void(0);" title="{$lang.delete}"><img class="middle" src="{$template_data}admin/images/icons/16x16/delete.png" />删除</a>
 				</td>					
 			</tr>
 			{/foreach}

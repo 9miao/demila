@@ -1,6 +1,18 @@
 define(function (require, exports, module){
 	var $ = require("jq"),
 		eAjaxData = "";
+
+    function emailajaxbtn(filter, emailfilter, url, callback){
+        $(filter).on("click", function(){
+            $.post(url, {
+                email: $(emailfilter).val()
+            }, function(data){
+                callback(data);
+            }, "json");
+        });
+    }
+    exports.emailajaxbtn = emailajaxbtn;
+
 	function deletebtninit(filter, attrurl, attrid, parameters, callback, frush){
 		$(filter).on("click", function(){
 			if (!confirm('请再次确定')){
@@ -29,6 +41,7 @@ define(function (require, exports, module){
             //console.log(t.test);
             var that = $(this),
                 ajdata = eval("(" + that.attr(ajaxdata) + ")");
+            console.log(ajdata);
             $.post(that.attr(attrurl), ajdata, function(data){
                 eAjaxData = data;
                 if(typeof callback == "function"){
@@ -71,6 +84,8 @@ define(function (require, exports, module){
         });
     }
     exports.ajaxbtnupdate = ajaxbtnupdate;
+
+
 
 	function ajaxradioinit(filter, attrurl, ajaxdata, callback, frush){
 		$(filter).on("change", function(){

@@ -2,7 +2,7 @@
 <div class="pagetit">
   <div class="navblock">
     <ul class="titnav clr">
-      <li><a href="/admin" title="管理首页">管理首页</a></li>
+      <li><a href="/{$languageURL}admin" title="管理首页">管理首页</a></li>
       <li class="pipe">&gt;</li>
       <li><a href="?m=attributes&amp;c=list">属性类别</a></li>
       <li class="pipe">&gt;</li>
@@ -16,7 +16,7 @@
 <!--<div class="page-info">
     <div class="container">
     <div id="breadcrumbs">
-        <a href="/admin" class="first">主页</a> \ <a href="?m=attributes&amp;c=list">属性类别</a> \ <a href="?m={$smarty.get.m}&c=attr&id={$smarty.get.id}&p={$smarty.get.p}">{$pdata.name}</a> \
+        <a href="/{$languageURL}admin" class="first">主页</a> \ <a href="?m=attributes&amp;c=list">属性类别</a> \ <a href="?m={$smarty.get.m}&c=attr&id={$smarty.get.id}&p={$smarty.get.p}">{$pdata.name}</a> \
     </div>
       <h1 class="page-title">{$title}</h1>
     </div>
@@ -42,7 +42,7 @@
               <input type="file" id="photo" name="photo" />
               {if $smarty.post.photo != ''}
               <br /><br />
-              <img src="{$data_server}/uploads/attributes/{$smarty.post.photo}" alt="" />
+              <img src="{$template_data}/uploads/attributes/{$smarty.post.photo}" alt="" />
               <input type="checkbox" name="deletePhoto" value="yes" /> 删除
               {/if}
               {if isset($error.photo)}

@@ -23,16 +23,13 @@ $ordersClass = new orders();
 #下载作品
 $itemID = get_id(2);
 if(is_numeric($itemID)) {
-
     require_once ROOT_PATH.'/apps/items/models/items.class.php';
     $itemsClass = new items();
-
     $item = $itemsClass->get($itemID);
     if(!is_array($item) || (check_login_bool() && $item['status'] == 'unapproved' && $item['user_id'] != $_SESSION['user']['user_id']) || $item['status'] == 'queue') {
         header("HTTP/1.0 404 Not Found");
-        header("Location: http://". DOMAIN ."/error");
+        header("Location: http://". DOMAIN ."/".$languageURL."error");
     }
-
     if(isset($_POST['rating'])) {
         $_GET['rating'] = $_POST['rating'];
     }
@@ -50,10 +47,10 @@ if(is_numeric($itemID)) {
         $stars = '';
         for($i=1;$i<6;$i++) {
             if($item['rating'] >= $i) {
-                $stars .= '<img src="/static/img/star-on.png" alt="" />';
+                $stars .= '<img src="/static/templates/default/img/star-on.png" alt="" />';
             }
             else {
-                $stars .= '<img src="/static/img/star-off.png" alt="" />';
+                $stars .= '<img src="/static/templates/default/img/star-off.png" alt="" />';
             }
         }
 
@@ -113,7 +110,6 @@ if(is_numeric($itemID)) {
             } else {
                 header('Content-Type: application/octet-stream');
             }
-
             header('Content-Disposition: attachment; filename="'.$item['main_file_name'].'"');
             header("Content-Length:".filesize(DATA_SERVER_PATH.'/uploads/items/'.$item['id'].'/'.$item['main_file']));
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -131,7 +127,7 @@ if(is_numeric($itemID)) {
     }
     else {
         header("HTTP/1.0 404 Not Found");
-        header("Location: http://". DOMAIN ."/error");
+        header("Location: http://". DOMAIN ."/".$languageURL."error");
     }
 
 }

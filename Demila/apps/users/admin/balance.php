@@ -24,12 +24,12 @@ if(!isset($_GET['id']) || !is_numeric($_GET['id'])) {
 }
 
 $cms = new users();
-$user = $cms->get($_GET['id']);
-if(!$user) {
+$userinfo = $cms->get($_GET['id']);
+if(!$userinfo) {
 	refresh('?m='.$_GET['m'].'&c=list', 'INVALID ID', 'error');
 }
 
-_setTitle ( $user['username'] . ' › ' . $langArray ['balance1'] );
+_setTitle ( $userinfo['username'] . ' › ' . $langArray ['balance1'] );
 
 #加载余额
 require_once ROOT_PATH.'/apps/users/models/balance.class.php';

@@ -2,7 +2,7 @@
 <div class="pagetit">
   <div class="navblock">
     <ul class="titnav clr">
-      <li><a href="/admin" title="管理首页">管理首页</a></li>
+      <li><a href="/{$languageURL}admin" title="管理首页">管理首页</a></li>
       <li class="pipe">&gt;</li>
       <li>用户</li>
     </ul>
@@ -56,17 +56,17 @@
 				<td class="ta-right">{$currency.symbol}{$d.referal_money|string_format:"%.2f"}</td>
 				<td>
 					{if $d.featured_author == 'true'}
-						<img src="{$data_server}admin/images/icons/24x24/accept.png" alt="" class="middle" />
+						<img src="{$template_data}admin/images/icons/24x24/accept.png" alt="" class="middle" />
 					{else}
-						<img src="{$data_server}admin/images/icons/24x24/delete.png" alt="" class="middle" />
+						<img src="{$template_data}admin/images/icons/24x24/delete.png" alt="" class="middle" />
 					{/if}
 				</td>
 				<td>
-					<a href="?m={$smarty.get.m}&c=balance&id={$d.user_id}" title="编辑余额"><img class="middle" src="{$data_server}/admin/images/icons/16x16/coins.png" /> 编辑余额</a>
+					<a href="?m={$smarty.get.m}&c=balance&id={$d.user_id}" title="编辑余额"><img class="middle" src="{$template_data}admin/images/icons/16x16/coins.png" /> 编辑余额</a>
 					<br/>
-					<a href="?m={$smarty.get.m}&c=edit&id={$d.user_id}" title="编辑用户"><img class="middle" src="{$data_server}admin/images/icons/16x16/edit.png" /> 编辑用户</a>
+					<a href="?m={$smarty.get.m}&c=edit&id={$d.user_id}" title="编辑用户"><img class="middle" src="{$template_data}admin/images/icons/16x16/edit.png" /> 编辑用户</a>
 					<br/>
-					<a class="deletebtn" ajax-url="/apps/{$smarty.get.m}/ajax/delete.php" item-id="{$d.user_id}" href="javascript:void(0);" title="删除用户"><img class="middle" src="{$data_server}admin/images/icons/16x16/delete.png" /> 删除用户</a>
+					<a class="deletebtn" ajax-url="/apps/{$smarty.get.m}/ajax/delete.php" item-id="{$d.user_id}" href="javascript:void(0);" title="删除用户"><img class="middle" src="{$template_data}admin/images/icons/16x16/delete.png" /> 删除用户</a>
 				</td>					
 			</tr>
 		{/foreach}

@@ -8,6 +8,7 @@
 // +----------------------------------------------------------------------
 // | Email author@demila.org
 // +----------------------------------------------------------------------
+
 require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
 $index = 'http://demila.org';
     //新闻
@@ -15,6 +16,7 @@ $index = 'http://demila.org';
     $http = new Http();
     $url = $index.'/getnews';
     $news = $http->curlGet($url);
+    $news=strstr($news,'[{');
     $news = json_decode($news,1);
     abr('news',$news);
     $more_url = $index.'/news/list';
@@ -24,6 +26,7 @@ $index = 'http://demila.org';
     $http = new Http();
     $url = $index.'/getteam';
     $team = $http->curlGet($url);
+    $team=strstr($team,'[{');
     $team = json_decode($team,1);
     abr('team',$team[0]);
     
@@ -31,6 +34,7 @@ $index = 'http://demila.org';
     $http = new Http();
     $url = $index.'/getversion';
     $version = $http->curlGet($url);
+    $version=strstr($version,'[{');
     $version = json_decode($version,1);
     abr('version',$version[0]);
     $download=$index."/demiladata/data/";

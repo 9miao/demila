@@ -1,7 +1,7 @@
 <div class="page-info">
     <div class="container">
       <div id="breadcrumbs">
-        <a href="/admin" class="first">主页</a> \ <a href="/admin/?m=system&c=list">设置</a> \ <a href="?m={$smarty.get.m}&c=badges&type={$smarty.get.type}&p={$smarty.get.p}">徽章</a> \
+        <a href="/{$languageURL}admin" class="first">主页</a> \ <a href="/{$languageURL}admin/?m=system&c=list">设置</a> \ <a href="?m={$smarty.get.m}&c=badges&type={$smarty.get.type}&p={$smarty.get.p}">徽章</a> \
       </div>
       <h1 class="page-title">{$title}</h1>
     </div>
@@ -57,7 +57,7 @@
 			<input type="file" for="photo" name="photo" />
 			{if $smarty.post.photo != ''}
 				<br /><br />
-				<img src="{$data_server}uploads/countries/{$smarty.post.photo}" alt="" />
+				<img src="{$template_data}uploads/countries/{$smarty.post.photo}" alt="" />
 				{if $smarty.get.type != 'system'}
 				<input type="checkbox" name="deletePhoto" value="yes" /> {$lang.delete}
 				{/if}

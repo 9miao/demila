@@ -11,7 +11,7 @@
 
 _setView(__FILE__);
 
-	$tag_type = get_id(2);	
+	$tag_type = get_id(2);
 	$tag = get_id(3);
 	
 	require_once ROOT_PATH.'/apps/tags/models/tags.class.php';

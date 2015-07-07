@@ -2,7 +2,7 @@
 <div class="pagetit">
   <div class="navblock">
     <ul class="titnav clr">
-      <li><a href="/admin" title="管理首页">管理首页</a></li>
+      <li><a href="/{$languageURL}admin" title="管理首页">管理首页</a></li>
       <li class="pipe">&gt;</li>
       <li>新闻邮件</li>
     </ul>
@@ -36,7 +36,7 @@
 				<td>{$d.name}</td>
 				<td>{$d.readed}</td>
 				<td>
-					<a href="?m={$smarty.get.m}&c=view&id={$d.id}&p={$smarty.get.p}" title="{$lang.view}"><img class="middle" src="{$data_server}admin/images/icons/16x16/view.png" /> {$lang.view}</a>
+					<a href="?m={$smarty.get.m}&c=view&id={$d.id}&p={$smarty.get.p}" title="{$lang.view}"><img class="middle" src="{$template_data}admin/images/icons/16x16/view.png" /> {$lang.view}</a>
 				</td>					
 			</tr>
 			{/foreach}

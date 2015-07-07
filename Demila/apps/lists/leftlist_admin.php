@@ -12,7 +12,7 @@
 //上传队列审核
 require_once ROOT_PATH.'/apps/items/models/items.class.php';
 $items=new items();
-$queue = $items->getAll(START, LIMIT, " `status` = 'queue' ");
+$queue = $items->getAll(0, 0, " `status` = 'queue' ");
 $queueCount=0;
 if($queue)$queueCount=count($queue);
 abr('queueCount', $queueCount);
@@ -34,7 +34,7 @@ abr('depositCount', $depositCount);
 //联系支持处理
 require_once ROOT_PATH.'/apps/contacts/models/contacts.class.php';
 $contacts=new contacts ();
-$contacts = $contacts->getAll(START, LIMIT);
+$contacts = $contacts->getAll(0, 0);
 $contactsCount=0;
 if($contacts)$contactsCount=count($contacts);
 abr('contactsCount', $contactsCount);
@@ -42,7 +42,7 @@ abr('contactsCount', $contactsCount);
 //举报评论处理
 require_once ROOT_PATH.'/apps/items/models/comments.class.php';
 $commentsClass = new comments();
-$comments = $commentsClass->getAll(START, LIMIT, " `report_by` <> '0' ");
+$comments = $commentsClass->getAll(0, 0, " `report_by` <> '0' ");
 $commentCount=0;
 if($comments)$commentCount=count($comments);
 abr('commentCount', $commentCount);

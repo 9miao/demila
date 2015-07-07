@@ -15,26 +15,19 @@ _setView(__FILE__);
 	
 	$itemsClass = new items();
 
+//获取预览图
+$previewFile = $itemsClass->get_theme_preview($itemID);
+$previewFiles = array();
+for($i=0;$i<count($previewFile);$i++){
+   $previewFiles[]= $previewFile[$i]["dir"];
+}
+abr('previewFiles', $previewFiles);
 
-    //获取预览图
-    $files = scandir(DATA_SERVER_PATH.'/uploads/items/'.$itemID.'/preview/');
-    $previewFiles = array();
-    if(is_array($files)) {
-        foreach($files as $f) {
-            if(file_exists(DATA_SERVER_PATH.'/uploads/items/'.$itemID.'/preview/'.$f)) {
-                $fileInfo = pathinfo(DATA_SERVER_PATH.'/uploads/items/'.$itemID.'/preview/'.$f);
-                if( isset($fileInfo['extension']) && ( strtolower($fileInfo['extension']) == 'jpg' || strtolower($fileInfo['extension']) == 'png' ) ) {
-                    $previewFiles[] =  'http://'.$config['domain'].'/static/uploads/items/'.$itemID.'/preview/'.$f;
-                }
-            }
-        }
-    }
-        abr('previewFiles', $previewFiles);
 //作品详情
 	$item = $itemsClass->get($itemID);
 	if(!is_array($item) || $item['status'] == 'deleted') {
 		header("HTTP/1.0 404 Not Found");
-        header("Location: http://". DOMAIN ."/error");
+        header("Location: http://". DOMAIN ."/".$languageURL."error");
 	} elseif(!is_array($item) || (check_login_bool() && $item['status'] == 'unapproved' && $item['user_id'] != $_SESSION['user']['user_id']) || $item['status'] == 'queue' || $item['status'] == 'extended_buy') {
 
 	}
@@ -57,19 +50,8 @@ _setView(__FILE__);
 	}	
 	
 	$item['description'] = replaceEmoticons($item['description']);
-	
+    $item["theme_preview"]=DATA_SERVER."/uploads/items/".$item["id"]."/".$item["theme_preview"];
 	abr('item', $item);
-
-    //判断有截图包模块
-    require_once ROOT_PATH.'/apps/app_extends/models/app_extends.class.php';
-    $is_extends='false';
-    $app_extends=new app_extends();
-
-    if($app_extends->is_uploads()){
-        $is_extends='true';
-    }
-    abr("is_extends",$is_extends);
-
 
     #BUY ITEM	
     //购买作品
@@ -301,6 +283,21 @@ _setView(__FILE__);
 			);
 		}
 	}
+
+#获取粉丝
+$follow['to'] = $usersClass->getFollowers($user['user_id'], 0, 9, 'RAND()', true);
+$follow['to_count'] = $usersClass->foundRows;
+$follow['from'] = $usersClass->getFollowers($user['user_id'], 0, 9, 'RAND()');
+$follow['from_count'] = $usersClass->foundRows;
+abr('follow', $follow);
+
+$follow['toto'] = $usersClass->getFollowers($user['user_id'], 0, 10000000, 'RAND()', true);
+$follow['toto_count'] = $usersClass->foundRows;
+$follow['fromfrom'] = $usersClass->getFollowers($user['user_id'], 0, 10000000, 'RAND()');
+$follow['fromfrom_count'] = $usersClass->foundRows;
+abr('follow', $follow);
+
+
 	
 	abr('user_badges', $user_badges);
     abr('meta',$meta);

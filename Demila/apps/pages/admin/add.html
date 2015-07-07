@@ -2,7 +2,7 @@
 <div class="pagetit">
     <div class="navblock">
         <ul class="titnav clr">
-            <li><a href="/admin" title="管理首页">管理首页</a></li>
+            <li><a href="/{$languageURL}admin" title="管理首页">管理首页</a></li>
             {if isset($pdata)}
             <li class="pipe">&gt;</li>
             <li><a href="?m={$smarty.get.m}&c=list">页面</a></li>
@@ -22,7 +22,7 @@
 <!--<div class="page-info">
     <div class="container">
       <div id="breadcrumbs">
-        <a href="/admin" class="first">主页</a> \ {if isset($pdata)}<a href="?m={$smarty.get.m}&c=list">页面</a> \ <a href="?m={$smarty.get.m}&c=list&sub_of={$smarty.get.sub_of}&p={$smarty.get.p}">{$pdata.name}</a> \ <a href="#">{$smarty.post.name|escape}</a>{else}<a href="?m={$smarty.get.m}&c=list">页面</a> \ {/if} 
+        <a href="/{$languageURL}admin" class="first">主页</a> \ {if isset($pdata)}<a href="?m={$smarty.get.m}&c=list">页面</a> \ <a href="?m={$smarty.get.m}&c=list&sub_of={$smarty.get.sub_of}&p={$smarty.get.p}">{$pdata.name}</a> \ <a href="#">{$smarty.post.name|escape}</a>{else}<a href="?m={$smarty.get.m}&c=list">页面</a> \ {/if} 
       </div>
       <h1 class="page-title">{$title} {if isset($pdata)}Subp{else}P{/if}age</h1>
     </div>
@@ -109,9 +109,9 @@
                                 <!--初始化编辑器-->
                                 <script id="desc" name="text" type="text/plain">{$smarty.post.text}</script>
                                 <!-- 配置文件 -->
-                                <script type="text/javascript" src="{$data_server}ueditor/ueditor.config.js"></script>
+                                <script type="text/javascript" src="{$template_data}ueditor/ueditor.config.js"></script>
                                 <!-- 编辑器源码文件 -->
-                                <script type="text/javascript" src="{$data_server}ueditor/ueditor.all.js"></script>
+                                <script type="text/javascript" src="{$template_data}ueditor/ueditor.all.js"></script>
                                 <!-- 实例化编辑器 -->
                                 <script type="text/javascript">
                                     var ue = UE.getEditor('desc');

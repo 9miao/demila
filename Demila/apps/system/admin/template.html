@@ -1,0 +1,75 @@
+<link href="/static/css/custom/ucenter.css" rel="stylesheet"/>
+<div class="pagetit">
+    <div class="navblock">
+        <ul class="titnav clr">
+            <li><a href="/{$languageURL}admin" title="管理首页">管理首页</a></li>
+            <li class="pipe">&gt;</li>
+            <li><a href="?m=system&c=list">设置</a></li>
+            <li class="pipe">&gt;</li>
+            <li>{$title}</li>
+        </ul>
+        <h2>{$title}</h2>
+    </div>
+</div>
+<!--<div class="page-info">
+    <div class="container">
+      <div id="breadcrumbs">
+       <a href="/{$languageURL}admin" class="first">主页</a> \ <a href="?m=system&c=list">设置</a> \
+      </div>
+      <h1 class="page-title">{$title}</h1>
+    </div>
+  </div>-->
+<div class="ucbg">
+    <div class="ucblock paddingt clr">
+        {include file="$root_path/apps/lists/leftlist_admin.html"}
+        <div class="rightdetail_admin">
+            <div class="general_table_border">
+                <table id="gentable" class="general_table" cellspacing="0" cellpadding="0" border="0">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>模板目录</th>
+                        <th width="150"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+
+                    {foreach from=$templates item=d}
+                    <tr>
+                        <td>
+                            <input class="statusrad"
+                                   type="radio"
+                                   ajax-url="/apps/{$smarty.get.m}/ajax/edit.php"
+                                   ajax-data="{literal}{'edit':true,'value':'template','template':'{/literal}{$d}{literal}'}{/literal}"
+                                   name="template_radio"
+                            {if $template == $d}
+                            checked="checked"
+                            {/if}
+                            >使用
+                        </td>
+                        <td>
+                            {$d}
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    {/foreach}
+
+
+
+                    </tbody>
+                </table>
+            </div>
+            {literal}
+            <script>
+                seajs.use(["jq", "modules/ajax"], function ($,aj) {
+                    aj.ajaxradioinit("#gentable .statusrad", "ajax-url", "ajax-data", function () {
+                        alert("修改发送方式成功");
+                    })
+                });
+            </script>
+            {/literal}
+        </div>
+    </div>
+</div>

@@ -2,7 +2,7 @@
 <div class="pagetit">
   <div class="navblock">
     <ul class="titnav clr">
-      <li><a href="/admin" title="管理首页">管理首页</a></li>
+      <li><a href="/{$languageURL}admin" title="管理首页">管理首页</a></li>
       {if isset($pdata)}
       <li class="pipe">&gt;</li>
       <li><a href="?m={$smarty.get.m}&c=list">页面</a></li>
@@ -50,21 +50,21 @@
 				<td>{$d.extend_name}</td>
 				<td>
 					{if $d.state ==0 }
-                        <img class="deletebtn" ajax-url="/apps/{$smarty.get.m}/ajax/edit.php" ajax-data="{literal}{'edit':true,'id':'{/literal}{$d.id}{literal}','state':'{/literal}{$d.state}{literal}'}{/literal}" item-id="{$d.id}"  src="{$data_server}admin/images/icons/24x24/delete.png" alt="" class="middle" />开启
+                        <img class="deletebtn" ajax-url="/apps/{$smarty.get.m}/ajax/edit.php" ajax-data="{literal}{'edit':true,'id':'{/literal}{$d.id}{literal}','state':'{/literal}{$d.state}{literal}'}{/literal}" item-id="{$d.id}"  src="{$template_data}admin/images/icons/24x24/delete.png" alt="" class="middle" />开启
 					{else}
 						<img class="deletebtn" ajax-url="/apps/{$smarty.get.m}/ajax/edit.php"
                              ajax-data="{literal}{'edit':true,'id':'{/literal}{$d.id}{literal}','state':'{/literal}{$d.state}{literal}'}{/literal}"
-                             item-id="{$d.id}" src="{$data_server}admin/images/icons/24x24/accept.png" alt="" class="middle" />关闭
+                             item-id="{$d.id}" src="{$template_data}admin/images/icons/24x24/accept.png" alt="" class="middle" />关闭
 					{/if}
 				</td>
 				<td>
                     {if $d.m!='uploads_extends'}
-					<a href="?m={$d.m}&c={$d.c}" title="{$lang.edit}"><img class="middle" src="{$data_server}admin/images/icons/16x16/edit.png" /> {$lang.edit}</a>
+					<a href="?m={$d.m}&c={$d.c}" title="{$lang.edit}"><img class="middle" src="{$template_data}admin/images/icons/16x16/edit.png" /> {$lang.edit}</a>
                     {/if}
                     <a href="#" class="unloadbtn" ajax-url="/apps/{$smarty.get.m}/ajax/unload.php"
                             ajax-data="{literal}{'unload':true,'extend_name':'{/literal}{$d.extend_name}{literal}','m':'{/literal}{$d.m}{literal}'}{/literal}"
                             title="{$lang.unload}">
-                        <img class="middle" src="{$data_server}admin/images/icons/16x16/delete.png" /> {$lang.unload}</a>
+                        <img class="middle" src="{$template_data}admin/images/icons/16x16/delete.png" /> {$lang.unload}</a>
                 </td>
 			</tr>
 			{/foreach}

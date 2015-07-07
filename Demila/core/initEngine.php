@@ -16,6 +16,8 @@ if (!isset($config)) {
 	die(" 错误:config文件不存在！");
 }
 
+
+
 /*
  * 系统定义
  */
@@ -25,8 +27,8 @@ define("ROOT_PATH", $config['root_path']);
 define("CACHE", ENGINE_PATH . "/data/cache/");
 define("DATA_SERVER_PATH", $config['data_server_path']);
 define("DATA_SERVER", $config['data_server']);
-define("TEMPLATE_PATH", ROOT_PATH . "/html/");
-define("VERSION", '1.0.2');
+
+define("VERSION", '1.0.3Beta');
 #END;
 
 
@@ -55,8 +57,10 @@ ini_set ( 'magic_quotes_runtime', "Off" );
 date_default_timezone_set ( "PRC" );
 
 
-error_reporting ( 0 );
+error_reporting (1);
 #END;
+
+
 
 
 /*
@@ -65,6 +69,68 @@ error_reporting ( 0 );
 include_once ENGINE_PATH . '/system/functions.php';
 include_once ENGINE_PATH . '/system/core.functions.php';
 include_once ENGINE_PATH . '/system/core.security.php';
+
+/*
+* MySQL连接
+*/
+$mysql = new mysql ( $config ['mysql_user'], $config ['mysql_pass'], $config ['mysql_db'], $config ['mysql_host'] );
+global $mysql;
+
+
+/*
+ * Smarty设置
+ */
+$_layoutFile = 'index';
+$_templateFile = '';
+
+define ( 'SMARTY_DIR', ENGINE_PATH . "classes/Smarty/" );
+
+include_once (SMARTY_DIR . "Smarty.class.php");
+$smarty = new Smarty ( );
+$smarty->compile_dir = CACHE . "/templates_cache/";
+$smarty->compile_check = true;
+$smarty->debugging = false;
+$smarty->register_function ( 'createEditor', 'createTextAreaEditor' );
+
+global $smarty;
+#END;
+
+
+//模板设置
+
+require_once ROOT_PATH.'/apps/system/models/system.class.php';
+$systemClass = new system();
+
+$currency = $systemClass->getActiveCurrency();
+abr('currency', $currency);
+
+#元数据
+$meta = $systemClass->getAllKeyValue();
+$smarty->assign('title', $meta['meta_title']);
+$smarty->assign('meta_keywords', $meta['meta_keywords']);
+$smarty->assign('meta_description', $meta['meta_description']);
+$smarty->assign('site_logo', $meta['site_logo']);
+
+//模板目录
+define("TEMPLATE_PATH", ROOT_PATH . "/templates/".$meta['template']."/html/");
+$config['template_data_path'] = $config['data_server_path'].'templates/'.$meta['template'].'/';
+$config['template_path'] = $config['root_path'].'templates/'.$meta['template'].'/';
+$config['template_data'] = $config['data_server'].'templates/'.$meta['template'].'/';
+
+//$config['data_server_path'] = $config['root_path'].'static/templates/'.$config['template'].'/';
+
+
+abr ( 'domain', DOMAIN );
+abr ( "root_path", ROOT_PATH );
+abr ( "data_server", $config ['data_server'] );
+abr ( "template_data", $config ['template_data'] );
+abr ( "template_data_path", $config ['template_data_path'] );
+abr ( "template_path", $config ['template_path'] );
+
+
+/*
+* 包含模板设置文件
+*/
 include_once ENGINE_PATH . '/system/core.template.php';
 #END;
 
@@ -96,34 +162,6 @@ global $cache;
 
 $session = new session ( );
 
-/*
- * MySQL连接
- */
-$mysql = new mysql ( $config ['mysql_user'], $config ['mysql_pass'], $config ['mysql_db'], $config ['mysql_host'] );
-global $mysql;
-
-
-/*
- * Smarty设置
- */
-$_layoutFile = 'index'; 
-$_templateFile = ''; 
-
-define ( 'SMARTY_DIR', ENGINE_PATH . "classes/Smarty/" );
-
-include_once (SMARTY_DIR . "Smarty.class.php");
-$smarty = new Smarty ( );
-$smarty->compile_dir = CACHE . "/templates_cache/";
-$smarty->compile_check = true;
-$smarty->debugging = false;
-
-abr ( 'domain', DOMAIN );
-abr ( "root_path", ROOT_PATH );
-abr ( "data_server", $config ['data_server'] );
-$smarty->register_function ( 'createEditor', 'createTextAreaEditor' ); 
-
-global $smarty;
-#END;
 
 /*
  * 读取$_SESSION中的flash信息

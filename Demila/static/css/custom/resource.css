@@ -1,10 +1,10 @@
 @charset "UTF-8";
 .pagesearch{
-	background: url(/static/img/custom/searchbg.jpg) repeat center top;
+	background: url(/static/templates/default/img/custom/searchbg.jpg) repeat center top;
 	min-width: 1080px;
 }
 .infoblock{
-	background: url(/static/img/custom/icon_info.png) no-repeat 10px center;
+	background: url(/static/templates/default/img/custom/icon_info.png) no-repeat 10px center;
 	padding-left: 40px;
 	background-color: #f5f5b4
 }
@@ -62,7 +62,7 @@
 	float: left;
 	width: 58px;
 	height: 47px;
-	background: url(/static/img/custom/icon.jpg) no-repeat 0px -190px;
+	background: url(/static/templates/default/img/custom/icon.jpg) no-repeat 0px -190px;
 	overflow: hidden;
 	text-indent: -99999px;
 	cursor: pointer;
@@ -90,7 +90,7 @@
 	margin-bottom: 14px;
 }
 .resourcebg .taglist .tagtit span{
-	background: url(/static/img/custom/icon.jpg) no-repeat 0px 0px;
+	background: url(/static/templates/default/img/custom/icon.jpg) no-repeat 0px 0px;
 	display: inline-block;
 	float: left;
 }
@@ -199,7 +199,7 @@
 	font-weight: bold;
 }
 .resourcebg .taglist .tags a.active .removetag{
-	background: url(/static/img/custom/icon.jpg) no-repeat -111px -111px;
+	background: url(/static/templates/default/img/custom/icon.jpg) no-repeat -111px -111px;
 	width: 17px;
 	height: 17px;
 	float: right;
@@ -226,7 +226,7 @@
 	font-size: 1em;
 }
 /*.resourcebg .taglist .selval{
-	background: url(/static/img/custom/selbg.jpg) no-repeat center center;
+	background: url(/static/templates/default/img/custom/selbg.jpg) no-repeat center center;
 	width: 225px;
 	height: 34px;
 	line-height: 34px;
@@ -300,10 +300,10 @@
 	margin-right: 10px;
 }
 .itemlist .itemsort .sortlist li.asc{
-	background: url(/static/img/custom/asc.jpg) no-repeat right center;
+	background: url(/static/templates/default/img/custom/asc.jpg) no-repeat right center;
 }
 .itemlist .itemsort .sortlist li.desc{
-	background: url(/static/img/custom/desc.jpg) no-repeat right center;
+	background: url(/static/templates/default/img/custom/desc.jpg) no-repeat right center;
 }
 .itemlist .itemsort .sortlist li span, .itemlist .itemsort .sortlist li a{
 	/*margin-right: 25px;*/
@@ -319,7 +319,7 @@
 	color: #0093d6;
 }
 .itemlist .itemsort .sortlist li .sortiptbg{
-	background: url(/static/img/custom/icon.jpg) no-repeat 0px -238px;
+	background: url(/static/templates/default/img/custom/icon.jpg) no-repeat 0px -238px;
 	width: 56px;
 	height: 22px;
 	margin-top: -1px;
@@ -353,7 +353,7 @@
 	margin-right: 5px;
 }
 .itemlist .itemsort .sortbtns li.btns a{
-	background: url(/static/img/custom/icon.jpg) no-repeat 0px 0px;
+	background: url(/static/templates/default/img/custom/icon.jpg) no-repeat 0px 0px;
 	width: 32px;
 	height: 32px;
 	display: inline-block;
@@ -469,7 +469,7 @@
 	float: left;
 }
 .item-list .itemdetail .itembtn li a{
-	background: url(/static/img/custom/icon.jpg) no-repeat 0px 0px;
+	background: url(/static/templates/default/img/custom/icon.jpg) no-repeat 0px 0px;
 	width: 45px;
 	height: 24px;
 	overflow: hidden;
@@ -576,6 +576,14 @@
 	width: 90px;
 	height: 90px;
 }
+.item-grid .itemobj .itemimg .controls{
+	position: absolute;
+	width: 64px;
+	height: 64px;
+	top: 13px;
+	left: 13px;
+	background: url(/static/img/custom/control.png) no-repeat center center;
+}
 .item-grid .itemobj .itembtn{
 	margin: 6px 0 0 -45px;
 	position: relative;
@@ -586,7 +594,7 @@
 	float: left;
 }
 .item-grid .itemobj .itembtn li a{
-	background: url(/static/img/custom/icon.jpg) no-repeat 0px 0px;
+	background: url(/static/templates/default/img/custom/icon.jpg) no-repeat 0px 0px;
 	width: 45px;
 	height: 24px;
 	overflow: hidden;
@@ -648,8 +656,8 @@
 	overflow: hidden;
 }
 .itemobj .itemstars .starnums .allstars, .featuredetail .itemstars .starnums .allstars{
-	background: url(/static/img/custom/starbg.png) no-repeat center center;
-	_background: url(/static/img/custom/starbg.jpg) no-repeat center center;
+	background: url(/static/templates/default/img/custom/starbg.png) no-repeat center center;
+	_background: url(/static/templates/default/img/custom/starbg.jpg) no-repeat center center;
 	width: 103px;
 	height: 19px;
 	display: block;
@@ -659,8 +667,8 @@
 	width: 103px;
 	height: 19px;
 	z-index: 5;
-	background: url(/static/img/custom/starbg2.png) no-repeat center center;
-	_background: url(/static/img/custom/starbg2.jpg) no-repeat center center;
+	background: url(/static/templates/default/img/custom/starbg2.png) no-repeat center center;
+	_background: url(/static/templates/default/img/custom/starbg2.jpg) no-repeat center center;
 }
 .item-grid .itemobj .sales{
 	font-size: 14px;
@@ -744,10 +752,11 @@
 	width: 100%;
 	display: block;
 }
-.resourcebg .leftdetail .detailimg .mainlink img{
+.resourcebg .leftdetail .detailimg .mainlink img, .resourcebg .leftdetail .detailimg .mainlink video, .resourcebg .leftdetail .detailimg .mainlink audio{
 	width: 100%;
 	display: block;
 	height: auto;
+	min-height: 40px;
 }
 .resourcebg .leftdetail .detailimg .links{
 	text-align: center;
@@ -776,7 +785,7 @@
 }
 .resourcebg .leftdetail .detailimg .links .bdsharebuttonbox.bdshare-button-style1-32 a{
 	margin: 0 1px 0 0;
-	background: url(/static/img/custom/icon.jpg) no-repeat 0 0;
+	background: url(/static/templates/default/img/custom/icon.jpg) no-repeat 0 0;
 	width: 36px;
 	height: 36px;
 }
@@ -873,24 +882,24 @@
 	margin-left: 4px;
 }
 .resourcebg .rightdetail .sideblock.info{
-	background: url(/static/img/custom/icon_info.png) no-repeat 10px center;
+	background: url(/static/templates/default/img/custom/icon_info.png) no-repeat 10px center;
 	padding-left: 40px;
 	width: 336px;
 	background-color: #f5f5b4
 }
 .resourcebg .rightdetail .sideblock.tips{
-	background: url(/static/img/custom/icon_info.png) no-repeat 10px center;
+	background: url(/static/templates/default/img/custom/icon_info.png) no-repeat 10px center;
 	padding-left: 40px;
 	width: 336px;
 }
 .resourcebg .rightdetail .sideblock.tips.t1{
-	background: url(/static/img/custom/icon_info.png) no-repeat 10px center;
+	background: url(/static/templates/default/img/custom/icon_info.png) no-repeat 10px center;
 }
 .resourcebg .rightdetail .sideblock.tips.t2{
-	background: url(/static/img/custom/icon_info.png) no-repeat 10px center;
+	background: url(/static/templates/default/img/custom/icon_info.png) no-repeat 10px center;
 }
 .resourcebg .rightdetail .sideblock.tips.t3{
-	background: url(/static/img/custom/icon_info.png) no-repeat 10px center;
+	background: url(/static/templates/default/img/custom/icon_info.png) no-repeat 10px center;
 }
 .price .surcharge{
 	text-align: center;
@@ -1000,10 +1009,10 @@
 }
 .resourcebg .rightdetail .sideblock.sidesales{
 	margin-bottom: 10px;
-	background: url(/static/img/custom/icon_sales.png) no-repeat 15px center;
+	background: url(/static/templates/default/img/custom/icon_sales.png) no-repeat 15px center;
 }
 .resourcebg .rightdetail .sideblock.sidecomment{
-	background: url(/static/img/custom/icon_comment.png) no-repeat 15px center;
+	background: url(/static/templates/default/img/custom/icon_comment.png) no-repeat 15px center;
 }
 .resourcebg .rightdetail .sideblock.sidecomment a{
 	color: #0093d6;
@@ -1177,7 +1186,7 @@
 }
 .leftdetail .editblock .note{
 	margin-bottom: 20px;
-	background: url(/static/img/custom/icon_info.png) no-repeat 10px center;
+	background: url(/static/templates/default/img/custom/icon_info.png) no-repeat 10px center;
 	padding-left: 40px;
 	background-color: #f5f5b4
 }
@@ -1249,7 +1258,7 @@ h3.underlined {
     float: right;
 }
 .slider-control {
-    background: url("/static/img/com.png") repeat scroll 0 -1425px rgba(0, 0, 0, 0);
+    background: url("/static/templates/default/img/com.png") repeat scroll 0 -1425px rgba(0, 0, 0, 0);
     height: 15px;
     position: absolute;
     text-indent: -9999px;
@@ -1412,7 +1421,7 @@ h3.underlined {
 	margin-left: 10px;
 }
 .header-note {
-    background: url("/static/img/warning.png") no-repeat scroll 0 5px rgba(0, 0, 0, 0);
+    background: url("/static/templates/default/img/warning.png") no-repeat scroll 0 5px rgba(0, 0, 0, 0);
     float: right;
     font-size: 12px;
     line-height: normal;
@@ -1439,7 +1448,7 @@ h3 .header-note {
     margin-top: 10px;
 }
 .note {
-    background: url("/static/img/note.gif") no-repeat scroll 19px 10px #dcd7cd;
+    background: url("/static/templates/default/img/note.gif") no-repeat scroll 19px 10px #dcd7cd;
     border: 1px solid #9d948e;
     padding: 20px 20px 20px 60px;
 }
@@ -1455,7 +1464,7 @@ h3 .header-note {
 	font-size: 14px;
 	display: block;
 	color: #fff;
-	background: url(/static/img/custom/edittip.jpg) no-repeat 4px center;
+	background: url(/static/templates/default/img/custom/edittip.jpg) no-repeat 4px center;
 	background-color: #bbb;
 	padding: 0 12px 0 26px;
 	border-radius: 4px;
@@ -1479,7 +1488,7 @@ h3 .header-note {
 }
 .inputs .tagtips .tagtipobj .delbtn{
 	float: left;
-	background: url(/static/img/custom/closetip.jpg) no-repeat center center;
+	background: url(/static/templates/default/img/custom/closetip.jpg) no-repeat center center;
 	width: 19px;
 	height: 22px;
 	cursor: pointer;
@@ -1585,22 +1594,22 @@ h3 .header-note {
 	height: 100%;
 }
 .inputs.uploadobjs .uploadobj .objimg.addNew{
-	background: url(/static/img/custom/plus.png) no-repeat center center;
+	background: url(/static/templates/default/img/custom/plus.png) no-repeat center center;
 }
 .inputs.uploadobjs .uploadobj:hover .objimg.addNew{
 	background-color: #eee;
 }
 .inputs.uploadobjs .uploadobj .objimg.imgupload{
-	background: url(/static/img/custom/image.png) no-repeat center center;
+	background: url(/static/templates/default/img/custom/image.png) no-repeat center center;
 }
 .inputs.uploadobjs .uploadobj .objimg.zipupload{
-	background: url(/static/img/custom/file_zip.png) no-repeat center center;
+	background: url(/static/templates/default/img/custom/file_zip.png) no-repeat center center;
 }
 .inputs.uploadobjs .uploadobj .objimg.onuploading{
-	background: url(/static/img/loading.gif) no-repeat center center;
+	background: url(/static/templates/default/img/loading.gif) no-repeat center center;
 }
 .inputs.uploadobjs .uploadobj .objimg.filebg{
-	background: url(/static/img/custom/file_bg.png) no-repeat center center;
+	background: url(/static/templates/default/img/custom/file_bg.png) no-repeat center center;
 	height: 90px;
 	line-height: 90px;
 	text-align: center;
@@ -1651,11 +1660,11 @@ h3 .header-note {
 	left: 0;
 	width: 17px;
 	height: 17px;
-	background: url(/static/img/sprites.png) no-repeat 0 -1266px;
+	background: url(/static/templates/default/img/sprites.png) no-repeat 0 -1266px;
 }
 .inputs.uploadobjs .uploadobj .objtools.deletbtn{
 	right: 0;
-	background: url(/static/img/custom/delete.png) no-repeat center center;
+	background: url(/static/templates/default/img/custom/delete.png) no-repeat center center;
 }
 .inputs.uploadobjs .uploadobj .errtxt{
 	margin: 0;

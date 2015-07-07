@@ -13,8 +13,7 @@ class chinabank extends payments_abstract {
 		$v_amount = $order_data['price'];//支付金额
         //判断是否使用代理支付
         if(isset($meta["use_demilapay"])){
-            $a_oid = '0_'.$order_data['id'].'_'.$meta["demilapay_key"];//订单号
-
+            $a_oid = '0_'.$order_data['id'].'_'.$meta["demilapay_key"].'_'.uniqid();//订单号
             $order_name = $order_data['item_name'];
             $order_id = $order_data['item_id'];
             $o_url = 'http://pay.demila.org/index.php/Home/Alipay';//demilapay
@@ -40,7 +39,7 @@ class chinabank extends payments_abstract {
             $u_email = $meta['alipay_v_num'];
             $order_name = $order_data['item_name'];
             $order_id = $order_data['item_id'];
-            $o_url = 'http://'.$config['domain'].'/payments/alipay';//地址
+            $o_url = 'http://'.$config['domain'].'/index.php/payments/alipay';//地址
             $show_url = 'http://'.$config['domain'].'/items/'.$order_id.'/'.$order_name;
             $o_info = strtoupper(md5($v_amount.$o_url.$a_oid.$u_email.$pid.$app_key));//md5加密拼凑串,注意顺序不能变
             //构造表单
@@ -68,7 +67,7 @@ class chinabank extends payments_abstract {
 		$v_amount = $order_data['deposit'];//支付金额
         //判断是否使用代理支付
         if(isset($meta["use_demilapay"])){
-            $a_oid = '1_'.$order_data['id'].'_'.$meta["demilapay_key"];//订单号
+            $a_oid = '1_'.$order_data['id'].'_'.$meta["demilapay_key"].'_'.uniqid();//订单号
 
             $o_url = 'http://pay.demila.org/index.php/Home/Alipay';//demilapay
 
@@ -94,7 +93,7 @@ class chinabank extends payments_abstract {
             $pid = $meta['alipay_v_key'];
             $app_key = $meta['alipay_v_mid'];
             $u_email = $meta['alipay_v_num'];
-            $o_url = 'http://'.$config['domain'].'/payments/alipay';//地址
+            $o_url = 'http://'.$config['domain'].'/index.php/payments/alipay';//地址
             $o_info = strtoupper(md5($v_amount.$o_url.$a_oid.$u_email.$pid.$app_key));//md5加密拼凑串,注意顺序不能变
             $order_name = '充值';
             $order_id = $order_data['item_id'];

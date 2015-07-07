@@ -21,7 +21,7 @@ foreach ( array_diff ( scandir ( ROOT_PATH . "apps/" ), array (
 	'index' 
 ) ) as $module ) {
 	if (is_dir ( ROOT_PATH . "apps/" . $module )) {
-		
+
 		//检查管理员配置module
 		if (file_exists ( ROOT_PATH . "/apps/" . $module . "/admin/admin_config.php" )) {
 			require_once ROOT_PATH . "/apps/" . $module . "/admin/admin_config.php";

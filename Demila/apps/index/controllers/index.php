@@ -8,10 +8,9 @@
 // +----------------------------------------------------------------------
 // | Email author@demila.org
 // +----------------------------------------------------------------------
-
 _setView(__FILE__);
 
- 
+
 	require_once ROOT_PATH.'/apps/users/models/users.class.php';
 	$usersClass = new users();
 			
@@ -41,6 +40,7 @@ _setView(__FILE__);
 	
     //免费作品
 	$freeItem = $itemsClass->getAll(0, 0, " `status` = 'active' AND `free_file` = 'true' ");
+
 	abr('freeItem', $freeItem);
 	
 #推荐作者

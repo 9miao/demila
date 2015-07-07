@@ -21,7 +21,7 @@ if(!check_login_bool()) {
 	$item = $itemsClass->get($itemID);
 	if(!is_array($item) || $item['user_id'] != $_SESSION['user']['user_id']) {
 		header("HTTP/1.0 404 Not Found");
-        header("Location: http://". DOMAIN ."/error");
+        header("Location: http://". DOMAIN ."/".$languageURL."error");
 	}
     //路径
     $item["thumbnail"] =DATA_SERVER.'/uploads/items/'.$itemID.'/'. $item["thumbnail"];

@@ -2,7 +2,7 @@
 <div class="pagetit">
   <div class="navblock">
     <ul class="titnav clr">
-      <li><a href="/admin" title="管理首页">管理首页</a></li>
+      <li><a href="/{$languageURL}admin" title="管理首页">管理首页</a></li>
       <li class="pipe">&gt;</li>
       <li><a href="?m={$smarty.get.m}&c=list&p={$smarty.get.p}">新闻邮件</a></li>
       <li class="pipe">&gt;</li>
@@ -14,7 +14,7 @@
 <!--<div class="page-info">
     <div class="container">
       <div id="breadcrumbs">
-        <a href="/admin" class="first">主页</a> \ <a href="?m={$smarty.get.m}&c=list&p={$smarty.get.p}">新闻邮件</a> \  
+        <a href="/{$languageURL}admin" class="first">主页</a> \ <a href="?m={$smarty.get.m}&c=list&p={$smarty.get.p}">新闻邮件</a> \  
       </div>
       <h1 class="page-title">{$title}新建</h1>
     </div>
@@ -24,7 +24,7 @@
     {include file="$root_path/apps/lists/leftlist_admin.html"}
     <div class="rightdetail_admin">
     <div class="content">
-     <script type="text/javascript" src="{$data_server}nicEditors/nicEdit.js"></script>
+     <script type="text/javascript" src="{$template_data}nicEditors/nicEdit.js"></script>
      <script type="text/javascript">{literal}bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });{/literal}</script>
    <div class="content-box">
 	<form action="" class="horizontal-form item-form disable-on-submit" action="" method="post" enctype="multipart/form-data">

@@ -2,7 +2,7 @@
 <div class="pagetit">
   <div class="navblock">
     <ul class="titnav clr">
-      <li><a href="/admin" title="管理首页">管理首页</a></li>
+      <li><a href="/{$languageURL}admin" title="管理首页">管理首页</a></li>
       {if isset($pdata)}
       <li class="pipe">&gt;</li>
       <li><a href="?m={$smarty.get.m}&c=list">页面</a></li>
@@ -47,30 +47,30 @@
 				<td>{$d.key}</td>
 				<td>
 					{if $d.menu == 'true'}
-						<img src="{$data_server}admin/images/icons/24x24/accept.png" alt="" class="middle" />
+						<img src="{$template_data}admin/images/icons/24x24/accept.png" alt="" class="middle" />
 					{else}
-						<img src="{$data_server}admin/images/icons/24x24/delete.png" alt="" class="middle" />
+						<img src="{$template_data}admin/images/icons/24x24/delete.png" alt="" class="middle" />
 					{/if}
 				</td>
 				<td>
 					{if $d.visible == 'true'}
-						<img src="{$data_server}admin/images/icons/24x24/accept.png" alt="" class="middle" />
+						<img src="{$template_data}admin/images/icons/24x24/accept.png" alt="" class="middle" />
 					{else}
-						<img src="{$data_server}admin/images/icons/24x24/delete.png" alt="" class="middle" />
+						<img src="{$template_data}admin/images/icons/24x24/delete.png" alt="" class="middle" />
 					{/if}
 				</td>
 				<td>
-					<a href="?m={$smarty.get.m}&c=list&down={$d.id}&p={$smarty.get.p}&sub_of={$smarty.get.sub_of}" title="{$lang.up}"><img class="middle" src="{$data_server}admin/images/icons/16x16/up.png" /></a>
-					<a href="?m={$smarty.get.m}&c=list&up={$d.id}&p={$smarty.get.p}&sub_of={$smarty.get.sub_of}" title="{$lang.down}"><img class="middle" src="{$data_server}admin/images/icons/16x16/download1.png" /></a>				
+					<a href="?m={$smarty.get.m}&c=list&down={$d.id}&p={$smarty.get.p}&sub_of={$smarty.get.sub_of}" title="{$lang.up}"><img class="middle" src="{$template_data}admin/images/icons/16x16/up.png" /></a>
+					<a href="?m={$smarty.get.m}&c=list&up={$d.id}&p={$smarty.get.p}&sub_of={$smarty.get.sub_of}" title="{$lang.down}"><img class="middle" src="{$template_data}admin/images/icons/16x16/download1.png" /></a>				
 				</td>								
 				<td>
 					{if !isset($smarty.get.sub_of) || !is_numeric($smarty.get.sub_of) || $smarty.get.sub_of == '0'}
-					<a href="?m={$smarty.get.m}&c=list&sub_of={$d.id}" title="{$lang.subpages}"><img class="middle" src="{$data_server}admin/images/icons/16x16/pages.png" /> {$lang.subpages}</a>
+					<a href="?m={$smarty.get.m}&c=list&sub_of={$d.id}" title="{$lang.subpages}"><img class="middle" src="{$template_data}admin/images/icons/16x16/pages.png" /> {$lang.subpages}</a>
 					<br />
 					{/if}
-					<a href="?m={$smarty.get.m}&c=edit&id={$d.id}&p={$smarty.get.p}&sub_of={$smarty.get.sub_of}" title="{$lang.edit}"><img class="middle" src="{$data_server}admin/images/icons/16x16/edit.png" /> {$lang.edit}</a>
+					<a href="?m={$smarty.get.m}&c=edit&id={$d.id}&p={$smarty.get.p}&sub_of={$smarty.get.sub_of}" title="{$lang.edit}"><img class="middle" src="{$template_data}admin/images/icons/16x16/edit.png" /> {$lang.edit}</a>
 					<br/>
-					<a class="deletebtn" ajax-url="/apps/{$smarty.get.m}/ajax/delete.php" item-id="{$d.id}" href="javascript:void(0);" title="{$lang.delete}"><img class="middle" src="{$data_server}admin/images/icons/16x16/delete.png" /> {$lang.delete}</a>
+					<a class="deletebtn" ajax-url="/apps/{$smarty.get.m}/ajax/delete.php" item-id="{$d.id}" href="javascript:void(0);" title="{$lang.delete}"><img class="middle" src="{$template_data}admin/images/icons/16x16/delete.png" /> {$lang.delete}</a>
 				</td>					
 			</tr>
 			{/foreach}

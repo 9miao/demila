@@ -2,30 +2,30 @@
 <div class="pagetit pagetabs">
   <div class="navblock">
     <ul class="titnav clr">
-      <li><a href="/admin" title="管理首页">管理首页</a></li>
+      <li><a href="/{$languageURL}admin" title="管理首页">管理首页</a></li>
       <li class="pipe">&gt;</li>
-      <li><a href="/admin/?m=items&c=list">作品</a></li>
+      <li><a href="/{$languageURL}admin/?m=items&c=list">作品</a></li>
       <li class="pipe">&gt;</li>
       <li>{$data.name}</li>
     </ul>
     <h2>{$data.name}</h2>
     <ul class="pagetab clr">
-    <li><a class="active" href="/admin/?m=items&c=edit&id={$smarty.get.id}">作品详情</a></li>
-    <li><a href="/admin/?m=items&c=comments&id={$smarty.get.id}">评论</a></li>
+    <li><a class="active" href="/{$languageURL}admin/?m=items&c=edit&id={$smarty.get.id}">作品详情</a></li>
+    <li><a href="/{$languageURL}admin/?m=items&c=comments&id={$smarty.get.id}">评论</a></li>
     </ul>
   </div>
 </div>
 <!--<div class="page-info">
     <div class="container">
       <div id="breadcrumbs">
-        <a href="/admin" class="first">主页</a> \ <a href="/admin/?m=items&c=list">作品</a> \
+        <a href="/{$languageURL}admin" class="first">主页</a> \ <a href="/{$languageURL}admin/?m=items&c=list">作品</a> \
       </div>
       <h1 class="page-title">{$data.name}</h1>
     </div>
      <div id="tabsy">
       <ul>
-		<li class="selected"><div></div><a href="/admin/?m=items&c=edit&id={$smarty.get.id}">作品详情</a></li>
-		<li class="last"><div></div><a href="/admin/?m=items&c=comments&id={$smarty.get.id}">评论</a><div class="last"></div></li>
+		<li class="selected"><div></div><a href="/{$languageURL}admin/?m=items&c=edit&id={$smarty.get.id}">作品详情</a></li>
+		<li class="last"><div></div><a href="/{$languageURL}admin/?m=items&c=comments&id={$smarty.get.id}">评论</a><div class="last"></div></li>
       </ul>
 	 </div>
   </div>-->
@@ -40,7 +40,7 @@
             <div class="input-group">
               <label>作者</label>
               <div class="right">
-                <a href="/admin/?m=users&c=edit&id={$data.user.user_id}" title="" target="_blank">{$data.user.username}</a>
+                <a href="/{$languageURL}admin/?m=users&c=edit&id={$data.user.user_id}" title="" target="_blank">{$data.user.username}</a>
               </div>
             </div>
             <div class="input-group">
@@ -75,9 +75,9 @@
                 {$data.description}
                 </script>
                 <!-- 配置文件 -->
-                <script type="text/javascript" src="{$data_server}ueditor/ueditor.config.js"></script>
+                <script type="text/javascript" src="{$template_data}ueditor/ueditor.config.js"></script>
                 <!-- 编辑器源码文件 -->
-                <script type="text/javascript" src="{$data_server}ueditor/ueditor.all.js"></script>
+                <script type="text/javascript" src="{$template_data}ueditor/ueditor.all.js"></script>
                 <!-- 实例化编辑器 -->
                 <script type="text/javascript">
                 var ue = UE.getEditor('container');
@@ -151,12 +151,12 @@
               </div>
             </div>
             <div class="input-group">
-              <label>想成为免费文件:</label>
+              <label>可设为免费文件:</label>
               <div class="inputs">
                 {if $smarty.post.free_request == 'true'}
-                <img src="{$data_server}/admin/images/icons/24x24/accept.png" alt="" class="middle" />
+                <img src="{$template_data}/admin/images/icons/24x24/accept.png" alt="" class="middle" />
                 {else}
-                <img src="{$data_server}/admin/images/icons/24x24/delete.png" alt="" class="middle" />
+                <img src="{$template_data}/admin/images/icons/24x24/delete.png" alt="" class="middle" />
                 {/if}	
                 <input type="hidden" name="free_request" value="{$smarty.post.free_request}" />
               </div>

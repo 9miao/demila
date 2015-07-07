@@ -85,11 +85,13 @@ return function (jquery){
 			this.mainObj_num = 0;
 			this.loaded_num = 0;
 			this.currentNum = -1;
-		};
+		},
+		msgopened = false;
 	cacheObj.prototype = {
 	}
 
 	demilamedia.open = function(objs){
+		msgopened = true;
 		if(isString(objs)){
 			currentStr = objs;
 		}else{
@@ -185,6 +187,8 @@ return function (jquery){
 		}
 	}
 	demilamedia.close = function(){
+		if(!msgopened) return;
+		msgopened = false;
 		$hxlb_main.html("");
 		$hxlb_arrs.children().hide();
 		txthide();

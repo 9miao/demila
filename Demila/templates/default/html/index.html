@@ -1,0 +1,268 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="user-scalable=0, initial-scale=1.0, maximum-scale=1.0" />
+<title>{if isset($title)}{$title} | {/if}{$domain}</title>
+	<meta name="keywords" content="{if isset($meta_keywords)}{$meta_keywords}{else}{$lang.page_keywords}{/if}" />
+	<meta name="description" content="{if isset($meta_description)}{$meta_description}{else}{$lang.page_title}{/if}" />
+	<meta name="robots" content="index,follow" />
+	<meta name="author" content="" />
+  <meta http-equiv="X-UA-Compatible" content="IE=9" />
+  <link href="{$template_data}css/custom/template.css" media="screen" rel="stylesheet" type="text/css" />
+  <link rel="Shortcut icon" href="{$data_server}favicon.ico" />
+{include file="$root_path/templates/default/html/jstemplate.html"}
+</head>
+<body>
+<div class="header">
+  <div class="container">
+    <h1 class="pagelogo"><a href="/{$languageURL}" class="marketplace" title="{$domain}">{$domain}</a></h1>
+    {if check_login_bool()}
+    <div class="account-wrapper">
+      <ul id="user-account-nav">
+        <li>
+          {if $smarty.session.user.quiz == 'true'}
+          <a href="/{$languageURL}author_dashboard/">
+          {else}
+          <a href="/{$languageURL}user/{$smarty.session.user.username}">
+          {/if}
+    		  <span id="user_username">{$smarty.session.user.username}</span>,
+    		  <span class="user_balance">{$currency.symbol}{$smarty.session.user.total|string_format:"%.2f"}</span>
+    		  </a>
+          <div>
+            <ul>
+              <li class="profile"><a href="/{$languageURL}user/{$smarty.session.user.username}/">个人资料</a></li>
+              <li class="settings"><a href="/{$languageURL}edit/">我的设置</a></li>
+              <li class="downloads"><a href="/{$languageURL}download/">下载</a></li>
+              <li class="bookmarks"><a href="/{$languageURL}user/bookmarks/">书签</a></li>
+              <li class="deposit"><a href="/{$languageURL}deposit/">充值</a></li>
+              <li class="statement"><a href="/{$languageURL}statement/">统计</a></li>
+              <li class="withdrawal"><a href="/{$languageURL}withdrawal/">提现</a></li>
+              {if $smarty.session.user.quiz == 'true'}
+              <li class="author_dashboard"><a href="/{$languageURL}author_dashboard/">作者控制面板</a></li>
+          	{if $smarty.session.user.items != '0'}
+          	<li class="portfolio"><a href="/{$languageURL}user/portfolio/{$smarty.session.user.username}/">作品集</a></li>
+          	{/if}
+          	<li class="upload"><a href="/{$languageURL}upload/index/">上传作品</a></li>
+          	{else}
+          	 <li class="become_author"><a href="/{$languageURL}make_money/become_an_author/">成为作者</a></li>
+          	{/if}
+          	{if $smarty.session.user.access}
+          	<li class="admin_dashboard"><a href="/{$languageURL}admin/">管理员控制面板</a></li>
+          	{/if}
+            </ul>
+          </div>
+        </li>
+        <li>
+          <form action="/{$languageURL}users/logout/" class="sign-out-form" method="post">
+            <button type="submit" class="auto-width no-margin" id="sign-out-button">注销</button>
+          </form>
+        </li>
+      </ul>
+  	</div>
+  	{else}
+    <div class="account-wrapper">
+      <ul id="user-account-nav">
+        <li><a class="reg-btn" href="/{$languageURL}sign_up/"><span>创建账号</span></a></li>
+        <li>
+          <a class="login-btn" href="/{$languageURL}sign_in/" rel="nofollow">登录</a>
+        </li>
+      </ul>
+    </div>
+    {/if}
+    <ul class="info-nav clr">
+      <li><a class="nobora" href="/{$languageURL}make_money/become_an_author" title="成为作者">成为作者</a></li>
+      <li><a class="nobora" href="/{$languageURL}make_money/affiliate_program/" title="推广赚钱">推广赚钱</a></li>
+      <li>
+        <a href="/{$languageURL}feature/" title="社区热门">社区热门</a>
+        <div class="dropdown">
+          <ul>
+            <li><a href="/{$languageURL}feature/" title="推荐文件">推荐文件</a></li>
+            <li><a href="/{$languageURL}top_sellers/" title="热门文件">热门文件</a></li>
+            <li><a href="/{$languageURL}collections/" title="书签集">书签集</a></li>
+            <li><a href="/{$languageURL}top_authors/" title="王牌作者">王牌作者</a></li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <a href="/{$languageURL}help/aboutus/" title="关于我们">关于我们</a>
+        <div class="dropdown">
+          <ul>
+            <li><a href="/{$languageURL}help/aboutus/" title="关于我们">关于我们</a></li>
+            <li><a href="/{$languageURL}help/legal/" title="网站条款">网站条款</a></li>
+            <li><a href="/{$languageURL}help/licenses/" title="许可政策">许可政策</a></li>
+            {if check_login_bool()}<li><a href="/{$languageURL}contacts/" title="联系支持">联系支持</a></li>{/if}
+            <li><a href="/{$languageURL}categories/browse/" title="网站地图">网站地图</a></li>
+          </ul>
+        </div>
+      </li>
+        {if $menuPages}
+      {foreach from=$menuPages[0] item=p name=foo}
+      <li>
+        <a href="/{$languageURL}pages/{$p.key}">{$p.name}</a>
+        {if isset($menuPages[$p.id])}
+        <div class="dropdown">
+          <ul>
+          {foreach from=$menuPages[$p.id] item=sp name=foo1}
+            <li><a href="/{$languageURL}pages/{$sp.key}.html">{$sp.name}</a></li>
+          {/foreach}
+          </ul>
+        </div>
+        {/if}
+      </li>
+      {/foreach}
+      {/if}
+    </ul>
+  </div>
+</div>
+<div role="navigation" class="pagenav clearfix">
+  <div class="navcontent">
+    <span id="pagemainnavbtn"></span>
+    <ul id="pagemainnav" class="main-nav clr">
+      <li>
+        <a href="/{$languageURL}categories/all/">全部文件</a>
+        <div class="dropdown">
+          <ul>
+            <li><a href="/{$languageURL}top_sellers/">热门文件</a></li>
+            <li><a href="/{$languageURL}top_authors/">王牌作者</a></li>
+          </ul>
+          <ul class="meta-links">
+            <li><a href="/{$languageURL}categories/browse/">查看全部分类</a></li>
+          </ul>
+        </div>
+      </li>
+      {if $mainCategories}
+  		{foreach from=$mainCategories item=c}
+      <li>
+        <a href="/{$languageURL}categories/{$c.id}">{$c.name}</a>
+  		  {if isset($allCats[$c.id])}
+        <div class="dropdown">
+  		    <ul class="meta-links-top">
+            <li><a href="/{$languageURL}categories/{$c.id}?sort_by=sales_count&order=desc">热门作品</a></li>
+          </ul>
+          <ul>
+            {foreach from=$allCats[$c.id] item=s}
+            <li><a href="/{$languageURL}categories/{$s.id}">{$s.name}</a></li>
+            {/foreach}
+          </ul>
+        </div>
+  		  {/if}
+      </li>
+      {/foreach}
+      {/if}
+      <li>
+        <a href="http://www.9miao.com/forum-64-1.html" target="_blank" class="cross-site-category nobora" title="Demila论坛">Demila论坛</a>
+      </li>
+    </ul>
+    <div class="navsearch">
+      <form id="search" action="/{$languageURL}search/" method="GET" class="aweform inline-form">
+        <input type="text" class="navsearchipt" name="term" value="在所有作品中搜索" onfocus="this.value=='在所有作品中搜索'?this.value='':false;" onblur="this.value==''?this.value='在所有作品中搜索':false;" />
+        <input type="submit" class="navsearchsub" value="搜索" />
+      </form>
+    </div>
+  </div>
+</div>
+{literal}
+<script type="text/javascript">
+seajs.use(["modules/mobile"], function(mob){
+  mob.pagenavInit("#pagemainnavbtn", "#pagemainnav");
+});
+</script>
+{/literal}
+
+{include file=$content_template}
+
+<link href="{$template_data}css/custom/mobile.css" media="screen" rel="stylesheet" type="text/css" />
+
+{include file="$root_path/templates/default/html/footer.html"}
+<div id="ajax-feedback" class="ajax-feedback" style="display:none;">
+  <span><img alt="Loader" height="22" src="{$template_data_path}img/loader.gif" width="126" />请求执行中...</span>
+</div>
+<div id="tooltip-magnifier" class="magnifier">
+  <strong></strong>
+  <div class="info">
+    <div class="author-category">
+      <span class="author"></span>
+      <span class="category"></span>
+    </div>
+    <div class="price">
+      <span class="symbol">{$currency.symbol}</span><span class="cost"></span>
+    </div>
+  </div>
+</div>
+  <div id="landscape-image-magnifier" class="magnifier">
+    <div class="size-limiter">
+    </div>
+  <strong></strong>
+  <div class="info">
+    <div class="author-category">
+      <span class="author"></span>
+      <span class="category"></span>
+    </div>
+    <div class="price">
+      <span class="symbol">{$currency.symbol}</span><span class="cost"></span>
+    </div>
+  </div>
+</div>
+  <div id="portrait-image-magnifier" class="magnifier">
+    <div class="size-limiter">
+    </div>
+  <strong></strong>
+  <div class="info">
+    <div class="author-category">
+      <span class="author"></span>
+      <span class="category"></span>
+    </div>
+    <div class="price">
+      <span class="symbol">{$currency.symbol}</span><span class="cost"></span>
+    </div>
+  </div>
+</div>
+  <div id="square-image-magnifier" class="magnifier">
+    <div class="size-limiter">
+    </div>
+  <strong></strong>
+  <div class="info">
+    <div class="author-category">
+       <span class="author"></span>
+      <span class="category"></span>
+    </div>
+    <div class="price">
+      <span class="symbol">{$currency.symbol}</span><span class="cost"></span>
+    </div>
+  </div>
+</div>
+  <div id="smart-image-magnifier" class="magnifier">
+    <div class="size-limiter">
+    </div>
+  <strong></strong>
+  <div class="info">
+    <div class="author-category">
+      <span class="author"></span>
+      <span class="category"></span>
+    </div>
+    <div class="price">
+      <span class="symbol">{$currency.symbol}</span><span class="cost"></span>
+    </div>
+  </div>
+</div>
+<div id="pageKfScrollTop"></div>
+<!--[if lte IE 8]>
+<link href="/static/css/custom/iehack.css" media="screen" rel="stylesheet" type="text/css" />
+<![endif]-->
+<!--[if IE 9]>
+<![endif]-->
+<!--[if IE 8]>
+<![endif]-->
+<!--[if IE 7]>
+<link href="/static/css/custom/ie7.css" media="screen" rel="stylesheet" type="text/css" />
+<![endif]-->
+{literal}
+<script>
+seajs.use(["modules/scrolltop"], function(top){
+  top.init("#pageKfScrollTop", {"qq": ["111111111111"]});
+});
+</script>
+{/literal}
+</body>
+</html>

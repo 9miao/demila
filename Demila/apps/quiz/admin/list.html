@@ -2,7 +2,7 @@
 <div class="pagetit">
   <div class="navblock">
     <ul class="titnav clr">
-      <li><a href="/admin" title="管理首页">管理首页</a></li>
+      <li><a href="/{$languageURL}admin" title="管理首页">管理首页</a></li>
       <li class="pipe">&gt;</li>
       <li>测验</li>
     </ul>
@@ -36,15 +36,15 @@
 			<tr id="row{$d.id}" class="{cycle values="no,alt"}">
 				<td>{$d.name}</td>
 				<td>
-					<a href="?m={$smarty.get.m}&c=list&down={$d.id}&p={$smarty.get.p}" title="{$lang.up}"><img class="middle" src="{$data_server}admin/images/icons/16x16/up.png" /></a>
-					<a href="?m={$smarty.get.m}&c=list&up={$d.id}&p={$smarty.get.p}" title="{$lang.down}"><img class="middle" src="{$data_server}admin/images/icons/16x16/download1.png" /></a>				
+					<a href="?m={$smarty.get.m}&c=list&down={$d.id}&p={$smarty.get.p}" title="{$lang.up}"><img class="middle" src="{$template_data}admin/images/icons/16x16/up.png" /></a>
+					<a href="?m={$smarty.get.m}&c=list&up={$d.id}&p={$smarty.get.p}" title="{$lang.down}"><img class="middle" src="{$template_data}admin/images/icons/16x16/download1.png" /></a>				
 				</td>								
 				<td>
-					<a href="?m={$smarty.get.m}&c=answers&id={$d.id}" title="{$lang.answers}"><img class="middle" src="{$data_server}admin/images/icons/16x16/answers.png" /> {$lang.answers}</a>
+					<a href="?m={$smarty.get.m}&c=answers&id={$d.id}" title="{$lang.answers}"><img class="middle" src="{$template_data}admin/images/icons/16x16/answers.png" /> {$lang.answers}</a>
 					<br />
-					<a href="?m={$smarty.get.m}&c=edit&id={$d.id}&p={$smarty.get.p}" title="{$lang.edit}"><img class="middle" src="{$data_server}admin/images/icons/16x16/edit.png" /> {$lang.edit}</a>
+					<a href="?m={$smarty.get.m}&c=edit&id={$d.id}&p={$smarty.get.p}" title="{$lang.edit}"><img class="middle" src="{$template_data}admin/images/icons/16x16/edit.png" /> {$lang.edit}</a>
 					<br/>
-					<a class="deletebtn" ajax-url="/apps/{$smarty.get.m}/ajax/delete.php" item-id="{$d.id}" href="javascript:void(0);" title="{$lang.delete}"><img class="middle" src="{$data_server}admin/images/icons/16x16/delete.png" /> {$lang.delete}</a>
+					<a class="deletebtn" ajax-url="/apps/{$smarty.get.m}/ajax/delete.php" item-id="{$d.id}" href="javascript:void(0);" title="{$lang.delete}"><img class="middle" src="{$template_data}admin/images/icons/16x16/delete.png" /> {$lang.delete}</a>
 				</td>					
 			</tr>
 			{/foreach}

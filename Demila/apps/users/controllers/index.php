@@ -8,28 +8,26 @@
 // +----------------------------------------------------------------------
 // | Email author@demila.org
 // +----------------------------------------------------------------------
-
 _setView(__FILE__);
 
 	$username = get_id(1);
-	
-_setTitle($username);	
-	
-	$usersClass = new users();
-	
-	$user = $usersClass->getByUsername($username);
-	if(!is_array($user)) {
+_setTitle($username);
+
+$usersClass = new users();
+
+$users = $usersClass->getByUsername($username);
+if(!is_array($users)) {
 		header("HTTP/1.0 404 Not Found");
-        header("Location: http://". DOMAIN ."/error");	
-	}
-	
-	if(check_login_bool() && $_SESSION['user']['user_id'] != $user['user_id']) {
-		$user['is_follow'] = $usersClass->isFollow($user['user_id']);
+        header("Location: http://". DOMAIN ."/".$languageURL."error");
 	}
 
-	$user['profile_desc'] = replaceEmoticons($user['profile_desc']);
+if(check_login_bool() && $_SESSION['user']['user_id'] != $users['user_id']) {
+		$users['is_follow'] = $usersClass->isFollow($users['user_id']);
+	}
+
+	$users['profile_desc'] = replaceEmoticons($users['profile_desc']);
 	
-	abr('user', $user);
+	abr('user', $users);
 	
 	
 #加载分类
@@ -43,7 +41,7 @@ _setTitle($username);
 	if(check_login_bool() && isset($_POST['send_email'])) {
 		$s = $usersClass->sendEmail();
 		if($s === true) {
-			refresh('/'.$languageURL.'user/'.$user['username'], $langArray['complete_send_email'], 'complete');
+			refresh('/'.$languageURL.'user/'.$users['username'], $langArray['complete_send_email'], 'complete');
 		}
 		else {
 			addErrorMessage($s, '', 'error');
@@ -51,10 +49,10 @@ _setTitle($username);
 	}
 		
 #关注用户
-	if(check_login_bool() && isset($_GET['follow']) && $_SESSION['user']['user_id'] != $user['user_id']) {
-		$usersClass->followUser($user['user_id']);
+	if(check_login_bool() && isset($_GET['follow']) && $_SESSION['user']['user_id'] != $users['user_id']) {
+		$usersClass->followUser($users['user_id']);
 		if(isset($_POST)) {			
-			if($user['is_follow']) {
+			if($users['is_follow']) {
 				$text = $langArray['follow'];
 			}
 			else {
@@ -64,52 +62,52 @@ _setTitle($username);
 				jQuery("#follow").html("'.$text.'");
 			');
 		}
-		refresh('/'.$languageURL.'user/'.$user['username']);
+		refresh('/'.$languageURL.'user/'.$users['username']);
 	}	
 	
 #加载公开书签集
 	require_once ROOT_PATH.'/apps/collections/models/collections.class.php';
 	$collectionsClass = new collections();
 
-	$collections = $collectionsClass->getAll(0, 2, " `public` = 'true' AND `user_id` = '".intval($user['user_id'])."' ");
+	$collections = $collectionsClass->getAll(0, 2, " `public` = 'true' AND `user_id` = '".intval($users['user_id'])."' ");
 	abr('collections', $collections);
 	
 #获取推荐文件
-	if($user['featured_item_id'] != '0') {
+	if($users['featured_item_id'] != '0') {
 		require_once ROOT_PATH.'/apps/items/models/items.class.php';
 		$itemsClass = new items();
 		
-		$featureItem = $itemsClass->get($user['featured_item_id'], true);
+		$featureItem = $itemsClass->get($users['featured_item_id'], true);
 		abr('featureItem', $featureItem);
 	}
 
 #获取粉丝
-	$follow['to'] = $usersClass->getFollowers($user['user_id'], 0, 9, 'RAND()', true);
+	$follow['to'] = $usersClass->getFollowers($users['user_id'], 0, 9, 'RAND()', true);
 	$follow['to_count'] = $usersClass->foundRows;
-	$follow['from'] = $usersClass->getFollowers($user['user_id'], 0, 9, 'RAND()');
+	$follow['from'] = $usersClass->getFollowers($users['user_id'], 0, 9, 'RAND()');
 	$follow['from_count'] = $usersClass->foundRows;	
 	abr('follow', $follow);
 	
 	
-	$follow['toto'] = $usersClass->getFollowers($user['user_id'], 0, 10000000, 'RAND()', true);
+	$follow['toto'] = $usersClass->getFollowers($users['user_id'], 0, 10000000, 'RAND()', true);
 	$follow['toto_count'] = $usersClass->foundRows;
-	$follow['fromfrom'] = $usersClass->getFollowers($user['user_id'], 0, 10000000, 'RAND()');
+	$follow['fromfrom'] = $usersClass->getFollowers($users['user_id'], 0, 10000000, 'RAND()');
 	$follow['fromfrom_count'] = $usersClass->foundRows;	
 	abr('follow', $follow);
 	
 #面包屑	
-	abr('breadcrumb', '<a href="/'.$languageURL.'" title="">'.$langArray['home'].'</a> \ <a href="/'.$languageURL.'users/'.$user['username'].'" title="">'.$user['username'].'</a>');		
+	abr('breadcrumb', '<a href="/'.$languageURL.'" title="">'.$langArray['home'].'</a> \ <a href="/'.$languageURL.'users/'.$users['username'].'" title="">'.$users['username'].'</a>');
 	
 	require_once ROOT_PATH.'/apps/system/models/badges.class.php';
 	$badges = new badges();
 	
 	$badges_data = $badges->getAllFront();
 	
-	$other_badges = array_map('trim', explode(',', $user['badges']));
+	$other_badges = array_map('trim', explode(',', $users['badges']));
 	
 	$user_badges = array();
 	
-	if($user['exclusive_author'] == 'true' && isset($badges_data['system']['is_exclusive_author'])) {
+	if($users['exclusive_author'] == 'true' && isset($badges_data['system']['is_exclusive_author'])) {
 		if($badges_data['system']['is_exclusive_author']['photo'] && file_exists(DATA_SERVER_PATH . "/uploads/badges/" . $badges_data['system']['is_exclusive_author']['photo'])) {
 			$user_badges[] = array(
 				'name' => $badges_data['system']['is_exclusive_author']['name'],
@@ -118,7 +116,7 @@ _setTitle($username);
 		}
 	}
 	
-	if($user['featured_author'] == 'true' && isset($badges_data['system']['has_been_featured'])) {
+	if($users['featured_author'] == 'true' && isset($badges_data['system']['has_been_featured'])) {
 		if($badges_data['system']['has_been_featured']['photo'] && file_exists(DATA_SERVER_PATH . "/uploads/badges/" . $badges_data['system']['has_been_featured']['photo'])) {
 			$user_badges[] = array(
 				'name' => $badges_data['system']['has_been_featured']['name'],
@@ -127,7 +125,7 @@ _setTitle($username);
 		}
 	}
 	
-	if(isset($user['statuses']['freefile']) && $user['statuses']['freefile'] && isset($badges_data['system']['has_free_file_month'])) {
+	if(isset($users['statuses']['freefile']) && $users['statuses']['freefile'] && isset($badges_data['system']['has_free_file_month'])) {
 		if($badges_data['system']['has_free_file_month']['photo'] && file_exists(DATA_SERVER_PATH . "/uploads/badges/" . $badges_data['system']['has_free_file_month']['photo'])) {
 			$user_badges[] = array(
 				'name' => $badges_data['system']['has_free_file_month']['name'],
@@ -136,7 +134,7 @@ _setTitle($username);
 		}
 	}
 	
-	if(isset($user['statuses']['featured']) && $user['statuses']['featured'] && isset($badges_data['system']['has_had_item_featured'])) {
+	if(isset($users['statuses']['featured']) && $users['statuses']['featured'] && isset($badges_data['system']['has_had_item_featured'])) {
 		if($badges_data['system']['has_free_file_month']['photo'] && file_exists(DATA_SERVER_PATH . "/uploads/badges/" . $badges_data['system']['has_had_item_featured']['photo'])) {
 			$user_badges[] = array(
 				'name' => $badges_data['system']['has_had_item_featured']['name'],
@@ -145,10 +143,10 @@ _setTitle($username);
 		}
 	}
 	
-	if($user['buy'] && isset($badges_data['buyers']) && is_array($badges_data['buyers'])) {
+	if($users['buy'] && isset($badges_data['buyers']) && is_array($badges_data['buyers'])) {
 		foreach($badges_data['buyers'] AS $k => $v) {
 			list($from, $to) = explode('-', $k);
-			if($from <= $user['buy'] && $to >= $user['buy']) {
+			if($from <= $users['buy'] && $to >= $users['buy']) {
 				if($v['photo'] && file_exists(DATA_SERVER_PATH . "/uploads/badges/" . $v['photo'])) {
 					$user_badges[] = array(
 						'name' => $v['name'],
@@ -160,10 +158,10 @@ _setTitle($username);
 		}
 	}
 	
-	if($user['sold'] && isset($badges_data['authors']) && is_array($badges_data['authors'])) {
+	if($users['sold'] && isset($badges_data['authors']) && is_array($badges_data['authors'])) {
 		foreach($badges_data['authors'] AS $k => $v) {
 			list($from, $to) = explode('-', $k);
-			if($from <= $user['sold'] && $to >= $user['sold']) {
+			if($from <= $users['sold'] && $to >= $users['sold']) {
 				if($v['photo'] && file_exists(DATA_SERVER_PATH . "/uploads/badges/" . $v['photo'])) {
 					$user_badges[] = array(
 						'name' => $v['name'],
@@ -175,10 +173,10 @@ _setTitle($username);
 		}
 	}
 	
-	if($user['referals'] && isset($badges_data['referrals']) && is_array($badges_data['referrals'])) {
+	if($users['referals'] && isset($badges_data['referrals']) && is_array($badges_data['referrals'])) {
 		foreach($badges_data['referrals'] AS $k => $v) {
 			list($from, $to) = explode('-', $k);
-			if($from <= $user['referals'] && $to >= $user['referals']) {
+			if($from <= $users['referals'] && $to >= $users['referals']) {
 				if($v['photo'] && file_exists(DATA_SERVER_PATH . "/uploads/badges/" . $v['photo'])) {
 					$user_badges[] = array(
 						'name' => $v['name'],
@@ -201,10 +199,10 @@ _setTitle($username);
 		}
 	}
 	
-	if(isset($user['country']['photo']) && $user['country']['photo'] && file_exists(DATA_SERVER_PATH . "/uploads/countries/" . $user['country']['photo'])) {
+	if(isset($users['country']['photo']) && $users['country']['photo'] && file_exists(DATA_SERVER_PATH . "/uploads/countries/" . $users['country']['photo'])) {
 		$user_badges[] = array(
-			'name' => $user['country']['name'],
-			'photo' => '/uploads/countries/' . $user['country']['photo']
+			'name' => $users['country']['name'],
+			'photo' => '/uploads/countries/' . $users['country']['photo']
 		);
 	} elseif(isset($badges_data['system']['location_global_community']) && $badges_data['system']['location_global_community']['photo'] && file_exists(DATA_SERVER_PATH . "/uploads/badges/" . $badges_data['system']['location_global_community']['photo'])) {
 		$user_badges[] = array(
@@ -213,7 +211,7 @@ _setTitle($username);
 		);
 	}
 
-	if($user['power_elite_author'] == 'true' && isset($badges_data['system']['power_elite_author'])) {
+	if($users['power_elite_author'] == 'true' && isset($badges_data['system']['power_elite_author'])) {
 		if($badges_data['system']['power_elite_author']['photo'] && file_exists(DATA_SERVER_PATH . "/uploads/badges/" . $badges_data['system']['has_been_featured']['photo'])) {
 			$user_badges[] = array(
 				'name' => $badges_data['system']['power_elite_author']['name'],
@@ -222,7 +220,7 @@ _setTitle($username);
 		}
 	}
 	
-	if($user['elite_author'] == 'true' && isset($badges_data['system']['elite_author'])) {
+	if($users['elite_author'] == 'true' && isset($badges_data['system']['elite_author'])) {
 		if($badges_data['system']['elite_author']['photo'] && file_exists(DATA_SERVER_PATH . "/uploads/badges/" . $badges_data['system']['has_been_featured']['photo'])) {
 			$user_badges[] = array(
 				'name' => $badges_data['system']['elite_author']['name'],

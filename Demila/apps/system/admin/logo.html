@@ -2,7 +2,7 @@
 <div class="pagetit">
   <div class="navblock">
     <ul class="titnav clr">
-      <li><a href="/admin" title="管理首页">管理首页</a></li>
+      <li><a href="/{$languageURL}admin" title="管理首页">管理首页</a></li>
       <li class="pipe">&gt;</li>
       <li><a href="?m=system&c=list">设置</a></li>
       <li class="pipe">&gt;</li>
@@ -14,7 +14,7 @@
 <!--<div class="page-info">
     <div class="container">
       <div id="breadcrumbs">
-        <a href="/admin" class="first">主页</a> \ <a href="?m={$smarty.get.m}&c=list">设置</a> \
+        <a href="/{$languageURL}admin" class="first">主页</a> \ <a href="?m={$smarty.get.m}&c=list">设置</a> \
       </div>
       <h1 class="page-title">{$title} </h1>
     </div>
@@ -31,7 +31,7 @@
               <input id="logo" type="file" name="value" />
               <small>.PNG 186x45</small>
               {if $smarty.post.value != ''}
-              <img src="{$data_server}uploads/logo/{$smarty.post.value}" alt="" />
+              <img src="{$template_data}uploads/logo/{$smarty.post.value}" alt="" />
               {/if}
               {if isset($error.photo)}
               <small>{$error.photo}</small>

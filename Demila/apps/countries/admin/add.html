@@ -2,7 +2,7 @@
 <div class="pagetit">
   <div class="navblock">
     <ul class="titnav clr">
-      <li><a href="/admin" title="管理首页">管理首页</a></li>
+      <li><a href="/{$languageURL}admin" title="管理首页">管理首页</a></li>
       <li class="pipe">&gt;</li>
       <li><a href="?m={$smarty.get.m}&c=list&p={$smarty.get.p}">国家或地区</a></li>
       <li class="pipe">&gt;</li>
@@ -14,7 +14,7 @@
 <!--<div class="page-info">
     <div class="container">
       <div id="breadcrumbs">
-        <a href="/admin" class="first">主页</a> \ <a href="?m={$smarty.get.m}&c=list&p={$smarty.get.p}">国家或地区</a> \ 
+        <a href="/{$languageURL}admin" class="first">主页</a> \ <a href="?m={$smarty.get.m}&c=list&p={$smarty.get.p}">国家或地区</a> \ 
       </div>
       <h1 class="page-title">{$title}</h1>
     </div>
@@ -39,7 +39,7 @@
             <div class="inputs">
               <input type="file" name="photo" />
               {if $smarty.post.photo != ''}
-              <img src="{$data_server}uploads/countries/{$smarty.post.photo}" alt="" />
+              <img src="{$template_data}uploads/countries/{$smarty.post.photo}" alt="" />
               <input type="checkbox" name="deletePhoto" value="yes" /> {$lang.delete}
               {/if}
               {if isset($error.photo)}

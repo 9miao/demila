@@ -152,13 +152,13 @@ define(function (require, exports, module){
 	var inputtype = {
 			"thumbnail": "*.jpg,*.gif,*.png",
 			"main_file": "*.zip",
-			"first_preview": "*.jpg,*.png,*.gif",
+			"first_preview": "*.jpg,*.png,*.gif,*.mp3,*.mp4,*.swf",
 			"theme_preview": "*.jpg,*.png,*.gif,*.mp3,*.mp4,*.swf"
 		},
 		filetypetxt = {
 			"thumbnail": "jpg;gif;png",
 			"main_file": "zip",
-			"first_preview": "jpg;png;gif",
+			"first_preview": "jpg;png;gif;mp3;mp4;swf",
 			"theme_preview": "jpg;png;gif;mp3;mp4;swf"
 		},
 		alltypestxt = {

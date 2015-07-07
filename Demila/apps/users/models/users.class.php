@@ -244,7 +244,16 @@ public function getuserinfoById($id=0){
                                     &nbsp;&nbsp;&nbsp;&nbsp;专属小编：['.$theservice['user_name'].']<br />
                                     &nbsp;&nbsp;&nbsp;&nbsp;['.$meta['meta_title'].']<br />
                                     &nbsp;&nbsp;&nbsp;&nbsp;['.date('Y-m-d H:i:s',time()).']<br />';
-
+            require_once ROOT_PATH.'/apps/system/models/system.class.php';
+            $system = new system();
+            $smtp = $system ->is_smtp();
+            $smtpconf=$system->getAllKeyValue();
+            if($smtp){
+                $emailClass->email_sock($smtpconf["smtp_host"],$smtpconf["smtp_port"],0,'error',10,1,$smtpconf["smtp_user"],$smtpconf["smtp_pass"],$smtpconf["smtp_from"]);
+                $emailClass->send_mail_sock($emailClass->subject,$emailClass->message,$user_info['email'],$smtpconf["smtp_from_name"]) ;
+                unset($emailClass);
+                return true;
+            }
             $emailClass->to($user_info['email']);
             $emailClass->send();
             unset($emailClass);
@@ -259,6 +268,16 @@ public function getuserinfoById($id=0){
                 'DOMAIN' => $config['domain'],
                 'LINK' => 'http://'.$config['domain'].'/'.$languageURL.'sign_in/?command=activate&user='.$user_info['username'].'&key='.$user_info['activate_key']
             ));
+            require_once ROOT_PATH.'/apps/system/models/system.class.php';
+            $system = new system();
+            $smtp = $system ->is_smtp();
+            $smtpconf=$system->getAllKeyValue();
+            if($smtp){
+                $emailClass->email_sock($smtpconf["smtp_host"],$smtpconf["smtp_port"],0,'error',10,1,$smtpconf["smtp_user"],$smtpconf["smtp_pass"],$smtpconf["smtp_from"]);
+                $emailClass->send_mail_sock($emailClass->subject,$emailClass->message,$user_info['email'],$smtpconf["smtp_from_name"]) ;
+                unset($emailClass);
+                return true;
+            }
             $emailClass->to($user_info['email']);
             $emailClass->send();
             unset($emailClass);
@@ -370,7 +389,6 @@ public function getuserinfoById($id=0){
 			FROM `users`
 			WHERE `username` = '".sql_quote($username)."'
 		" );
-		
 		if(!is_array($return)) {
 			return false;
 		}
@@ -383,7 +401,7 @@ public function getuserinfoById($id=0){
 		unset($return['social']);
 		$return['social'] = $buff;
 		unset($buff);
-		
+
 		$groups = unserialize($return['groups']);
 		unset($return['groups']);		
 		if(is_array($groups) && !empty($groups)) {
@@ -404,7 +422,7 @@ public function getuserinfoById($id=0){
 				FROM `user_groups`
 				WHERE $groupsWhere
 			", __FUNCTION__ );
-			
+
 			if($mysql->num_rows() > 0) {
 				$return['is_admin'] = true;
 
@@ -427,6 +445,7 @@ public function getuserinfoById($id=0){
 		else {
 			$return['groups'] = '';
 		}
+
 		
 #加载国家或地区
 		if($return['country_id'] != '0') {
@@ -434,21 +453,21 @@ public function getuserinfoById($id=0){
 			$countriesClass = new countries();
 			
 			$return['country'] = $countriesClass->get($return['country_id']);
-		}	
+		}
 
 #加载状态
 		$mysql->query("
 			SELECT *
 			FROM `users_status`
 			WHERE `user_id` = '".intval($return['user_id'])."'
-		");		
+		");
 		
 		if($mysql->num_rows() > 0) {
 			while($d = $mysql->fetch_array()) {
 				$return['statuses'][$d['status']] = $d;
 			}
 		}
-		
+
 		return $return;
 	}
 	
@@ -645,8 +664,6 @@ public function getuserinfoById($id=0){
         }
         $user_info = $this->get_user_info_by_pn($_POST['username'],$_POST['password']);
         if(!$have_service){
-
-
             #发送激活链接
             require_once ENGINE_PATH.'/classes/email.class.php';
             $emailClass = new email();
@@ -656,11 +673,19 @@ public function getuserinfoById($id=0){
                 'DOMAIN' => $config['domain'],
                 'LINK' => 'http://'.$config['domain'].'/'.$languageURL.'sign_in/?command=activate&user='.$_POST['username'].'&key='.$activationKey
             ));
-            $emailClass->to($_POST['email']);
-            $emailClass->send();
-            unset($emailClass);
-
-
+            require_once ROOT_PATH.'/apps/system/models/system.class.php';
+            $system = new system();
+            $smtp = $system ->is_smtp();
+            $smtpconf=$system->getAllKeyValue();
+            if($smtp){
+                $emailClass->email_sock($smtpconf["smtp_host"],$smtpconf["smtp_port"],0,'error',10,1,$smtpconf["smtp_user"],$smtpconf["smtp_pass"],$smtpconf["smtp_from"]);
+                $emailClass->send_mail_sock($emailClass->subject,$emailClass->message,$user_info['email'],$smtpconf["smtp_from_name"]) ;
+                unset($emailClass);
+            }else{
+                $emailClass->to($_POST['email']);
+                $emailClass->send();
+                unset($emailClass);
+            }
         }
         else{
 
@@ -745,13 +770,19 @@ public function getuserinfoById($id=0){
 								&nbsp;&nbsp;&nbsp;&nbsp;专属小编：['.$theservice['user_name'].']<br />
 								&nbsp;&nbsp;&nbsp;&nbsp;['.$meta['meta_title'].']<br />
 								&nbsp;&nbsp;&nbsp;&nbsp;['.date('Y-m-d H:i:s',time()).']<br />';
-
-            $emailClass->to($_POST['email']);
-            $emailClass->send();
-            unset($emailClass);
-            
-            
-
+            require_once ROOT_PATH.'/apps/system/models/system.class.php';
+            $system = new system();
+            $smtp = $system ->is_smtp();
+            $smtpconf=$system->getAllKeyValue();
+            if($smtp){
+                $emailClass->email_sock($smtpconf["smtp_host"],$smtpconf["smtp_port"],0,'error',10,1,$smtpconf["smtp_user"],$smtpconf["smtp_pass"],$smtpconf["smtp_from"]);
+                $emailClass->send_mail_sock($emailClass->subject,$emailClass->message,$user_info['email'],$smtpconf["smtp_from_name"]) ;
+                unset($emailClass);
+            }else{
+                $emailClass->to($_POST['email']);
+                $emailClass->send();
+                unset($emailClass);
+            }
         }
         $res_mail = 'http://'.$this->gotomail($user_info['email']);
         $_SESSION["THE_USER_RES_SEND_MAIL_4_M_MAIL"] = $res_mail;
@@ -1094,6 +1125,16 @@ public function getuserinfoById($id=0){
 								&nbsp;&nbsp;&nbsp;&nbsp;专属小编：['.$theservice['user_name'].']<br />
 								&nbsp;&nbsp;&nbsp;&nbsp;['.$meta['meta_title'].']<br />
 								&nbsp;&nbsp;&nbsp;&nbsp;['.date('Y-m-d H:i:s',time()).']<br />';
+            require_once ROOT_PATH.'/apps/system/models/system.class.php';
+            $system = new system();
+            $smtp = $system ->is_smtp();
+            $smtpconf=$system->getAllKeyValue();
+            if($smtp){
+                $emailClass->email_sock($smtpconf["smtp_host"],$smtpconf["smtp_port"],0,'error',10,1,$smtpconf["smtp_user"],$smtpconf["smtp_pass"],$smtpconf["smtp_from"]);
+                $emailClass->send_mail_sock($emailClass->subject,$emailClass->message,$d['email'],$smtpconf["smtp_from_name"]) ;
+                unset($emailClass);
+                return true;
+            }
             $emailClass->to($d['email']);
             $emailClass->send();
             unset($emailClass);
@@ -1109,6 +1150,16 @@ public function getuserinfoById($id=0){
         'USERNAME' => $d['username'],
         'PASSWORD' => $code
 		));
+        require_once ROOT_PATH.'/apps/system/models/system.class.php';
+        $system = new system();
+        $smtp = $system ->is_smtp();
+        $smtpconf=$system->getAllKeyValue();
+        if($smtp){
+            $emailClass->email_sock($smtpconf["smtp_host"],$smtpconf["smtp_port"],0,'error',10,1,$smtpconf["smtp_user"],$smtpconf["smtp_pass"],$smtpconf["smtp_from"]);
+            $emailClass->send_mail_sock($emailClass->subject,$emailClass->message,$d['email'],$smtpconf["smtp_from_name"]) ;
+            unset($emailClass);
+            return true;
+        }
 		$emailClass->to($d['email']);
 		
 		$emailClass->send();
@@ -1159,7 +1210,16 @@ public function getuserinfoById($id=0){
 								&nbsp;&nbsp;&nbsp;&nbsp;专属小编：['.$theservice['user_name'].']<br />
 								&nbsp;&nbsp;&nbsp;&nbsp;['.$meta['meta_title'].']<br />
 								&nbsp;&nbsp;&nbsp;&nbsp;['.date('Y-m-d H:i:s',time()).']<br />';
-
+            require_once ROOT_PATH.'/apps/system/models/system.class.php';
+            $system = new system();
+            $smtp = $system ->is_smtp();
+            $smtpconf=$system->getAllKeyValue();
+            if($smtp){
+                $emailClass->email_sock($smtpconf["smtp_host"],$smtpconf["smtp_port"],0,'error',10,1,$smtpconf["smtp_user"],$smtpconf["smtp_pass"],$smtpconf["smtp_from"]);
+                $emailClass->send_mail_sock($emailClass->subject,$emailClass->message,$d['email'],$smtpconf["smtp_from_name"]) ;
+                unset($emailClass);
+                return true;
+            }
             $emailClass->to($d['email']);
 
             $emailClass->send();
@@ -1177,8 +1237,17 @@ public function getuserinfoById($id=0){
 																'DOMAIN' => $config['domain'],
 																'USERNAME' => $d['username']
 														));
+        require_once ROOT_PATH.'/apps/system/models/system.class.php';
+        $system = new system();
+        $smtp = $system ->is_smtp();
+        $smtpconf=$system->getAllKeyValue();
+        if($smtp){
+            $emailClass->email_sock($smtpconf["smtp_host"],$smtpconf["smtp_port"],0,'error',10,1,$smtpconf["smtp_user"],$smtpconf["smtp_pass"],$smtpconf["smtp_from"]);
+            $emailClass->send_mail_sock($emailClass->subject,$emailClass->message,$d['email'],$smtpconf["smtp_from_name"]) ;
+            unset($emailClass);
+            return true;
+        }
 		$emailClass->to($d['email']);
-		
 		$emailClass->send();
 		unset($emailClass);
     return true;

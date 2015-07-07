@@ -28,7 +28,7 @@ if (isset ( $_GET ['module'] ) && isset ( $_GET ['controller'] )) {
 			include_once (inc2);
 		} else {
 		header("HTTP/1.0 404 Not Found");
-        header("Location: http://". DOMAIN ."/error");			 
+        header("Location: http://". DOMAIN ."/".$languageURL."error");			 
 		}
 	}
 } elseif (isset ( $_GET ['module'] )) {
@@ -49,7 +49,7 @@ if (isset ( $_GET ['module'] ) && isset ( $_GET ['controller'] )) {
 	 * 重定向到404页面
 	 */
 		header("HTTP/1.0 404 Not Found");
-        header("Location: http://". DOMAIN ."/error");
+        header("Location: http://". DOMAIN ."/".$languageURL."error");
 	}
 } else {
 
@@ -62,16 +62,16 @@ if (isset ( $_GET ['module'] ) && isset ( $_GET ['controller'] )) {
  */
 
 if($_templateFile == '') {
-	$_templateFile = ROOT_PATH.'apps/index/views/index.html';
-	abr ( 'content_template', $_templateFile );		
+    //模板目录
+    $_templateFile = ROOT_PATH.'apps/templates/'.$meta['template'].'/index/index.html';
+    abr ( 'content_template', $_templateFile );
 }
 
-if ($_templateFile != '') {	
+if ($_templateFile != '') {
 	restore_error_handler ();
 	flush ();
-
-	$smarty->display ( TEMPLATE_PATH . $_layoutFile . ".html" );
-	
+    $smarty->display ( TEMPLATE_PATH . $_layoutFile . ".html" );
+    $smarty->display ( ROOT_PATH.'apps/templates/'.$meta['template'].'/index/'. $_layoutFile .'.html');
 } else {
 
 }

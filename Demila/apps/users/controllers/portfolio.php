@@ -28,7 +28,7 @@ _setTitle($username.$langArray['portfolio_setTitle']);
 	$user = $usersClass->getByUsername($username);
 	if(!is_array($user)) {
 		header("HTTP/1.0 404 Not Found");
-        header("Location: http://". DOMAIN ."/error");	
+        header("Location: http://". DOMAIN ."/".$languageURL."error");	
 	}
 	abr('user', $user);
 	
