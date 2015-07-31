@@ -1,0 +1,32 @@
+{include file="$template_path/html/header.html"}
+<link href="{$template_data}css/custom/ucenter.css" rel="stylesheet" />
+<link href="{$template_data}css/custom/mobile.css" media="screen" rel="stylesheet" type="text/css" />
+</head>
+<body>
+{include file="$template_path/html/pagenav.html"}
+<div class="pagetit">
+  <div class="navblock">
+    <ul class="titnav clr">
+      <li><a href="/{$languageURL}" title="主页">主页</a></li>
+      <li class="pipe">&gt;</li>
+      <li><a href="/{$languageURL}help/aboutus/" title="关于我们">关于我们</a></li>
+      <li class="pipe">&gt;</li>
+      <li>关于我们</li>
+    </ul>
+    <h2>关于我们</h2>
+  </div>
+</div>
+<div class="ucbg">
+  <div class="ucblock clr">
+    <div class="txtlistnav">
+      {include file="$admin_template_path/lists/leftlist_aboutus.html"}
+    </div>
+    <div class="detailtxt">
+      <h3>关于我们</h3>
+      <p>尊重作者的创作工作，合理使用在本站购买的作品。</p>
+    </div>
+  </div>
+</div>
+{include file="$root_path/templates/home/default/html/footer.html"}
+</body>
+</html>

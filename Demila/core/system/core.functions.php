@@ -297,7 +297,6 @@ function check_login($type = 'user') {
 
 function check_login_bool($type = 'user') {
 	global $_SESSION;
-	
 	if (! isset ( $_SESSION [$type] )) {
 		return false;
 	}

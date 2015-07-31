@@ -39,6 +39,7 @@ _setTitle($langArray['queue']);
 
 	$data = $cms->getAll(START, LIMIT, " `status` = 'queue' ", $orderQuery);
 
+
 	abr('data', $data);
 
 	$p = paging ( "?m=" . $_GET ['m'] . "&c=queue&p=", "&order=".$_GET['order']."&dir=".$_GET['dir'], PAGE, LIMIT, $cms->foundRows );

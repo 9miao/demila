@@ -1,0 +1,87 @@
+{include file="$template_path/html/header.html"}
+<link href="{$template_data}css/custom/ucenter.css" rel="stylesheet" />
+<link href="{$template_data}css/custom/mobile.css" media="screen" rel="stylesheet" type="text/css" />
+</head>
+<body>
+{include file="$template_path/html/pagenav.html"}
+<div class="pagetit">
+  <div class="navblock">
+    <ul class="titnav clr">
+      <li><a href="/" title="主页">主页</a></li>
+      <li class="pipe">&gt;</li>
+      <li><a href="/{$languageURL}categories/all/" title="文件">文件</a></li>
+      <li class="pipe">&gt;</li>
+      <li>公开书签集</li>
+    </ul>
+    <h2>公开书签集</h2>
+  </div>
+</div>
+
+<div class="ucbg">
+  <div class="ucblock paddingt clr">
+    <div class="leftdetail itemlist">
+      <div class="itemsort">
+        <form action="" class="sort-control" id="sortbyform" method="get">
+          <input id="order-type" name="order" type="hidden" value="{if $smarty.get.order == 'asc'}desc{else}asc{/if}" />
+          <input type="hidden" id="sort_by" name="sort_by" />
+          <ul class="sortlist clr">
+            <li><span>排序：</span></li>
+            <li{if $smarty.get.sort_by == 'published_at'}{if $smarty.get.order == 'asc'} class="asc"{else} class="desc"{/if}{/if}><a href="javascript: void(0);" onclick="document.getElementById('sort_by').value='published_at';document.getElementById('sortbyform').submit();"{if $smarty.get.sort_by == 'published_at'} class="active"{/if} title="日期">日期</a></li>
+            <li{if $smarty.get.sort_by == 'name'}{if $smarty.get.order == 'asc'} class="asc"{else} class="desc"{/if}{/if}><a href="javascript: void(0);" onclick="document.getElementById('sort_by').value='name';document.getElementById('sortbyform').submit();"{if $smarty.get.sort_by == 'name'} class="active"{/if} title="标题">标题</a></li>
+            <li{if $smarty.get.sort_by == 'average_rating'}{if $smarty.get.order == 'asc'} class="asc"{else} class="desc"{/if}{/if}><a href="javascript: void(0);" onclick="document.getElementById('sort_by').value='average_rating';document.getElementById('sortbyform').submit();"{if $smarty.get.sort_by == 'average_rating'} class="active"{/if} title="评分">评分</a></li>
+          </ul>
+        </form>
+        <div class="sortbtns clr">{$paging}</div>   
+      </div>
+      {if $collections}
+      <ul class="sideblock colllist">
+        {foreach from=$collections item=c}
+        <li class="collitem clr">
+          <a href="/{$languageURL}collections/view/{$c.id}" class="collimg">
+            {if $c.photo != ''}
+            <img alt="{$c.name|escape}" src="{$data_server}/uploads/collections/{$c.photo}" class="m6 left" />
+            {else}
+            <img alt="{$c.name|escape}" src="{$template_data}img/default-collection.jpg" class="m6 left" />
+            {/if}
+          </a>
+          <div class="collinfo">
+            <h3><a href="/{$languageURL}collections/view/{$c.id}">{$c.name}</a></h3>
+            <span>由<a href="/{$languageURL}user/{$users[$c.user_id].username}">{$users[$c.user_id].username}</a>创建</span>
+            <p>{$c.text|nl2br}</p>
+            <div class="itemstars">
+              <div style="width:{$u.rating*2}0%;" class="starnums"><span class="allstars"></span></div>
+              <div class="starsbg"></div>
+            </div>
+            <p class="votes">{$c.votes}评分</>
+          </div>
+          <div class="collmeta">
+            <strong>{$c.items} {$lang.items}</strong>
+          </div>
+        </li>
+        {/foreach}
+      </ul>
+      {else}
+      <div class="sideblock">{$lang.no_collections}</div>
+      {/if}
+      <div class="pagination">{$paging}</div>
+    </div>
+    <div class="rightdetail">
+      <h3 class="bordertit">什么是书签集？</h3>
+      <div class="borderbg">
+        <p>书签集是用户喜欢的作品的集合。</p>
+        <p>书签集分为公开和私人两种，这里显示的是公开书签集。</p>
+      </div>
+      <h2 class="bordertit">搜索书签集</h2>
+      <div class="borderbg">
+        <form class="sidebar-search" method="get" action="/{$languageURL}search/">
+          <input type="text" name="term" value="{$lang.search_collections}" onfocus="this.value='';" class="ipttheme" />
+          <input id="type" name="type" type="hidden" value="collections" />
+          <button type="submit" class="btntheme2 btnsize">搜索</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{include file="$root_path/templates/home/default/html/footer.html"}
+</body>
+</html>

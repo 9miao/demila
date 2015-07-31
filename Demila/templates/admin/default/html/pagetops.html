@@ -1,0 +1,106 @@
+<div class="pagebg">
+	<div class="mcontent topblock bg-top clr">
+		<div class="toplogo bg-top-logo lf" id="toplogo">
+			<a class="clr" href="/{$languageURL}admin/" title="Demila">
+				<span class="logos textflowover">Demila</span>
+				<span class="txt text-logo">Demila</span>
+			</a>
+		</div>
+		<div class="toptools lf">
+			<div class="quicklinks lf" id="quicktaps">
+				<a class="quicktaps text-top-tap bg-top-tap buttons" title="点此展开"><span class="icon i-grid"></span></a>
+				<ul class="toplinks shadowblock clr">
+					<li class="links lf">
+						<span class="linktit">栏目</span>
+						<ol>
+							<li><a href="/{$languageURL}admin/?m=categories&c=list" title="作品分类">作品分类</a></li>
+							<li><a href="/{$languageURL}admin/?m=collections&c=list" title="书签集">书签集</a></li>
+							<li><a href="/{$languageURL}admin/?m=attributes&c=list" title="属性类别和属性">属性类别和属性</a></li>
+						</ol>
+					</li>
+					<li class="links lf">
+						<span class="linktit">用户</span>
+						<ol>
+							<li><a href="/{$languageURL}admin/?m=users&c=users" title="全部分类">全部分类</a></li>
+							<li><a href="/{$languageURL}admin/?m=users&c=list&u_type=1" title="普通用户">普通用户</a></li>
+							<li><a href="/{$languageURL}admin/?m=users&c=list&u_type=2" title="普通作者">普通作者</a></li>
+							<li><a href="/{$languageURL}admin/?m=users&c=list&u_type=3" title="签约作者">签约作者</a></li>
+							<li><a href="/{$languageURL}admin/?m=users&c=list&u_type=4" title="推荐作者">推荐作者</a></li>
+							<li><a href="/{$languageURL}admin/?m=users&c=groups" title="用户权限设置">用户权限设置</a></li>
+						</ol>
+					</li>
+					<li class="links lf">
+						<span class="linktit">作品</span>
+						<ol>
+							<li><a href="/{$languageURL}admin/?m=items&c=list" title="全部作品">全部作品</a></li>
+							<li><a href="/{$languageURL}admin/?m=items&c=list&p=&q=&order=weekly&dir=desc" title="推荐作品">推荐作品</a></li>
+							<li><a href="/{$languageURL}admin/?m=items&c=list&p=&q=&order=freefile&dir=desc" title="免费作品">免费作品</a></li>
+							<li><a href="/{$languageURL}admin/?m=tags&c=list" title="作品标签">作品标签</a></li>
+						</ol>
+					</li>
+					<li class="links lf">
+						<span class="linktit">审核</span>
+						<ol>
+							<li><a href="/{$languageURL}admin/?m=items&c=queue" title="上传作品审核">上传作品审核</a></li>
+							<li><a href="/{$languageURL}admin/?m=items&c=queue_update" title="更新作品审核">更新作品审核</a></li>
+							<li><a href="/{$languageURL}admin/?m=users&c=withdraws" title="用户提现审核">用户提现审核</a></li>
+							<li><a href="/{$languageURL}admin/?m=contacts&c=list" title="联系支持审核">联系支持审核</a></li>
+							<li><a href="/{$languageURL}admin/?m=users&c=comments" title="评论举报处理">评论举报处理</a></li>
+						</ol>
+					</li>
+					<li class="links lf">
+						<span class="linktit">设置</span>
+						<ol>
+							<li><a href="/{$languageURL}admin/?m=system&c=list" title="站点信息设置">站点信息设置</a></li>
+							<li><a href="/{$languageURL}admin/?m=system&c=list2" title="资金相关设置">资金相关设置</a></li>
+							<li><a href="/{$languageURL}admin/?m=system&c=list3" title="用户相关设置">用户相关设置</a></li>
+						</ol>
+					</li>
+					<li class="links lf">
+						<span class="linktit">其他</span>
+						<ol>
+							<li><a href="/{$languageURL}admin/?m=reports&c=list" title="生成报表">生成报表</a></li>
+							<li><a href="/{$languageURL}admin/?m=bulletin&c=list" title="新闻邮件列表">新闻邮件列表</a></li>
+							<li><a href="/{$languageURL}admin/?m=bulletin&c=emails" title="新闻邮件订阅列表">新闻邮件订阅列表</a></li>
+							<li><a href="/{$languageURL}admin/?m=bulletin&c=add" title="发送新闻邮件">发送新闻邮件</a></li>
+							<li><a href="/{$languageURL}admin/?m=pages&c=list" title="自定义页面">自定义页面</a></li>
+							<li><a href="/{$languageURL}admin/?m=qnews&c=list" title="快讯列表">快讯列表</a></li>
+							<li><a href="/{$languageURL}admin/?m=qnews&c=add" title="添加快讯">添加快讯</a></li>
+							<li><a href="/{$languageURL}admin/?m=quiz&c=list" title="测验">测验</a></li>
+						</ol>
+					</li>
+				</ul>
+			</div>
+			<!-- <div class="topsearch bg-white lf bord-ra clr">
+				<form action="" method="">
+					<input class="searchipt ipttheme lf" type="text" placeholder="搜索设置项..." />
+					<button class="searchbtn text-s-btn buttons ipttheme lf" type="submit" title="搜索"><span class="fa fa-search"></span></button>
+				</form>
+			</div> -->
+			<div class="topinfos rf clr">
+				<a class="splink bg-hover-white lf" href="/" title="网站首页">网站首页</a>
+				<div class="userinfo lf" id="userinfo">
+					<a class="userlink bg-hover-white buttons clr" title="{$smarty.session.user.username}">
+						<img class="userimg lf" src="{$admin_template_data}img/avatar.png" alt="{$smarty.session.user.username}" />
+						<span class="username lf">{$smarty.session.user.username}</span>
+						<span class="caret lf"></span>
+					</a>
+					<ul class="usermenu shadowblock">
+						<li><span class="arrow top"></span><a href="/{$languageURL}users/{$smarty.session.user.username}/" title="个人中心">个人中心</a></li>
+						<!-- <li><a href="#" title="我的消息">我的消息<span class="numtip text-numtip">3</span></a></li> -->
+						<li class="lines bg-lines"></li>
+						<li><a href="/{$languageURL}users/logout/" title="退出">退出</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{literal}
+<script type="text/javascript">
+seajs.use(["modules/pageui/list"], function(tl){
+    tl.clickListInit("#quicktaps", ".quicktaps");
+    tl.clickListInit("#userinfo", ".userlink");
+});
+</script>
+{/literal}

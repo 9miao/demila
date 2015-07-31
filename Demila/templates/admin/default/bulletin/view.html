@@ -1,0 +1,65 @@
+{include file="$admin_template_path/html/header.html"}
+</head>
+<body>
+{include file="$admin_template_path/html/pagetops.html"}
+{if $errorMessage}
+<div id="errormsg">
+<div class="msg">
+  <div class="closebtn"><i data-icon="" class="icon-close"></i></div>
+  {$errorMessage}
+</div>
+</div>
+{literal}
+<script type="text/javascript">
+seajs.use(["modules/pageui/msg"], function(msg){
+    msg.msginit("#errormsg");
+});
+</script>
+{/literal}
+{/if}
+
+<div class="pagebg">
+  <div class="mcontent pagemain clr">
+    {include file="$admin_template_path/html/leftmenu.html"}
+    <div class="pagemainconent">
+
+    <div class="rightdetail_admin">
+      <div class="sideblock">
+        <div class="sideheader">订阅邮件详细</div>
+        <div class="sidebody">
+        <form action="" class="horizontal-form item-form disable-on-submit" action="" method="post" enctype="multipart/form-data">
+          <div class="input-group clr">
+            <label class="control-label">标题</label>
+            <div class="inputs">
+              <label class="checktext">{$data.name}</label>
+            </div>
+          </div>
+          <div class="input-group clr">
+            <label class="control-label">发表于</label>
+            <div class="inputs">
+              <label class="checktext">{$data.datetime|date_format:"%Y-%m-%d %H:%M"}</label>
+            </div>
+          </div>
+          <div class="input-group clr">
+            <label class="control-label">{$lang.readed}</label>
+            <div class="inputs">
+              <label class="checktext">{$data.readed}</label>
+            </div>
+          </div>
+          <div class="input-group clr">
+            <label class="control-label">Description</label>
+            <div class="inputs">
+              <label class="checktext">{$data.text}</label>
+            </div>
+          </div>
+        </form>
+        </div>
+        </div>
+      </div>
+    </div>
+
+    </div>
+  </div>
+</div>
+</body>
+</html>

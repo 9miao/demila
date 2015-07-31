@@ -45,5 +45,23 @@ $commentsClass = new comments();
 $comments = $commentsClass->getAll(0, 0, " `report_by` <> '0' ");
 $commentCount=0;
 if($comments)$commentCount=count($comments);
-abr('commentCount', $commentCount);
+abr('commentCount', $commentCount);     //举报评论处理
+
+//已审核作品
+
+$itemCheck = $items->getAll(0, 0, " `status` = 'active' ");
+$itemCount=0;
+if($itemCheck)$itemCount=count($itemCheck);
+abr('itemCount',  $itemCount);
+
+//签约作者数量
+require_once ROOT_PATH.'/apps/users/models/users.class.php';
+$users=new users();
+$usersCount = $users->getAll(0, 0, " `exclusive_author` = 'true' ");
+$qyuserCount=0;
+if($usersCount)$qyuserCount=count($usersCount);
+abr('qyuserCount',$qyuserCount);
+
+
+
 

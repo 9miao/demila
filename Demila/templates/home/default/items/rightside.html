@@ -1,0 +1,256 @@
+<div class="rightdetail">
+  {if check_login_bool() && $smarty.session.user.user_id == $item.user_id}
+  <div class="sideblock info">
+    <p>这是您自己的文件</p>
+    {if isset($item.user.license.personal)}<p>共享使用权：{$currency.symbol}{$item.price|string_format:"%.0f"}</p>{/if}
+    {if isset($item.user.license.extended)}<p>专有使用权：{$currency.symbol}{$item.extended_price|string_format:"%.0f"}</p>{/if}
+  </div>
+  {/if}
+  {if isset($item.is_buyed)}
+  <div class="sideblock info">
+  <p>你已购买过这个文件，你可以<a href="/{$languageURL}download/{$item.id}">点击此处下载</a>。
+  如果你愿意，你也可以再次购买。
+  </p>
+  </div>
+  {/if}
+  {if $item.free_file == 'true'}
+    <div class="sideblock free">
+      {if check_login_bool()}
+        <h3 class="clr"><img alt="免费下载" src="{$template_data}img/custom/free.png" height="31" width="65">
+        <a href="/{$languageURL}download/{$item.id}">免费下载此作品</a></h3>
+        <p>本作品是{$smarty.now|date_format:"%m"}月的免费作品<br>
+        每个用户默认拥有 
+        <strong><a href="/{$languageURL}help/licenses">共享使用权</a></strong>.</p>
+      {else}
+        <h3 class="clr"><img alt="免费下载" src="{$template_data}img/gold-star.png" height="30" width="30"/><a href="/{$languageURL}download/{$item.id}">免费下载此作品</a></h3>
+        <p>
+        本作品是{$smarty.now|date_format:"%m"}月的免费作品<br>
+        <strong>你必须先登录才能下载这个文件。</strong>
+        </p>
+      {/if}
+    </div>
+  {/if}
+  {if check_login_bool()}
+  {else}
+  <div class="sideblock">
+  <form id="licence" action="/{$languageURL}items/{$item.id}/" method="post">
+  <input type="hidden" name="licence" id="licence" value="regular" />
+  <p class="loginblock">请先<a href="javascript:;" onclick="document.getElementById('licence').submit();">登录</a>
+  或<a href="/{$languageURL}sign_up/">注册</a>之后购买</p>
+  </form>
+  </div>
+  {/if}
+
+  {if $item.free_file !== 'true'}
+    {if !check_login_bool() || $smarty.session.user.user_id !== $item.user_id}
+    <div class="sideblock price">
+      <form action="/{$languageURL}items/{$item.id}" id="purchase-form" method="post" name="purchase-form">
+      <div class="licenses clr">
+        <meta itemprop="price" content="$3">
+        <div class="licensescho">
+          <select name="" id="lchoose">
+            {if isset($item.user.license.personal)}
+            <option value="1">共享许可</option>
+            {/if}
+            {if isset($item.user.license.extended)}
+            <option value="0">专有许可</option>
+            {/if}
+          </select>
+        </div>
+        {if isset($item.user.license.personal)}
+        <div class="licenitem" id="licenitem-price">
+          <span class="cost"><span>{$currency.symbol}</span>{$item.price|string_format:"%.0f"}</span>
+          <p>共享使用权，作者仍可继续出售。- <a href="/{$languageURL}help/licenses/">查看详情</a></p>
+          <button class="buybtn" id="purchase_button" onclick="" type="submit">马上购买</button>
+        </div>
+        {/if}
+        {if isset($item.user.license.extended)}
+        <div class="licenitem" id="licenitem-extend">
+          <span class="cost"><span>{$currency.symbol}</span>{$item.extended_price|string_format:"%.0f"}</span>
+          <p>专有使用权，作者不再继续出售。 - <a href="/{$languageURL}help/licenses/">查看详情</a></p>
+          <button class="buybtn" id="purchase_button2" onclick="" type="submit">马上购买</button>
+        </div>
+        {/if}
+        {literal}
+          <script type="text/javascript">
+          seajs.use(["modules/licence"], function(lens){
+            lens.init({
+              "form": "purchase-form",
+              "price": '{/literal}{$item.price|string_format:"%.0f"}{literal}',
+              "prepaid_price": '{/literal}{$item.prepaid_price|string_format:"%.0f"}{literal}',
+              "extended_price": '{/literal}{if $item.extended_price < 0}0.00{else}{$item.extended_price|string_format:"%.2f"}{/if}{literal}',
+              "discount": '{/literal}{$meta.prepaid_price_discount}{literal}'
+            });
+          });
+          </script>
+        {/literal}
+      </div>
+      <small class="surcharge hidden">使用充值余额购买作品永久享受{$meta.prepaid_price_discount}元折扣</small>
+      </form>
+    </div>
+    {/if}
+  {/if}
+
+  {if $item.weekly_to}
+  <div class="sideblock tips t1">
+  <p>这是一件推荐作品</p>
+  </div>
+  {/if}
+
+  {if $item.user.elite_author  == 'true'}
+  <div class="sideblock tips t2">
+  <p>该作品由精英作者发布</p>
+  </div>
+  {/if}
+
+  {if $item.user.power_elite_author  == 'true'}
+  <div class="sideblock tips t3">
+  <p>该作品由强力精英作者发布</p>
+  </div>
+  {/if}
+
+  {if check_login_bool()}
+  <div class="sideblock follow">
+    <form id="bookmark_form"  method="post" action="" enctype="multipart/form-data">
+      <select id="collection_id" name="collection_id" style="width: 100%">
+        {if $bookCollections}
+          {foreach from=$bookCollections item=c}
+            <option value="{$c.id}">{$c.name}</option>
+          {/foreach}
+        {/if}
+      </select>
+      <p id="collection_create_link">{$lang.or} <a list-show="0" href="#">新建书签集</a></p>
+      <div style="display:none;" id="collection_create_form" class="vertical-form">
+        <hr>
+        <div class="input-group">
+          <label for="name">分类名称：</label>
+          <div class="inputs">
+            <input id="name" class="ipttheme" name="name" type="text" value="" />
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="description">分类描述：</label>
+          <div class="inputs">
+            <textarea id="description" name="description" rows="6" style="width: 300px"></textarea>
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="file_upload">分类图片：</label>
+          <div class="inputs">
+            <input id="file_upload" name="file_upload" size="12" style="width: 170px;" type="file" />
+            <small>(260 x 140px)</small>
+          </div>
+        </div>
+        <div class="input-group">
+          <div class="inputs">
+            <label for="publically_visible">
+              <input id="publically_visible" name="publically_visible" style="border:1px" type="checkbox" value="1" /> 分类是否公开? 
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-submit" href="javascript: void(0);" >
+        <input type="hidden" name="add_collection" value="yes" />
+        <button type="submit" class="btntheme bookmark btnsize">添加至书签集！</button>
+      </div>
+    </form>
+    <script>
+    {literal}
+    seajs.use(["jq", "modules/collection"], function($, coll){
+      coll.btninit("#collection_create_link a", "#collection_create_form");
+    });
+    {/literal}
+    </script>
+  </div>
+  {/if}
+
+  <div class="sideblock author">
+    <div class="authordetail clr">
+      <a href="/{$languageURL}user/{$item.user.username}/" class="avatar">
+        {if $item.user.avatar != ''}  
+        <img alt="{$item.user.username}" src="{$data_server}uploads/users/{$item.user.user_id}/A_{$item.user.avatar}" />
+        {else}
+        <img alt="{$item.user.username}" src="{$template_data}img/default-user.jpg" />
+        {/if}
+      </a>
+      <div class="details">
+        <h3 class="decorator"><a href="/{$languageURL}user/{$item.user.username}/" rel="author">{$item.user.nickname}</a></h3>
+        <p>注册时间：{$item.user.register_datetime|date_format:"%Y-%m-%d"}</p>
+        <p>最后登录：{$item.user.last_login_datetime|date_format:"%Y-%m-%d"}</p>
+      </div>
+    </div>
+    <div class="badges">
+    {foreach from=$user_badges item=b name=foo}
+    <img class="" src="{$data_server}{$b.photo}" height="30" width="30" alt="{$b.name|escape}" title="{$b.name|escape}" />
+    {if $smarty.foreach.foo.last}{/if}
+    {/foreach}
+    </div>
+    {if $item.user.power_elite_author  == 'true'}
+    <div class="power-elite-author">
+    <a href="/{$languageURL}user/portfolio/{$item.user.username}" class="authorbtn btntheme">查看用户作品集</a>
+    </div>
+    {else}
+    <a href="/{$languageURL}user/portfolio/{$item.user.username}" class="authorbtn btntheme">查看用户作品集</a>
+    {/if}
+  </div>
+
+  <div class="sideblock sidesales">
+    <p><span>{$item.sales}</span>销量</p>
+  </div>
+  <div class="sideblock sidecomment">
+    <p>
+      <a href="/{$languageURL}items/comments/{$item.id}"><span>{$item.comments}</span>评论</a>
+    </p>
+  </div> 
+
+  <div class="sideblock attribute">
+    <table id="item_attributes" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="attr-name">创建时间</td>
+        <td class="attr-detail">{$item.datetime|date_format:"%Y-%m-%d"}</td>
+      </tr>
+      {foreach from=$item.attributes item=a key=c}
+        {if $a}
+          <tr>
+            <td class="attr-name">{$attributeCategories[$c].name}</td>
+            <td class="attr-detail">
+            {if is_array($a)}
+              {assign var=foo value=0}
+              {foreach from=$a item=ai}
+                {if $attributes[$ai].photo != ''}
+                <img class="tooltip" title="{$attributes[$ai].name|escape}" alt="{$attributes[$ai].name|escape}" src="{$data_server}/uploads/attributes/{$attributes[$ai].photo}" />
+                {else}
+                  <a>{$attributes[$ai].name}</a>
+                {/if}
+                {assign var=foo value=$foo+1}
+              {/foreach}
+            {else}        
+              {if $attributes[$a].photo != ''}
+                <img class="tooltip" title="{$attributes[$ai].name|escape}" alt="{$attributes[$a].name|escape}" src="{$data_server}/uploads/attributes/{$attributes[$a].photo}" />
+              {else}
+                {if $attributeCategories[$c].type == 'input'}
+                  <a>{$a}</a>
+                {else}
+                  <a>{$attributes[$a].name}</a>
+                {/if}
+              {/if}
+            {/if}
+            </td>
+          </tr>
+        {/if}
+      {/foreach}
+      <tr>
+        <td class="attr-name">标签</td>
+        <td class="attr-detail itemtags clr">
+          {foreach from=$item.tags item=t}
+            <a href="/{$languageURL}items/tag/{$t.name}" title="{$t.name}">{$t.name}</a>
+          {/foreach}
+        </td>
+      </tr>
+    </tbody>
+    </table>
+  </div>
+
+  <div class="sideblock copyright">&copy; {$item.user.username}保留该文件所有权利<br /><a href="/{$languageURL}contacts/"><span>报告版权问题</span></a></div>
+</div>

@@ -10,7 +10,6 @@
 // +----------------------------------------------------------------------
 
 _setView(__FILE__);
-_setLayout('rss');
 
 header('Content-type: application/xml; charset="utf-8"',true);
 

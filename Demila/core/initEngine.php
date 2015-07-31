@@ -9,14 +9,13 @@
 // | Email author@demila.org
 // +----------------------------------------------------------------------
 
+
 /*
  * 检查config文件是否加载
  */
 if (!isset($config)) {
 	die(" 错误:config文件不存在！");
 }
-
-
 
 /*
  * 系统定义
@@ -28,7 +27,7 @@ define("CACHE", ENGINE_PATH . "/data/cache/");
 define("DATA_SERVER_PATH", $config['data_server_path']);
 define("DATA_SERVER", $config['data_server']);
 
-define("VERSION", '1.0.3Beta');
+define("VERSION", '1.0.3');
 #END;
 
 
@@ -80,7 +79,8 @@ global $mysql;
 /*
  * Smarty设置
  */
-$_layoutFile = 'index';
+
+$_layoutFile = '';
 $_templateFile = '';
 
 define ( 'SMARTY_DIR', ENGINE_PATH . "classes/Smarty/" );
@@ -106,18 +106,29 @@ abr('currency', $currency);
 
 #元数据
 $meta = $systemClass->getAllKeyValue();
+
 $smarty->assign('title', $meta['meta_title']);
 $smarty->assign('meta_keywords', $meta['meta_keywords']);
 $smarty->assign('meta_description', $meta['meta_description']);
 $smarty->assign('site_logo', $meta['site_logo']);
+/*
+* 包含模板设置文件
+*/
+include_once ENGINE_PATH . '/system/core.template.php';
 
 //模板目录
-define("TEMPLATE_PATH", ROOT_PATH . "/templates/".$meta['template']."/html/");
-$config['template_data_path'] = $config['data_server_path'].'templates/'.$meta['template'].'/';
-$config['template_path'] = $config['root_path'].'templates/'.$meta['template'].'/';
-$config['template_data'] = $config['data_server'].'templates/'.$meta['template'].'/';
+define("TEMPLATE_PATH", ROOT_PATH . "/templates/home/".$meta['template']."/html/");
+define("ADMIN_TEMPLATE_PATH", ROOT_PATH . "/templates/admin/".$meta['admin_template']."/html/");
 
-//$config['data_server_path'] = $config['root_path'].'static/templates/'.$config['template'].'/';
+
+$config['template_data_path'] = $config['data_server_path'].'home/'.$meta['template'].'/';//前台模板资源目录
+$config['template_path'] = $config['root_path'].'templates/home/'.$meta['template'].'/';//前台模板目录
+$config['template_data'] = $config['data_server'].'home/'.$meta['template'].'/';//前台模板资源目录
+
+
+$config['admin_template_data_path'] = $config['data_server_path'].'admin/'.$meta['admin_template'].'/';//后台模板资源目录
+$config['admin_template_path'] = $config['root_path'].'templates/admin/'.$meta['admin_template'].'/';//后台模板目录
+$config['admin_template_data'] = $config['data_server'].'admin/'.$meta['admin_template'].'/';//后台模板资源目录
 
 
 abr ( 'domain', DOMAIN );
@@ -126,12 +137,13 @@ abr ( "data_server", $config ['data_server'] );
 abr ( "template_data", $config ['template_data'] );
 abr ( "template_data_path", $config ['template_data_path'] );
 abr ( "template_path", $config ['template_path'] );
+abr ( "admin_template_data", $config ['admin_template_data'] );
+abr ( "admin_template_data_path", $config ['admin_template_data_path'] );
+abr ( "admin_template_path", $config ['admin_template_path'] );
 
 
-/*
-* 包含模板设置文件
-*/
-include_once ENGINE_PATH . '/system/core.template.php';
+
+
 #END;
 
 
@@ -175,7 +187,7 @@ if ($message = getRefreshMessage ()) {
  * LIMIT = 10 
  */
 if (! defined ( 'LIMIT' )) {
-	define ( 'LIMIT', 10, true );
+	define ( 'LIMIT',20 , true );
 }
 if (isset ( $_GET ['p'] ) && is_numeric ( $_GET ['p'] ) && $_GET ['p'] > 1) {
 	define ( 'PAGE', intval ( $_GET ['p'] ) );
@@ -188,7 +200,11 @@ if (isset ( $_GET ['p'] ) && is_numeric ( $_GET ['p'] ) && $_GET ['p'] > 1) {
 
 define ( 'adminURL', 'admin' );
 
+
+
 include_once ENGINE_PATH . '/system/core.url.php';
+
+
 include_once ENGINE_PATH . '/system/core.languages.php';
 
 ?>

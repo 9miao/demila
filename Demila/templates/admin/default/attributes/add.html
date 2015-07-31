@@ -1,0 +1,90 @@
+{include file="$admin_template_path/html/header.html"}
+</head>
+<body>
+{include file="$admin_template_path/html/pagetops.html"}
+{if $errorMessage}
+<div id="errormsg">
+<div class="msg">
+  <div class="closebtn"><i data-icon="" class="icon-close"></i></div>
+  {$errorMessage}
+</div>
+</div>
+{literal}
+<script type="text/javascript">
+seajs.use(["modules/pageui/msg"], function(msg){
+    msg.msginit("#errormsg");
+});
+</script>
+{/literal}
+{/if}
+
+<div class="pagebg">
+  <div class="mcontent pagemain clr">
+    {include file="$admin_template_path/html/leftmenu.html"}
+    <div class="pagemainconent">
+
+    <div class="rightdetail_admin">
+      <div class="sideblock">
+        <div class="sideheader">添加属性</div>
+        <div class="sidebody">
+        <form action="" class="horizontal-form item-form disable-on-submit" action="" method="post" enctype="multipart/form-data">
+          <div class="input-group clr">
+            <label class="control-label" for="name">名称</label>
+            <div class="inputs">
+              <input type="text" name="name" class="ipttheme" id="name" required="true" value="{$smarty.post.name|escape}" >
+              {if isset($error.name)}
+              <span class="validate_error">{$error.name}</span>
+              {/if}
+            </div>
+          </div>
+          <div class="input-group clr">
+            <label class="control-label" for="type">类型</label>
+            <div class="inputs">
+              <select id="type" name="type" class="ipttheme">
+                <option value=""></option>
+                <option value="select" {if $smarty.post.type == 'select'}selected="selected"{/if}>单选列表</option>
+                <option value="multiple" {if $smarty.post.type == 'multiple'}selected="selected"{/if}>多选列表</option>
+                <option value="check" {if $smarty.post.type == 'check'}selected="selected"{/if}>多选框</option>
+                <option value="radio" {if $smarty.post.type == 'radio'}selected="selected"{/if}>单选钮</option>
+                <option value="input" {if $smarty.post.type == 'input'}selected="selected"{/if}>手动输入</option>
+              </select>
+              {if isset($error.select)}
+              <small>{$error.select}</small>>
+              {/if}
+            </div>
+          </div>
+          {if $categories}
+          <div class="input-group clr">
+            <label class="control-label" for="name">分类</label>
+            <div class="inputs">
+              {foreach from=$categories item=c}
+              <div class="clr">
+              <input type="checkbox" id="cate_id_{$c.id}" name="category[{$c.id}]" value="{$c.id}" class="checkbox" {if isset($smarty.post.category[$c.id])}checked="checked"{/if} />
+              <label class="checktext" for="cate_id_{$c.id}">{$c.name}</label>
+              </div>
+              {/foreach}
+            </div>
+          </div>
+          {/if}
+          <div class="input-group clr">
+            <label class="control-label" for="visible">可见</label>
+            <div class="inputs">
+              <input type="checkbox" name="visible" id="visible" value="true" class="checkbox" {if $smarty.post.visible == 'true'}checked="checked"{/if} />
+              <label class="checktext" for="visible">是</label>
+            </div>
+          </div>
+          {if $smarty.get.c=='edit'}
+          <button id="personal_info_submit_button" class="btntheme btnsize btn-primary" type="submit" name="edit" >编辑</button>
+          {else}
+          <button id="personal_info_submit_button" class="btntheme btnsize btn-primary" type="submit" name="add" >添加</button>
+          {/if}
+        </form>
+        </div>
+      </div>
+    </div>
+    
+    </div>
+  </div>
+</div>
+</body>
+</html>

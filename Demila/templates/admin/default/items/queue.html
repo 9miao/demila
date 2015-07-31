@@ -1,0 +1,65 @@
+{include file="$admin_template_path/html/header.html"}
+</head>
+<body>
+{include file="$admin_template_path/html/pagetops.html"}
+{if $errorMessage}
+<div id="errormsg">
+<div class="msg">
+  <div class="closebtn"><i data-icon="" class="icon-close"></i></div>
+  {$errorMessage}
+</div>
+</div>
+{literal}
+<script type="text/javascript">
+seajs.use(["modules/pageui/msg"], function(msg){
+    msg.msginit("#errormsg");
+});
+</script>
+{/literal}
+{/if}
+
+<div class="pagebg">
+	<div class="mcontent pagemain clr">
+	    {include file="$admin_template_path/html/leftmenu.html"}
+	    <div class="pagemainconent{if $paging !=""} paging{/if}">
+
+		{if $paging !=""}
+		<div class="page-controls">
+			{$paging}
+		</div>
+		{/if}
+		<div class="rightdetail_admin">
+			{if is_array($data)}
+			<div class="general_table_border">
+				<table class="general_table" cellspacing="0" cellpadding="0" border="0">
+					<thead>
+						<tr>
+							<th>{$lang.name}</th>
+							<th><a href="?m={$smarty.get.m}&c={$smarty.get.c}&p={$smarty.get.p}&order=date&dir={$orderDir}" title="">{$lang.date}</a></th>
+							<th width="250">操作</th>
+						</tr>
+					</thead>
+
+					<tbody>
+					{foreach from=$data item=d}
+						<tr id="row{$d.id}" class="{cycle values="no,alt"}">
+							<td>{$d.name}</td>
+							<td>{$d.datetime|date_format:"%Y-%m-%d %H:%M"}</td>
+							<td>
+								<a href="?m={$smarty.get.m}&c=queue_view&id={$d.id}&p={$smarty.get.p}" title="{$lang.preview}"><i class="fa fa-edit text-success m-r-xs"></i> {$lang.preview}</a>
+							</td>
+						</tr>
+						{/foreach}
+					</tbody>
+				</table>
+				{else}
+					{$lang.no_records}
+				{/if}
+			</div>
+		</div>
+		
+		</div>
+	</div>
+</div>
+</body>
+</html>

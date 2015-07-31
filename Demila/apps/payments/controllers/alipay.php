@@ -35,11 +35,11 @@ require_once ROOT_PATH.'/classes/Alipay/lib/alipay_submit.class.php';
         //必填，不能修改
 
         //服务器异步通知页面路径
-        $notify_url  = 'http://'.$config['domain'].'/payments/ali_notify';//地址";
+        $notify_url  = 'http://'.$config['domain'] . '/' . $languageURL . 'payments/ali_notify';//地址";
         //需http://格式的完整路径，不能加?id=123这类自定义参数
 
         //页面跳转同步通知页面路径
-        $return_url = 'http://'.$config['domain'].'/payments/ali_return';
+        $return_url = 'http://'.$config['domain'] . '/' . $languageURL . 'payments/ali_return';
 
         //卖家支付宝帐户
         $seller_email = $_POST['WIDseller_email'];

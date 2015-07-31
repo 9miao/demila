@@ -1,0 +1,176 @@
+{include file="$admin_template_path/html/header.html"}
+</head>
+<body>
+{include file="$admin_template_path/html/pagetops.html"}
+{if $errorMessage}
+<div id="errormsg">
+<div class="msg">
+	<div class="closebtn"><i data-icon="" class="icon-close"></i></div>
+	{$errorMessage}
+</div>
+</div>
+{literal}
+<script type="text/javascript">
+seajs.use(["modules/pageui/msg"], function(msg){
+    msg.msginit("#errormsg");
+});
+</script>
+{/literal}
+{/if}
+<div class="pagebg">
+	<div class="mcontent pagemain clr">
+		{include file="$admin_template_path/html/leftmenu.html"}
+		<div class="pagemainconent">
+
+		<div class="rightdetail_admin">
+<h2 class="text-black">您好,{$smarty.session.user.username}</h2>
+<span class="small">欢迎使用<span class="icon-social-youtube text-primary"></span>Demila管理系统,您上次登录的时间是{$last_login}</span>
+<div class="indexnavs clr">
+	<div class="indexnav m-b-md">
+		<span class="block">
+			<a class="con gradient blueto" href="/{$languageURL}admin/?m=items&c=queue"><i class="chen chen-lightbulb"></i></a>
+		</span>
+		<span class="block">
+			<a href="/{$languageURL}admin/?m=items&c=queue"><span class="h3 yt">{$queueCount}</span></a>
+			<small class="ms">个</small>
+		</span>
+		<span class="block">等待审核作品</span>
+	</div>
+	<div class="indexnav m-b-md">
+		<span class="block">
+			<a class="con gradient pinkto" href="/{$languageURL}admin/?m=items&c=queue_update"><i class="chen chen-upload"></i></a>
+		</span>
+		<span class="block">
+			<a href="/{$languageURL}admin/?m=items&c=queue_update"><span class="h3 yt">{$updateCount}</span></a>
+			<small class="ms">个</small>
+		</span>
+		<span class="block">待处理的更新作品</span>
+	</div>
+	<div class="indexnav m-b-md">
+		<span class="block">
+			<a class="con gradient greento" href="/{$languageURL}admin/?m=users&c=withdraws"><i class="chen chen-wallet"></i></a>
+		</span>
+		<span class="block">
+			<a href="/{$languageURL}admin/?m=users&c=withdraws"><span class="h3 yt">{$depositCount}</span></a>
+			<small class="ms">个</small>
+		</span>
+		<span class="block">待处理提现申请</span>
+	</div>
+	<div class="indexnav m-b-md">
+		<span class="block">
+			<a class="con gradient purpleto" href="/{$languageURL}admin/?m=users&c=comments"><i class="chen chen-chat"></i></a>
+		</span>
+		<span class="block">
+			<a href="/{$languageURL}admin/?m=users&c=comments"><span class="h3 yt">{$commentCount}</span></a>
+			<small class="ms">个</small>
+		</span>
+		<span class="block">待处理举报评论</span>
+	</div>
+	<div class="indexnav m-b-md">
+		<span class="block">
+			<a class="con gradient brownto" href="/{$languageURL}admin/?m=items&c=list"><i class="chen chen-browser"></i></a>
+		</span>
+		<span class="block">
+			<a href="/{$languageURL}admin/?m=items&c=list"><span class="h3 yt">{$itemCount}</span></a>
+			<small class="ms">个</small>
+		</span>
+		<span class="block">已审核作品</span>
+	</div>
+	<div class="indexnav m-b-md">
+		<span class="block">
+			<a class="con gradient redto" href="/{$languageURL}admin/?m=users&c=list&u_type=3"><i class="chen chen-profile-male"></i></a>
+		</span>
+		<span class="block">
+			<a href="/{$languageURL}admin/?m=users&c=list&u_type=3"><span class="h3 yt">{$qyuserCount}</span></a>
+			<small class="ms">个</small>
+		</span>
+		<span class="block">签约作者</span>
+	</div>
+</div>
+<h2 class="pagetit text-black">官方新闻</h2>
+<ul class="newslist">
+	{foreach from=$news item=i}
+	<li class="clr">
+		<a class="lf text-link" href="{$i.url}" target="_blank" title="{$i.title}">{$i.title}</a>
+		<span class="rf">{$i.inputtime|date_format:'%Y-%m-%d'}</span>
+	</li>
+	{/foreach}
+	<li class="clr morelink"><a class="lf text-link" href="{$more}" target="_blank" title="更多新闻">更多新闻</a></li>
+</ul>
+<h2 class="pagetit text-black">系统信息</h2>
+<table class="msgtable" cellspacing="0" cellpadding="0" border="0">
+	<tr>
+		<td width="25%">操作系统：</td>
+		<td>{$sysinfo.os}</td>
+	</tr>
+	<tr>
+		<td>web 服务器软件：</td>
+		<td>{$sysinfo.web_server}</td>
+	</tr>
+	<tr>
+		<td>mysql版本：</td>
+		<td>{$sysinfo.mysqlv}</td>
+	</tr>
+	<tr>
+		<td>文件上传设置：</td>
+		<td>{$sysinfo.fileupload}</td>
+	</tr>
+	<tr>
+		<td>服务器IP：</td>
+		<td>{$sysinfo.ip}</td>
+	</tr>
+	<tr>
+		<td>物理路径：</td>
+		<td>{$sysinfo.root_path}</td>
+	</tr>
+	<tr>
+		<td>屏蔽函数：</td>
+		<td>{$sysinfo.unfun}</td>
+	</tr>
+	<tr>
+		<td>服务器时间：</td>
+		<td>{$sysinfo.server_time}</td>
+	</tr>
+	<tr>
+		<td>脚本超时：</td>
+		<td>{$sysinfo.outtime}秒</td>
+	</tr>
+	<tr id="versions">
+		<td>当前版本：</td>
+		<td>Demila{$smarty.const.VERSION}
+        {if $smarty.const.VERSION < $version.content}
+           <div id="update_button" >
+               <a style="cursor: pointer;" class="update" ajax-url="/update.php" ajax-data="{literal}{'update_version':'true'}{/literal}" >更新Demila</a>
+               &nbsp;&nbsp;&nbsp;&nbsp;<a href="{$download}Demila{$version.content}.zip"> <input type="button" value="下载Demila{$version.content}"></a>
+           </div>
+            <div id="update_ing" style="display: none;" >
+                &nbsp;&nbsp;&nbsp;&nbsp;<b>正在更新…请稍等…更新过程中不要关闭窗口…</b>
+            </div>
+        {/if}
+        </td>
+	</tr>
+	<tr>
+		<td>最新版本：</td>
+		<td>Demila{$version.content}</td>
+	</tr>
+</table>
+<h2 class="pagetit text-black">开发团队</h2>
+{$team.content}
+{literal}
+<script type="text/javascript">
+seajs.use(["modules/ajax/btns"], function(aj){
+    aj.ajaxbtnupdate("#versions .update", "ajax-url", "ajax-data", function(data){
+        if(data.msg)
+        alert(data.msg);
+        window.location.reload();
+    }, false, true);
+});
+</script>
+{/literal}
+		</div>
+
+		</div>
+	</div>
+</div>
+</body>
+</html>

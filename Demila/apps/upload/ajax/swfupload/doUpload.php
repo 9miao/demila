@@ -13,11 +13,9 @@ define ( 'USING_LANGUAGE', false );
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once $config ['root_path'] . '/core/functions.php';
-
-session_id($_POST['sessID']);
-
 include_once $config ['system_core'] . "/initEngine.php";
 
+session_id($_POST['sessID']);
 
 // 检查上传
 if (!check_login_bool()) {

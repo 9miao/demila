@@ -32,7 +32,6 @@ if (isset ( $_GET ['module'] ) && isset ( $_GET ['controller'] )) {
 		}
 	}
 } elseif (isset ( $_GET ['module'] )) {
-	
 	//加载administration
 	if (isAdministration ( $_GET ['module'] )) {
 		define ( "inc", ENGINE_PATH . '/administration/controllers/index.php' );
@@ -52,7 +51,6 @@ if (isset ( $_GET ['module'] ) && isset ( $_GET ['controller'] )) {
         header("Location: http://". DOMAIN ."/".$languageURL."error");
 	}
 } else {
-
 	$_GET ['module'] = 'index';
 	include_once (ROOT_PATH . "/apps/index/controllers/index.php");
 }
@@ -61,19 +59,25 @@ if (isset ( $_GET ['module'] ) && isset ( $_GET ['controller'] )) {
  * smarty显示
  */
 
-if($_templateFile == '') {
+if($_templateFile == '' && $_layoutFile=='') {
     //模板目录
-    $_templateFile = ROOT_PATH.'apps/templates/'.$meta['template'].'/index/index.html';
-    abr ( 'content_template', $_templateFile );
+    $_templateFile = ROOT_PATH.'/templates/'.$meta['template'].'/index/index.html';
+    $smarty->display ($_templateFile);
 }
-
-if ($_templateFile != '') {
+else if ($_templateFile == '' && $_layoutFile!='') {
 	restore_error_handler ();
 	flush ();
-    $smarty->display ( TEMPLATE_PATH . $_layoutFile . ".html" );
-    $smarty->display ( ROOT_PATH.'apps/templates/'.$meta['template'].'/index/'. $_layoutFile .'.html');
-} else {
-
+    $smarty->display ( TEMPLATE_PATH ."html/". $_layoutFile . ".html" );
+}
+else if($_templateFile != '' && $_layoutFile!='') {
+    restore_error_handler ();
+    flush ();
+    $smarty->display ( TEMPLATE_PATH ."html/". $_layoutFile . ".html" );
+}
+else{
+    restore_error_handler ();
+    flush ();
+    $smarty->display ($_templateFile);
 }
 #END;
 

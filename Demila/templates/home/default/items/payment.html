@@ -1,0 +1,73 @@
+{include file="$template_path/html/header.html"}
+<link href="{$template_data}css/custom/ucenter.css" rel="stylesheet" />
+<link href="{$template_data}css/custom/mobile.css" media="screen" rel="stylesheet" type="text/css" />
+</head>
+<body>
+{include file="$template_path/html/pagenav.html"}
+<div class="ucbg">
+  <div class="ucblock paddingt clr">
+  {$errorMessage}
+  {if $payments_data}
+<div id="process">
+  <div class="inner-boundary">
+    <div class="inner-border">
+      <ul>
+        <li class="">选择作品<img src="{$template_data}img/arrow.gif"></li>
+        <li class="current">支付作品<img src="{$template_data}img/arrow.gif"></li>
+        <li class=""><img src="{$template_data}img/arrow.gif">返回网站</li>
+      </ul>
+      <div class="single"> </div>
+      <img class="context" src="{$template_data}img/cash.png" alt="Deposit" width="52" height="44">
+    </div>
+  </div>
+</div>
+
+<div class="leftdetail">
+  {foreach from=$payments_data item=pm}
+  <div class="sideblock">
+    <!--<div class="deposit-aside content-box callout">
+      <img alt="" src="{$template_data}img/moneystack.png" width="130" height="95">
+    </div>-->
+    <p class="paymenttit">请选择一种支付方式然后点击确定</p>
+    <div class="radioimgs clr" id="radioimgs">
+      <div class="radioitem clr">
+        <input checked="checked" id="paymentway_1" name="paymentway" type="radio" value="0" />
+        <label for="paymentway_1"><img class="option" src="{$template_data}img/alipay.jpg" width="435px" alt="使用支付宝支付"/></label>
+      </div>
+    </div>
+    <div class="submitbtn clr" id="submitbtn">
+      <div style="">{$pm.form[0]}</div>
+    </div>
+  </div>
+  {/foreach}
+  {literal}
+  <script type="text/javascript">
+  seajs.use(["jq"], function($){
+    var btns = $("#submitbtn").find("div");
+    $("#radioimgs").find("input[type='radio']").each(function(e){
+      $(this).click(function(){
+        btns.eq(e).show().siblings("div").hide();
+      });
+    });
+  });
+  </script>
+  {/literal}
+</div>
+
+<div class="rightdetail">
+  <h3 class="bordertit">当前账户余额</h3>
+  <div class="borderbg">
+    <span class="current-balance">{$currency.symbol}{$smarty.session.user.total|string_format:"%.2f"}</span>
+    <p><a href="/{$languageURL}invoices/">查看账户历史</a></p>
+    <p>
+      <strong><strong>需要发票？</strong>请确保你已经在设置中填写了公司名称，现在去</strong><a href="/{$languageURL}statement/">设置</a>。
+    </p>
+  </div>
+</div>
+
+  {/if}
+  </div>
+</div>
+{include file="$root_path/templates/home/default/html/footer.html"}
+</body>
+</html>

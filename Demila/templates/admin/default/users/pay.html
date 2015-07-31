@@ -1,0 +1,125 @@
+{include file="$admin_template_path/html/header.html"}
+</head>
+<body>
+{include file="$admin_template_path/html/pagetops.html"}
+{if $errorMessage}
+<div id="errormsg">
+<div class="msg">
+  <div class="closebtn"><i data-icon="" class="icon-close"></i></div>
+  {$errorMessage}
+</div>
+</div>
+{literal}
+<script type="text/javascript">
+seajs.use(["modules/pageui/msg"], function(msg){
+    msg.msginit("#errormsg");
+});
+</script>
+{/literal}
+{/if}
+
+<div class="pagebg">
+  <div class="mcontent pagemain clr">
+    {include file="$admin_template_path/html/leftmenu.html"}
+    <div class="pagemainconent">
+
+    <div class="rightdetail_admin">
+      <div class="content-box">
+        <div class="sideheader">提现详情</div>
+        <div class="sidebody">
+        <form class="horizontal-form item-form disable-on-submit" action="" method="post" enctype="multipart/form-data">
+          <div class="input-group clr">
+            <label class="control-label">用户</label>
+            <div class="inputs">
+              <label class="checktext"><a href="/{$languageURL}admin/?m=users&c=edit&id={$user.user_id}" title="" target="_blank">{$user.username}</a></label>
+            </div>
+          </div>
+          <div class="input-group clr">
+            <label class="control-label">提现方式</label>
+            <div class="inputs">
+              <label class="checktext">{$data.method}</label>
+            </div>
+          </div>
+          <div class="input-group clr">
+            <label class="control-label">邮件账号</label>
+            <div class="inputs">
+              <label class="checktext">{$data.text|nl2br}</label>
+            </div>
+          </div>
+          <div class="input-group clr">
+            <label class="control-label">中国大陆纳税者</label>
+            <div class="inputs">
+              {if $data.chinese != 'false'}
+              {if $data.chinese == 'iam'}
+              {$lang.i_am_author}
+              {else}
+              {$lang.i_am_not_author}
+              <br /><br />
+              <strong>组织机构代码:</strong> {$data.cbn}<br />
+              <strong>营业执照号码:</strong> {$data.ccn}
+              {/if}
+              {else}
+              <label class="checktext"><img src="{$template_data}admin/images/icons/24x24/delete.png" alt="" class="middle" /></label>
+              {/if}
+            </div>
+          </div>
+          <div class="input-group clr">
+            <label class="control-label">联系Email</label>
+            <div class="inputs">
+              <label class="checktext">{$data.text|nl2br}</label>
+            </div>
+          </div>
+          <div class="input-group clr">
+            <label class="control-label">请求日期</label>
+            <div class="inputs">
+              <label class="checktext">{$data.datetime|date_format:"%Y-%m-%d"}</label>
+            </div>
+          </div>
+          <div class="input-group clr">
+            <label class="control-label">是否已处理</label>
+            <div class="inputs">
+              <label class="checktext">{if $data.paid == 'true'}
+              <img src="{$template_data}admin/images/icons/24x24/accept.png" alt="" class="middle" />
+              {else}
+              <img src="{$template_data}admin/images/icons/24x24/delete.png" alt="" class="middle" />
+              {/if}</label>
+            </div>
+          </div>
+          <div class="input-group clr">
+            <label class="control-label">提现数额</label>
+            <div class="inputs">
+              <label class="checktext">{if $data.paid == 'true'}
+              {$currency.symbol} {$data.amount|string_format:"%.2f"}
+              {else}
+              {if !is_numeric($data.amount)}
+              {$data.amount}
+              {else}
+              {$currency.symbol} {$data.amount|string_format:"%.2f"}
+              {/if}
+              {/if}</label>
+            </div>
+          </div>
+          <div class="input-group clr">
+            <label class="control-label">当前余额</label>
+            <div class="inputs">
+              <label class="checktext">{$currency.symbol} {$user.earning|string_format:"%.2f"}</label>
+            </div>
+          </div>
+          <div class="input-group clr">
+            <label class="control-label" for="payout">支付数额</label>
+            <div class="inputs">
+              <input class="ipttheme" type="text" id="payout" name="payout" value="{if isset($smarty.post.payout)}{$smarty.post.payout|escape}{elseif !is_numeric($data.amount)}{$user.earning|string_format:"%.2f"}{else}{$data.amount|string_format:"%.2f"}{/if}" />
+            </div>
+          </div>
+          <div class="form-submit">
+            <button type="submit" name="edit" class="btntheme btnsize btn-primary">{$lang.payout}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    </div>
+  </div>
+</div>
+</body>
+</html>

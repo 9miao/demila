@@ -17,10 +17,10 @@ require_once 'init.php';
 if(!isset($_GET['m']) && !isset($_GET['c'])) {
 	require_once ROOT_PATH.'/apps/admin/index.php';
 }
-$_templateFile = ROOT_PATH.'/apps/admin/index.html';
-abr ( 'content_template', $_templateFile );
 
-_setLayout ( 'admin' );
+$_templateFile = ROOT_PATH.'templates/admin/'.$meta["admin_template"].'/admin/index.html';
+
+abr ( 'content_template', $_templateFile );
 
 require_once 'system/checkInstalledModules.php';
 

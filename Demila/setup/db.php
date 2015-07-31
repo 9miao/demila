@@ -883,6 +883,7 @@ INSERT INTO `badges` (`id`, `name`, `photo`, `visible`, `from`, `to`, `type`, `s
 		  `id` int(11) NOT NULL AUTO_INCREMENT,
 		  `item_id` int(11) NOT NULL,
 		  `dir` varchar(255) DEFAULT NULL,
+		  `status` tinyint(1) DEFAULT 1,
 		  PRIMARY KEY (`id`)
 		) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 	");
@@ -912,6 +913,9 @@ mysql_query("
         ");
 mysql_query("
                 INSERT INTO `system` (`id`, `key`, `value`, `system`,`group`) VALUES (NULL, 'template', 'default', '1','template');
+        ");
+mysql_query("
+                INSERT INTO `system` (`id`, `key`, `value`, `system`,`group`) VALUES (NULL, 'admin_template', 'default', '1','template');
         ");
 
 

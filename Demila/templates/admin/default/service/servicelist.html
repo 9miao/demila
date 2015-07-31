@@ -1,0 +1,88 @@
+{include file="$admin_template_path/html/header.html"}
+</head>
+<body>
+{include file="$admin_template_path/html/pagetops.html"}
+{if $errorMessage}
+<div id="errormsg">
+<div class="msg">
+  <div class="closebtn"><i data-icon="" class="icon-close"></i></div>
+  {$errorMessage}
+</div>
+</div>
+{literal}
+<script type="text/javascript">
+seajs.use(["modules/pageui/msg"], function(msg){
+    msg.msginit("#errormsg");
+});
+</script>
+{/literal}
+{/if}
+
+<div class="pagebg">
+	<div class="mcontent pagemain clr">
+	    {include file="$admin_template_path/html/leftmenu.html"}
+	    <div class="pagemainconent headtools{if $paging !=""} paging{/if}">
+
+		<div class="headtool b-b clr">
+			<div class="toolbtns clr">
+				<button class="btns btntheme btnsize" onclick="window.location='?m={$smarty.get.m}&c=addservice';" type="button"><i class="fa fa-plus"></i> {$lang.add_new}</button>
+			</div>
+			<div class="toolsearch clr rf">
+				<form class="sort-control" method="post" action="?m={$smarty.get.m}&c={$smarty.get.c}&id={$smarty.get.id}">
+					<button type="submit" class="btntheme btnsize rf">搜索</button>
+					<input class="ipttheme rf" type="text" id="q" name="q" placeholder="开始搜索...">
+				</form>
+			</div>
+		</div>
+		{if $paging !=""}
+		<div class="page-controls">
+			{$paging}
+		</div>
+		{/if}
+		<div class="rightdetail_admin">
+			{if is_array($data)}
+			<div class="general_table_border">
+				<table class="general_table" cellspacing="0" cellpadding="0" border="0">
+					<thead>
+						<tr>
+							<th>用户名</th>
+							<th>用户昵称</th>
+							<th>用户类型</th>
+							<th>购买作品数</th>
+							<th>在售作品数</th>
+						</tr>
+					</thead>
+					<tbody>
+						{foreach from=$data item=i}
+						<tr>
+							<td>{$i.username}</td>
+							<td>{$i.nickname}</td>
+							<td>
+								{if $i.quiz=='true'}
+									{if $i.exclusive_author=='true'}
+		                            签约作者
+									{else}
+									普通作者
+									{/if}
+								{else}
+		                        普通用户
+								{/if}
+							</td>
+							<td>{$i.buy}</td>
+							<td>{$i.items}</td>
+						</tr>
+						{/foreach}
+						
+					</tbody>
+				</table>
+			</div>
+		    {else}
+				暂无记录
+			{/if}
+		</div>
+		
+		</div>
+	</div>
+</div>
+</body>
+</html>

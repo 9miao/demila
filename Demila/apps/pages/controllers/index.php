@@ -20,6 +20,7 @@ _setView(__FILE__);
 	}
 	abr('page', $page);
 
+
 #设置元信息	
 	if($page['meta_title'] != '') {
 		$smarty->assign('title', $page['meta_title']);

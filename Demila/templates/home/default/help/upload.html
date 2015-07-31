@@ -1,0 +1,53 @@
+{include file="$template_path/html/header.html"}
+<link href="{$template_data}css/custom/ucenter.css" rel="stylesheet" />
+<link href="{$template_data}css/custom/mobile.css" media="screen" rel="stylesheet" type="text/css" />
+</head>
+<body>
+{include file="$template_path/html/pagenav.html"}
+<div class="pagetit">
+  <div class="navblock">
+    <ul class="titnav clr">
+      <li><a href="/" title="主页">主页</a></li>
+      <li class="pipe">&gt;</li>
+      <li><a href="/{$languageURL}help/basic" title="帮助">帮助</a></li>
+      <li class="pipe">&gt;</li>
+      <li>详细的上传指南</li>
+    </ul>
+    <h2>详细的上传指南</h2>
+  </div>
+</div>
+
+
+<div class="ucbg">
+  <div class="ucblock clr">
+  	<div class="txtlistnav">
+      <ul>
+        <li><a href="/{$languageURL}make_money/become_an_author" title="成为作者">成为作者</a></li>
+        <li><a href="/{$languageURL}make_money/payment_rates" title="分成比例">分成比例</a></li>
+        <li><a href="/{$languageURL}make_money/affiliate_program/" title="推广赚钱">推广赚钱</a></li>
+        <li><a href="/{$languageURL}make_money/banners_logos/" title="广告和LOGO">广告和LOGO</a></li>
+      </ul>
+    </div>
+    <div class="detailtxt">
+		<h3>一、命名与描述</h3>
+		<p>命名（上传后不可修改）与描述应当准确且与你的作品相关，以便用户能容易地找到你的作品。</p>
+		<h3>二、需要的文件</h3>
+		<h4>1、缩略图</h4>
+		<p><strong>大小为90x90，格式为JPG</strong>，<strong>PNG</strong>或者<strong>GIF</strong>。请确保缩略图能准确表现你的作品。</p>
+		<h4>2、主文件</h4>
+		<p>主要文件应当打包为.zip格式，并且包含使用说明。请确保文件夹结构的正确和准确。</p>
+		<h4>3、预览图像设置</h4>
+		<p>预览图像仅限于JPG格式且大小不能超过<strong>590x300px</strong>最好按照以下格式命名你的预览图像： <em>01_preview1.jpg, 02_preview2.jpg, 03_closeup.jpg</em>，最后打包成<strong>.zip</strong>文件包，系统会自动解压显示。</p>
+		<h3>4、分类和属性</h3>
+		<p>为你的作品选择最合适的<strong>分类</strong>。&nbsp;<br>选择包含的文件类型（可按住<em>CTRL</em>（Windows ）键或者<em>COMMAND</em>键（OS X）多选。<br>选择你的作品运行所需的软件环境。<strong><br></strong></p>
+		请确保所有属性的正确与准确。<br>
+		<h3>5、标签</h3>
+		<p>为你的作品添加准确的标签以方便用户找到你的作品。&nbsp;<strong>不要</strong>对每件作品都使用同样的标签，每个标签都应当与你的作品相对应&nbsp;</p>
+		<h3>6、给审核员的留言</h3>
+		<p>输入你要发给作品审核员的提示。</p>
+	</div>
+  </div>
+</div>
+{include file="$root_path/templates/home/default/html/footer.html"}
+</body>
+</html>

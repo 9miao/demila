@@ -1,0 +1,198 @@
+{include file="$admin_template_path/html/header.html"}
+<link href="{$admin_template_data}css/resource.css" media="screen" rel="stylesheet" type="text/css" />
+</head>
+<body>
+{include file="$admin_template_path/html/pagetops.html"}
+{if $errorMessage}
+<div id="errormsg">
+<div class="msg">
+  <div class="closebtn"><i data-icon="" class="icon-close"></i></div>
+  {$errorMessage}
+</div>
+</div>
+{literal}
+<script type="text/javascript">
+seajs.use(["modules/pageui/msg"], function(msg){
+    msg.msginit("#errormsg");
+});
+</script>
+{/literal}
+{/if}
+
+<div class="pagebg">
+  <div class="mcontent pagemain clr">
+    {include file="$admin_template_path/html/leftmenu.html"}
+    <div class="pagemainconent">
+
+    <div class="rightdetail_admin">
+      <div class="sideblock">
+        <div class="sideheader">编辑作品</div>
+        <div class="sidebody">
+        <form id="sampleform" action="" class="" method="post">
+          <div class="input-group clr">
+            <label class="control-label">作者</label>
+            <div class="inputs">
+              <label class="checktext"><a href="/{$languageURL}admin/?m=users&c=edit&id={$data.user.user_id}" title="" target="_blank">{$data.user.username}</a></label>
+            </div>
+          </div>
+          <div class="input-group clr">
+            <label class="control-label">缩略图</label>
+            <div class="inputs uploadobjs clr" id="thumbnail">
+              <input autocomplete="off" type="hidden" class="hiddenvalue" name="thumbnail" value="{$data.thumbnail}" />
+            </div>
+          </div>
+          <div class="input-group clr">
+            <label class="control-label">{$lang.main_file}</label>
+            <div class="inputs uploadobjs clr" id="main_file">
+              <input autocomplete="off" type="hidden" class="hiddenvalue" name="main_file" value="{$data.main_file}" />
+            </div>
+          </div>
+          <div class="input-group clr">
+            <label class="control-label">封面预览文件</label>
+            <div class="inputs uploadobjs clr" id="first_preview">
+              <input autocomplete="off" type="hidden" class="hiddenvalue" name="first_preview" value="{$data.theme_preview}" />
+            </div>
+          </div>
+          <div class="input-group clr">
+            <label class="control-label">其它预览文件</label>
+            <div class="inputs uploadobjs clr" id="theme_preview">
+              <input autocomplete="off" type="hidden" class="hiddenvalue" name="theme_preview" value="{if $data.preview}{foreach from=$data.preview item=s name=foo}{$s.dir}{if !$smarty.foreach.foo.last},{/if}{/foreach}{/if}" />
+            </div>
+          </div>
+          <div class="input-group clr">
+            <label class="control-label" for="idesc">详细描述</label>
+            <div class="inputs">
+              <!--初始化编辑器-->
+              <script id="container" name="description" type="text/plain">
+              {$data.description}
+              </script>
+              <!-- 配置文件 -->
+              <script type="text/javascript" src="{$template_data}ueditor/ueditor.config.js"></script>
+              <!-- 编辑器源码文件 -->
+              <script type="text/javascript" src="{$template_data}ueditor/ueditor.all.js"></script>
+              <!-- 实例化编辑器 -->
+              <script type="text/javascript">
+              var ue = UE.getEditor('container');
+              </script>
+            </div>
+          </div>
+          <div class="input-group clr">
+            <label class="control-label">分类</label>
+            <div class="inputs">
+              <select class="ipttheme" name="category[]">{$categoriesSelect}</select>
+            </div>
+            {if isset($error.category)} {$error.category} {/if}
+          </div>
+          {if $data.demo_url != ''}
+          <div class="input-group clr">
+            <label class="control-label" for="demo_url">演示url:</label>
+            <div class="inputs">
+              <input class="input big ipttheme" id="demo_url" type="text" name="demo_url" value="{$smarty.post.demo_url|escape}" />
+            </div>
+          </div>
+          {/if}
+          <div id="attribute_fields">
+            {if $attributes}
+            {foreach from=$attributes item=a}
+            <br />
+            <div class="input-group clr">
+              <label class="control-label">{$a.name}</label>
+              <div class="inputs">
+                {if $a.type == 'select'}                      
+                <select id="custom_attributes_{$a.id}" name="attributes[{$a.id}]">
+                {foreach from=$a.attributes item=ai}
+                <option value="{$ai.id}" {if isset($smarty.post.attributes[$a.id][$ai.id])}selected="selected"{/if}>{$ai.name}</option>
+                {/foreach}
+                </select>
+                {elseif $a.type == 'multiple'}
+                <select multiple="multiple" id="custom_attributes_{$a.id}" name="attributes[{$a.id}][]">
+                {foreach from=$a.attributes item=ai}
+                <option value="{$ai.id}" {if isset($smarty.post.attributes[$a.id][$ai.id])}selected="selected"{/if}>{$ai.name}</option>
+                {/foreach}
+                </select>
+                {elseif $a.type == 'check'}
+                {foreach from=$a.attributes item=ai}
+                <input type="checkbox" name="attributes[{$a.id}][{$ai.id}]" value="{$ai.id}" {if isset($smarty.post.attributes[$a.id][$ai.id])}checked="checked"{/if} class="mt5"/> {$ai.name}<br />
+                {/foreach}
+                {elseif $a.type == 'radio'}
+                {foreach from=$a.attributes item=ai}
+                <input type="radio" name="attributes[{$a.id}]" value="{$ai.id}" {if isset($smarty.post.attributes[$a.id][$ai.id])}checked="checked"{/if} class="mt5" /> {$ai.name} <br />
+                {/foreach}
+                {else}
+                <input class="big input mt5" type="text" name="attributes[{$a.id}]" value="{foreach from = $smarty.post.attributes[$a.id] item=val}{$val}{/foreach}" />
+                {/if}
+              </div>
+            </div>
+            {/foreach}
+            {/if}
+          </div>
+          <div class="input-group clr">
+            <label class="control-label">推荐标签</label>
+            <div class="inputs tagsinputs">
+              <input type="hidden" name="tags" id="tagstxt" />
+              <div class="tagtips clr" id="tagtips">
+                <span class="tageditbtn"><i class="fa fa-edit m-r-xs"></i> 编辑标签</span>
+              </div>
+              <div class="addtags clr" id="addtags">
+                <div class="tagiptbg">
+                  <input type="text" class="ipttheme" id="addtagipt" autocomplete="off"/>
+                  <div class="addtaglist" id="addtaglist"></div>
+                </div>
+                <a class="addtagsbtn">完成</a>
+              </div>
+            </div>
+          </div>
+          <div class="input-group clr">
+            <label class="control-label">可设为免费文件:</label>
+            <div class="inputs">
+              {if $smarty.post.free_request == 'true'}
+              <img src="{$template_data}/admin/images/icons/24x24/accept.png" alt="" class="middle" />
+              {else}
+              <img src="{$template_data}/admin/images/icons/24x24/delete.png" alt="" class="middle" />
+              {/if}	
+              <input type="hidden" name="free_request" value="{$smarty.post.free_request}" />
+            </div>
+          </div>
+          {if $smarty.post.free_request == 'true'}
+          <div class="input-group clr">
+            <label class="control-label" for="freefile">设为免费文件</label>
+            <div class="inputs">
+              <input class="checkbox" id="freefile" type="checkbox" name="free_file" value="true" {if $smarty.post.free_file == 'true'}checked="checked"{/if} />
+              <label class="checktext" for="freefile">是</label>
+            </div>
+          </div>
+          {/if}
+          <div class="input-group clr">
+            <label class="control-label" for="datepick">周推荐</label>
+            <div class="inputs">
+              <input class="input big ipttheme" type="text" id="datepick" name="weekly_to" value="{$smarty.post.weekly_to|escape}" />
+              <span>格式：2015-02-27</span>
+            </div>
+          </div>
+          <div class="input-group clr">
+            <label class="control-label" for="price">价格{$currency.symbol}</label>
+            <div class="inputs">
+              <input class="input big ipttheme" id="price" type="text" name="price" value="{$smarty.post.price|escape}" /> 
+            </div>
+          </div>
+          <div class="form-submit">
+            <button type="submit" name="edit" class="btntheme btnsize btn-primary">编辑</button>
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+    
+    </div>
+  </div>
+</div>
+{literal}
+<script type="text/javascript">
+seajs.use(["modules/pageui/upload", "modules/pageui/objtags"], function(ui, tag){
+  tag.tagsInit("#tagstxt", "#tagtips", "#addtags", {/literal}{$item_tags}{literal}, {/literal}{$all_tags}{literal});
+  ui.uploadInit("/apps/upload/ajax/swfupload/doUpload.php", "{/literal}{$sessID}{literal}", "readonly");
+});
+</script>
+{/literal}
+</body>
+</html>

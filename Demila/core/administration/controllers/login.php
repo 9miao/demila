@@ -12,11 +12,8 @@
 require_once 'init.php';
 
 //加载管理员模板
-$_templateFile = ENGINE_PATH . '/administration/views/login.html';
+$_templateFile = ROOT_PATH.'templates/admin/'.$meta["admin_template"].'/admin/admin_login.html';
 abr ( 'content_template', $_templateFile );
-
-_setLayout ( "admin_login" );
-
 require_once ROOT_PATH . '/apps/users/models/users.class.php';
 $cms = new users ( );
 

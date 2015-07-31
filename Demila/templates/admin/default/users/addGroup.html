@@ -1,0 +1,81 @@
+{include file="$admin_template_path/html/header.html"}
+</head>
+<body>
+{include file="$admin_template_path/html/pagetops.html"}
+{if $errorMessage}
+<div id="errormsg">
+<div class="msg">
+  <div class="closebtn"><i data-icon="" class="icon-close"></i></div>
+  {$errorMessage}
+</div>
+</div>
+{literal}
+<script type="text/javascript">
+seajs.use(["modules/pageui/msg"], function(msg){
+    msg.msginit("#errormsg");
+});
+</script>
+{/literal}
+{/if}
+
+<div class="pagebg">
+  <div class="mcontent pagemain clr">
+    {include file="$admin_template_path/html/leftmenu.html"}
+    <div class="pagemainconent">
+
+    <div class="rightdetail_admin">
+      <div class="sideblock">
+        <div class="sideheader">添加自定义页面</div>
+        <div class="sidebody">
+          <form action="" class="horizontal-form item-form disable-on-submit" action="" method="post" enctype="multipart/form-data">
+            <div class="input-group clr">
+              <label class="control-label" for="name">用户组名</label>
+              <div class="inputs">
+                <input class="ipttheme" id="name" type="text" name="name" value="{$smarty.post.name|escape}" />
+                {if isset($error.name)}
+                <small>{$error.name}</small>
+                {/if}
+              </div>
+            </div>
+            <div class="input-group clr">
+              <label class="control-label" for="description">描述</label>
+              <div class="inputs">
+                <input class="ipttheme" id="description" type="text" name="description" value="{$smarty.post.description|escape}" />
+              </div>
+            </div>
+            <div class="input-group clr">
+              <label class="control-label" for="meta_keywords">权限设置</label>
+              <div class="inputs">
+                {if is_array($modules)}
+                <table class="general_table" cellspacing="0" cellpadding="0" border="0">
+                  <tr>
+                    <td width="150"> system_系统 </td>
+                    <td><input type="checkbox" name="modules[system]" value="on" id="modules[system]" class="checkbox" {if $smarty.post.rights.system == 'on'}checked="checked"{/if} /></td>
+                    </tr>
+                    {foreach from=$modules item=conf key=m}
+                    <tr>
+                    <td> {$m}_{$lang.$m} </td>
+                    <td> <input type="checkbox" name="modules[{$m}]" value="on" id="modules[{$m}]" class="checkbox" {if $smarty.post.rights.$m == 'on'}checked="checked"{/if} /></td>
+                  </tr>
+                  {/foreach}
+                </table>
+                {/if}
+              </div>
+            </div>
+            <div class="form-submit">
+              {if $smarty.get.id}
+              <button type="submit" name="edit" class="btntheme btnsize btn-primary">编辑</button>
+              {else}
+              <button type="submit" name="add" class="btntheme btnsize btn-primary">添加</button>
+              {/if}
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+{include file="$admin_template_path/html/header.html"}
+</head>
+<body>
+{include file="$admin_template_path/html/pagetops.html"}
+{if $errorMessage}
+<div id="errormsg">
+<div class="msg">
+  <div class="closebtn"><i data-icon="" class="icon-close"></i></div>
+  {$errorMessage}
+</div>
+</div>
+{literal}
+<script type="text/javascript">
+seajs.use(["modules/pageui/msg"], function(msg){
+    msg.msginit("#errormsg");
+});
+</script>
+{/literal}
+{/if}
+<div class="pagebg">
+  <div class="mcontent pagemain clr">
+    {include file="$admin_template_path/html/leftmenu.html"}
+    <div class="pagemainconent">
+
+    <div class="rightdetail_admin">
+      <div class="sideblock">
+        <div class="sideheader">添加属性</div>
+        <div class="sidebody">
+        <form action="" class="" action="" method="post" enctype="multipart/form-data">
+          <div class="input-group clr">
+            <label class="control-label" for="name">名称</label>
+            <div class="inputs">
+              <input type="text" class="ipttheme" name="name" id="name" required="true" value="{$smarty.post.name|escape}" >
+              {if isset($error.name)}
+              <small>{$error.name}</small>
+              {/if}
+            </div>
+          </div>
+          <div class="input-group clr">
+            <label class="control-label" for="photo">图片</label>
+            <div class="inputs">
+              <input type="file" class="ipttheme" id="photo" name="photo" />
+              {if $smarty.post.photo != ''}
+              <br /><br />
+              <img src="{$template_data}/uploads/attributes/{$smarty.post.photo}" alt="" />
+              <input type="checkbox" name="deletePhoto" value="yes" /> 删除
+              {/if}
+              {if isset($error.photo)}
+              <small>{$error.photo}</small>
+              {/if}
+            </div>
+          </div>
+          {*
+          <div class="input-group clr">
+            <label class="control-label" for="visible">可见</label>
+            <div class="inputs">
+            <input type="checkbox" name="visible" value="true" id="visible" class="checkbox" {if $smarty.post.visible == 'true'}checked="checked"{/if} /> 是
+            </div>
+          </div>
+          *}
+          <div class="form-submit">
+            {if $smarty.get.c=='editAttr'}
+            <button id="personal_info_submit_button" class="btntheme btnsize btn-primary" type="submit" name="edit" >编辑</button>
+            {else}
+            <button id="personal_info_submit_button" class="btntheme btnsize btn-primary" type="submit" name="add" >添加</button>
+            {/if}
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+    
+    </div>
+  </div>
+</div>
+</body>
+</html>

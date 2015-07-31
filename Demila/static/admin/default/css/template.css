@@ -1,0 +1,776 @@
+@charset "UTF-8";
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td,canvas{padding:0;margin:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}address,caption,cite,code,dfn,em,th,var{font-weight:normal;font-style:normal}ol,ul,li{list-style:none}caption,th{text-align:left}q:before,q:after{content:''}abbr,acronym{border:0}.clearboth{clear:both;height:0;font-size:0;width:0}
+.lf{float:left}.rf{float:right}a,a:visited{text-decoration:none}a:hover{text-decoration:none}a:active{}body, input, textarea{font-family:"微软雅黑","宋体",Arial,Helvetica,sans-serif}.clr:after{content:".";display:block;height:0;clear:both;visibility:hidden}.clr{display:inline-block}* html .clr{height:1%}h1,h2,h3,h4,h5,h6{font-weight: normal;}.clr{display:block}input[type="button"], input[type="submit"], input[type="reset"], textarea{-webkit-appearance: none;}textarea{resize: none;}
+body{
+	text-align:center;
+	font-size: 20px;
+	color: #788288;
+}
+a{
+	color: #3c4144;
+}
+input, button{
+	border: none;
+	background: none;
+}
+.textflowover{
+	text-indent: -99999px;
+	overflow: hidden;
+}
+.bord-ra{
+	border-radius: 2px;
+}
+.arrow{
+    border-width: 8px;
+    z-index: 10;
+}
+.buttons{
+	cursor: pointer;
+}
+.text-active, .active > .menutip .text{
+	display: none;
+}
+.active > .menutip .text-active{
+	display: inline-block;
+}
+.pagebg{
+	min-width: 1024px;
+}
+.block{
+    display: block;
+}
+.m-t-md{
+    margin-top: 20px;
+}
+.mcontent{
+	position: relative;
+	width: 100%;
+	margin: 0 auto;
+	overflow: hidden;
+	text-align: left;
+}
+.mcontent.topblock{
+	height: 2.5em;
+	line-height: 2.5em;
+	overflow: visible;
+}
+.mcontent.pagemain{
+	top: 2.5em;
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+.topblock .toplogo{
+	width: 200px;
+}
+.topblock .toplogo span{
+	float: left;
+	display: block;
+}
+.topblock .toplogo .logos{
+	background: url(../img/logo_white.png) no-repeat center center;
+	background-size: auto 60%;
+	width: 2.5em;
+	height: 100%;
+	margin: 0 .3em;
+}
+.topblock .toplogo .txt{
+	font-weight: 700;
+}
+.topblock.narrow .toplogo{
+	width: 70px;
+}
+.topblock.narrow .toplogo a{
+	text-align: center;
+}
+.topblock.narrow .toplogo .logos{
+	margin: 0 auto;
+	float: none;
+}
+.topblock.narrow .toplogo .txt{
+	display: none;
+}
+.topblock .toptools{
+	right: 0;
+	position: absolute;
+	left: 200px;
+	height: 100%;
+}
+.topblock .toptools .quicklinks{
+	height: 100%;
+}
+.topblock.narrow .toptools{
+	left: 70px;
+}
+.toptools .quicklinks .quicktaps{
+	padding: 0 1em;
+	line-height: 3.5em;
+	display: block;
+	font-size: .7em;
+}
+.toptools .quicklinks .toplinks{
+	display: none;
+	position: absolute;
+	text-align: center;
+	font-size: .9em;
+	padding: .8em 0;
+	z-index: 1000;
+}
+.toptools .quicklinks.active .toplinks{
+	display: block;
+}
+.quicklinks .toplinks li.links{
+	width: 7.5em;
+	padding: 0 .8em;
+}
+.quicklinks .toplinks li.links ol li{
+	display: block;
+	font-size: .8em;
+	line-height: 2em;
+	margin: .4em 0;
+}
+.quicklinks .toplinks li.links ol li a{
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+.topblock .toptools .topsearch{
+	height: 1.5em;
+	margin: .5em;
+}
+.toptools .topsearch .searchipt{
+	width: 12em;
+	font-size: .7em;
+	margin: .25em .5em;
+	height: 1.5em;
+}
+.toptools .topsearch .searchbtn{
+	padding: .5em;
+}
+.toptools .topinfos .splink{
+	font-size: .7em;
+	padding: 0 .8em;
+}
+.toptools .topinfos .userinfo{
+}
+.topinfos .userinfo .userlink{
+	position: relative;
+	padding-right: .5em;
+}
+.userinfo .userlink .userimg{
+	width: 1.5em;
+	height: 1.5em;
+	margin: .5em;
+	margin-right: .2em;
+	border-radius: .75em;
+}
+.userinfo .userlink .username{
+	font-size: .7em;
+}
+.userinfo .userlink .caret{
+	margin: 1.2em 0 0 .3em;
+}
+.topinfos .userinfo .usermenu{
+	display: none;
+	width: 10em;
+	position: absolute;
+	right: 0;
+	font-size: .7em;
+	padding: .3em 0;
+	z-index: 200;
+}
+.userinfo .usermenu li{
+	line-height: 1.5em;
+}
+.userinfo .usermenu li a{
+	padding: .5em 1em;
+	display: block;
+	position: relative;
+}
+.userinfo .usermenu li a .numtip{
+	position: absolute;
+	top: 1em;
+	right: 1em;
+}
+.userinfo .usermenu li.lines{
+	height: 1px;
+	margin: .5em 0;
+	overflow: hidden;
+}
+.topinfos .userinfo.active .usermenu{
+	display: block;
+}
+.mcontent .pagemenu{
+	float: left;
+	width: 200px;
+	float: left;
+	position: absolute;
+	bottom: 0;
+	top: 0;
+}
+.mcontent .pagemenu .menumain{
+	position: absolute;
+	top: 0;
+	bottom: 2.5em;
+	left: 0;
+	right: 0;
+	overflow: hidden;
+}
+.pagemenu .menumain .menuscrollbox{
+	font-size: .7em;
+	line-height: 2.5em;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+.pagemenu .menumain .menuscrollbox > div{
+	width: 100%;
+}
+.pagemenu .menumain .menuscrollbar{
+	position: absolute;
+	right: 0;
+	height: 100%;
+	width: 10px;
+	border-radius:5px;
+	opacity: .2;
+	z-index: 200;
+}
+.pagemenu .menumain .menuscrollbar .handle{
+	opacity: .6;
+	width: 10px;
+	cursor: pointer;
+	border-radius:5px;
+	z-index: 250;
+}
+.pagemenu .menumain .avatarblock{
+	position: relative;
+	padding: 1em 0 1em 6%;
+}
+.menumain .avatarblock .avatarlink{
+}
+.menumain .avatarblock .avatarimg{
+	width: 50px;
+	border-radius: 25px;
+	margin-right: 6%;
+	position: relative;
+}
+.menumain .avatarblock .avatarimg img{
+	width: 100%;
+	height: auto;
+	display: block;
+	border-radius: 25px;
+}
+.avatarblock .avatarimg .imgtip{
+	border-radius: 100%;
+    border-style: solid;
+    border-width: 2px;
+    left: 0;
+    position: absolute;
+    top: 0;
+	height: 7px;
+    margin: 1px;
+    width: 7px;
+}
+.menumain .avatarblock .avatardetail{
+	line-height: 1.3em;
+	margin-top: 5px;
+}
+.avatarblock .avatardetail .sp{
+	font-weight: bold;
+}
+.avatarblock .avatardetail .titles{
+	display: block;
+	font-size: .85em;
+}
+.menumain .avatarblock .avatarmenu{
+	display: none;
+	position: absolute;
+    min-width: 160px;
+	padding: 5px 0;
+    top: 100%;
+    margin-top: -1em;
+}
+.avatarblock .avatarmenu li{
+	padding: 0 8%;
+}
+.avatarblock .avatarmenu li a, .menumain .avatarblock.active .avatarmenu{
+	display: block;
+}
+.pagemenu .menumain .menumainlist{
+}
+.menumain .menumainlist a{
+	transition: background-color 0.2s ease-in-out 0s;
+}
+.menumain .menumainlist a .menutxt{
+}
+.menumain .menumainlist a .numtip{
+	position: relative;
+	margin-top: 1em;
+	min-width: 0;
+	padding: 3px 5px;
+}
+.menumain .menumainlist .icon{
+	line-height: 1.9em;
+	font-size: 1.3em;
+	margin-right: 1em;
+}
+.menumain .menumainlist .menutips .icon{
+	margin-right: 0;
+	font-size: 1em;
+}
+.menumain .menumainlist .menutip, .menumain .menumainlist .menutit, .menumain .menumainlist .menulink{
+	padding: .2em 1.3em;
+}
+.menumain .menumainlist .menutip, .menumain .menumainlist .menunav li{
+	position: relative;
+}
+.menumain .menumainlist .menunav li .navlink{
+	padding: .2em 1.3em;
+}
+.menumain .menumainlist .menunav{
+	display: none;
+}
+.menumain .menumainlist .menuline{
+    margin-top: 10px;
+    height: 1px;
+}
+.mcontent .pagemenu .menufooter{
+	position: absolute;
+	bottom: 0;
+	height: 2.5em;
+	right: 0;
+	left: 0;
+	padding: 0 3%;
+}
+.pagemenu .menufooter a{
+	line-height: 3.125em;
+	font-size: .8em;
+	padding: 0 .5em;
+}
+.pagemenu .menufooter .i-circleright{
+	display: none;
+}
+.mcontent.narrow .pagemenu{
+	width: 70px;
+	z-index: 300;
+}
+.narrow .pagemenu .menufooter .i-circleright{
+	display: inline-block;
+}
+.narrow .menumain .avatarblock .avatardetail, .narrow .pagemenu .menufooter .i-circleleft, .narrow .pagemenu .menufooter .exitbtn, .narrow .menumain .menumainlist .menutit, .narrow .pagemenu .menumain .menuscrollbar, .narrow .menumain .menumainlist .menuline, .narrow .menumain .menumainlist a .menutips{
+	display: none;
+}
+.narrow .pagemenu .menumain .avatarblock{
+	padding: 1em 0;
+}
+.narrow .menumain .avatarblock .avatarimg{
+	margin: 0 10px;
+}
+.narrow .menumain .menumainlist .menutit{
+
+}
+.narrow .menumain .menumainlist .menulink, .narrow .menumain .menumainlist .menutip, .narrow .menumain .menumainlist a .menutxt, .narrow .menumain .menumainlist .menulink .menulinktxt{
+	width: 100%;
+	padding: 0;
+	height: 50px;
+	line-height: 50px;
+	overflow-y: hidden;
+	position: relative;
+	text-align: center;
+}
+.narrow .menumain .menumainlist .menulink:hover .icon, .narrow .menumain .menumainlist .menutip:hover .icon, .narrow .menumain .menumainlist .active .menulink .icon, .narrow .menumain .menumainlist .active .menutip .icon{
+	transition: margin-top 0.2s ease 0s;
+	margin-top: -50px;
+}
+.narrow .menumain .menumainlist a .numtip{
+	position: absolute;
+	margin: 0;
+	top: 4px;
+	right: 8px;
+}
+.narrow.mcontent .pagemenu .menumain{
+	overflow: visible;
+}
+.narrow.mcontent .pagemenu .menufooter{
+	padding: 0;
+}
+.narrow .pagemenu .menufooter a{
+	padding: 0;
+	width: 100%;
+	text-align: center;
+}
+.narrow .menumain .menumainlist .icon{
+	height: 50px;
+	line-height: 50px;
+	float: none;
+	margin-right: 0;
+	text-align: center;
+	display: block;
+}
+.narrow .menumain .menumainlist .navlink .icon{
+	float: left;
+	height: 40px;
+    line-height: 40px;
+}
+.narrow .menumain .menumainlist > li{
+	position: relative;
+}
+.narrow .menumain .menumainlist .menunav{
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    left: 100%;
+    position: absolute;
+    top: 0;
+    width: 220px;
+    z-index: 350;
+    line-height: 40px;
+}
+.mcontent .pagemainconent{
+	float: left;
+	position: absolute;
+	left: 200px;
+	right: 0;
+	bottom: 0;
+	top: 0;
+	z-index: 100;
+}
+.narrow.mcontent .pagemainconent{
+	left: 70px;
+}
+.pagemainconent .headtool{
+	position: absolute;
+	top: 0;
+	height: 2.5em;
+	line-height: 2.5em;
+	left: 0;
+	right: 0;
+	z-index: 220;
+}
+.headtool .toolbtns, .headtool .toolbtns .btns{
+	float: left;
+}
+.headtool .toolbtns{
+	float: left;
+	padding-left: 15px;
+	margin-top: .5em;
+}
+.headtool .toolsearch{
+	width: 30%;
+	margin-right: 2%;
+	position: relative;
+	height: 50px;
+	padding-top: 8px;
+}
+.headtool .toolsearch input{
+	width: 80%;
+}
+.headtool .toolsearch button{
+	padding: 6px 0;
+	width: 15%;
+}
+.pagemainconent .page-controls{
+	position: absolute;
+	height: 2.5em;
+	line-height: 2.5em;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 220;
+	border-top: 1px solid #eaeef1;
+}
+.pagemainconent .pagination{
+	padding: 0 15px;
+	font-size: .7em;
+}
+.pagemainconent .page-controls .page_numbers{
+	float: right;
+	padding-top: 9px;
+}
+.pagemainconent .page-controls .page_tips{
+	float: left;
+}
+.page-controls .page_numbers a{
+	background-color: #fff;
+    border: 1px solid #ddd;
+    color: #75b5e8;
+    float: left;
+    line-height: 1.42857;
+    margin-left: -1px;
+    padding: 6px 12px;
+    position: relative;
+    text-decoration: none;
+}
+.page-controls .page_numbers a.selected{
+	background-color: #75b5e8;
+    border-color: #337ab7;
+    color: #fff;
+    cursor: default;
+    z-index: 2;
+}
+.page-controls .page_numbers a:hover{
+	background-color: #eee;
+	border-color: #ddd;
+	color: #75b5e8;
+}
+.pagemainconent .rightdetail_admin{
+	background-color: #f2f4f8;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	overflow-y: scroll;
+    overflow-x: hidden;
+	padding: 15px;
+	z-index: 200;
+}
+.pagemainconent.headtools .rightdetail_admin{
+	top: 2.5em;
+}
+.pagemainconent.paging .rightdetail_admin{
+	bottom: 2.5em;
+}
+.rightdetail_admin h2{
+	font-size: 1.2em;
+}
+.rightdetail_admin .small{
+	font-size: .6em;
+}
+.rightdetail_admin .pagetit{
+	margin-bottom: .5em;
+}
+.rightdetail_admin .msgtable, .rightdetail_admin .general_table{
+	width: 100%;
+	font-size: .8em;
+	margin-bottom: 1.5em;
+	background-color: #f9fafc;
+}
+.rightdetail_admin .msgtable td, .rightdetail_admin .general_table td, .rightdetail_admin .general_table th{
+	padding: .5em .8em;
+}
+.rightdetail_admin .msgtable a{
+    color: #177bbb;
+}
+.rightdetail_admin .general_table{
+	border: 1px solid #eaeef1;
+}
+.rightdetail_admin .general_table a{
+	color: #177bbb;
+}
+.general_table thead tr th, .general_table tbody tr td{
+	border-bottom: 1px solid #eaeef1;
+	border-right: 1px solid #eaeef1;
+}
+.general_table thead tr th:last-child, .general_table tbody tr td:last-child{
+	border-right: none;
+}
+.general_table tbody tr:last-child td{
+	border-bottom: none;
+}
+.general_table tr:hover{
+	background-color: #eef7fd;
+}
+.rightdetail_admin .sideblock{
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-color: #eaeef1;
+    border-radius: 2px;
+}
+.rightdetail_admin .sideblock .sideheader{
+	color: #333;
+	font-weight: 700;
+	padding: 10px 15px;
+	font-size: .7em;
+	border-bottom: 1px solid transparent;
+	border-color: #eaeef1;
+}
+.rightdetail_admin .sideblock .sidebody{
+	padding: 15px;
+}
+.rightdetail_admin .input-group{
+	margin-bottom: 15px;
+	font-size: .8em;
+}
+.input-group .control-label, .input-group .inputs, .input-group .checkbox, .input-group .checktext, .input-group .formtxt, .input-group .tipsimg{
+    float: left;
+}
+.input-group .formtxt{
+	height: 2em;
+	line-height: 2em;
+}
+.input-group .tipsimg{
+	margin: 0 .5em;
+}
+.input-group .control-label, .input-group .checktext{
+	height: 2em;
+	line-height: 2em;
+}
+.input-group .checkbox{
+	margin-top: .7em;
+}
+.input-group .checktext{
+	padding-left: 1%;
+}
+.input-group .control-label{
+    text-align: right;
+    width: 16.6667%;
+}
+.input-group .inputs{
+	width: 80.3333%;
+	margin-left: 3%;
+}
+.rightdetail_admin .indexnavs{
+	margin: 2em 0;
+}
+.rightdetail_admin .indexnav{
+    text-align: center;
+    font-size: .7em;
+    float: left;
+    width: 16.6666%;
+}
+.rightdetail_admin .indexnav a.con{
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease 0s;
+    border-radius: 25px;
+    color: #fff;
+    display: inline-block;
+    font-size: 6em;
+    height: 120px;
+    padding: 10px;
+    text-align: center;
+    width: 120px;
+}
+.rightdetail_admin .indexnav a.con:hover, .rightdetail_admin .indexnav a.con:focus{
+	box-shadow: 0 0 16px rgba(0, 0, 0, 0.3);
+	text-decoration: none;
+}
+.rightdetail_admin .indexnav:hover a .h3{
+	color: #1aae88;
+}
+.rightdetail_admin .indexnav a .h3{
+    color: #919aa1;
+    font-family: Georgia,"Times New Roman",Times,serif;
+    font-size: 3em;
+    font-weight: normal;
+}
+.rightdetail_admin .newslist{
+	font-size: .8em;
+	margin-bottom: 1em;
+}
+.rightdetail_admin .newslist li{
+	margin-bottom: .5em;
+}
+.rightdetail_admin .reportblock{
+	width: 80%;
+	margin-bottom: 1.5em;
+}
+.rightdetail_admin .pagetab{
+	height: 40px;
+	line-height: 40px;
+	margin-top: -15px;
+	margin-right: -15px;
+	margin-left: -15px;
+	font-size: .8em;
+	margin-bottom: 15px;
+}
+.rightdetail_admin .pagetab li{
+	float: left;
+	margin-right: 1px;
+}
+.rightdetail_admin .pagetab li a{
+	display: block;
+	padding: 0 1.5em;
+	color: #cff8ed;
+	cursor: pointer;
+}
+.rightdetail_admin .pagetab li a.active{
+	background-color: #138f6f;
+}
+.rightdetail_admin .pagetab li a.active:hover{
+	color: #cff8ed;
+}
+.rightdetail_admin .pagetab li a:hover{
+	background-color: #159a78;
+	color: #fff;
+}
+.rightdetail_admin .underlined{
+	font-size: 1em;
+	margin-bottom: .4em;
+}
+.rightdetail_admin p{
+	line-height: 1.5em;
+	font-size: .7em;
+	margin-bottom: 1.5em;
+}
+#errormsg{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, .5);
+	top: 0;
+	left: 0;
+	z-index: 1000;
+}
+#errormsg .msg{
+	left: 50%;
+	top: 50%;
+	margin: -5em 0 0 -10em;
+	width: 20em;
+	height: 10em;
+	line-height: 1.5em;
+	text-align: center;
+	position: absolute;
+	background-color: #fff;
+	border-radius: 5px;
+}
+#errormsg .box{
+	position: relative;
+	top: 50%;
+	margin-top: -.5em;
+}
+#errormsg .box.box-success{
+	color: #1aae88;
+}
+#errormsg .box.box-error{
+    color: #e33244;
+}
+#errormsg .closebtn{
+	position: absolute;
+	cursor: pointer;
+	right: .2em;
+	top: .1em;
+}
+@media only screen and (max-width: 1024px){
+.pagebg{
+	min-width: 320px;
+	width: 100%;
+}
+.mcontent{
+	width: 100%;
+}
+}
+@media only screen and (max-width: 864px){
+body{
+	font-size: 18px;
+}
+}
+@media only screen and (max-width: 720px){
+body{
+	font-size: 17px;
+}
+}
+@media only screen and (max-width: 640px){
+body{
+	font-size: 16px;
+}
+}
+@media only screen and (max-width: 480px){
+body{
+	font-size: 14px;
+}
+}
+@media only screen and (max-width: 375px){
+body{
+	font-size: 12px;
+}
+}

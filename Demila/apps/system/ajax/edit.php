@@ -65,6 +65,14 @@ if (isset ( $_POST ['edit'] ) && isset ( $_POST ['value']) && $_POST ['value']==
         'status' => 'true'
     ) ) ) );
 }
+if (isset ( $_POST ['edit'] ) && isset ( $_POST ['value']) && $_POST ['value']== 'admin_template') {
+    require_once ROOT_PATH . "/apps/system/models/system.class.php";
+    $sys = new system();
+    $sys->edit_admin_template($_POST["admin_template"]);
+    die ( json_encode ( array_merge ( $_POST, array (
+        'status' => 'true'
+    ) ) ) );
+}
 
 
 

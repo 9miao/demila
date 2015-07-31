@@ -1,0 +1,56 @@
+{include file="$admin_template_path/html/header.html"}
+</head>
+<body>
+{include file="$admin_template_path/html/pagetops.html"}
+{if $errorMessage}
+<div id="errormsg">
+<div class="msg">
+  <div class="closebtn"><i data-icon="" class="icon-close"></i></div>
+  {$errorMessage}
+</div>
+</div>
+{literal}
+<script type="text/javascript">
+seajs.use(["modules/pageui/msg"], function(msg){
+    msg.msginit("#errormsg");
+});
+</script>
+{/literal}
+{/if}
+
+<div class="pagebg">
+  <div class="mcontent pagemain clr">
+    {include file="$admin_template_path/html/leftmenu.html"}
+    <div class="pagemainconent">
+
+    <div class="rightdetail_admin">
+      <div class="sideblock">
+        <div class="sideheader">添加自定义页面</div>
+        <div class="sidebody">
+          <form action="" class="horizontal-form item-form disable-on-submit" method="post">
+            <div class="input-group clr">
+              <label class="control-label" for="tag">标签</label>
+              <div class="inputs">
+                <input class="ipttheme" id="tag" type="text" name="name" value="{$smarty.post.name|escape}" required="true">
+                {if isset($error.name)}
+                <small>{$error.name}</small>
+                {/if}
+              </div>
+            </div>
+            <div class="form-submit">
+              {if $smarty.get.c=='edit'}
+              <button id="personal_info_submit_button" class="btntheme btnsize btn-primary" type="submit" name="edit" >{$lang.edit}</button>
+              {else}
+              <button id="personal_info_submit_button" class="btntheme btnsize btn-primary" type="submit" name="add" >{$lang.add}</button>
+              {/if}
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+    </div>
+  </div>
+</div>
+</body>
+</html>

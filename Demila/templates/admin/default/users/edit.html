@@ -1,0 +1,350 @@
+{include file="$admin_template_path/html/header.html"}
+</head>
+<body>
+{include file="$admin_template_path/html/pagetops.html"}
+{if $errorMessage}
+<div id="errormsg">
+<div class="msg">
+  <div class="closebtn"><i data-icon="" class="icon-close"></i></div>
+  {$errorMessage}
+</div>
+</div>
+{literal}
+<script type="text/javascript">
+seajs.use(["modules/pageui/msg"], function(msg){
+    msg.msginit("#errormsg");
+});
+</script>
+{/literal}
+{/if}
+
+<div class="pagebg">
+  <div class="mcontent pagemain clr">
+    {include file="$admin_template_path/html/leftmenu.html"}
+    <div class="pagemainconent">
+
+    <div class="rightdetail_admin">
+      <ul class="pagetab bg-success clr" id="ziper">
+        <li><a class="active">个人信息</a></li>
+        <li><a>更改密码</a></li>
+        <li><a>徽章</a></li>
+        <li><a>在本站独家出售你的作品</a></li>
+      </ul>
+      {if !isset($personalEdit)}
+      <ul style="list-style-type: none;" id="taber">
+        <li>
+          <div class="sideblock">
+            <div class="sideheader">编辑个人信息</div>
+            <div class="sidebody">
+            <form id="sampleform" action="" method="post" enctype="multipart/form-data">
+              <div class="horizontal-form">
+                {foreach from=$groups item=g}
+                <div class="input-group clr">
+                  <label class="control-label" for="group_{$g.ug_id}">{$g.name}</label>
+                  <div class="inputs">
+                  <input class="checkbox" id="group_{$g.ug_id}" type="checkbox" name="groups[{$g.ug_id}]" values="yes" {if isset($smarty.post.groups[$g.ug_id])}checked="checked"{/if}>
+                  </div>
+                </div>
+                {/foreach}
+                <div class="input-group clr">
+                  <label class="control-label">状态:</label>
+                  <div class="inputs">
+                    <select class="ipttheme" id="istatus" name="status">
+                      <option value="activate" {if $smarty.post.status == 'activate'}selected="selected"{/if}>{$lang.activate}</option>
+                      <option value="waiting" {if $smarty.post.status == 'waiting'}selected="selected"{/if}>{$lang.waiting}</option>
+                      <option value="banned" {if $smarty.post.status == 'banned'}selected="selected"{/if}>Banned</option>
+                    </select>
+                  </div>
+                </div>
+                {if $user.quiz == 'true'}
+                <div class="input-group clr">
+                  <label class="control-label" for="commission_percent">佣金比例</label>
+                  <div class="inputs">
+                    <input class="ipttheme" type="text" id="commission_percent" name="commission_percent" value="{$user.commission_percent}">
+                    <small>设置单个佣金百分比</small>
+                  </div>
+                </div>
+                {/if}
+                <div class="input-group clr">
+                  <label class="control-label" for="nickname">昵称:</label>
+                  <div class="inputs">
+                    <label class="checktext" for="visible">{$user.nickname}</label>
+                  </div>
+                </div>
+                <div class="input-group clr">
+                  <label class="control-label" for="email">电子邮件:</label>
+                  <div class="inputs">
+                    <label class="checktext" for="visible">{$user.email}</label>
+                  </div>
+                </div>
+                {if $user.firmname != ''}
+                <div class="input-group clr">
+                  <label class="control-label" for="invoice_to">公司名称:</label>
+                  <div class="inputs">
+                    <label class="checktext" for="visible">{$user.firmname}</label>
+                  </div>
+                </div>
+                {/if}
+                {if $user.live_city != ''}
+                <div class="input-group clr">
+                  <label class="control-label" for="lives_in">所在城市：</label>
+                  <div class="inputs">
+                    <label class="checktext" for="visible">{$user.live_city}</label>
+                  </div>
+                </div>
+                {/if}
+                {if $user.country.name != ''}
+                <div class="input-group clr">
+                  <label class="control-label" for="country">国家或地区:</label>
+                  <div class="inputs">
+                    <label class="checktext" for="visible">{$user.country.name}</label>
+                  </div>
+                </div>
+                {/if}
+                  {if $user.address != ''}
+                  <div class="input-group clr">
+                      <label class="control-label"> 详细地址:</label>
+                      <div class="inputs">
+                          <label class="checktext" for="visible">{$user.address}</label>
+                      </div>
+                  </div>
+                  {/if}
+                <div class="input-group clr">
+                  <label class="control-label">充值金额：</label>
+                  <div class="inputs">
+                    <label class="checktext" for="visible">{$currency.symbol} {$user.stats.deposit|string_format:"%.2f"}</label>
+                  </div>
+                </div>
+                {if !isset($user.stats.items)}{else}
+                <div class="input-group clr">
+                  <label class="control-label">购买作品计数:</label>
+                  <div class="inputs">
+                    <label class="checktext" for="visible">{$user.buy}件作品 共计{$currency.symbol} {$user.stats.total|string_format:"%.2f"}</label>
+                  </div>
+                </div>
+                {/if}
+                <div class="input-group clr">
+                  <label class="control-label">是否出售作品：</label>
+                  <div class="inputs">
+                    <label class="checktext" for="visible">{if $user.quiz == 'true'}是{else}否{/if}</label>
+                  </div>
+                </div>
+                <div class="input-group clr">
+                  <label class="control-label">注册时间:</label>
+                  <div class="inputs">
+                    <label class="checktext" for="visible">{$user.register_datetime|date_format:"%Y-%m-%d %H:%M"}</label>
+                  </div>
+                </div>
+                {if $user.last_login_datetime != ''}
+                <div class="input-group clr">
+                  <label class="control-label">最后登录:</label>
+                  <div class="inputs">
+                    <label class="checktext" for="visible">{$user.last_login_datetime|date_format:"%Y-%m-%d %H:%M"}</label>
+                  </div>
+                </div>
+                {/if}
+                {if $user.ip_address != ''}
+                <div class="input-group clr">
+                  <label class="control-label">IP地址:</label>
+                  <div class="inputs">
+                    <label class="checktext" for="visible">{$user.ip_address}</label>
+                  </div>
+                </div>
+                {/if}
+                {if $user.profile_title != ''}
+                <div class="input-group clr">
+                  <label class="control-label">个人资料:</label>
+                  <div class="inputs">
+                    <label class="checktext" for="visible">{$user.profile_title}</label>
+                  </div>
+                </div>
+                {/if}
+                {if $user.profile_desc != ''}
+                <div class="input-group clr">
+                  <label class="control-label">资料详情:</label>
+                  <div class="inputs">
+                    <label class="checktext" for="visible">{$user.profile_desc}</label>
+                  </div>
+                </div>
+                {/if}
+              </div>
+              <div class="form-submit">
+                {if $smarty.get.c=='edit'}  
+                <button id="personal_info_submit_button" class="btntheme btnsize btn-primary" type="submit" name="edit">{$lang.edit}</button>
+                {else}
+                <button id="personal_info_submit_button" class="btntheme btnsize btn-primary" type="submit" name="add">{$lang.edit}</button>
+                {/if}
+              </div>
+            </form>
+            </div>
+          </div>
+        </li>
+        <li style="display:none;">
+          <div class="sideblock">
+            <div class="sideheader">编辑密码</div>
+            <div class="sidebody">
+            <form id="sampleform" action="" method="post" enctype="multipart/form-data">
+              <div id="password" class="horizontal-form">
+                <div class="input-group clr">
+                  <label class="control-label" for="change_password">更改密码：</label>
+                  <div class="inputs">
+                    <input class="ipttheme" id="change_password" name="password" type="text" value="">
+                  </div>
+                </div>
+              </div>
+              <div class="form-submit">
+                {if $smarty.get.c=='edit'}  
+                <button id="personal_info_submit_button" class="btntheme btnsize btn-primary" type="submit" name="edit">{$lang.edit}</button>
+                {else}
+                <button id="personal_info_submit_button" class="btntheme btnsize btn-primary" type="submit" name="add">{$lang.edit}</button>
+                {/if}
+              </div>
+            </form>
+            </div>
+          </div>
+        </li>
+        <li style="display:none;">
+          <div class="sideblock">
+            <div class="sideheader">编辑徽章</div>
+            <div class="sidebody">
+            <form id="sampleform" action="" method="post" enctype="multipart/form-data">
+              <div id="profile" class="horizontal-form">
+              <div class="input-group clr" style="margin-bottom:0px;">
+                <div class="inputs">
+                  <input id="power_elite_author" name="power_elite_author" value="true" type="checkbox" class="checkbox" {if $smarty.post.power_elite_author == 'true'}checked="checked"{/if}>
+                  <label for="power_elite_author">
+                    <img class="tipsimg" src="{$data_server}uploads/badges/power_elite_author.png" alt="" />
+                    <span class="formtxt">权威精英作者</span>
+                  </label>
+                </div>
+              </div>
+              <div class="input-group clr" style="margin-bottom:0px;">
+                <div class="inputs">
+                  <input id="elite_author" name="elite_author" value="true" type="checkbox" class="checkbox" {if $smarty.post.elite_author == 'true'}checked="checked"{/if}>
+                  <label for="elite_author">
+                    <img class="tipsimg" src="{$data_server}uploads/badges/elite_author.png" alt="" />
+                    <span class="formtxt">精英作者</span>
+                  </label>
+                </div>
+              </div>
+              {if $badges}
+              {foreach from=$badges item=b}
+              <div class="input-group clr" style="margin-bottom:0px;">
+                <div class="inputs">
+                  <input id="badge_{$b.id}" name="badges[]" value="{$b.id}" type="checkbox" class="checkbox" {if is_array($smarty.post.badges) && in_array($b.id, $smarty.post.badges)}checked="checked"{/if}> 
+                  <label for="badge_{$b.id}">		 
+                    {if $b.photo != ''}
+                    <img class="tipsimg" src="{$data_server}uploads/badges/{$b.photo}" alt="" />
+                    {/if}
+                    <span class="formtxt">{$b.name}</span>
+                  </label>
+                </div>
+              </div>
+              {/foreach}
+              {/if}
+              <div class="input-group clr" style="margin-bottom:0px;">
+                <div class="inputs">
+                  <input id="featured_author" name="featured_author" value="true" type="checkbox" class="checkbox" {if $smarty.post.featured_author == 'true'}checked="checked"{/if}>
+                  <label for="featured_author"> 
+                    <img class="tipsimg" src="{$data_server}uploads/badges/author_was_featured.png" alt="" />
+                    <span class="formtxt">{$lang.featured_author}</span>
+                  </label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-submit">
+                {if $smarty.get.c=='edit'}  
+                <button id="personal_info_submit_button" class="btntheme btnsize btn-primary" type="submit" name="edit">{$lang.edit}</button>
+                {else}
+                <button id="personal_info_submit_button" class="btntheme btnsize btn-primary" type="submit" name="add">{$lang.edit}</button>
+                {/if}
+              </div>
+            </form>
+            </div>
+          </div>
+        </li>
+        <li style="display:none;">
+          <div class="sideblock">
+            <div class="sideheader">是否独家</div>
+            <div class="sidebody">
+            <div id="exclusivity" class="tab-content active">
+              <h4 class="underlined">在本站独家出售你的作品</h3>
+              <p>如果你在本站独家出售作品的话，你的分成比例在60%-80%之间。在本站独家出售作品的意思是你不能在其他地方出售相同作品。</p>
+              <p>你账号目前的类型是:</p>
+              {if $user.exclusive_author == 'true'}
+              <h4 class="underlined">独家作者</h3>
+              <p>你可以转换作品出售类型，如果是从独家转换为非独家，可享受30天的延期，转换类型30天后生效。</p>
+              {else}
+              <h4 class="underlined">非独家作者</h3>
+              <p>你可以转换作品出售类型，如果是从独家转换为非独家，可享受30天的延期，转换类型30天后生效。</p>
+              {/if}
+              <form  action="" class="horizontal-form disable-on-submit" method="post">
+                {if $user.exclusive_author == 'true'}
+                <div class="form-submit">
+                  <div class="form-submit"><input type="hidden" name="exclusive_false" value="yes" />
+                    <button type="submit" class="btntheme btnsize btn-primary">取消本站独家出售</button>
+                  </div>
+                </div>
+                {else}
+                <div class="form-submit">
+                  <div class="form-submit"><input type="hidden" name="exclusive_true" value="yes" />
+                    <button type="submit" class="btntheme btnsize btn-primary">开启本站独家出售</button>
+                  </div>
+                </div>
+                {/if}
+              </form>
+            </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+      {$lang.edit_from_site}
+      {/if}
+    </div>
+    <!-- <div class="rightdetail">
+      <div class="sideblock author">
+        <div class="clr">
+          <div class="authoravatar">
+            {if $user.avatar != ''}
+            <img class="img-border" src="{$data_server}/uploads/users/{$user.user_id}/A_{$user.avatar}" style="margin-top:15px" />
+            {else}
+            <img class="img-border" src="{$template_data}img/default-user.jpg" style="margin-top:15px" />
+            {/if}
+          </div>
+          <div class="details">
+            <h3>{$user.username}</h3>
+          </div>
+        </div>
+        <p>
+          当前余额: {$currency.symbol}{$user.total|string_format:"%.2f"}<br>  
+          {if $user.ip_address != ''}
+          IP地址：{$user.ip_address}<br>
+          {/if}
+          注册时间：{$user.register_datetime|date_format:"%Y-%m-%d"}<br>
+          {if $user.last_login_datetime != ''}
+          最后登录: {$user.last_login_datetime|date_format:"%Y-%m-%d %H:%M"}<br>
+          {/if}
+        </p>
+      </div>
+      <ul class="side-tabs" id="ziper">
+        <li><a href="javascript:;" class="icon-process">个人信息</a></li>
+        <li><a href="javascript:;" class="icon-key">更改密码</a></li> 
+        <li><a href="javascript:;" class="icon-badge">徽章</a></li>
+        <li><a href="javascript:;" class="icon-tick">在本站独家出售你的作品</a></li>
+      </ul>
+    </div> -->
+    <script type="text/javascript">
+    {literal}
+    seajs.use(["jq", "modules/pageui/tabs"], function($, ui){
+      $(function(){
+        ui.tabsinit($("#ziper").find("li"), $("#taber").find("li"), {active: "active"})
+      });
+    });
+    {/literal}
+    </script>
+    
+    </div>
+  </div>
+</div>
+</body>
+</html>

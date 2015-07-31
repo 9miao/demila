@@ -1,0 +1,132 @@
+{include file="$admin_template_path/html/header.html"}
+</head>
+<body>
+{include file="$admin_template_path/html/pagetops.html"}
+{if $errorMessage}
+<div id="errormsg">
+<div class="msg">
+  <div class="closebtn"><i data-icon="" class="icon-close"></i></div>
+  {$errorMessage}
+</div>
+</div>
+{literal}
+<script type="text/javascript">
+seajs.use(["modules/pageui/msg"], function(msg){
+    msg.msginit("#errormsg");
+});
+</script>
+{/literal}
+{/if}
+
+<div class="pagebg">
+    <div class="mcontent pagemain clr">
+        {include file="$admin_template_path/html/leftmenu.html"}
+        <div class="pagemainconent">
+
+        <div class="rightdetail_admin">
+            <div class="sideblock">
+                <div class="sideheader">添加自定义页面</div>
+                <!--<script type="text/javascript" src="{$data_server}nicEditors/nicEdit.js"></script>-->
+                <!--<script type="text/javascript">{literal}bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });{/literal}</script>-->
+                <div class="sidebody">
+                    <form action="" class="" action="" method="post" enctype="multipart/form-data">
+                        {if $smarty.get.c == 'edit'}
+                        <div class="input-group clr">
+                            <label class="control-label" for="name">{$lang.subpage_of}</label>
+                            <div class="inputs">
+                                <select class="ipttheme" name="sub_of">
+                                    <option value="0">{$lang.none}</option>
+                                    {$select}
+                                </select>
+                                <input type="hidden" name="sub_of_old" value="{if isset($smarty.post.sub_of_old)}{$smarty.post.sub_of_old}{else}{$smarty.post.sub_of}{/if}"/>
+                                {if isset($error.sub)}
+                                <small>{$error.sub}</small>
+                                {/if}
+                            </div>
+                        </div>
+                        {/if}
+                        <div class="input-group clr">
+                            <label class="control-label" for="Url">Url</label>
+                            <div class="inputs">
+                                <input class="ipttheme" id="Url" type="text" name="key" value="{$smarty.post.key|escape}" required="true"/>
+                                {if isset($error.key)}
+                                <small>{$error.key}</small>
+                                {/if}
+                            </div>
+                        </div>
+                        <div class="input-group clr">
+                            <label class="control-label" for="name">{$lang.name}</label>
+                            <div class="inputs">
+                                <input class="ipttheme" id="name" type="text" name="name" value="{$smarty.post.name|escape}" required="true"/>
+                                {if isset($error.name)}
+                                <small>{$error.name}</small>
+                                {/if}
+                            </div>
+                        </div>
+                        <div class="input-group clr">
+                            <label class="control-label" for="meta_title">{$lang.meta_title}</label>
+                            <div class="inputs">
+                                <input class="ipttheme" id="meta_title" type="text" name="meta_title" value="{$smarty.post.meta_title|escape}"/>
+                            </div>
+                        </div>
+                        <div class="input-group clr">
+                            <label class="control-label" for="meta_keywords">{$lang.meta_keywords}</label>
+                            <div class="inputs">
+                                <input class="ipttheme" type="text" id="meta_keywords" name="meta_keywords" value="{$smarty.post.meta_keywords|escape}"/>
+                            </div>
+                        </div>
+                        <div class="input-group clr">
+                            <label class="control-label" for="meta_description">{$lang.meta_description}</label>
+                            <div class="inputs">
+                                <input class="ipttheme" type="text" id="meta_description" name="meta_description" value="{$smarty.post.meta_description|escape}"/>
+                            </div>
+                        </div>
+                        <div class="input-group clr">
+                            <label class="control-label" for="desc">{$lang.text}</label>
+                            <div class="inputs">
+                                <!--初始化编辑器-->
+                                <script id="desc" name="text" type="text/plain">{$smarty.post.text}</script>
+                                <!-- 配置文件 -->
+                                <script type="text/javascript" src="{$template_data}ueditor/ueditor.config.js"></script>
+                                <!-- 编辑器源码文件 -->
+                                <script type="text/javascript" src="{$template_data}ueditor/ueditor.all.js"></script>
+                                <!-- 实例化编辑器 -->
+                                <script type="text/javascript">
+                                    var ue = UE.getEditor('desc');
+                                </script>
+                                <!--<textarea name="text" id="desc">{$smarty.post.text}</textarea>-->
+                            </div>
+                        </div>
+                        <div class="input-group clr">
+                            <label class="control-label" for="in_menu">{$lang.in_menu}</label>
+                            <div class="inputs">
+                                <input type="checkbox" name="menu" value="true" id="in_menu" class="checkbox" {if
+                                $smarty.post.menu == 'true'}checked="checked"{/if} />
+                                <label class="checktext" for="in_menu">{$lang.yes}</label>
+                            </div>
+                        </div>
+                        <div class="input-group clr">
+                            <label class="control-label" for="visible">{$lang.visible}</label>
+                            <div class="inputs">
+                                <input type="checkbox" name="visible" value="true" id="visible" class="checkbox" {if
+                                $smarty.post.visible == 'true'}checked="checked"{/if} />
+                                <label class="checktext" for="visible">{$lang.yes}</label>
+                            </div>
+                        </div>
+                        <div class="form-submit">
+                            {if $smarty.get.c=='edit'}
+                            <button type="submit" name="edit" class="btntheme btnsize btn-primary">{$lang.edit}</button>
+                            {else}
+                            <button type="submit" name="add" class="btntheme btnsize btn-primary">{$lang.add}</button>
+                            {/if}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        </div>
+    </div>
+</div>
+</body>
+</html>

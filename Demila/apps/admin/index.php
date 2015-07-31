@@ -8,7 +8,6 @@
 // +----------------------------------------------------------------------
 // | Email author@demila.org
 // +----------------------------------------------------------------------
-
 require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
 $index = 'http://demila.org';
     //新闻
@@ -53,6 +52,9 @@ $index = 'http://demila.org';
     $sysinfo['server_time'] = date('Y-m-d H:i:s').'&nbsp;'.date_default_timezone_get();
     $sysinfo['root_path'] = ROOT_PATH;
     abr('sysinfo',$sysinfo);
+
+    abr('last_login',$_SESSION["user"]["last_login_datetime"]);
+
 
 
 ?>

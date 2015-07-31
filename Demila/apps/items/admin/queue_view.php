@@ -17,11 +17,11 @@ _setTitle($langArray['queue']);
 	}
 
 	if(!isset($_GET['p'])) {
-		$_GET['p'] = '';
+		$_GET['p'] = '1';
 	}
-	
+
 	$cms = new items ( );
-	
+
 	require_once ROOT_PATH.'/apps/users/models/users.class.php';
 	$usersClass = new users();
 
@@ -35,19 +35,20 @@ _setTitle($langArray['queue']);
     abr('data', $data);
 
 if(isset($_POST['submit'])) {
-		
+
 		if($_POST['action'] == 'approve') {
 			$s = $cms->approve($_GET['id']);
-			if($s === true) {
+			if($s == true) {
 				refresh("?m=".$_GET['m']."&c=queue&p=".$_GET['p'], $langArray['complete_approve_item']);
 			}
 			else {
 				addErrorMessage($s, '', 'error');
 			}
-		}
+}
 		elseif($_POST['action'] == 'unapprove') {
 			$s = $cms->unapprove($_GET['id']);
-			if($s === true) {
+			if($s == true) {
+
 				refresh("?m=".$_GET['m']."&c=queue&p=".$_GET['p'], $langArray['complete_unapprove_item']);
 			}
 			else {
@@ -56,7 +57,7 @@ if(isset($_POST['submit'])) {
 		}
 		elseif($_POST['action'] == 'delete') {
 			$s = $cms->unapproveDelete($_GET['id']);
-			if($s === true) {
+			if($s == true) {
 				refresh("?m=".$_GET['m']."&c=queue&p=".$_GET['p'], $langArray['complete_delete_item']);
 			}
 			else {

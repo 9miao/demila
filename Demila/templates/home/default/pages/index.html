@@ -1,0 +1,42 @@
+{include file="$template_path/html/header.html"}
+<link href="{$template_data}css/custom/ucenter.css" rel="stylesheet" />
+<link href="{$template_data}css/custom/mobile.css" media="screen" rel="stylesheet" type="text/css" />
+</head>
+<body>
+{include file="$template_path/html/pagenav.html"}
+<div class="pagetit">
+  <div class="navblock">
+    <ul class="titnav clr">
+      <li><a href="/" title="主页">主页</a></li>
+      <li class="pipe">&gt;</li>
+      <li>{$title}</li>
+    </ul>
+    <h2>{$title}</h2>
+  </div>
+</div>
+
+<div class="ucbg">
+  <div class="ucblock clr">
+    {$errorMessage}
+    <div class="txtlistnav">
+      <ul>
+        {if $menuPages}
+        {foreach from=$menuPages[0] item=p name=foo}
+        <li><a href="/{$languageURL}pages/{$p.key}" title="{$p.name}">{$p.name}</a></li>
+        {if isset($menuPages[$p.id])}
+        {foreach from=$menuPages[$p.id] item=sp name=foo1}
+        <li><a href="/{$languageURL}pages/{$sp.key}" title="{$sp.name}">{$sp.name}</a></li>
+        {/foreach}
+        {/if}
+        {/foreach}
+        {/if} 
+      </ul>
+    </div>
+    <div class="detailtxt">
+      {$page.text}
+    </div>
+  </div>
+</div>
+{include file="$root_path/templates/home/default/html/footer.html"}
+</body>
+</html>

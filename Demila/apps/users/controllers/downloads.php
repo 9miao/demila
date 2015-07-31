@@ -47,10 +47,10 @@ if(is_numeric($itemID)) {
         $stars = '';
         for($i=1;$i<6;$i++) {
             if($item['rating'] >= $i) {
-                $stars .= '<img src="/static/templates/default/img/star-on.png" alt="" />';
+                $stars .= '<img src="{$template_data}img/star-on.png" alt="" />';
             }
             else {
-                $stars .= '<img src="/static/templates/default/img/star-off.png" alt="" />';
+                $stars .= '<img src="{$template_data}img/star-off.png" alt="" />';
             }
         }
 

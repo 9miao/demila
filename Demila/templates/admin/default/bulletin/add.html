@@ -1,0 +1,66 @@
+{include file="$admin_template_path/html/header.html"}
+</head>
+<body>
+{include file="$admin_template_path/html/pagetops.html"}
+{if $errorMessage}
+<div id="errormsg">
+<div class="msg">
+  <div class="closebtn"><i data-icon="" class="icon-close"></i></div>
+  {$errorMessage}
+</div>
+</div>
+{literal}
+<script type="text/javascript">
+seajs.use(["modules/pageui/msg"], function(msg){
+    msg.msginit("#errormsg");
+});
+</script>
+{/literal}
+{/if}
+
+<div class="pagebg">
+  <div class="mcontent pagemain clr">
+    {include file="$admin_template_path/html/leftmenu.html"}
+    <div class="pagemainconent">
+
+    <div class="rightdetail_admin">
+      <div class="sideblock">
+        <div class="sideheader">添加新闻邮件</div>
+        <div class="sidebody">
+        <script type="text/javascript" src="{$template_data}nicEditors/nicEdit.js"></script>
+        <script type="text/javascript">{literal}bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });{/literal}</script>
+        <div class="content-box">
+          <form action="" class="horizontal-form item-form disable-on-submit" action="" method="post" enctype="multipart/form-data">
+            <div class="input-group clr">
+              <label class="control-label" for="name">{$lang.name}</label>
+              <div class="inputs">
+                <input class="ipttheme" id="name" type="text" name="name" value="{$smarty.post.name|escape}" required="true" />
+                {if isset($error.name)}
+                <small>{$error.name}</small>
+                {/if}
+              </div>
+            </div>
+            <div class="input-group clr">
+              <label class="control-label" for="desc">{$lang.text}</label>
+              <div class="inputs">
+                <textarea class="ipttheme area" id="text" name="text">{$smarty.post.text}</textarea>
+                {if isset($error.text)}
+                <small>{$error.text}</small>
+                {/if}
+              </div>
+            </div>
+            <input type="hidden" name="send_to" value="site" />
+            <div class="form-submit">
+              <button type="submit" name="add" class="btntheme btnsize btn-primary">{$lang.send}</button>
+            </div>
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    </div>
+  </div>
+</div>
+</body>
+</html>

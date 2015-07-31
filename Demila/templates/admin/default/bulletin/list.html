@@ -1,0 +1,71 @@
+{include file="$admin_template_path/html/header.html"}
+</head>
+<body>
+{include file="$admin_template_path/html/pagetops.html"}
+{if $errorMessage}
+<div id="errormsg">
+<div class="msg">
+  <div class="closebtn"><i data-icon="" class="icon-close"></i></div>
+  {$errorMessage}
+</div>
+</div>
+{literal}
+<script type="text/javascript">
+seajs.use(["modules/pageui/msg"], function(msg){
+    msg.msginit("#errormsg");
+});
+</script>
+{/literal}
+{/if}
+
+<div class="pagebg">
+	<div class="mcontent pagemain clr">
+		{include file="$admin_template_path/html/leftmenu.html"}
+		<div class="pagemainconent headtools{if $paging !=""} paging{/if}">
+
+		<div class="headtool b-b clr">
+			<div class="toolbtns clr">
+				<button class="btns btntheme btnsize" onclick="window.location='?m={$smarty.get.m}&c=add';" type="button"><i class="fa fa-plus"></i> {$lang.add_new}</button>
+			</div>
+		</div>
+		{if $paging !=""}
+		<div class="page-controls">
+			{$paging}
+		</div>
+		{/if}
+
+		<div class="rightdetail_admin">
+			{if is_array($data)}
+			<div class="general_table_border">
+				<table class="general_table" cellspacing="0" cellpadding="0" border="0">
+					<thead>
+						<tr>
+							<th>{$lang.name}</th>
+							<th width="150">{$lang.readed}</th>
+							<th width="250">操作</th>
+						</tr>
+					</thead>
+
+					<tbody>
+					{foreach from=$data item=d}
+						<tr id="row{$d.id}" class="{cycle values="no,alt"}">
+							<td>{$d.name}</td>
+							<td>{$d.readed}</td>
+							<td>
+								<a href="?m={$smarty.get.m}&c=view&id={$d.id}&p={$smarty.get.p}" title="{$lang.view}"><img class="middle" src="{$template_data}admin/images/icons/16x16/view.png" /> {$lang.view}</a>
+							</td>
+						</tr>
+						{/foreach}
+					</tbody>
+				</table> 	
+			</div>
+			{else}
+				{$lang.no_records}
+			{/if}
+    	</div>
+    	
+    	</div>
+	</div>
+</div>
+</body>
+</html>

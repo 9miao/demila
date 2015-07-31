@@ -1,0 +1,218 @@
+{include file="$template_path/html/header.html"}
+<link href="{$template_data}css/custom/ucenter.css" rel="stylesheet" />
+<link href="{$template_data}css/custom/mobile.css" media="screen" rel="stylesheet" type="text/css" />
+</head>
+<body>
+{include file="$template_path/html/pagenav.html"}
+{if $smarty.session.user.power_elite_author  == 'true' || $smarty.session.user.elite_author  == 'true'}
+<div class="pagetit pagetabs{if $smarty.session.user.power_elite_author  == 'true'} power-elite-author{/if}{if $smarty.session.user.elite_author  == 'true'} elite-author{/if}">
+  <div class="navblock">
+    <ul class="titnav clr">
+      <li><a href="/" title="主页">主页</a></li>
+      <li class="pipe">&gt;</li>
+      <li><a href="/{$languageURL}users/{$smarty.session.user.username}/">我的账号</a></li>
+    </ul>
+    <h2>用户控制面板</h2>
+    {include file="$template_path/users/tabsy.html"}
+  </div>
+</div>
+{else}
+<div class="pagetit pagetabs">
+  <div class="navblock">
+    <ul class="titnav clr">
+      <li><a href="/" title="主页">主页</a></li>
+      <li class="pipe">&gt;</li>
+      <li><a href="/{$languageURL}users/{$smarty.session.user.username}/">我的账号</a></li>
+    </ul>
+    <h2>用户控制面板</h2>
+    {include file="$template_path/users/tabsy.html"}
+  </div>
+</div>
+{/if}
+
+<div class="ucbg">
+  <div class="ucblock paddingt clr">
+      {$errorMessage}
+      <div class="leftdetail">
+      {if $qnews_data}
+      <h3 class="underlined">快讯</h3>
+      <div class="fastmsg clr">
+        {foreach from=$qnews_data item=i}
+        <a class="fastmsgimg"{if $i.url} href="{$i.url}"{/if} title="{$i.name}">
+          <img src="/{$i.thumb}" alt="{$i.name}" title="{$i.name}" />
+        </a>
+        <div class="fastmsgtxt">
+          <h3><a{if $i.url} href="{$i.url}"{/if} title="{$i.name}">{$i.name}</a></h3>
+          <p>{$i.description}</p>
+        </div>
+        {/foreach}
+      </div>
+      {/if}
+
+
+<div class="salesnum">
+  <h3 class="underlined">销量</h3>
+  <div class="general_table_border">
+    <table id="sales_table" class="general_table" cellspacing="0" cellpadding="0">
+      <thead>
+        <tr>
+          <td>{$lang.month}</td>
+          <td>{$lang.sales}</td>
+          <td>{$lang.earnings}</td>
+        </tr>
+      </thead>
+      <tbody>
+        {foreach from=$sales item=r key=year}
+        {foreach from=$r item=rr key=month} 
+        <tr id="month_{$month}_{$year}" class="{$year}">
+          <td id="month_{$month}_{$year}_show"><a href="#" id="link_{$month}_{$year}" {literal}onclick="$.ajax({complete:function(request){ hideLoading(); jQuery(&quot;#ajax-feedback&quot;).animate({&quot;height&quot;: &quot;toggle&quot;, &quot;opacity&quot;: &quot;toggle&quot;}, &quot;slow&quot;); }, beforeStart: function() { showLoading(); }, data:'ajax=ok', dataType:'script', type:'post', url:'/{/literal}{$languageURL}users/earnings/{$month}/{$year}{literal}'}); jQuery(&quot;#ajax-feedback&quot;).hide(); jQuery(&quot;#ajax-feedback&quot;).animate({&quot;height&quot;: &quot;toggle&quot;, &quot;opacity&quot;: &quot;toggle&quot;}, &quot;slow&quot;);; return false;"{/literal}>{$lang.monthArr[$month]} {$year}</a></td>
+          <td id="month_{$month}_{$year}_hide" style="display: none;"><a href="#" onclick="$('#month_{$month}_{$year}_details').empty(); $('#month_{$month}_{$year}_hide').hide(); $('#month_{$month}_{$year}_show').show(); return false;">{$lang.monthArr[$month]} {$year}</a></td>
+          <td>{$rr.buy} {$lang.sales}</td>
+          <td class="earningsVal">{$currency.symbol}{$rr.total|string_format:"%.2f"}</td>
+        </tr>
+      <tbody id="month_{$month}_{$year}_details">
+      </tbody>
+        {/foreach}
+        {/foreach}
+      </tbody>
+      <tfoot>
+        <tr>
+        <td>{$lang.total_sales}</td>
+        <td>{$earnings.sales} {$lang.sales}</td>
+        <td class="earningsTotal">{$currency.symbol}{$earnings.sales_earning|string_format:"%.2f"}</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+  <h3 class="underlined">{$lang.sales_graph}</h3>
+  <div id="sales_graph" class="graph mt10">
+    {foreach from=$sales item=r key=year}
+    {foreach from=$r item=rr key=month} 
+    <div class="bar 2010">
+      <strong>{$lang.monthArr[$month]} {$year}</strong>
+      <div style="width:{math equation="x * y" x=$saleIndex y=$rr.buy}px;" class="graph_1"></div>
+      <div class="value">{$rr.buy} {$lang.sales}</div>
+    </div>
+    {/foreach}
+    {/foreach}  
+  </div>
+  <h3 class="underlined">{$lang.earnings_graph}</h3>
+  <div id="earnings_graph" class="graph mt10">
+    {foreach from=$earningArr item=r key=year}
+    {foreach from=$r item=rr key=month} 
+    <div class="bar 2010">
+      <strong>{$lang.monthArr[$month]} {$year}</strong>
+      <div style="width:{math equation="x * y" x=$earningIndex y=$rr}px;" class="graph_1"></div>
+      <div class="value">{$currency.symbol}{$rr|string_format:"%.2f"}</div>
+    </div>
+    {/foreach}
+    {/foreach} 
+  </div>
+</div>
+<h3 class="underlined">评论</h3>
+<div class="commentblock">
+  {if $comments}
+  <div class="commentlist">
+    {foreach from=$comments item=c}
+    <div class="comment">
+      <div class="comment__user">
+        <a href="/{$languageURL}user/{$users[$c.user_id].username}" class="avatar" title="{$users[$c.user_id].username}">
+          {if $users[$c.user_id].avatar != ''} 
+          <img alt="{$users[$c.user_id].username}" class="" src="{$data_server}uploads/users/{$c.user_id}/A_{$users[$c.user_id].avatar}" />
+          {else}
+          <img alt="{$users[$c.user_id].username}" class="" src="{$template_data}img/default-user.jpg" />
+          {/if}
+          <span>{$users[$c.user_id].nickname}</span>
+        </a>
+      </div>
+      <div class="comment__container">
+        <div class="content-box comment__body">
+          <div class="comment__header">
+            <a href="/{$languageURL}user/{$users[$c.user_id].username}" class="comment__username">{$users[$c.user_id].nickname}</a>
+          </div>
+          <p>{$c.comment|nl2br}</p>
+          <div class="comment__meta">
+            发表于{$c.datetime|date_format:"%Y-%m-%d"} 
+            <a href="/{$languageURL}items/{$c.item_id}" alt="{$c.item_name}" title="{$c.item_name}" class="glyph-pencil"><span>{$c.item_name}</span></a>
+          </div>
+        </div>
+        {if isset($c.reply)}
+        {foreach from=$c.reply item=cc}
+        <div class="comment__reply ">
+          <a href="/{$languageURL}user/{$users[$cc.user_id].username}" class='comment__reply__avatar'>
+            {if $users[$cc.user_id].avatar != ''} 
+            <img alt="{$users[$cc.user_id].username}" height="30" src="{$data_server}uploads/users/{$cc.user_id}/A_{$users[$cc.user_id].avatar}" width="30" />
+            {else}
+            <img alt="{$users[$cc.user_id].username}" class="avt" height="30" src="{$template_data}img/default-user.jpg" width="30" />
+            {/if}
+          </a>
+          <div class="comment__reply__body">
+            <div class="comment__header">
+              <a href="/{$languageURL}user/{$users[$cc.user_id].username}" class="comment__username">{$users[$cc.user_id].nickname}</a>
+            </div>
+            <p>{$cc.comment|nl2br}</p>
+          </div>
+          <div class="comment__meta">
+            发表于{$cc.datetime|date_format:"%Y-%m-%d"}
+          </div>
+        </div>
+        {/foreach}
+        {/if}
+        <div id="replyhere_{$c.id}"></div>
+        {literal}<script language="javascript">
+        seajs.use(["jq"], function($){
+        $("{/literal}#replyhere_{$c.id}{literal}").load("{/literal}/{$languageURL}items/reply/{$c.id}{literal}");
+        });
+        </script>{/literal}
+      </div>
+    </div>
+    {/foreach}
+  </div>
+  {else}
+  <div class="content-box vertical-space">还没人评论你的作品。</div>
+  {/if}
+</div>
+
+    </div>
+    <div class="rightdetail">
+      <h3 class="bordertit">上传作品</h3>
+      <div class="borderbg uploadform">
+        <form id="begin-upload" action="/{$languageURL}" method="get">
+          <fieldset class="vertical-form">
+            <div class="input-group">
+              <label for="type">请选择要上传到的分类：</label>
+              <div class="inputs">
+                <select class="inline" id="category" name="category">
+                  {if $mainCategories}
+                  {foreach from=$mainCategories item=c}
+                  <option value="{$c.id}">{$c.name}</option>
+                  {/foreach}
+                  {/if}
+                </select>
+                <button onclick="window.location='/{$languageURL}upload/form/?category=' + document.getElementById('category').options[document.getElementById('category').selectedIndex].value;" type=button class="btntheme2 btnsize">下一步</button>
+              </div>
+              <p><a href="/{$languageURL}help/upload/">不知道怎么上传作品？</a></p>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+      <h3 class="bordertit">本周统计</h3>
+      <div class="borderbg">
+        <p>获得收入<strong>{$weekStats.earning|string_format:"%.2f"}</strong>元<br />售出作品<strong>{$weekStats.sold}</strong>次</p>
+      </div>
+{literal}
+<script type="text/javascript">
+seajs.use(["jq"], function($){
+  $("textarea").on("keyup keydown",function(){
+    var h=$(this);
+    h.height(20).height(h[0].scrollHeight);
+  });
+});
+</script>
+{/literal}
+    </div>
+  </div>
+</div>
+{include file="$root_path/templates/home/default/html/footer.html"}
+</body>
+</html>

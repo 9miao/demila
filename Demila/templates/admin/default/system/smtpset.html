@@ -1,0 +1,107 @@
+{include file="$admin_template_path/html/header.html"}
+</head>
+<body>
+{include file="$admin_template_path/html/pagetops.html"}
+{if $errorMessage}
+<div id="errormsg">
+<div class="msg">
+  <div class="closebtn"><i data-icon="" class="icon-close"></i></div>
+  {$errorMessage}
+</div>
+</div>
+{literal}
+<script type="text/javascript">
+seajs.use(["modules/pageui/msg"], function(msg){
+    msg.msginit("#errormsg");
+});
+</script>
+{/literal}
+{/if}
+
+<div class="pagebg">
+    <div class="mcontent pagemain clr">
+        {include file="$admin_template_path/html/leftmenu.html"}
+        <div class="pagemainconent">
+
+        <div class="rightdetail_admin" >
+            <div class="sideblock" id="gentable">
+                <div class="sideheader">修改邮件信息</div>
+                <div class="sidebody">
+                <form action="" class="horizontal-form item-form disable-on-submit" action="" method="post" enctype="multipart/form-data">
+                    <div class="input-group clr">
+                        <label class="control-label" for="smtp_host">SMTP服务器地址</label>
+                        <div class="inputs">
+                            <input class="ipttheme" id="smtp_host" type="text" name="smtp_host" value="{$data.smtp_host}" />
+                        </div>
+                    </div>
+                    <div class="input-group clr">
+                        <label class="control-label" for="smtp_from">邮件地址</label>
+                        <div class="inputs">
+                            <input class="ipttheme" id="smtp_from" type="text" name="smtp_from" value="{$data.smtp_from}" />
+                        </div>
+                    </div>
+                    <div class="input-group clr">
+                        <label class="control-label" for="smtp_port">SMTP端口</label>
+                        <div class="inputs">
+                            <input class="ipttheme" id="smtp_port" type="text" name="smtp_port" value="{$data.smtp_port}" />
+                        </div>
+                    </div>
+                    <div class="input-group clr">
+                        <label class="control-label" for="smtp_user">SMTP服务器用户名</label>
+                        <div class="inputs">
+                            <input class="ipttheme" id="smtp_user" type="text" name="smtp_user" value="{$data.smtp_user}" />
+                        </div>
+                    </div>
+                    <div class="input-group clr">
+                        <label class="control-label" for="smtp_pass">SMTP服务器密码</label>
+                        <div class="inputs">
+                            <input class="ipttheme" id="smtp_pass" type="password" name="smtp_pass" value="{$data.smtp_pass}" />
+                        </div>
+                    </div>
+                    <div class="input-group clr">
+                        <label class="control-label" for="smtp_from_name">联系人名称</label>
+                        <div class="inputs">
+                            <input class="ipttheme" id="smtp_from_name" type="text" name="smtp_from_name" value="{$data.smtp_from_name}" />
+                        </div>
+                    </div>
+                    <div class="form-submit">
+                        <button type="submit" name="edit" class="btntheme btnsize btn-primary">{$lang.edit}</button>
+                    </div>
+                </form>
+                <div class="horizontal-form item-form disable-on-submit" >
+                    <div>
+                        <div class="input-group clr">
+                            <label class="control-label" for="test_emil">收件人地址</label>
+                            <div class="inputs">
+                                <input class="ipttheme" id="test_email" type="text" />
+                            </div>
+                        </div>
+                        <div class="form-submit">
+                            <button type="submit" class="btntheme btnsize btn-primary" id="test_email_button"
+                                    ajax-url="/apps/{$smarty.get.m}/ajax/edit.php"
+                                    >测试</button>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+
+        </div>
+    </div>
+</div>
+{literal}
+<script>
+seajs.use(["jq", "modules/ajax/btns"], function ($,aj) {
+    /*$("#gentable .statusrad").attr("ajax-data", "{'email':"+ email +"}");
+    aj.ajaxbtninit("#gentable .statusrad", "ajax-url","ajax-data", function (data) {
+        alert(data.status);
+    })*/
+    aj.emailajaxbtn("#gentable .statusrad", "#test_email", "/apps/{/literal}{$smarty.get.m}{literal}/ajax/edit.php", function(data){
+        alert(data.status);
+    })
+});
+</script>
+{/literal}
+</body>
+</html>

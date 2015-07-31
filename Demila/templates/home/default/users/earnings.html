@@ -1,0 +1,153 @@
+{include file="$template_path/html/header.html"}
+<link href="{$template_data}css/custom/ucenter.css" rel="stylesheet" />
+<link href="{$template_data}css/custom/mobile.css" media="screen" rel="stylesheet" type="text/css" />
+</head>
+<body>
+{include file="$template_path/html/pagenav.html"}
+{if $smarty.session.user.power_elite_author  == 'true' || $smarty.session.user.elite_author  == 'true'}
+<div class="pagetit pagetabs{if $smarty.session.user.power_elite_author  == 'true'} power-elite-author{/if}{if $smarty.session.user.elite_author  == 'true'} elite-author{/if}">
+  <div class="navblock">
+    <ul class="titnav clr">
+      <li><a href="/" title="主页">主页</a></li>
+      <li class="pipe">&gt;</li>
+      <li><a href="/{$languageURL}users/{$smarty.session.user.username}/">我的账号</a></li>
+    </ul>
+    <h2>收入</h2>
+    {include file="$template_path/users/tabsy.html"}
+  </div>
+</div>
+{else}
+<div class="pagetit pagetabs">
+  <div class="navblock">
+    <ul class="titnav clr">
+      <li><a href="/" title="主页">主页</a></li>
+      <li class="pipe">&gt;</li>
+      <li><a href="/{$languageURL}users/{$smarty.session.user.username}/">我的账号</a></li>
+    </ul>
+    <h2>收入</h2>
+    {include file="$template_path/users/tabsy.html"}
+  </div>
+</div>
+{/if}
+<div id="content">
+      <div class="container">
+	  		{$errorMessage}
+	<div class="content-s">
+	
+		<h2 class="underlined">销量</h2>
+		
+		<div class="general_table_border">
+		<table id="sales_table" class="general_table" cellspacing="0" cellpadding="0">
+	    <thead>
+	      <tr>
+	       <td>{$lang.month}</td>
+	        <td>{$lang.sales}</td>
+	       <td>{$lang.earnings}</td>
+	      </tr>
+	    </thead>
+	    <tbody>
+			{foreach from=$sales item=r key=year}
+	    	{foreach from=$r item=rr key=month} 
+	      <tr id="month_{$month}_{$year}" class="{$year}">
+	        <td id="month_{$month}_{$year}_show"><a href="#" id="link_{$month}_{$year}" {literal}onclick="$.ajax({complete:function(request){ hideLoading(); jQuery(&quot;#ajax-feedback&quot;).animate({&quot;height&quot;: &quot;toggle&quot;, &quot;opacity&quot;: &quot;toggle&quot;}, &quot;slow&quot;); }, beforeStart: function() { showLoading(); }, data:'ajax=ok', dataType:'script', type:'post', url:'/{/literal}{$languageURL}users/earnings/{$month}/{$year}{literal}'}); jQuery(&quot;#ajax-feedback&quot;).hide(); jQuery(&quot;#ajax-feedback&quot;).animate({&quot;height&quot;: &quot;toggle&quot;, &quot;opacity&quot;: &quot;toggle&quot;}, &quot;slow&quot;);; return false;"{/literal}>{$lang.monthArr[$month]} {$year}</a></td>
+	        <td id="month_{$month}_{$year}_hide" style="display: none;"><a href="#" onclick="$('#month_{$month}_{$year}_details').empty(); $('#month_{$month}_{$year}_hide').hide(); $('#month_{$month}_{$year}_show').show(); return false;">{$lang.monthArr[$month]} {$year}</a></td>
+	        <td>{$rr.buy} {$lang.sales}</td>
+	        <td class="earningsVal">{$currency.symbol}{$rr.total|string_format:"%.2f"}</td>
+	      </tr>
+		    <tbody id="month_{$month}_{$year}_details">
+		    </tbody>
+	    	{/foreach}
+	    {/foreach}
+	    </tbody>
+		  <tfoot>
+		    <tr>
+		      <td>{$lang.total_sales}</td>
+		      <td>{$earnings.sales} {$lang.sales}</td>
+		      <td class="earningsTotal">{$currency.symbol}{$earnings.sales_earning|string_format:"%.2f"}</td>
+		    </tr>
+	    </tfoot>
+	  </table>
+	  </div>
+      <h2 class="underlined">{$lang.sales_graph}</h2>
+	  
+	  <div id="sales_graph" class="graph mt10">
+	    {foreach from=$sales item=r key=year}
+	    	{foreach from=$r item=rr key=month} 
+	      <div class="bar 2010">
+	        <strong>{$lang.monthArr[$month]} {$year}</strong>
+	        <div style="width:{math equation="x * y" x=$saleIndex y=$rr.buy}px;" class="graph_1"></div>
+	        <div class="value">{$rr.buy} {$lang.sales}</div>
+	      </div>
+	    	{/foreach}
+	    {/foreach}  
+		</div>
+		
+		<h2 class="underlined">{$lang.earnings_graph}</h2>
+		
+		<div id="earnings_graph" class="graph mt10">
+	  	{foreach from=$earningArr item=r key=year}
+	    	{foreach from=$r item=rr key=month} 
+	      <div class="bar 2010">
+	        <strong>{$lang.monthArr[$month]} {$year}</strong>
+	        <div style="width:{math equation="x * y" x=$earningIndex y=$rr}px;" class="graph_1"></div>
+	        <div class="value">{$currency.symbol}{$rr|string_format:"%.2f"}</div>
+	      </div>
+	    	{/foreach}
+	    {/foreach} 
+		</div>
+		
+		<h2 class="underlined">{$lang.referals}</h2>
+		
+		{if $referals}
+	  	<div class="general_table_border">
+		  <table id="referrals_table" class="general_table" cellpadding="0" cellspacing="0">
+		    <thead>
+		      <tr>
+		         <td>{$lang.month}</td>
+		         <td>{$lang.buy_items}</td>
+		         <td>{$lang.deposit}</td>
+		         <td>{$lang.earnings}</td>
+		      </tr>
+		    </thead>
+		    <tbody>
+		    {foreach from=$referals item=r key=year}
+		    	{foreach from=$r item=rr key=month} 
+		      <tr class="{$year}">
+		    	  <td><strong>{$lang.monthArr[$month]} {$year}</strong></td>
+		    	  <td>{$rr.buy}</td>
+		    	  <td>{$rr.deposit}</td>
+		    	  <td class="earningsVal">{$currency.symbol}{$rr.total|string_format:"%.2f"}</td>
+		    	</tr>
+		    	{/foreach}
+		    {/foreach}
+		    </tbody>
+		    <tfoot>
+		      <tr>
+		        <td>{$lang.total_referal_earning}:</td>
+		        <td></td>
+		        <td></td>            
+		        <td class="earningsTotal">{$currency.symbol}{$earnings.referal|string_format:"%.2f"}</td>
+		      </tr>
+		      </tfoot>
+		  </table>
+	  </div>
+	  {else}
+	  	<div class="content-box vertical-space">未发现记录！</div>
+	  {/if}
+	
+	  <h2 class="underlined"> {$lang.total_earning}: {$currency.symbol}{$earnings.total|string_format:"%.2f"}</h2>
+	
+	</div>
+<div class="sidebar-l sidebar-right">
+		<h2 class="box-heading">开始在网站上销售你的作品！</h2>
+	<div class="content-box">
+      <p>如何开始销售？</p>
+      <p>在本站销售作品，将会获得高额的分成。查看 <a href="/{$languageURL}make_money/become_an_author">如何开始</a>！</p>
+    </div>
+	</div> 
+
+</div> 
+</div> 
+{include file="$root_path/templates/home/default/html/footer.html"}
+</body>
+</html>

@@ -92,9 +92,9 @@ if(!check_login_bool()) {
 		abr('inUpdateQueue', 'yes');
 	}	
 	
-	
+
 	if(isset($_POST['save'])) {
-		$s = $itemsClass->edit($itemID);
+		$s = $itemsClass->  edit($itemID);
 		if($s === true) {
 			refresh('/'.$languageURL.'items/'.$itemID.'/', $langArray['complete_update_item'], 'complete');
 		}

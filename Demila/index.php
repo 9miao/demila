@@ -9,7 +9,6 @@
 // | Email author@demila.org
 // +----------------------------------------------------------------------
 
-
 #检查安装
 if(!file_exists($_SERVER['DOCUMENT_ROOT'].'/config/config.php')) {
 	header('Location: /setup/index.php');

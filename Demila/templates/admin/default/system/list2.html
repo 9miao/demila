@@ -1,0 +1,57 @@
+{include file="$admin_template_path/html/header.html"}
+</head>
+<body>
+{include file="$admin_template_path/html/pagetops.html"}
+{if $errorMessage}
+<div id="errormsg">
+<div class="msg">
+  <div class="closebtn"><i data-icon="" class="icon-close"></i></div>
+  {$errorMessage}
+</div>
+</div>
+{literal}
+<script type="text/javascript">
+seajs.use(["modules/pageui/msg"], function(msg){
+    msg.msginit("#errormsg");
+});
+</script>
+{/literal}
+{/if}
+
+<div class="pagebg">
+  	<div class="mcontent pagemain clr">
+	    {include file="$admin_template_path/html/leftmenu.html"}
+	    <div class="pagemainconent">
+
+		<div class="rightdetail_admin">
+			<div class="general_table_border">
+				<table class="general_table" cellspacing="0" cellpadding="0" border="0">
+					<thead>
+						<tr>
+							<th>字段名称</th>
+							<th width="10%">&nbsp;</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>系统货币</td>
+							<td><a href="/{$languageURL}admin/?m=system&c=currency" title="编辑"><i class="fa fa-edit text-success m-r-xs"></i> 编辑</a></td>
+						</tr>
+						<tr>
+							<td>支付方式</td>
+							<td><a href="/{$languageURL}admin/?m=payments&c=list" title="编辑"><i class="fa fa-edit text-success m-r-xs"></i> 编辑</a></td>
+						</tr>
+						<tr>
+							<td>分成比例</td>
+							<td><a href="/{$languageURL}admin/?m=percents&c=list" title="编辑"><i class="fa fa-edit text-success m-r-xs"></i> 编辑</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
+		</div>
+	</div>
+</div>
+</body>
+</html>

@@ -23,8 +23,7 @@ $config = array (
 'use_language' => true,//get_id() +1
 'default_language' => 'zh',
 'langs' => array('zh'),
-    //模板
-'template'=>'default',
+
 'debug' => false,
 'debug_ips' => array (
 	'localhost', '::1', 
@@ -48,13 +47,19 @@ $config = array (
 	'jpg' 
 ),
 
-'max_upload_size' => 1024 * 1024 * 32,  //32 MB
+'max_upload_size' => 1024 * 1024 * 1024,  //32 MB
 'upload_ext' => array(
-	'jpg',
-	'png',
-	'zip',
-	'mp3',
-	'wma'
+    'jpg',
+    'png',
+    'zip',
+    'mp3',
+    'wma',
+    'mp4',
+    'gif',
+    'wav',
+    'flv',
+    'wmv',
+    'swf'
 ),
 
 'max_photo_size' => 1024 * 1024 * 10,  //10 MB

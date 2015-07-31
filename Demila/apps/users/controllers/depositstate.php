@@ -10,7 +10,6 @@ if(isset($_GET["type"]) && $_GET["type"]==1){
     }
         refresh('http://' . $config['domain'] . '/' . $languageURL . 'users/deposit/success/' . $order_id . '/');
         echo 'success';
-
 }
 if(isset($_GET["type"]) && $_GET["type"]==0){
     //支付宝直接购买订单

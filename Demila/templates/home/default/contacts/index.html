@@ -1,0 +1,95 @@
+{include file="$template_path/html/header.html"}
+<link href="{$template_data}css/custom/ucenter.css" rel="stylesheet" />
+<link href="{$template_data}css/custom/mobile.css" media="screen" rel="stylesheet" type="text/css" />
+</head>
+<body>
+{include file="$template_path/html/pagenav.html"}
+<div class="ucbg">
+  <div class="ucblock clr">
+    {$errorMessage}
+    <div class="supporttit">
+      <h3>发送一个支持请求</h3>
+      <p>{$lang.support_info}</p>
+    </div>
+    <div class="supportbg clr">
+      <div class="supportform">
+        <form action="" method="post" id="supportform" class="listform" autocomplete="off" enctype="multipart/form-data">
+          <div class="formitem clr">
+            <span class="ipttxt">用户名</span>
+            <div class="iptbg">
+              <input type="text" class="formipt" name="username" id="username" required="true" value="{$smarty.session.user.username}" data-type="用户名" autocomplete="off" />
+            </div>
+            <span class="errtxt"></span>
+            <span class="suctxt"></span>
+          </div>
+          <div class="formitem clr">
+            <span class="ipttxt">{$lang.email}</span>
+            <div class="iptbg">
+              <input type="text" class="formipt" id="usermail" name="email" required="true" value="{$smarty.session.user.email}" autocomplete="off" />
+            </div>
+            <span class="errtxt"></span>
+            <span class="suctxt"></span>
+          </div><div class="formitem clr">
+            <span class="ipttxt">{$lang.your_issue}</span>
+            <div class="selbg">
+              <select class="selval" id="supporttype" name="issue_id">
+                <option value="0">{$lang.select_issue}</option>
+                {if $categories}
+                {foreach from=$categories item=c}
+                <option value="{$c.id}">{$c.name}</option>
+                {/foreach}
+                {/if}
+              </select>
+            </div>
+            <span class="errtxt"></span>
+            <span class="suctxt"></span>
+          </div>
+          
+          <div class="formitem clr">
+            <span class="ipttxt">{$lang.how_can_we_help}</span>
+            <div class="areabg">
+              <textarea class="formtextarea" name="issue_details" id="supportdetail" data-type="详细描述" autocomplete="off"></textarea>
+            </div>
+            <span class="errtxt"></span>
+            <span class="suctxt"></span>
+          </div>
+          <div class="formitem clr">
+            <span class="ipttxt">验证码</span>
+            <div class="iptbg2">
+              <input id="yzm" maxlength="4" type="text" tabindex="3" class="formipt" name="verify" id="verify" data-type="验证码" autocomplete="off" />
+            </div>
+            <img class="yzmimg" src="/{$languageURL}verify" id="verify_pic">
+            <a class="yzmfrush" title="刷新验证码" id="verify_btn">刷新验证码</a>
+            <span class="errtxt"></span>
+            <span class="suctxt"></span>
+          </div>
+          <div class="formitem clr">
+            <span class="ipttxt">&nbsp;</span>
+            <p class="supporttxt">{$lang.contact_details4}</p>
+          </div>
+          <div class="formitem clr">
+            <span class="ipttxt">&nbsp;</span>
+            <input type="hidden" name="action" value="action" />
+            <a class="supportbtn btntheme1" id="supportbtn" title="发送">发送</a>
+          </div>
+        </form>
+      </div>
+      <div class="supporttip">
+        <h4>客服工作时间</h4>
+        <p>问题一般会在24小时内答复<br />复杂的问题可能需要更长的时间</p>
+        <span class="tipimg"></span>
+      </div>
+    </div>
+  </div>
+</div>
+{include file="$root_path/templates/home/default/html/footer.html"}
+<script type="text/javascript">
+{literal}
+seajs.use(["jq", "datavalid"], function($, dvo){
+  dvo.supportInit($("#supportform"));
+  dvo.yzminit($("#verify_pic"), [$("#verify_pic"), $("#verify_btn")]);
+});
+{/literal}
+</script>
+</body>
+</html>

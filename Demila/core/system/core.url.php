@@ -15,6 +15,9 @@
 
 
 //path_info
+
+//$_GET ['url']=str_replace("/index.php","",$_SERVER['REQUEST_URI']) ;
+//$_GET ['url']=get_new_str($_GET ['url']);
 $_GET ['url']=get_new_str($_SERVER["PATH_INFO"]);
 $_GET ['url']=str_replace("index.php", "",  $_GET ['url']);
 

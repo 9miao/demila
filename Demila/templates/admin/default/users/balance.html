@@ -1,0 +1,74 @@
+{include file="$admin_template_path/html/header.html"}
+</head>
+<body>
+{include file="$admin_template_path/html/pagetops.html"}
+{if $errorMessage}
+<div id="errormsg">
+<div class="msg">
+  <div class="closebtn"><i data-icon="" class="icon-close"></i></div>
+  {$errorMessage}
+</div>
+</div>
+{literal}
+<script type="text/javascript">
+seajs.use(["modules/pageui/msg"], function(msg){
+    msg.msginit("#errormsg");
+});
+</script>
+{/literal}
+{/if}
+
+<div class="pagebg">
+  <div class="mcontent pagemain clr">
+    {include file="$admin_template_path/html/leftmenu.html"}
+    <div class="pagemainconent headtools">
+
+    <div class="headtool b-b clr">
+      <div class="toolbtns clr">
+        <button class="btns btntheme btnsize" onclick="window.location='?m={$smarty.get.m}&c=addBalance&user_id={$smarty.get.id}';" type="button"><i class="fa fa-plus"></i> {$lang.add_new}</button>
+      </div>
+    </div>
+    <div class="rightdetail_admin">
+      {if is_array($data)}
+      <div class="general_table_border">
+        <table id="generlist" class="general_table" cellspacing="0" cellpadding="0" border="0">
+          <thead>
+            <tr>
+              <th>数量</th>
+              <th>{$lang.date}</th>
+              <th width="150">{$lang.paid}</th>
+              <th width="150">{$lang.from_admin}</th>
+              <th width="250">操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            {foreach from=$data item=d}
+            <tr id="row{$d.id}" class="{cycle values="no,alt"}">
+              <td class="ta-right">{$currency.symbol}{$d.deposit|string_format:"%.2f"}</td>
+              <td>{$d.datetime|date_format:"%Y-%m-%d %H:%M:%S"}</td>
+              <td style="font-weight:bold; color:{if $d.paid == 'true'} #48691d; {else} #c00; {/if}">{if $d.paid == 'true'} {$lang.yes} {else} {$lang.no} {/if}</td>
+              <td style="font-weight:bold; color:{if $d.from_admin} #48691d; {else} #c00; {/if}">{if $d.from_admin} {$lang.yes} {else} {$lang.no} {/if}</td>
+              <td>
+              <a href="?m={$smarty.get.m}&c=editBalance&id={$d.id}" title="{$lang.edit}"><i class="fa fa-edit text-success m-r-xs"></i> {$lang.edit}</a>
+              <a class="deletebtn" ajax-url="/apps/{$smarty.get.m}/ajax/delete.php" item-id="{$d.id}" href="javascript:void(0);" title="{$lang.delete}"><i class="fa fa-trash-o text-danger m-r-xs"></i> {$lang.delete}</a>
+              </td>
+            </tr>
+            {/foreach}
+          </tbody>
+        </table>
+      </div>
+      {literal}
+      <script type="text/javascript">
+      seajs.use(["modules/ajax/btns"], function(aj){
+        aj.deletebtninit("#generlist .deletebtn", "ajax-url", "item-id", {'deleteBalance':true,'id':''}, "deleteRow");
+      });
+      </script>
+      {/literal}
+      {/if}
+    </div>
+
+    </div>
+  </div>
+</div>
+</body>
+</html>

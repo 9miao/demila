@@ -1,0 +1,339 @@
+<div class="pagemenu bg-menu" id="pagemenu">
+	<div class="menumain">
+		<div class="menuscrollbox" id="menuscrollbox">
+			<div>
+				<div class="avatarblock bg-dk" id="avatarblock">
+					<a class="avatarlink buttons clr">
+						<span class="avatarimg bg-ava-img lf">
+							<img src="{$admin_template_data}img/avatar.png" alt="{$smarty.session.user.username}" />
+							<span class="imgtip bg-tip-on"></span>
+						</span>
+						<span class="avatardetail text-ava-det lf">
+							<span class="names">
+								<span class="sp text-ava-name">{$smarty.session.user.username}</span>
+								<span class="caret"></span>
+							</span>
+							<span class="titles">超级管理员</span>
+						</span>
+					</a>
+					<ul class="avatarmenu bg-white" id="avatarmenu">
+						<li>
+							<span class="arrow top"></span>
+							<a href="/{$languageURL}users/{$smarty.session.user.username}/" title="设置">设置</a>
+						</li>
+					</ul>
+				</div>
+				<ul class="menumainlist" id="menumainlist">
+					<li class="menutit text-menu-tit">选项</li>
+					<li{if $smarty.get.m=='system' && $smarty.get.c=='console'} class="active"{/if}>
+						<a class="menulink text-menu-link clr" href="/{$languageURL}admin/?m=system&c=console">
+							<span class="icon lf i-statistics"></span>
+							<span class="menutxt lf">控制台</span>
+						</a>
+					</li>
+					<li{if ($smarty.get.m=='categories' && $smarty.get.c=='list') || ($smarty.get.m=='collections' && $smarty.get.c=='list') || ($smarty.get.m=='attributes' && $smarty.get.c=='list')} class="active"{/if}>
+						<a class="menutip buttons text-menu-link clr">
+							<span class="icon lf i-ellipsis"></span>
+							<span class="menutxt lf">栏目</span>
+							<span class="menutips text-menu-tip rf">
+								<i class="icon i-circle-sm-o text"></i>
+								<i class="icon i-circle-sm text-active"></i>
+							</span>
+						</a>
+						<ul class="menunav bg-dk">
+							<li>
+								<span class="arrow left"></span>
+								<a class="navlink text-menu-link clr" href="/{$languageURL}admin/?m=categories&c=list" title="作品分类">
+									<i class="icon lf i-dot"></i>
+									<span class="lf">作品分类</span>
+								</a>
+							</li>
+							<li>
+								<a class="navlink text-menu-link clr" href="/{$languageURL}admin/?m=collections&c=list" title="书签集">
+									<i class="icon lf i-dot"></i>
+									<span class="lf">书签集</span>
+								</a>
+							</li>
+							<li>
+								<a class="navlink text-menu-link clr" href="/{$languageURL}admin/?m=attributes&c=list" title="属性类别和属性">
+									<i class="icon lf i-dot"></i>
+									<span class="lf">属性类别和属性</span>
+								</a>
+							</li>
+						</ul>
+					</li>
+					<li {if ($smarty.get.m=='users' && $smarty.get.c=='users') || ($smarty.get.m=='users' && $smarty.get.c=='list') || ($smarty.get.m=='users' && $smarty.get.c=='groups')} class="active"{/if}>
+						<a class="menutip buttons text-menu-link clr">
+							<span class="icon lf i-user2"></span>
+							<span class="menutxt lf">用户</span>
+							<span class="menutips text-menu-tip rf">
+								<i class="icon i-circle-sm-o text"></i>
+								<i class="icon i-circle-sm text-active"></i>
+							</span>
+						</a>
+						<ul class="menunav bg-dk">
+							<li>
+								<span class="arrow left"></span>
+								<a class="navlink text-menu-link clr" href="/{$languageURL}admin/?m=users&c=users" title="全部分类">
+									<i class="icon lf i-dot"></i>
+									<span class="lf">全部分类</span>
+								</a>
+							</li>
+							<li>
+								<a class="navlink text-menu-link clr" href="/{$languageURL}admin/?m=users&c=list&u_type=1" title="普通用户">
+									<i class="icon lf i-dot"></i>
+									<span class="lf">普通用户</span>
+								</a>
+							</li>
+							<li>
+								<a class="navlink text-menu-link clr" href="/{$languageURL}admin/?m=users&c=list&u_type=2" title="普通作者">
+									<i class="icon lf i-dot"></i>
+									<span class="lf">普通作者</span>
+								</a>
+							</li>
+							<li>
+								<a class="navlink text-menu-link clr" href="/{$languageURL}admin/?m=users&c=list&u_type=3" title="签约作者">
+									<i class="icon lf i-dot"></i>
+									<span class="lf">签约作者</span>
+								</a>
+							</li>
+							<li>
+								<a class="navlink text-menu-link clr" href="/{$languageURL}admin/?m=users&c=list&u_type=4" title="推荐作者">
+									<i class="icon lf i-dot"></i>
+									<span class="lf">推荐作者</span>
+								</a>
+							</li>
+							<li>
+								<a class="navlink text-menu-link clr" href="/{$languageURL}admin/?m=users&c=groups" title="用户权限设置">
+									<i class="icon lf i-dot"></i>
+									<span class="lf">用户权限设置</span>
+								</a>
+							</li>
+						</ul>
+					</li>
+					<li {if ($smarty.get.m=='items' && $smarty.get.c=='list') || ($smarty.get.m=='tags' && $smarty.get.c=='list')} class="active"{/if}>
+						<a class="menutip buttons text-menu-link clr">
+							<span class="icon lf i-layer2"></span>
+							<span class="menutxt lf">作品</span>
+							<span class="menutips text-menu-tip rf">
+								<i class="icon i-circle-sm-o text"></i>
+								<i class="icon i-circle-sm text-active"></i>
+							</span>
+						</a>
+						<ul class="menunav bg-dk">
+							<li>
+								<span class="arrow left"></span>
+								<a class="navlink text-menu-link clr" href="/{$languageURL}admin/?m=items&c=list" title="全部作品">
+									<i class="icon lf i-dot"></i>
+									<span class="lf">全部作品</span>
+								</a>
+							</li>
+							<li>
+								<a class="navlink text-menu-link clr" href="/{$languageURL}admin/?m=items&c=list&p=&q=&order=weekly&dir=desc" title="推荐作品">
+									<i class="icon lf i-dot"></i>
+									<span class="lf">推荐作品</span>
+								</a>
+							</li>
+							<li>
+								<a class="navlink text-menu-link clr" href="/{$languageURL}admin/?m=items&c=list&p=&q=&order=freefile&dir=desc" title="免费作品">
+									<i class="icon lf i-dot"></i>
+									<span class="lf">免费作品</span>
+								</a>
+							</li>
+							<li>
+								<a class="navlink text-menu-link clr" href="/{$languageURL}admin/?m=tags&c=list" title="作品标签">
+									<i class="icon lf i-dot"></i>
+									<span class="lf">作品标签</span>
+								</a>
+							</li>
+						</ul>
+					</li>
+					<li {if ($smarty.get.m=='items' && $smarty.get.c=='queue') || ($smarty.get.m=='items' && $smarty.get.c=='queue_update') || ($smarty.get.m=='users' && $smarty.get.c=='withdraws') || ($smarty.get.m=='contacts' && $smarty.get.c=='list') || ($smarty.get.m=='users' && $smarty.get.c=='comments')} class="active"{/if}>
+						<a class="menutip buttons text-menu-link clr">
+							<span class="icon lf i-spin"></span>
+							<span class="menutxt lf">审核</span>
+							<span class="menutips text-menu-tip rf">
+								<i class="icon i-circle-sm-o text"></i>
+								<i class="icon i-circle-sm text-active"></i>
+							</span>
+							{if $queueCount || $updateCount || $depositCount || $contactsCount || $commentCount}
+							<span class="numtip rf">{$queueCount+$updateCount+$depositCount+$contactsCount+$commentCount}</span>
+							{/if}
+						</a>
+						<ul class="menunav bg-dk">
+							<li>
+								<span class="arrow left"></span>
+								<a class="navlink text-menu-link clr" href="/{$languageURL}admin/?m=items&c=queue" title="上传作品审核">
+									<i class="icon lf i-dot"></i>
+									<span class="lf">上传作品审核</span>
+									{if $queueCount}<span class="numtip rf">{$queueCount}</span>{/if}
+								</a>
+							</li>
+							<li>
+								<a class="navlink text-menu-link clr" href="/{$languageURL}admin/?m=items&c=queue_update" title="更新作品审核">
+									<i class="icon lf i-dot"></i>
+									<span class="lf">更新作品审核</span>
+									{if $updateCount}<span class="numtip rf">{$updateCount}</span>{/if}
+								</a>
+							</li>
+							<li>
+								<a class="navlink text-menu-link clr" href="/{$languageURL}admin/?m=users&c=withdraws" title="用户提现审核">
+									<i class="icon lf i-dot"></i>
+									<span class="lf">用户提现审核</span>
+									{if $depositCount}<span class="numtip rf">{$depositCount}</span>{/if}
+								</a>
+							</li>
+							<li>
+								<a class="navlink text-menu-link clr" href="/{$languageURL}admin/?m=contacts&c=list" title="联系支持审核">
+									<i class="icon lf i-dot"></i>
+									<span class="lf">联系支持审核</span>
+									{if $contactsCount}<span class="numtip rf">{$contactsCount}</span>{/if}
+								</a>
+							</li>
+							<li>
+								<a class="navlink text-menu-link clr" href="/{$languageURL}admin/?m=users&c=comments" title="评论举报处理">
+									<i class="icon lf i-dot"></i>
+									<span class="lf">评论举报处理</span>
+									{if $commentCount}<span class="numtip rf">{$commentCount}</span>{/if}
+								</a>
+							</li>
+						</ul>
+					</li>
+					<li {if ($smarty.get.m=='system' && $smarty.get.c=='list') || ($smarty.get.m=='system' && $smarty.get.c=='list2') || ($smarty.get.m=='system' && $smarty.get.c=='list3') || ($smarty.get.m=='system' && $smarty.get.c=='edit') || ($smarty.get.m=='system' && $smarty.get.c=='logo') || ($smarty.get.m=='system' && $smarty.get.c=='sendmail') || ($smarty.get.m=='system' && $smarty.get.c=='template') || ($smarty.get.m=='system' && $smarty.get.c=='currency') || ($smarty.get.m=='payments' && $smarty.get.c=='list') || ($smarty.get.m=='percents' && $smarty.get.c=='list') || ($smarty.get.m=='system' && $smarty.get.c=='badges') || ($smarty.get.m=='countries' && $smarty.get.c=='list') || ($smarty.get.m=='contacts' && $smarty.get.c=='categories')} class="active"{/if}>
+						<a class="menutip buttons text-menu-link clr">
+							<span class="icon lf i-cog2"></span>
+							<span class="menutxt lf">设置</span>
+							<span class="menutips text-menu-tip rf">
+								<i class="icon i-circle-sm-o text"></i>
+								<i class="icon i-circle-sm text-active"></i>
+							</span>
+						</a>
+						<ul class="menunav bg-dk">
+							<li>
+								<span class="arrow left"></span>
+								<a class="navlink text-menu-link clr" href="/{$languageURL}admin/?m=system&c=list" title="站点信息设置">
+									<i class="icon lf i-dot"></i>
+									<span class="lf">站点信息设置</span>
+								</a>
+							</li>
+							<li>
+								<a class="navlink text-menu-link clr" href="/{$languageURL}admin/?m=system&c=list2" title="资金相关设置">
+									<i class="icon lf i-dot"></i>
+									<span class="lf">资金相关设置</span>
+								</a>
+							</li>
+							<li>
+								<a class="navlink text-menu-link clr" href="/{$languageURL}admin/?m=system&c=list3" title="用户相关设置">
+									<i class="icon lf i-dot"></i>
+									<span class="lf">用户相关设置</span>
+								</a>
+							</li>
+						</ul>
+					</li>
+					<li {if ($smarty.get.m=='reports' && $smarty.get.c=='list') || ($smarty.get.m=='bulletin' && $smarty.get.c=='list') || ($smarty.get.m=='bulletin' && $smarty.get.c=='emails') || ($smarty.get.m=='bulletin' && $smarty.get.c=='add') || ($smarty.get.m=='qnews' && $smarty.get.c=='list') || ($smarty.get.m=='pages' && $smarty.get.c=='list') || ($smarty.get.m=='qnews' && $smarty.get.c=='add') || ($smarty.get.m=='quiz' && $smarty.get.c=='list')} class="active"{/if}>
+						<a class="menutip buttons text-menu-link clr">
+							<span class="icon lf i-bulb"></span>
+							<span class="menutxt lf">其他</span>
+							<span class="menutips text-menu-tip rf">
+								<i class="icon i-circle-sm-o text"></i>
+								<i class="icon i-circle-sm text-active"></i>
+							</span>
+						</a>
+						<ul class="menunav bg-dk">
+							<li>
+								<span class="arrow left"></span>
+								<a class="navlink text-menu-link clr" href="/{$languageURL}admin/?m=reports&c=list" title="生成报表">
+									<i class="icon lf i-dot"></i>
+									<span class="lf">生成报表</span>
+								</a>
+							</li>
+							<li>
+								<a class="navlink text-menu-link clr" href="/{$languageURL}admin/?m=bulletin&c=list" title="新闻邮件列表">
+									<i class="icon lf i-dot"></i>
+									<span class="lf">新闻邮件列表</span>
+								</a>
+							</li>
+							<li>
+								<a class="navlink text-menu-link clr" href="/{$languageURL}admin/?m=bulletin&c=emails" title="新闻邮件订阅列表">
+									<i class="icon lf i-dot"></i>
+									<span class="lf">新闻邮件订阅列表</span>
+								</a>
+							</li>
+							<li>
+								<a class="navlink text-menu-link clr" href="/{$languageURL}admin/?m=bulletin&c=add" title="发送新闻邮件">
+									<i class="icon lf i-dot"></i>
+									<span class="lf">发送新闻邮件</span>
+								</a>
+							</li>
+							<li>
+								<a class="navlink text-menu-link clr" href="/{$languageURL}admin/?m=pages&c=list" title="自定义页面">
+									<i class="icon lf i-dot"></i>
+									<span class="lf">自定义页面</span>
+								</a>
+							</li>
+							<li>
+								<a class="navlink text-menu-link clr" href="/{$languageURL}admin/?m=qnews&c=list" title="快讯列表">
+									<i class="icon lf i-dot"></i>
+									<span class="lf">快讯列表</span>
+								</a>
+							</li>
+							<li>
+								<a class="navlink text-menu-link clr" href="/{$languageURL}admin/?m=qnews&c=add" title="添加快讯">
+									<i class="icon lf i-dot"></i>
+									<span class="lf">添加快讯</span>
+								</a>
+							</li>
+							<li>
+								<a class="navlink text-menu-link clr" href="/{$languageURL}admin/?m=quiz&c=list" title="测验">
+									<i class="icon lf i-dot"></i>
+									<span class="lf">测验</span>
+								</a>
+							</li>
+						</ul>
+					</li>
+					<li class="menuline bg-dk"></li>
+					<li class="menutit text-menu-tit">链接</li>
+					<li>
+						<a class="menulink text-menu-link clr" href="#" title="论坛求助" target="_blank">
+							<span class="icon lf i-circle-sm text-info-dk"></span>
+							<span class="menulinktxt lf">论坛求助</span>
+						</a>
+					</li>
+					<li>
+						<a class="menulink text-menu-link clr" href="#" title="Demila" target="_blank">
+							<span class="icon lf i-circle-sm text-success-dk"></span>
+							<span class="menulinktxt lf">Demila</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="menuscrollbar bg-scroll" id="menuscrollbar">
+			<div class="handle bg-scroll-h"></div>
+		</div>
+	</div>
+	<div class="menufooter clr">
+		<a class="hiddenbtn buttons text-menu-foot lf" id="switchbtn">
+			<span class="icon i-circleleft"></span>
+			<span class="icon i-circleright"></span>
+		</a>
+		<a class="exitbtn text-menu-foot rf" href="/{$languageURL}users/logout/" title="登出">
+			<span class="icon i-logout"></span>
+		</a>
+	</div>
+</div>
+{literal}
+<script type="text/javascript">
+seajs.use(["modules/pageui/list"], function(list){
+	list.clickListInit("#avatarblock", ".avatarlink");
+	list.leftListInit({
+		leftobjf: "#pagemenu",
+		switchf: "#switchbtn",
+		toplogof: "#toplogo",
+		scrolldom: "#menuscrollbox",
+		scrollbar: "#menuscrollbar",
+		menulist: "#menumainlist"
+	});
+});
+</script>
+{/literal}

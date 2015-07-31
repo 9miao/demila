@@ -76,13 +76,13 @@ if(isset($_GET['url']) && $_GET['url'] != 'admin/') {
 			return '';
 		}
 		
-		$paging = '<div class="pagination"><div class="page_numbers">';
+		$paging = '<div class="pagination clr"><div class="page_numbers clr">';
 		
 		$pages = ceil ( $allRows / $rowsPerPage );
 		
 
 		if ($currentPage > 1)
-			$paging .= '<a href="' . $frontUrl . '' . ($currentPage - 1) . '' . $backUrl . '" title="前一页" class="previous_page">往前</a>';
+			$paging .= '<a href="' . $frontUrl . '' . ($currentPage - 1) . '' . $backUrl . '" title="前一页" class="previous_page"><i class="fa fa-chevron-left"></i></a>';
 		
 		if ($pages > 10) {
 			if ($currentPage == 1) {
@@ -115,14 +115,14 @@ if(isset($_GET['url']) && $_GET['url'] != 'admin/') {
 		}
 		
 		if ($currentPage < $pages)
-			$paging .= '<a href="' . $frontUrl . '' . ($currentPage + 1) . '' . $backUrl . '"  title="后一页" class="next_page">往后</a>';
+			$paging .= '<a href="' . $frontUrl . '' . ($currentPage + 1) . '' . $backUrl . '"  title="后一页" class="next_page"><i class="fa fa-chevron-right"></i></a>';
 		
 		$toPages = $currentPage*$rowsPerPage;
 		if($toPages > $allRows) {
 			$toPages = $allRows;
 		}	
 			
-		return $paging . '    &nbsp;    &nbsp;    &nbsp;'.((($currentPage-1)*$rowsPerPage)+1).' - '.$toPages.' '.$langArray['of'].' '.$allRows.'</div>';
+		return $paging . '</div><div class="page_tips">'.((($currentPage-1)*$rowsPerPage)+1).' - '.$toPages.' '.$langArray['of'].' '.$allRows.'</div></div>';
 	}
 	
 }

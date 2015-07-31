@@ -445,6 +445,16 @@ class system extends base {
 			UPDATE `system` set `value` = '".sql_quote($val)."'
 			WHERE `key` = 'template'
 			", __FUNCTION__ );
+        return true;
+    }
+
+    //后台模板设置
+    public function edit_admin_template($val = ""){
+        global $mysql;
+        $mysql->query("
+			UPDATE `system` set `value` = '".sql_quote($val)."'
+			WHERE `key` = 'admin_template'
+			", __FUNCTION__ );
 
         return true;
     }

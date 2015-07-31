@@ -8,9 +8,7 @@
 // +----------------------------------------------------------------------
 // | Email author@demila.org
 // +----------------------------------------------------------------------
-
-
-#LOAD ORDERS COUNT
+   _setView ( __FILE__ );
 	require_once ROOT_PATH.'/apps/items/models/orders.class.php';
 	$ordersClass = new orders();
 
@@ -29,9 +27,8 @@
 #LOAD USERS COUNT
 	require_once ROOT_PATH.'/apps/users/models/users.class.php';
 	$usersClass = new users();
-
-	$users['month'] = $usersClass->getUsersCount(" `register_datetime` > '".date('Y-m')."-01 00:00:00' AND `status` = 'activate' ");
-	$users['total'] = $usersClass->getUsersCount(" `status` = 'activate' ");
+//	$users['month'] = $usersClass->getUsersCount(" `register_datetime` > '".date('Y-m')."-01 00:00:00' AND `status` = 'activate' ");
+//	$users['total'] = $usersClass->getUsersCount(" `status` = 'activate' ");
 	abr('users', $users);
 
 	$topAuthors = $usersClass->getAll(0, 5, " `status` = 'activate' ", "`sales` DESC");
@@ -124,6 +121,6 @@
 	abr('sales_array', javascript::encode($new_array2));
 	abr('days', json_encode($days));
 	abr('valuta', html_entity_decode($currency['symbol'], ENT_QUOTES, 'utf-8'));
-require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
+    require_once ROOT_PATH.'/apps/lists/leftlist_admin.php';
 	
 ?>

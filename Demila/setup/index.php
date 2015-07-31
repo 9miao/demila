@@ -174,7 +174,7 @@ if(isset($_POST['install']) && !$isInstalled) {
 			fwrite($fp, '?>');											
 			fclose($fp);
 
-			$adminPassword = rand(0,9999).rand(0,9999).rand(0,9999);
+			$adminPassword = $_POST["admin_pwd"];
 
 			require_once 'db.php';
 
@@ -205,6 +205,8 @@ if(isset($_POST['install']) && !$isInstalled) {
 	$_POST['mysql_db'] = '';
 	$_POST['admin_mail'] = '';
     $_POST['admin_username'] = '';
+    $_POST['admin_pwd'] = '';
+    $_POST['admin_pwd1'] = '';
     $_POST['admin_phone'] = '';
     $_POST['report_mail'] = '';
 	$_POST['meta_title'] = '';
@@ -218,14 +220,14 @@ if(isset($_POST['install']) && !$isInstalled) {
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>安装</title>
-	<link rel="stylesheet" type="text/css" href="/static/css/style.css"/>
-	<link href="/static/css/custom/template.css" media="screen" rel="stylesheet" type="text/css" />
-	<link href="/static/css/custom/ucenter.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="/static/home/default/css/style.css"/>
+	<link href="/static/home/default/css/custom/template.css" media="screen" rel="stylesheet" type="text/css" />
+	<link href="/static/home/default/css/custom/ucenter.css" rel="stylesheet" />
 </head>
 <body>
 <div class="header">
 	<div class="container">
-		<a href="/" class="marketplace"><img alt="" src="/static/templates/default/img/custom/logo.png" title="Demila"></a>
+		<a href="/" class="marketplace"><img alt="" src="/static/home/default/img/custom/logo.png" title="Demila"></a>
 	</div>
 </div>
 <div class="pagetit">
@@ -255,9 +257,9 @@ if(isset($_POST['install']) && !$isInstalled) {
 			<strong>恭喜!你的系统已安装成功!!!</strong>
 			<strong>为确保站点安全，请务必删除"/setup"目录。</strong>
 			<br /><br />
-			用户名(你设定的用户名): <strong><?php echo $_POST['admin_username']; ?></strong>
-			<br /><br />
-			密码(登录修改前务必牢记): <strong><?php echo $adminPassword; ?></strong>
+<!--			用户名(你设定的用户名): <strong>--><?php //echo $_POST['admin_username']; ?><!--</strong>-->
+<!--			<br /><br />-->
+<!--			密码(登录修改前务必牢记): <strong>--><?php //echo $adminPassword; ?><!--</strong>-->
 			<br /><br />
 			<a href="/" title="" target="_blank">去网站前台</a>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -280,7 +282,7 @@ if(isset($_POST['install']) && !$isInstalled) {
 		<?php if(substr(sprintf('%o', fileperms($_SERVER['DOCUMENT_ROOT'].'/core/data/cache/')), -4) != '0777') { ?>
 		<div class="box2">
 			<div class="box_error">
-				<strong>错误! </strong>请给这个目录设置写权限(0777)： <strong>/core/data/cache/</strong> (包括所有子目录)
+				<strong>错误! </strong>请给这个目录设置写权限(0777)：<?php  echo $_SERVER['DOCUMENT_ROOT'];?> <strong>/core/data/cache/</strong> (包括所有子目录)
 			</div>
 		</div>
 		<?php $fas_error = true; } else { ?>
@@ -364,6 +366,19 @@ if(isset($_POST['install']) && !$isInstalled) {
 								<input id="admin_username" required="true" name="admin_username" value="<?php echo htmlspecialchars($_POST['admin_username']); ?>" type="text">
 							</div>
 						</div>
+                        <div class="input-group">
+                            <label for="admin_pwd">管理员密码</label>
+                            <div class="inputs">
+                                <input id="admin_pwd" required="true" name="admin_pwd" value="<?php echo htmlspecialchars($_POST['admin_pwd']); ?>" type="text">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="admin_pwd1">管理员密码确认</label>
+                            <div class="inputs">
+                                <input id="admin_pwd1" onblur="checkpwd()" required="true" name="admin_pwd1" value="<?php echo htmlspecialchars($_POST['admin_pwd1']); ?>" type="text">
+                                <div id="admin_pwd1_tip" class="errortxt"></div>
+                            </div>
+                        </div>
 						<div class="input-group">
 							<label for="admin_phone">管理员联系电话</label>
 							<div class="inputs">
@@ -425,6 +440,18 @@ if(isset($_POST['install']) && !$isInstalled) {
 				</fieldset>
 			</form>										
 		</div>
+		<script type="text/javascript">
+		function checkpwd(){
+			var p = document.getElementById("admin_pwd").value,
+				p1 = document.getElementById("admin_pwd1").value,
+				t = document.getElementById("admin_pwd1_tip");
+			if(p != p1){
+				t.innerHTML = "两次输入密码不一致";
+			}else{
+				t.innerHTML = "";
+			}
+		}
+		</script>
 
 		<?php } ?>
 

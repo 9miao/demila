@@ -1,0 +1,14 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="user-scalable=0, initial-scale=1.0, maximum-scale=1.0" />
+<title>{if isset($title)}{$title} | {/if}{$domain}</title>
+	<meta name="keywords" content="{if isset($meta_keywords)}{$meta_keywords}{else}{$lang.page_keywords}{/if}" />
+	<meta name="description" content="{if isset($meta_description)}{$meta_description}{else}{$lang.page_title}{/if}" />
+	<meta name="robots" content="index,follow" />
+	<meta http-equiv="X-UA-Compatible" content="IE=9" />
+	<link href="{$template_data}css/font-awesome.css" media="screen" rel="stylesheet" type="text/css" />
+	<link href="{$template_data}css/custom/template.css" media="screen" rel="stylesheet" type="text/css" />
+	<link rel="Shortcut icon" href="{$data_server}favicon.ico" />
+	{include file="$template_path/html/jstemplate.html"}

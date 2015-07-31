@@ -8,9 +8,10 @@
 // +----------------------------------------------------------------------
 // | Email author@demila.org
 // +----------------------------------------------------------------------
-
 _setView ( __FILE__ );
+
 _setTitle ( $langArray ['report_comments'] );
+
 
 	require_once ROOT_PATH.'/apps/items/models/comments.class.php';
 	$commentsClass = new comments();

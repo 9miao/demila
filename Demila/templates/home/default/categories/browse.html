@@ -1,0 +1,49 @@
+{include file="$template_path/html/header.html"}
+<link href="{$template_data}css/custom/ucenter.css" rel="stylesheet" />
+<link href="{$template_data}css/custom/mobile.css" media="screen" rel="stylesheet" type="text/css" />
+</head>
+<body>
+{include file="$template_path/html/pagenav.html"}
+<div class="pagetit pagetabs">
+  <div class="navblock">
+    <ul class="titnav clr">
+      <li><a href="/{$languageURL}" title="主页">主页</a></li>
+      <li class="pipe">&gt;</li>
+      <li><a href="/{$languageURL}help/aboutus/" title="关于我们">关于我们</a></li>
+      <li class="pipe">&gt;</li>
+      <li>网站地图</li>
+    </ul>
+    <h2>网站地图</h2>
+    <ul class="pagetab clr">
+      <li><a class="active" href="/{$languageURL}categories/browse/" title="浏览">浏览</a></li>
+      <li><a href="/{$languageURL}categories/" title="列表显示">列表显示</a></li>
+    </ul>
+  </div>
+</div>
+<div class="ucbg" id="content">
+  <div class="ucblock clr container">
+    <div id="first" class="category-section">
+      <ul class="first">
+      {$categoriesbrowseList} 
+      </ul>
+    </div>
+    <div id="second" class="category-section empty">
+      <p class="helper-text">点击行显示子分类</p>
+      <p class="helper-text">点击分类文字浏览该分类</p>
+    </div>
+    <div id="third" class="category-section empty">
+    </div>
+    <div id="fourth" class="category-section empty">
+    </div>
+  </div>
+</div>
+{include file="$root_path/templates/home/default/html/footer.html"}
+<script>
+{literal}
+seajs.use(["jq", "modules/categorytree"], function($, tree){
+  tree.init();
+});
+{/literal}
+</script>
+</body>
+</html>

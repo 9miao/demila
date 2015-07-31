@@ -479,7 +479,7 @@ class items {
                 copy($temporary_dir.$_POST['first_preview'], DATA_SERVER_PATH.'/uploads/'.$this->uploadFileDirectory.$itemID.'/'.$_POST['first_preview']);
                 @unlink($temporary_dir.$_POST['first_preview']);
                 $imageClass->crop(DATA_SERVER_PATH.'/uploads/'.$this->uploadFileDirectory.$itemID.'/'.$_POST['first_preview'], 590, 300);
-            }elseif(in_array(strtolower($file_first['extension']),$this->support_format(2))){
+            }elseif(in_array(strtolower($file_first['extension']),$this->support_format(0))){
                 copy($temporary_dir.$_POST['first_preview'], DATA_SERVER_PATH.'/uploads/'.$this->uploadFileDirectory.$itemID.'/'.$_POST['first_preview']);
                 @unlink($temporary_dir.$_POST['first_preview']);
             }
@@ -559,29 +559,35 @@ class items {
     }
 
     //创建预览包
-    public function save_theme_preview($item_id,$dir){
+    public function save_theme_preview($item_id,$dir,$status = 1){
         global $mysql;
         $mysql->query("
 			INSERT INTO `preview` (
 				`item_id`,
-				`dir`
+				`dir`,
+				`status`
 			)
 			VALUES (
 				'".intval($item_id)."',
-				'".sql_quote($dir)."'
+				'".sql_quote($dir)."',
+				'".sql_quote($status)."'
 			)
 		");
         return true;
     }
 
     //通过作品id获取预览图
-    public function get_theme_preview($item_id=0){
+    public function get_theme_preview($item_id=0,$status = false){
         global $mysql;
-
+       
+        if(!$status){
+        	$whereQuery = " AND `status` = 1 ";
+        }
         $mysql->query("
 			SELECT *
 			FROM `preview`
-			WHERE `item_id` = '".intval($item_id)."'
+			WHERE `item_id` = '".intval($item_id)."' 
+			$whereQuery
 		");
 
         if($mysql->num_rows() == 0) {
@@ -595,15 +601,43 @@ class items {
     }
 
     //通过作品id删除作品预览
-    public function del_preview($item_id=0){
-        global $mysql;
+    public function del_preview($item_id=0,$reah=false){
+		global $mysql;
 
-        $mysql->query("
-			DELETE FROM `preview`
-			WHERE `item_id` = '".intval($item_id)."'
+		
+        
+        if($reah){
+			$where = " AND `status` = 0 ";
+		}else{
+			$where = '';
+		}
+
+		$mysql->query("
+			SELECT *
+			FROM `preview`
+			WHERE `item_id` = '".intval($item_id)."' $where
 		");
-        return true;
-    }
+		$preview = array();
+        while($d = $mysql->fetch_array()) {
+            $preview[] = $d;
+        }
+        $base_dir = DATA_SERVER_PATH.'/uploads/'.$this->uploadFileDirectory.$item_id.'/preview/';
+        foreach ($preview as $dir) {
+        	//获取预览文件
+			$dir = $dir['dir'];
+			$file_info = pathinfo($dir);
+			$file = $base_dir.$file_info['basename'];
+			//删除文件
+			@unlink($file);
+        }
+		
+
+		$mysql->query("
+			DELETE FROM `preview`
+			WHERE `item_id` = '".intval($item_id)."' $where 
+		");	
+		return true;
+	}
     //获取队列作品信息
     public function get_temp_data($id){
         global $mysql;
@@ -697,9 +731,6 @@ class items {
 
             //修改次数
             $e = 0;
-
-            //修改次数
-            $e = 0;
             //缩略图
             if(isset($_POST['thumbnail']) && trim($_POST['thumbnail']) != '' && file_exists($temporary_dir.$_POST['thumbnail'])) {
                 //检测文件是否被修改
@@ -746,7 +777,7 @@ class items {
                         $j++;
                         $i++;
                         $this->del_preview_by_id($pre['id']);
-                        unlink(DATA_SERVER_PATH.'/uploads/'.$this->uploadFileDirectory.$id.'/preview/'.$view['basename']);
+                        //unlink(DATA_SERVER_PATH.'/uploads/'.$this->uploadFileDirectory.$id.'/preview/'.$view['basename']);
                     }
                 }
 
@@ -756,21 +787,20 @@ class items {
                         copy($temporary_dir.$post_theme_file, DATA_SERVER_PATH.'/uploads/'.$this->uploadFileDirectory.$id.'/preview/'.$post_theme_file);
                         @unlink($temporary_dir.$post_theme_file);
                         #插入预览图
-                        $this->save_theme_preview($id,DATA_SERVER.'/uploads/'.$this->uploadFileDirectory.$id.'/preview/'.$post_theme_file);
+                        $this->save_theme_preview($id,DATA_SERVER.'/uploads/'.$this->uploadFileDirectory.$id.'/preview/'.$post_theme_file,0);
                     }
                 }
 
-//                //预览图是否修改
-//
-//                foreach($theme_preview_arr as $file_exis){
-//                    if(file_exists($temporary_dir.$file_exis)){
-//                        $i++;
-//                    }
-//                }
-//                if($i > 0){
-//                    $colQuery .= " `theme_preview`, ";
-//                    $valQuery .= " '".sql_quote(json_encode($edit_theme_arr))."', ";
-//                }
+                //预览图是否修改
+               foreach($theme_preview_arr as $file_exis){
+                   if(file_exists(DATA_SERVER_PATH.'/uploads/'.$this->uploadFileDirectory.$id.'/preview/'.$file_exis)){
+                       $i++;
+                   }
+               }
+               if($i > 0){
+                   $colQuery .= " `theme_preview`, ";
+                   $valQuery .= " '".sql_quote(json_encode($edit_theme_arr))."', ";
+               }
             }
 
             //封面预览图
@@ -877,6 +907,7 @@ class items {
         foreach($theme_preview_arr as $file_exis){
             if(file_exists($temporary_dir.$file_exis)){
                 $edit_file_num++;
+
             }
         }
         if($item_info['status'] != 'active' && $edit_file_num > 0){
@@ -1056,9 +1087,8 @@ class items {
 				");
 			}
 		}
-		
-		//免费
 		if($fromAdmin) {
+            //免费
 			if(isset($_POST['free_file'])) {
 				$this->addUserStatus($id, 'freefile');
 				$mysql->query("
@@ -1326,55 +1356,52 @@ class items {
 			WHERE `user_id` = '".intval($data['user_id'])."'
 			LIMIT 1
 		");
-
-        //判断有无客服管理模块
-        require_once ROOT_PATH.'/apps/app_extends/models/app_extends.class.php';
-
-        $app_extends=new app_extends();
-
-        if($app_extends->is_service()){
-
-            //通过用户id获取关联客服
-            require_once ROOT_PATH.'/apps/service/models/service.class.php';
-            $service = new service();
-            $theservice = $service->getserviceByuserid($data['user']['user_id']);
-            $item_url = $config['domain'].'/'.$languageURL.'items/'.$data['id'];
-            $item_url = '<a href="'.$item_url.'" target="_blank">'.$item_url.'</a>';
-            #给用户发邮件
-            require_once ENGINE_PATH.'/classes/ email.class.php';
-            $emailClass = new email();
-
-            $emailClass->fromEmail = 'no-reply@'.$config['domain'];
-            $emailClass->contentType = 'text/html';
-            $emailClass->subject = '你的作品['.$data['name'].']审核通过啦！';
-            $emailClass->message = 'Hi！['.$data['user']['username'].']：<br />
-								&nbsp;&nbsp;&nbsp;&nbsp;恭喜你的作品审核通过啦！<br />
-								&nbsp;&nbsp;&nbsp;&nbsp;作品名称：['.$data['name'].']<br />
-								&nbsp;&nbsp;&nbsp;&nbsp;作品地址：['.$item_url.']<br />
-								&nbsp;&nbsp;&nbsp;&nbsp;又可以赚钱啦！<br />
-								&nbsp;&nbsp;&nbsp;&nbsp;要请小编吃饭哦！<br />
-                                <br />
-								&nbsp;&nbsp;&nbsp;&nbsp;专属小编：['.$theservice['user_name'].']<br />
-								&nbsp;&nbsp;&nbsp;&nbsp;['.$meta['meta_title'].']<br />
-								&nbsp;&nbsp;&nbsp;&nbsp;['.date('Y-m-d H:i:s',time()).']<br />';
-            require_once ROOT_PATH.'/apps/system/models/system.class.php';
-            $system = new system();
-            $smtp = $system ->is_smtp();
-            $smtpconf=$system->getAllKeyValue();
-            if($smtp){
-                $emailClass->email_sock($smtpconf["smtp_host"],$smtpconf["smtp_port"],0,'error',10,1,$smtpconf["smtp_user"],$smtpconf["smtp_pass"],$smtpconf["smtp_from"]);
-                $emailClass->send_mail_sock($emailClass->subject,$emailClass->message,$data['user']['email'],$smtpconf["smtp_from_name"]) ;
-                unset($emailClass);
-            }else{
-                $emailClass->to($data['user']['email']);
-                $emailClass->send();
-                unset($emailClass);
-            }
-
-
-        }
-
-
+//        //判断有无客服管理模块
+//        require_once ROOT_PATH.'/apps/app_extends/models/app_extends.class.php';
+//
+//        $app_extends=new app_extends();
+//
+//        if($app_extends->is_service()){
+//
+//            //通过用户id获取关联客服
+//            require_once ROOT_PATH.'/apps/service/models/service.class.php';
+//            $service = new service();
+//            $theservice = $service->getserviceByuserid($data['user']['user_id']);
+//            $item_url = $config['domain'].'/'.$languageURL.'items/'.$data['id'];
+//            $item_url = '<a href="'.$item_url.'" target="_blank">'.$item_url.'</a>';
+//            #给用户发邮件
+//            require_once ENGINE_PATH.'/classes/ email.class.php';
+//            $emailClass = new email();
+//
+//            $emailClass->fromEmail = 'no-reply@'.$config['domain'];
+//            $emailClass->contentType = 'text/html';
+//            $emailClass->subject = '你的作品['.$data['name'].']审核通过啦！';
+//            $emailClass->message = 'Hi！['.$data['user']['username'].']：<br />
+//								&nbsp;&nbsp;&nbsp;&nbsp;恭喜你的作品审核通过啦！<br />
+//								&nbsp;&nbsp;&nbsp;&nbsp;作品名称：['.$data['name'].']<br />
+//								&nbsp;&nbsp;&nbsp;&nbsp;作品地址：['.$item_url.']<br />
+//								&nbsp;&nbsp;&nbsp;&nbsp;又可以赚钱啦！<br />
+//								&nbsp;&nbsp;&nbsp;&nbsp;要请小编吃饭哦！<br />
+//                                <br />
+//								&nbsp;&nbsp;&nbsp;&nbsp;专属小编：['.$theservice['user_name'].']<br />
+//								&nbsp;&nbsp;&nbsp;&nbsp;['.$meta['meta_title'].']<br />
+//								&nbsp;&nbsp;&nbsp;&nbsp;['.date('Y-m-d H:i:s',time()).']<br />';
+//            require_once ROOT_PATH.'/apps/system/models/system.class.php';
+//            $system = new system();
+//            $smtp = $system ->is_smtp();
+//            $smtpconf=$system->getAllKeyValue();
+//            if($smtp){
+//                $emailClass->email_sock($smtpconf["smtp_host"],$smtpconf["smtp_port"],0,'error',10,1,$smtpconf["smtp_user"],$smtpconf["smtp_pass"],$smtpconf["smtp_from"]);
+//                $emailClass->send_mail_sock($emailClass->subject,$emailClass->message,$data['user']['email'],$smtpconf["smtp_from_name"]) ;
+//                unset($emailClass);
+//            }else{
+//                $emailClass->to($data['user']['email']);
+//                $emailClass->send();
+//                unset($emailClass);
+//            }
+//
+//
+//        }
         return true;
 	}
 	
@@ -1596,7 +1623,18 @@ class items {
             $setQuery .= " `main_file_name` = '".sql_quote($temp_item_data['main_file_name'])."', ";
             unlink(DATA_SERVER_PATH.'/uploads/'.$this->uploadFileDirectory.$item['id'].'/'.$item_info["main_file"]);
         }
+        //删除原预览图
+        $preview_arr = json_decode($temp_item_data['theme_preview'],1);
+        if(!empty($preview_arr) && is_array($preview_arr)){
+            $base_dir = DATA_SERVER_PATH.'/uploads/'.$this->uploadFileDirectory.$item['id'].'/preview/';
 
+            foreach ($preview_arr as $dir) {
+		        $file_info = pathinfo($dir);
+		        $file = $base_dir.$file_info['basename'];
+				//删除文件
+				unlink($file);
+            }
+        }
         //更改作品状态
         $mysql->query("
 			UPDATE `items`
@@ -1605,11 +1643,17 @@ class items {
 			WHERE `id` = '".intval($item['id'])."'
 			LIMIT 1
 		");
+        //更新预览图状态
+		$sql = " `status` = 1";
+        $this->update_preview_by_upload_queue($item['id'],$sql);
 
-            //获取用户信息
-            require_once ROOT_PATH.'/apps/users/models/users.class.php';
-            $user = new users();
-            $user_info = $user->getuserinfoById($item['user_id']);
+        
+
+
+        //获取用户信息
+        require_once ROOT_PATH.'/apps/users/models/users.class.php';
+        $user = new users();
+        $user_info = $user->getuserinfoById($item['user_id']);
 
             //通过用户id获取关联客服
 //            require_once ROOT_PATH.'/apps/service/models/service.class.php';
@@ -1652,6 +1696,19 @@ class items {
 		return true;
 	}
 	
+
+	//通过itemID更新预览图状态
+	public function update_preview_by_upload_queue($id=0,$setQuery=''){
+		global $mysql;
+
+		$mysql->query("
+			UPDATE `preview`
+			SET 
+			$setQuery
+			WHERE `item_id` = '".intval($id)."'
+		");
+	}
+
 	public function unapproveDeleteUpdate($id) {
 		global $mysql, $item, $data, $langArray, $config, $meta;
 		
@@ -1659,54 +1716,87 @@ class items {
 			return $langArray['error_set_comment_to_user'];
 		}
 		
+		$setQuery = '';
+
+
+		//获取当前作品历史数据
+        $mysql->query("
+			SELECT *
+			FROM `temp_items`
+			WHERE `item_id` = '".intval($item['id'])."'
+			LIMIT 1
+		");
+		$temp_item_data = $mysql->fetch_array();
+		
+
+        //回滚作品
+        $mysql->query("
+			UPDATE `items`
+			SET 
+			`status` = 'active'
+			WHERE `id` = '".intval($item['id'])."'
+			LIMIT 1
+		");
+
+		//检测预览文件状态
+        if(!empty($temp_item_data['theme_preview'])){
+            //删除新增预览图
+            $this->del_preview($item['id'],true);
+            //回滚原预览文件
+            $preview_arr = json_decode($temp_item_data['theme_preview'],1);
+            foreach ($preview_arr as $value) {
+            	$this->save_theme_preview($item['id'],$value,1);
+            }
+        }
+
 		$this->deleteUpdate($item['id']);
 
-//判断有无客服管理模块
-        require_once ROOT_PATH.'/apps/app_extends/models/app_extends.class.php';
+////判断有无客服管理模块
+//        require_once ROOT_PATH.'/apps/app_extends/models/app_extends.class.php';
+//
+//        $app_extends=new app_extends();
 
-        $app_extends=new app_extends();
-
-        if($app_extends->is_service()){
-            //获取用户信息
-            require_once ROOT_PATH.'/apps/users/models/users.class.php';
-            $user = new users();
-            $user_info = $user->getuserinfoById($item['user_id']);
-            //通过用户id获取关联客服
-            require_once ROOT_PATH.'/apps/service/models/service.class.php';
-            $service = new service();
-            $theservice = $service->getserviceByuserid($item['user_id']);
-            $item_url = $config['domain'].'/'.$languageURL.'items/'.$item['id'];
-            #给用户发邮件
-            require_once ENGINE_PATH.'/classes/email.class.php';
-            $emailClass = new email();
-
-            $emailClass->fromEmail = 'no-reply@'.$config['domain'];
-            $emailClass->contentType = 'text/html';
-            $emailClass->subject = '你的作品['.$item['name'].']更新被拒绝';
-            $emailClass->message = 'Hi！['.$user_info['username'].']：<br />
-								&nbsp;&nbsp;&nbsp;&nbsp;很抱歉你的作品['.$item['name'].']更新因以下原因被拒绝：<br />
-								&nbsp;&nbsp;&nbsp;&nbsp;['.$_POST['comment_to_user'].']<br />
-								&nbsp;&nbsp;&nbsp;&nbsp;不要失望好么？小编其实也很难过！<br />
-								&nbsp;&nbsp;&nbsp;&nbsp;一定要再接再厉，小编为你加油！<br />
-								&nbsp;&nbsp;&nbsp;&nbsp;Fighting！<br />
-                                <br />
-								&nbsp;&nbsp;&nbsp;&nbsp;专属小编：['.$theservice['user_name'].']<br />
-								&nbsp;&nbsp;&nbsp;&nbsp;['.$meta['meta_title'].']<br />
-								&nbsp;&nbsp;&nbsp;&nbsp;['.date('Y-m-d H:i:s',time()).']<br />';
-            require_once ROOT_PATH.'/apps/system/models/system.class.php';
-            $system = new system();
-            $smtp = $system ->is_smtp();
-            $smtpconf=$system->getAllKeyValue();
-            if($smtp){
-                $emailClass->email_sock($smtpconf["smtp_host"],$smtpconf["smtp_port"],0,'error',10,1,$smtpconf["smtp_user"],$smtpconf["smtp_pass"],$smtpconf["smtp_from"]);
-                $emailClass->send_mail_sock($emailClass->subject,$emailClass->message,$user_info['email'],$smtpconf["smtp_from_name"]) ;
-                unset($emailClass);
-            }else{
-                $emailClass->to($user_info['email']);
-                $emailClass->send();
-                unset($emailClass);
-            }
-        }else{
+//        if($app_extends->is_service()){
+//            //获取用户信息
+//            require_once ROOT_PATH.'/apps/users/models/users.class.php';
+//            $user = new users();
+//            $user_info = $user->getuserinfoById($item['user_id']);
+//            //通过用户id获取关联客服
+//            require_once ROOT_PATH.'/apps/service/models/service.class.php';
+//            $service = new service();
+//            $theservice = $service->getserviceByuserid($item['user_id']);
+//            $item_url = $config['domain'].'/'.$languageURL.'items/'.$item['id'];
+//            #给用户发邮件
+//            require_once ENGINE_PATH.'/classes/email.class.php';
+//            $emailClass = new email();
+//
+//            $emailClass->fromEmail = 'no-reply@'.$config['domain'];
+//            $emailClass->contentType = 'text/html';
+//            $emailClass->subject = '你的作品['.$item['name'].']更新被拒绝';
+//            $emailClass->message = 'Hi！['.$user_info['username'].']：<br />
+//								&nbsp;&nbsp;&nbsp;&nbsp;很抱歉你的作品['.$item['name'].']更新因以下原因被拒绝：<br />
+//								&nbsp;&nbsp;&nbsp;&nbsp;['.$_POST['comment_to_user'].']<br />
+//								&nbsp;&nbsp;&nbsp;&nbsp;不要失望好么？小编其实也很难过！<br />
+//								&nbsp;&nbsp;&nbsp;&nbsp;一定要再接再厉，小编为你加油！<br />
+//								&nbsp;&nbsp;&nbsp;&nbsp;Fighting！<br />
+//                                <br />
+//								&nbsp;&nbsp;&nbsp;&nbsp;专属小编：['.$theservice['user_name'].']<br />
+//								&nbsp;&nbsp;&nbsp;&nbsp;['.$meta['meta_title'].']<br />
+//								&nbsp;&nbsp;&nbsp;&nbsp;['.date('Y-m-d H:i:s',time()).']<br />';
+//            require_once ROOT_PATH.'/apps/system/models/system.class.php';
+//            $system = new system();
+//            $smtp = $system ->is_smtp();
+//            $smtpconf=$system->getAllKeyValue();
+//            if($smtp){
+//                $emailClass->email_sock($smtpconf["smtp_host"],$smtpconf["smtp_port"],0,'error',10,1,$smtpconf["smtp_user"],$smtpconf["smtp_pass"],$smtpconf["smtp_from"]);
+//                $emailClass->send_mail_sock($emailClass->subject,$emailClass->message,$user_info['email'],$smtpconf["smtp_from_name"]) ;
+//                unset($emailClass);
+//            }else{
+//                $emailClass->to($user_info['email']);
+//                $emailClass->send();
+//                unset($emailClass);
+//            }
+//        }else{
             #给用户发邮件
             require_once ENGINE_PATH.'/classes/email.class.php';
             $emailClass = new email();
@@ -1730,7 +1820,9 @@ class items {
                 $emailClass->send();
                 unset($emailClass);
             }
-        }
+
+//        }
+
 		return true;
 	}
 	
@@ -2074,7 +2166,7 @@ class items {
     //通过预览id删除预览文件数据
     public function del_preview_by_id($id=0){
         global $mysql;
-
+        
         $mysql->query("
 			DELETE FROM `preview`
 			WHERE `id` = '".intval($id)."'

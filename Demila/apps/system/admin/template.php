@@ -13,7 +13,7 @@ _setView ( __FILE__ );
 _setTitle ( $langArray ['template']);
 
 
-$arr=getDirList(ROOT_PATH."/templates");
+$arr=getDirList(ROOT_PATH."/templates/home");
 abr("templates",$arr);
 
 $template=$meta["template"];
